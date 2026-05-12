@@ -13,11 +13,11 @@
 
 ---
 
-I built **JEM TOOLS** to make managing Windows system settings and administrative tasks a bit easier. It brings together over 30 common tools and system commands into one simple dashboard so you don't have to go looking for them.
+I built **JEM TOOLS** to make managing Windows system settings and administrative tasks a bit easier. It brings together **32 essential tools** and system commands into one simple dashboard so you don't have to go looking for them.
 
 ## What it does
 
-- **All-in-one access**: Puts everything from the Registry Editor to the Task Scheduler in one place.
+- **All-in-one access**: Puts **32 different tools** from the Registry Editor to the Task Scheduler in one place.
 - **System Monitoring**: Keeps a small eye on your CPU and RAM usage while you work.
 - **Easy Navigation**: Categorized sections to help you find the right tool for the job.
 - **Portable**: It's just one file. No need to install anything; just run it when you need it.
