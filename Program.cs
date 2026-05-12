@@ -356,6 +356,13 @@ namespace WindowsSystemToolMenu
         {
             moduleCountLabel.Text = "Intelligence Profile";
             
+            // This panel will force the aboutCenter to stay in the middle
+            Panel centeringWrapper = new Panel { 
+                Width = cardContainer.Width - 40, 
+                Height = cardContainer.Height > 700 ? cardContainer.Height : 700, 
+                BackColor = Color.Transparent 
+            };
+
             Panel aboutCenter = new Panel { 
                 Width = 800, 
                 Height = 650, 
@@ -363,8 +370,8 @@ namespace WindowsSystemToolMenu
                 Padding = new Padding(40)
             };
             
-            // Center the about panel in the container
-            aboutCenter.Location = new Point((cardContainer.Width - aboutCenter.Width) / 2, 20);
+            // Mathematically center the panel
+            aboutCenter.Location = new Point((centeringWrapper.Width - aboutCenter.Width) / 2, 20);
             if (aboutCenter.Left < 0) aboutCenter.Left = 0;
 
             Label title = new Label { Text = "JEM TOOLS", Font = new Font("Segoe UI Black", 28), ForeColor = accentColor, Dock = DockStyle.Top, Height = 60, TextAlign = ContentAlignment.MiddleCenter };
@@ -394,7 +401,6 @@ namespace WindowsSystemToolMenu
             licWrap.Controls.Add(license);
             licWrap.Controls.Add(licTitle);
 
-            // Stacking with Dock.Top
             aboutCenter.Controls.Add(licWrap);
             aboutCenter.Controls.Add(contactPanel);
             aboutCenter.Controls.Add(devTitle);
@@ -403,9 +409,9 @@ namespace WindowsSystemToolMenu
             aboutCenter.Controls.Add(version);
             aboutCenter.Controls.Add(title);
             
-            cardContainer.Controls.Add(aboutCenter);
+            centeringWrapper.Controls.Add(aboutCenter);
+            cardContainer.Controls.Add(centeringWrapper);
             
-            // Add a subtle border effect
             aboutCenter.Paint += (s, e) => {
                 ControlPaint.DrawBorder(e.Graphics, aboutCenter.ClientRectangle, Color.FromArgb(40, 40, 50), ButtonBorderStyle.Solid);
             };
