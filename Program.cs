@@ -199,18 +199,14 @@ namespace WindowsSystemToolMenu
             sidebarContent = new Panel { Dock = DockStyle.Fill, AutoScroll = true };
             sidebar.Controls.Add(sidebarContent);
 
-            // Infrastructure Nodes (Navigation)
-            Label catHeader = new Label { Text = "INFRASTRUCTURE NODES", Dock = DockStyle.Top, Height = 40, ForeColor = Color.DimGray, Font = new Font("Segoe UI Bold", 8), TextAlign = ContentAlignment.BottomLeft, Padding = new Padding(15, 0, 0, 5) };
-            sidebarContent.Controls.Add(catHeader);
-
             var categoryData = new[] {
-                new { Name = "ALL", Icon = "🌐" },
-                new { Name = "MAINTENANCE", Icon = "⚡" },
-                new { Name = "SYSTEM", Icon = "💻" },
-                new { Name = "ADMIN", Icon = "⚙️" },
-                new { Name = "SECURITY", Icon = "🛡️" },
+                new { Name = "ABOUT", Icon = "👤" },
                 new { Name = "UTILITIES", Icon = "🔣" },
-                new { Name = "ABOUT", Icon = "👤" }
+                new { Name = "SECURITY", Icon = "🛡️" },
+                new { Name = "ADMIN", Icon = "⚙️" },
+                new { Name = "SYSTEM", Icon = "💻" },
+                new { Name = "MAINTENANCE", Icon = "⚡" },
+                new { Name = "ALL", Icon = "🌐" }
             };
 
             foreach (var cat in categoryData) {
@@ -220,6 +216,9 @@ namespace WindowsSystemToolMenu
                 sidebarContent.Controls.Add(btn);
                 categoryButtons.Add(btn);
             }
+
+            Label catHeader = new Label { Text = "INFRASTRUCTURE NODES", Dock = DockStyle.Top, Height = 40, ForeColor = Color.DimGray, Font = new Font("Segoe UI Bold", 8), TextAlign = ContentAlignment.BottomLeft, Padding = new Padding(15, 0, 0, 5) };
+            sidebarContent.Controls.Add(catHeader);
 
             // Main Area
             mainLayout = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 3, BackColor = darkBg, Padding = new Padding(60, 40, 60, 40) };
