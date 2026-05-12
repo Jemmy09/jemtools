@@ -354,35 +354,61 @@ namespace WindowsSystemToolMenu
 
         private void ShowAboutView()
         {
-            moduleCountLabel.Text = "Release Information";
+            moduleCountLabel.Text = "Intelligence Profile";
             
-            Panel aboutPanel = new Panel { 
-                Width = 1000, 
-                Height = 600, 
-                Padding = new Padding(20), 
-                BackColor = Color.FromArgb(15, 15, 20),
-                Margin = new Padding(0)
+            Panel aboutCenter = new Panel { 
+                Width = 800, 
+                Height = 650, 
+                BackColor = Color.FromArgb(25, 25, 32),
+                Padding = new Padding(40)
             };
             
-            Label title = new Label { Text = "JEM TOOLS v1.0.3", Font = new Font("Segoe UI Black", 24), ForeColor = accentColor, Dock = DockStyle.Top, Height = 50 };
-            Label dev = new Label { Text = "Developed by Jemmy Francisco", Font = new Font("Segoe UI Semibold", 14), ForeColor = Color.White, Dock = DockStyle.Top, Height = 40 };
-            Label contact = new Label { Text = "Contact: Jemmyfrancisco30@gmail.com\nFacebook: www.facebook.com/jemmy.francisco.98", Font = new Font("Segoe UI", 11), ForeColor = Color.Gray, Dock = DockStyle.Top, Height = 60 };
+            // Center the about panel in the container
+            aboutCenter.Location = new Point((cardContainer.Width - aboutCenter.Width) / 2, 20);
+            if (aboutCenter.Left < 0) aboutCenter.Left = 0;
+
+            Label title = new Label { Text = "JEM TOOLS", Font = new Font("Segoe UI Black", 28), ForeColor = accentColor, Dock = DockStyle.Top, Height = 60, TextAlign = ContentAlignment.MiddleCenter };
+            Label version = new Label { Text = "Admin Edition v1.0.3", Font = new Font("Segoe UI Semibold", 10), ForeColor = Color.DimGray, Dock = DockStyle.Top, Height = 30, TextAlign = ContentAlignment.MiddleCenter };
             
-            Label licHeader = new Label { Text = "\nMIT LICENSE", Font = new Font("Segoe UI Bold", 12), ForeColor = Color.White, Dock = DockStyle.Top, Height = 50 };
+            Panel spacer = new Panel { Dock = DockStyle.Top, Height = 30 };
+            
+            Label devName = new Label { Text = "Jemmy Francisco", Font = new Font("Segoe UI Light", 22), ForeColor = Color.White, Dock = DockStyle.Top, Height = 50, TextAlign = ContentAlignment.MiddleCenter };
+            Label devTitle = new Label { Text = "Lead Architect & Developer", Font = new Font("Segoe UI Bold", 8), ForeColor = accentColor, Dock = DockStyle.Top, Height = 25, TextAlign = ContentAlignment.MiddleCenter };
+            
+            Panel contactPanel = new Panel { Dock = DockStyle.Top, Height = 80, Padding = new Padding(0, 15, 0, 0) };
+            Label contactInfo = new Label { 
+                Text = "✉️ Jemmyfrancisco30@gmail.com    |    🔵 facebook.com/jemmy.francisco.98", 
+                Font = new Font("Segoe UI", 10), ForeColor = Color.LightGray, Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter 
+            };
+            contactPanel.Controls.Add(contactInfo);
+            
+            Panel licWrap = new Panel { Dock = DockStyle.Fill, Padding = new Padding(20), BackColor = Color.FromArgb(15, 15, 20), Margin = new Padding(0, 20, 0, 0) };
+            Label licTitle = new Label { Text = "LEGAL FRAMEWORK (MIT LICENSE)", Font = new Font("Segoe UI Bold", 8), ForeColor = Color.FromArgb(80, 80, 90), Dock = DockStyle.Top, Height = 30 };
+            
             TextBox license = new TextBox { 
                 Text = "Copyright (c) 2026 Jemmy Francisco\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
-                Multiline = true, ReadOnly = true, BackColor = Color.FromArgb(10, 10, 12), ForeColor = Color.DimGray, BorderStyle = BorderStyle.None,
-                Font = new Font("Consolas", 10), Dock = DockStyle.Fill, ScrollBars = ScrollBars.Vertical
+                Multiline = true, ReadOnly = true, BackColor = Color.FromArgb(15, 15, 20), ForeColor = Color.Gray, BorderStyle = BorderStyle.None,
+                Font = new Font("Consolas", 9), Dock = DockStyle.Fill, ScrollBars = ScrollBars.Vertical
             };
-
-            // Add in reverse order for DockStyle.Top to work correctly
-            aboutPanel.Controls.Add(license);
-            aboutPanel.Controls.Add(licHeader);
-            aboutPanel.Controls.Add(contact);
-            aboutPanel.Controls.Add(dev);
-            aboutPanel.Controls.Add(title);
             
-            cardContainer.Controls.Add(aboutPanel);
+            licWrap.Controls.Add(license);
+            licWrap.Controls.Add(licTitle);
+
+            // Stacking with Dock.Top
+            aboutCenter.Controls.Add(licWrap);
+            aboutCenter.Controls.Add(contactPanel);
+            aboutCenter.Controls.Add(devTitle);
+            aboutCenter.Controls.Add(devName);
+            aboutCenter.Controls.Add(spacer);
+            aboutCenter.Controls.Add(version);
+            aboutCenter.Controls.Add(title);
+            
+            cardContainer.Controls.Add(aboutCenter);
+            
+            // Add a subtle border effect
+            aboutCenter.Paint += (s, e) => {
+                ControlPaint.DrawBorder(e.Graphics, aboutCenter.ClientRectangle, Color.FromArgb(40, 40, 50), ButtonBorderStyle.Solid);
+            };
         }
 
         private void StartStats()
