@@ -69,7 +69,7 @@ namespace WindowsSystemToolMenu
 
         public ModernAdminForm()
         {
-            this.Text = "JEM TOOLS | Admin Edition";
+            this.Text = "JEM TOOLS | Admin Edition v1.0.3";
             this.WindowState = FormWindowState.Maximized;
             this.MinimumSize = new Size(1200, 800);
             this.BackColor = darkBg;
