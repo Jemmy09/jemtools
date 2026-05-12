@@ -341,7 +341,7 @@ namespace WindowsSystemToolMenu
                 moduleCountLabel.Text = filtered.Count + " Modules Ready";
                 foreach (var tool in filtered) {
                     Panel card = new Panel { Size = new Size(320, 80), Margin = new Padding(0, 0, 20, 20), BackColor = cardBg, Cursor = Cursors.Hand };
-                    if (tool.IsMacro) card.Paint += (s, e) => ControlPaint.DrawBorder(e.Graphics, card.ClientRectangle, accentColor, ButtonBorderStyle.Solid);
+                    card.Paint += (s, e) => ControlPaint.DrawBorder(e.Graphics, card.ClientRectangle, accentColor, ButtonBorderStyle.Solid);
                     Label icon = new Label { Text = tool.Icon, Font = new Font("Segoe UI", 20), Location = new Point(15, 20), AutoSize = true, ForeColor = accentColor }; card.Controls.Add(icon);
                     Label name = new Label { Text = tool.SpecificName, Font = new Font("Segoe UI Semibold", 11), Location = new Point(65, 18), Width = 240, ForeColor = Color.White }; card.Controls.Add(name);
                     Label desc = new Label { Text = tool.Description, Font = new Font("Segoe UI", 8), Location = new Point(66, 42), Width = 240, Height = 30, ForeColor = Color.Gray }; card.Controls.Add(desc);
