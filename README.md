@@ -9,6 +9,7 @@
   [![OS](https://img.shields.io/badge/WINDOWS-COMPATIBLE-blue?style=for-the-badge&logo=windows)](#)
   [![Version](https://img.shields.io/badge/VERSION-1.0.3-orange?style=for-the-badge)](#)
   [![Tech](https://img.shields.io/badge/C%23-.NET%204.8-purple?style=for-the-badge&logo=c-sharp)](#)
+  [![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 </div>
 
 ---
