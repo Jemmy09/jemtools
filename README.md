@@ -39,14 +39,6 @@ Start-Process ".\AdminTool.exe" -Verb runAs
 ### Running a Tool
 Just click on any card to open the tool. Some items (marked with a solid blue border) are "macros" that run a few system commands for you to save time.
 
-## For Developers
-
-If you want to look at the code or build it yourself from the `Program.cs` file, you can use the standard C# compiler:
-
-```bash
-C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe /target:winexe /out:AdminTool.exe Program.cs /r:System.dll,System.Drawing.dll,System.Windows.Forms.dll,Microsoft.VisualBasic.dll,System.Core.dll,System.Data.dll
-```
-
 ## A quick note on safety
 Since this app opens system tools, just make sure you know what a tool does before you run it. 
 
