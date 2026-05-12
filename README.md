@@ -14,7 +14,20 @@ I built **JEM TOOLS** to make managing Windows system settings and administrativ
 
 ## How to use it
 
-### Getting Started
+### Quick Install via Terminal (PowerShell)
+If you're in a hurry, you can just run this in PowerShell (as Administrator) to download and start the app:
+
+```powershell
+# Create folder and download files
+mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Jemmy09/jemtools/master/AdminTool.exe" -OutFile "AdminTool.exe"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Jemmy09/jemtools/master/jem_logo.png" -OutFile "jem_logo.png"
+
+# Launch the app
+Start-Process ".\AdminTool.exe" -Verb runAs
+```
+
+### Manual Setup
 1. Download `AdminTool.exe` and make sure `jem_logo.png` is in the same folder.
 2. It's best to **Right-click** and **Run as Administrator** so it has the permissions it needs to open system tools.
 
