@@ -209,7 +209,8 @@ namespace WindowsSystemToolMenu
                 new { Name = "SYSTEM", Icon = "💻" },
                 new { Name = "ADMIN", Icon = "⚙️" },
                 new { Name = "SECURITY", Icon = "🛡️" },
-                new { Name = "UTILITIES", Icon = "🔣" }
+                new { Name = "UTILITIES", Icon = "🔣" },
+                new { Name = "ABOUT", Icon = "👤" }
             };
 
             foreach (var cat in categoryData) {
@@ -325,19 +326,49 @@ namespace WindowsSystemToolMenu
         private void RefreshDisplay()
         {
             cardContainer.SuspendLayout(); cardContainer.Controls.Clear();
-            string query = (searchBox.Text == "Search admin tools...") ? "" : searchBox.Text.ToLower();
-            var filtered = tools.Where(t => (currentCategory == "ALL" || t.Category == currentCategory) && (t.SpecificName.ToLower().Contains(query) || t.Description.ToLower().Contains(query))).ToList();
-            moduleCountLabel.Text = filtered.Count + " Modules Ready";
-            foreach (var tool in filtered) {
-                Panel card = new Panel { Size = new Size(320, 80), Margin = new Padding(0, 0, 20, 20), BackColor = cardBg, Cursor = Cursors.Hand };
-                if (tool.IsMacro) card.Paint += (s, e) => ControlPaint.DrawBorder(e.Graphics, card.ClientRectangle, accentColor, ButtonBorderStyle.Solid);
-                Label icon = new Label { Text = tool.Icon, Font = new Font("Segoe UI", 20), Location = new Point(15, 20), AutoSize = true, ForeColor = accentColor }; card.Controls.Add(icon);
-                Label name = new Label { Text = tool.SpecificName, Font = new Font("Segoe UI Semibold", 11), Location = new Point(65, 18), Width = 240, ForeColor = Color.White }; card.Controls.Add(name);
-                Label desc = new Label { Text = tool.Description, Font = new Font("Segoe UI", 8), Location = new Point(66, 42), Width = 240, Height = 30, ForeColor = Color.Gray }; card.Controls.Add(desc);
-                EventHandler click = (s, e) => Launch(tool); card.Click += click; foreach (Control c in card.Controls) c.Click += click;
-                cardContainer.Controls.Add(card);
+            
+            if (currentCategory == "ABOUT") {
+                ShowAboutView();
+            } else {
+                string query = (searchBox.Text == "Search admin tools...") ? "" : searchBox.Text.ToLower();
+                var filtered = tools.Where(t => (currentCategory == "ALL" || t.Category == currentCategory) && (t.SpecificName.ToLower().Contains(query) || t.Description.ToLower().Contains(query))).ToList();
+                moduleCountLabel.Text = filtered.Count + " Modules Ready";
+                foreach (var tool in filtered) {
+                    Panel card = new Panel { Size = new Size(320, 80), Margin = new Padding(0, 0, 20, 20), BackColor = cardBg, Cursor = Cursors.Hand };
+                    if (tool.IsMacro) card.Paint += (s, e) => ControlPaint.DrawBorder(e.Graphics, card.ClientRectangle, accentColor, ButtonBorderStyle.Solid);
+                    Label icon = new Label { Text = tool.Icon, Font = new Font("Segoe UI", 20), Location = new Point(15, 20), AutoSize = true, ForeColor = accentColor }; card.Controls.Add(icon);
+                    Label name = new Label { Text = tool.SpecificName, Font = new Font("Segoe UI Semibold", 11), Location = new Point(65, 18), Width = 240, ForeColor = Color.White }; card.Controls.Add(name);
+                    Label desc = new Label { Text = tool.Description, Font = new Font("Segoe UI", 8), Location = new Point(66, 42), Width = 240, Height = 30, ForeColor = Color.Gray }; card.Controls.Add(desc);
+                    EventHandler click = (s, e) => Launch(tool); card.Click += click; foreach (Control c in card.Controls) c.Click += click;
+                    cardContainer.Controls.Add(card);
+                }
             }
             cardContainer.ResumeLayout();
+        }
+
+        private void ShowAboutView()
+        {
+            moduleCountLabel.Text = "Release Information";
+            Panel aboutPanel = new Panel { Width = cardContainer.Width - 50, AutoSize = true, Padding = new Padding(20), BackColor = Color.FromArgb(15, 15, 20) };
+            
+            Label title = new Label { Text = "JEM TOOLS v1.0.3", Font = new Font("Segoe UI Black", 18), ForeColor = accentColor, Dock = DockStyle.Top, Height = 40 };
+            Label dev = new Label { Text = "Developed by Jemmy Francisco", Font = new Font("Segoe UI Semibold", 12), ForeColor = Color.White, Dock = DockStyle.Top, Height = 30 };
+            Label contact = new Label { Text = "Contact: Jemmyfrancisco30@gmail.com\nFacebook: www.facebook.com/jemmy.francisco.98", Font = new Font("Segoe UI", 10), ForeColor = Color.Gray, Dock = DockStyle.Top, Height = 50 };
+            
+            Label licHeader = new Label { Text = "\nMIT LICENSE", Font = new Font("Segoe UI Bold", 10), ForeColor = Color.White, Dock = DockStyle.Top, Height = 40 };
+            TextBox license = new TextBox { 
+                Text = "Copyright (c) 2026 Jemmy Francisco\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+                Multiline = true, ReadOnly = true, BackColor = Color.FromArgb(10, 10, 12), ForeColor = Color.DimGray, BorderStyle = BorderStyle.None,
+                Font = new Font("Consolas", 9), Width = 800, Height = 300, Dock = DockStyle.Top
+            };
+
+            aboutPanel.Controls.Add(license);
+            aboutPanel.Controls.Add(licHeader);
+            aboutPanel.Controls.Add(contact);
+            aboutPanel.Controls.Add(dev);
+            aboutPanel.Controls.Add(title);
+            
+            cardContainer.Controls.Add(aboutPanel);
         }
 
         private void StartStats()
