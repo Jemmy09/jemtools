@@ -355,19 +355,27 @@ namespace WindowsSystemToolMenu
         private void ShowAboutView()
         {
             moduleCountLabel.Text = "Release Information";
-            Panel aboutPanel = new Panel { Width = cardContainer.Width - 50, AutoSize = true, Padding = new Padding(20), BackColor = Color.FromArgb(15, 15, 20) };
             
-            Label title = new Label { Text = "JEM TOOLS v1.0.3", Font = new Font("Segoe UI Black", 18), ForeColor = accentColor, Dock = DockStyle.Top, Height = 40 };
-            Label dev = new Label { Text = "Developed by Jemmy Francisco", Font = new Font("Segoe UI Semibold", 12), ForeColor = Color.White, Dock = DockStyle.Top, Height = 30 };
-            Label contact = new Label { Text = "Contact: Jemmyfrancisco30@gmail.com\nFacebook: www.facebook.com/jemmy.francisco.98", Font = new Font("Segoe UI", 10), ForeColor = Color.Gray, Dock = DockStyle.Top, Height = 50 };
+            Panel aboutPanel = new Panel { 
+                Width = 1000, 
+                Height = 600, 
+                Padding = new Padding(20), 
+                BackColor = Color.FromArgb(15, 15, 20),
+                Margin = new Padding(0)
+            };
             
-            Label licHeader = new Label { Text = "\nMIT LICENSE", Font = new Font("Segoe UI Bold", 10), ForeColor = Color.White, Dock = DockStyle.Top, Height = 40 };
+            Label title = new Label { Text = "JEM TOOLS v1.0.3", Font = new Font("Segoe UI Black", 24), ForeColor = accentColor, Dock = DockStyle.Top, Height = 50 };
+            Label dev = new Label { Text = "Developed by Jemmy Francisco", Font = new Font("Segoe UI Semibold", 14), ForeColor = Color.White, Dock = DockStyle.Top, Height = 40 };
+            Label contact = new Label { Text = "Contact: Jemmyfrancisco30@gmail.com\nFacebook: www.facebook.com/jemmy.francisco.98", Font = new Font("Segoe UI", 11), ForeColor = Color.Gray, Dock = DockStyle.Top, Height = 60 };
+            
+            Label licHeader = new Label { Text = "\nMIT LICENSE", Font = new Font("Segoe UI Bold", 12), ForeColor = Color.White, Dock = DockStyle.Top, Height = 50 };
             TextBox license = new TextBox { 
                 Text = "Copyright (c) 2026 Jemmy Francisco\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
                 Multiline = true, ReadOnly = true, BackColor = Color.FromArgb(10, 10, 12), ForeColor = Color.DimGray, BorderStyle = BorderStyle.None,
-                Font = new Font("Consolas", 9), Width = 800, Height = 300, Dock = DockStyle.Top
+                Font = new Font("Consolas", 10), Dock = DockStyle.Fill, ScrollBars = ScrollBars.Vertical
             };
 
+            // Add in reverse order for DockStyle.Top to work correctly
             aboutPanel.Controls.Add(license);
             aboutPanel.Controls.Add(licHeader);
             aboutPanel.Controls.Add(contact);
