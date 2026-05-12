@@ -1,8 +1,19 @@
-# JEM TOOLS v1.0.3 🌐
+<div align="center">
+  <img src="jem_logo.png" width="150" height="150" alt="JEM TOOLS Logo">
+  
+  # JEM TOOLS v1.0.3
+  
+  *A simple, sincere way to manage your Windows system tools.*
+
+  [![Status](https://img.shields.io/badge/STATUS-LIVE-success?style=for-the-badge)](#)
+  [![OS](https://img.shields.io/badge/WINDOWS-COMPATIBLE-blue?style=for-the-badge&logo=windows)](#)
+  [![Version](https://img.shields.io/badge/VERSION-1.0.3-orange?style=for-the-badge)](#)
+  [![Tech](https://img.shields.io/badge/C%23-.NET%204.8-purple?style=for-the-badge&logo=c-sharp)](#)
+</div>
+
+---
 
 I built **JEM TOOLS** to make managing Windows system settings and administrative tasks a bit easier. It brings together over 30 common tools and system commands into one simple dashboard so you don't have to go looking for them.
-
-![JEM TOOLS Icon](jem_logo.png)
 
 ## What it does
 
@@ -36,12 +47,13 @@ Start-Process ".\AdminTool.exe" -Verb runAs
 - Or just click the **🌐 ALL** button to see everything at once.
 - The **Search bar** at the top is also pretty handy if you're in a hurry.
 
-### Running a Tool
-Just click on any card to open the tool. Some items (marked with a solid blue border) are "macros" that run a few system commands for you to save time.
+---
 
 ## A quick note on safety
 Since this app opens system tools, just make sure you know what a tool does before you run it. 
 
 I hope this helps make your system management a little faster!
 
-**JEM TOOLS - Precision System Intelligence.**
+<div align="center">
+  <b>JEM TOOLS - Precision System Intelligence.</b>
+</div>
