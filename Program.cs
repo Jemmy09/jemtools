@@ -199,18 +199,13 @@ namespace WindowsSystemToolMenu
             sidebarContent = new Panel { Dock = DockStyle.Fill, AutoScroll = true };
             sidebar.Controls.Add(sidebarContent);
 
-            // Infrastructure Nodes (Navigation)
-            Label catHeader = new Label { Text = "INFRASTRUCTURE NODES", Dock = DockStyle.Top, Height = 40, ForeColor = Color.DimGray, Font = new Font("Segoe UI Bold", 8), TextAlign = ContentAlignment.BottomLeft, Padding = new Padding(15, 0, 0, 5) };
-            sidebarContent.Controls.Add(catHeader);
-
             var categoryData = new[] {
                 new { Name = "ALL", Icon = "🌐" },
                 new { Name = "MAINTENANCE", Icon = "⚡" },
                 new { Name = "SYSTEM", Icon = "💻" },
                 new { Name = "ADMIN", Icon = "⚙️" },
                 new { Name = "SECURITY", Icon = "🛡️" },
-                new { Name = "UTILITIES", Icon = "🔣" },
-                new { Name = "ABOUT", Icon = "👤" }
+                new { Name = "UTILITIES", Icon = "🔣" }
             };
 
             foreach (var cat in categoryData) {
@@ -220,6 +215,17 @@ namespace WindowsSystemToolMenu
                 sidebarContent.Controls.Add(btn);
                 categoryButtons.Add(btn);
             }
+
+            Label catHeader = new Label { Text = "INFRASTRUCTURE NODES", Dock = DockStyle.Top, Height = 40, ForeColor = Color.DimGray, Font = new Font("Segoe UI Bold", 8), TextAlign = ContentAlignment.BottomLeft, Padding = new Padding(15, 0, 0, 5) };
+            sidebarContent.Controls.Add(catHeader);
+
+            // Separate About Node at the very bottom (Persistent)
+            Button aboutBtn = new Button { Text = "    👤  ABOUT", Height = 60, Dock = DockStyle.Bottom, FlatStyle = FlatStyle.Flat, TextAlign = ContentAlignment.MiddleLeft, Font = new Font("Segoe UI Semibold", 10), ForeColor = Color.Gray, Cursor = Cursors.Hand, BackColor = Color.FromArgb(20, 20, 25) };
+            aboutBtn.FlatAppearance.BorderSize = 0;
+            aboutBtn.Click += (s, e) => { currentCategory = "ABOUT"; UpdateSidebarColors(); RefreshDisplay(); SaveState(); };
+            sidebar.Controls.Add(aboutBtn);
+            categoryButtons.Add(aboutBtn);
+            aboutBtn.BringToFront();
 
             // Main Area
             mainLayout = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 3, BackColor = darkBg, Padding = new Padding(60, 40, 60, 40) };
