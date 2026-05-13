@@ -2,12 +2,12 @@
   <img src="jem_logo.png" width="120" height="120" alt="JEM TOOLS Logo">
 
   # JEM TOOLS
-  ### Admin Edition · v1.0.3
+  ### Admin Edition · v1.0.4
 
   *Precision System Intelligence for Windows Professionals.*
 
   [![Status](https://img.shields.io/badge/STATUS-LIVE-00c853?style=for-the-badge)](#)
-  [![Version](https://img.shields.io/badge/VERSION-1.0.3-0288d1?style=for-the-badge)](#)
+  [![Version](https://img.shields.io/badge/VERSION-1.0.4-0288d1?style=for-the-badge)](#)
   [![OS](https://img.shields.io/badge/WINDOWS-7%20%7C%208%20%7C%2010%20%7C%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white)](#)
   [![Tech](https://img.shields.io/badge/C%23-.NET%204.8-7b1fa2?style=for-the-badge&logo=dotnet&logoColor=white)](#)
   [![License](https://img.shields.io/badge/License-MIT-f9a825?style=for-the-badge)](LICENSE)
@@ -16,9 +16,11 @@
 
 ---
 
-## Overview
+## 💎 Overview
 
-**JEM TOOLS** is a professional-grade Windows administrative suite that consolidates **32 essential system tools** into a single, modern, and responsive dashboard. Built for power users, IT professionals, and system administrators who demand efficiency without compromise.
+**JEM TOOLS** is a professional-grade Windows administrative suite that consolidates **35 essential system tools** into a single, modern, and responsive dashboard. Built for power users, IT professionals, and system administrators who demand efficiency without compromise.
+
+The "Admin Edition" features the signature **Digital Gemstone** UI, providing a high-fidelity experience that turns complex system management into a streamlined, visual process.
 
 ---
 
@@ -26,13 +28,13 @@
 
 | Feature | Description |
 |---|---|
-| 🗂️ **32 Admin Modules** | Every essential Windows tool — from Registry Editor to Task Scheduler — in one place |
+| 🗂️ **35 Admin Modules** | Every essential Windows tool — from Registry Editor to Task Scheduler — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
-| 🔍 **Instant Search** | Find any tool in milliseconds with the built-in search bar |
+| 🔍 **Instant Search** | Find any tool in milliseconds with the built-in search bar (intelligent placeholder) |
 | 🗂️ **Category Filters** | Browse by Security, Admin, System, Maintenance, or Utilities |
 | 👤 **About & Legal** | Dedicated in-app profile section with full MIT License transparency |
 | ⚡ **Admin Macros** | One-click automated maintenance sequences for deep system care |
-| 🖥️ **Portable** | Single `.exe` file — no installation required |
+| 🖥️ **Portable** | Single `.exe` file with embedded branding — no installation required |
 | 🛡️ **Cross-Compatible** | Supports Windows 7, 8, 10, and 11 |
 
 ---
@@ -54,67 +56,79 @@ mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools
 ## 🗂️ Module Library
 
 <details>
-<summary><b>🔧 Maintenance</b></summary>
+<summary><b>🔧 Maintenance (Deep Optimization)</b></summary>
 
-- ⚡ System Deep Clean
-- 🌐 Network Refresh
-- 🔒 Security Lockdown
-- 🗑️ Disk Cleanup
-
-</details>
-
-<details>
-<summary><b>💻 System</b></summary>
-
-- 🖥️ System Information
-- 📋 Task Manager
-- 📈 Resource Monitor
-- ⚙️ System Configuration
-- 🗂️ Defragment Drives
-- 💾 Disk Cleanup
+- ⚡ **System Deep Clean**: Advanced junk removal and cache purging.
+- 🌐 **Network Refresh**: Reset DNS, flush sockets, and optimize connectivity.
+- 🛡️ **Security Lockdown**: Enforce recommended system security defaults.
+- 🧹 **Disk Cleanup**: Native Windows disk optimization utility.
+- 💿 **Defragment Drives**: Optimize file allocation for HDD performance.
 
 </details>
 
 <details>
-<summary><b>⚙️ Admin</b></summary>
+<summary><b>💻 System (Core Management)</b></summary>
 
-- 🖥️ Control Panel
-- 🔧 Registry Editor
-- 🖥️ Remote Desktop
-- ▶️ Run Dialog
-- 🖥️ Computer Management
-- ⚙️ Component Services
-- 🖨️ Print Management
-- 📅 Task Scheduler
-- 🗂️ Services
-
-</details>
-
-<details>
-<summary><b>🛡️ Security</b></summary>
-
-- 🔐 Security Policy
-- 🛡️ Defender Firewall
-- 🔒 iSCSI Initiator
-- 💾 Recovery Drive
+- 🗑️ **Program Uninstaller**: Manage and remove installed applications.
+- 💻 **Command Prompt**: Elevated terminal access.
+- 🎛️ **Control Panel**: Centralized system settings.
+- ⚙️ **System Configuration**: Manage startup and boot parameters (msconfig).
+- ℹ️ **System Information**: Detailed hardware and software specifications.
+- 📋 **Task Manager**: Real-time process monitoring and control.
+- 📊 **Resource Monitor**: In-depth analysis of CPU, Memory, Disk, and Network.
+- 🐚 **PowerShell Core**: Modern task automation and configuration management.
+- 🌀 **PowerShell ISE**: Integrated Scripting Environment for PowerShell.
+- 🔑 **Registry Editor**: Advanced modification of the Windows Registry database.
+- 📡 **Remote Desktop**: Connect to and control remote workstations.
+- 🏃 **Run Dialog**: Quickly execute commands or open programs.
 
 </details>
 
 <details>
-<summary><b>🔣 Utilities</b></summary>
+<summary><b>⚙️ Admin (Infrastructure Tools)</b></summary>
 
-- 💻 Command Prompt
-- 🔷 PowerShell Core
-- 🔵 PowerShell ISE
-- 🔍 Event Viewer
-- 📊 Performance Monitor
-- 🗺️ Character Map
-- 📝 Steps Recorder
-- 🗄️ ODBC Data Sources
-- 🧠 Memory Diagnostic
-- 🎵 Media Player Legacy
+- 🖥️ **Computer Management**: Consolidates multiple admin tools into one console.
+- 🔌 **Device Manager**: Manage hardware drivers and device status.
+- 💽 **Disk Management**: Partitioning and disk volume control.
+- ⚙️ **Component Services**: Manage COM+ applications and DCOM configuration.
+- 📜 **Event Viewer**: Analyze system logs and application errors.
+- 📈 **Performance Monitor**: Detailed system performance logging.
+- 🛠️ **Services**: Manage background system services.
+- 📅 **Task Scheduler**: Automate tasks and scripts at specific times.
+- 🖨️ **Print Management**: Centralized printer and print server control.
+- 🗄️ **ODBC Data Sources**: Configure database connections and drivers.
 
 </details>
+
+<details>
+<summary><b>🛡️ Security (Protection & Recovery)</b></summary>
+
+- 🔒 **Security Policy**: Enforce local security and audit policies.
+- 🧱 **Defender Firewall**: Advanced Windows Firewall configuration.
+- 🔗 **iSCSI Initiator**: Connect to external iSCSI storage arrays.
+- 🆘 **Recovery Drive**: Create a system repair and recovery environment.
+
+</details>
+
+<details>
+<summary><b>🔣 Utilities (Standard Tools)</b></summary>
+
+- 🔣 **Character Map**: View and copy special characters from all fonts.
+- 📸 **Steps Recorder**: Capture steps to reproduce system issues.
+- 🧠 **Memory Diagnostic**: Check for hardware-level RAM errors.
+- 🎵 **Media Player Legacy**: Classic Windows media playback.
+
+</details>
+
+---
+
+## 🛠️ Recent Updates (v1.0.4)
+
+- **Admin Expansion**: Integrated **Program Uninstaller**, **Device Manager**, and **Disk Management** into the core dashboard.
+- **UI Polish**: Synchronized "JEM TOOLS" brand typography and increased sidebar font visibility.
+- **Embedded Branding**: Assets are now fully encapsulated within the binary for true portability.
+- **UX Fix**: Improved Search Box behavior with intelligent placeholder restoration.
+- **State Persistence**: Synchronized configuration engine to `jem_state.cfg`.
 
 ---
 
@@ -138,7 +152,7 @@ JEM TOOLS opens native Windows system utilities. Always ensure you understand wh
 
 ---
 
-**JEM TOOLS · Admin Edition v1.0.3**
+**JEM TOOLS · Admin Edition v1.0.4**
 *© 2026 Jemmy Francisco · MIT License*
 
 </div>

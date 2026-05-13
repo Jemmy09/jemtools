@@ -112,6 +112,7 @@ namespace WindowsSystemToolMenu
                 new ToolItem { SpecificName = "Defragment Drives", Command = "dfrgui", Icon = "💿", Category = "MAINTENANCE", Description = "Optimize storage performance." },
 
                 // SYSTEM
+                new ToolItem { SpecificName = "Program Uninstaller", Command = "appwiz.cpl", Icon = "🗑️", Category = "SYSTEM", Description = "Add or remove programs." },
                 new ToolItem { SpecificName = "Command Prompt", Command = "cmd", Icon = "💻", Category = "SYSTEM", Description = "Standard command-line." },
                 new ToolItem { SpecificName = "Control Panel", Command = "control", Icon = "🎛️", Category = "SYSTEM", Description = "Legacy settings." },
                 new ToolItem { SpecificName = "System Configuration", Command = "msconfig", Icon = "⚙️", Category = "SYSTEM", Description = "Boot and service config." },
@@ -126,6 +127,8 @@ namespace WindowsSystemToolMenu
 
                 // ADMIN
                 new ToolItem { SpecificName = "Computer Management", Command = "compmgmt.msc", Icon = "🖥️", Category = "ADMIN", Description = "Unified admin console." },
+                new ToolItem { SpecificName = "Device Manager", Command = "devmgmt.msc", Icon = "🔌", Category = "ADMIN", Description = "Hardware and driver control." },
+                new ToolItem { SpecificName = "Disk Management", Command = "diskmgmt.msc", Icon = "💽", Category = "ADMIN", Description = "Storage volume management." },
                 new ToolItem { SpecificName = "Component Services", Command = "dcomcnfg", Icon = "⚙️", Category = "ADMIN", Description = "COM+ and DCOM management." },
                 new ToolItem { SpecificName = "Event Viewer", Command = "eventvwr", Icon = "📜", Category = "ADMIN", Description = "System logs." },
                 new ToolItem { SpecificName = "Performance Monitor", Command = "perfmon", Icon = "📈", Category = "ADMIN", Description = "Real-time HW monitoring." },
@@ -173,7 +176,15 @@ namespace WindowsSystemToolMenu
                 Cursor = Cursors.Hand,
                 Margin = new Padding(0)
             };
-            try { byte[] imgBytes = Convert.FromBase64String(GetLogoBase64()); using (var ms = new System.IO.MemoryStream(imgBytes)) { logoBox.Image = new Bitmap(ms); } } catch { }
+            try { 
+                byte[] imgBytes = Convert.FromBase64String(GetLogoBase64()); 
+                using (var ms = new System.IO.MemoryStream(imgBytes)) { 
+                    Bitmap bmp = new Bitmap(ms);
+                    logoBox.Image = bmp; 
+                    IntPtr hIcon = bmp.GetHicon();
+                    this.Icon = Icon.FromHandle(hIcon);
+                } 
+            } catch { }
             
             Label brand = new Label { 
                 Text = "JEM TOOLS", 
@@ -265,6 +276,7 @@ namespace WindowsSystemToolMenu
             Panel line = new Panel { Height = 1, BackColor = Color.FromArgb(50, 50, 60), Dock = DockStyle.Bottom };
             searchWrap.Controls.Add(line);
             searchBox.Enter += (s, e) => { if (searchBox.Text == "Search admin tools...") searchBox.Text = ""; };
+            searchBox.Leave += (s, e) => { if (string.IsNullOrWhiteSpace(searchBox.Text)) searchBox.Text = "Search admin tools..."; };
             searchBox.TextChanged += (s, e) => RefreshDisplay();
             mainLayout.Controls.Add(searchWrap, 0, 1);
 
@@ -478,8 +490,8 @@ namespace WindowsSystemToolMenu
             }
         }
 
-        private void SaveState() { try { File.WriteAllText("prime_state.cfg", currentCategory); } catch { } }
-        private void LoadState() { try { if (File.Exists("prime_state.cfg")) currentCategory = File.ReadAllText("prime_state.cfg"); } catch { } }
+        private void SaveState() { try { File.WriteAllText("jem_state.cfg", currentCategory); } catch { } }
+        private void LoadState() { try { if (File.Exists("jem_state.cfg")) currentCategory = File.ReadAllText("jem_state.cfg"); } catch { } }
 
         private static string GetLogoBase64()
         {
