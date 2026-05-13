@@ -246,10 +246,11 @@ namespace WindowsSystemToolMenu
                 new { Name = "UTILITIES", Icon = "🔣" }
             };
 
-            foreach (var cat in categoryData.Reverse()) {
+            foreach (var cat in categoryData) {
+                var currentCat = cat; // Capture for lambda
                 Button btn = new Button { 
-                    Text = "    " + cat.Icon + "  " + cat.Name, 
-                    Tag = cat.Name,
+                    Text = "    " + currentCat.Icon + "  " + currentCat.Name, 
+                    Tag = currentCat.Name,
                     Height = 50, 
                     Dock = DockStyle.Top, 
                     FlatStyle = FlatStyle.Flat, 
