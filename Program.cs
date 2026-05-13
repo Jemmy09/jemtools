@@ -246,10 +246,20 @@ namespace WindowsSystemToolMenu
                 new { Name = "UTILITIES", Icon = "🔣" }
             };
 
-            foreach (var cat in categoryData) {
-                Button btn = new Button { Text = "    " + cat.Icon + "  " + cat.Name, Height = 50, Dock = DockStyle.Top, FlatStyle = FlatStyle.Flat, TextAlign = ContentAlignment.MiddleLeft, Font = new Font("Segoe UI Semibold", 9), ForeColor = Color.Gray, Cursor = Cursors.Hand };
+            foreach (var cat in categoryData.Reverse()) {
+                Button btn = new Button { 
+                    Text = $"    {cat.Icon}  {cat.Name}", 
+                    Tag = cat.Name,
+                    Height = 50, 
+                    Dock = DockStyle.Top, 
+                    FlatStyle = FlatStyle.Flat, 
+                    TextAlign = ContentAlignment.MiddleLeft, 
+                    Font = new Font("Segoe UI Semibold", 9), 
+                    ForeColor = Color.Gray, 
+                    Cursor = Cursors.Hand 
+                };
                 btn.FlatAppearance.BorderSize = 0;
-                btn.Click += (s, e) => { currentCategory = cat.Name; UpdateSidebarColors(); RefreshDisplay(); SaveState(); };
+                btn.Click += (s, e) => { currentCategory = (string)btn.Tag; UpdateSidebarColors(); RefreshDisplay(); SaveState(); };
                 sidebarContent.Controls.Add(btn);
                 categoryButtons.Add(btn);
             }
@@ -334,7 +344,7 @@ namespace WindowsSystemToolMenu
         private void UpdateSidebarColors()
         {
             foreach (var btn in categoryButtons) {
-                bool active = btn.Text.Trim() == currentCategory;
+                bool active = (string)btn.Tag == currentCategory;
                 btn.ForeColor = active ? accentColor : Color.Gray;
                 btn.BackColor = active ? Color.FromArgb(25, 25, 30) : Color.Transparent;
             }
