@@ -8,6 +8,10 @@ using System.IO;
 
 namespace WindowsSystemToolMenu
 {
+    /// <summary>
+    /// JEM TOOLS | Admin Edition - A high-fidelity Windows system administration suite.
+    /// Designed for portable, single-executable deployment with zero dependencies.
+    /// </summary>
     public class Program
     {
         [STAThread]
@@ -60,12 +64,21 @@ namespace WindowsSystemToolMenu
         private PerformanceCounter cpuCounter;
         private Microsoft.VisualBasic.Devices.ComputerInfo computerInfo;
 
-        private int sidebarMaxWidth = 320; // Expanded for intelligence features
-        private Color accentColor = Color.FromArgb(0, 180, 255);
-        private Color darkBg = Color.FromArgb(10, 10, 12);
-        private Color cardBg = Color.FromArgb(20, 20, 26);
-        private Color sidebarBg = Color.FromArgb(15, 15, 20);
-        private Color alertColor = Color.FromArgb(255, 60, 60);
+        private static readonly Color ThemeAccent = Color.FromArgb(0, 180, 255);
+        private static readonly Color ThemeDarkBg = Color.FromArgb(10, 10, 12);
+        private static readonly Color ThemeCardBg = Color.FromArgb(20, 20, 26);
+        private static readonly Color ThemeSidebarBg = Color.FromArgb(15, 15, 20);
+        private static readonly Color ThemeAlert = Color.FromArgb(255, 60, 60);
+
+        private int sidebarMaxWidth = 320;
+        private Color accentColor = ThemeAccent;
+        private Color darkBg = ThemeDarkBg;
+        private Color cardBg = ThemeCardBg;
+        private Color sidebarBg = ThemeSidebarBg;
+        private Color alertColor = ThemeAlert;
+
+        private const string StateFile = "jem_state.cfg";
+        private const string LogFile = "jem_activity.log";
 
         public ModernAdminForm()
         {
@@ -305,7 +318,18 @@ namespace WindowsSystemToolMenu
             LogActivity("Admin System Online.");
         }
 
-        private void LogActivity(string msg) { } 
+        /// <summary>
+        /// Logs application activity to a local file for audit and debugging purposes.
+        /// </summary>
+        private void LogActivity(string msg)
+        {
+            try
+            {
+                string entry = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {msg}{Environment.NewLine}";
+                File.AppendAllText(LogFile, entry);
+            }
+            catch { /* Silent failure to prevent UI disruption */ }
+        }
 
         private void UpdateSidebarColors()
         {
@@ -357,25 +381,46 @@ namespace WindowsSystemToolMenu
 
         private void RefreshDisplay()
         {
-            cardContainer.SuspendLayout(); cardContainer.Controls.Clear();
-            
-            if (currentCategory == "ABOUT") {
-                ShowAboutView();
-            } else {
-                string query = (searchBox.Text == "Search admin tools...") ? "" : searchBox.Text.ToLower();
-                var filtered = tools.Where(t => (currentCategory == "ALL" || t.Category == currentCategory) && (t.SpecificName.ToLower().Contains(query) || t.Description.ToLower().Contains(query))).ToList();
-                moduleCountLabel.Text = filtered.Count + " Modules Ready";
-                foreach (var tool in filtered) {
-                    Panel card = new Panel { Size = new Size(320, 80), Margin = new Padding(0, 0, 20, 20), BackColor = cardBg, Cursor = Cursors.Hand };
-                    card.Paint += (s, e) => ControlPaint.DrawBorder(e.Graphics, card.ClientRectangle, accentColor, ButtonBorderStyle.Solid);
-                    Label icon = new Label { Text = tool.Icon, Font = new Font("Segoe UI", 20), Location = new Point(15, 20), AutoSize = true, ForeColor = accentColor }; card.Controls.Add(icon);
-                    Label name = new Label { Text = tool.SpecificName, Font = new Font("Segoe UI Semibold", 11), Location = new Point(65, 18), Width = 240, ForeColor = Color.White }; card.Controls.Add(name);
-                    Label desc = new Label { Text = tool.Description, Font = new Font("Segoe UI", 8), Location = new Point(66, 42), Width = 240, Height = 30, ForeColor = Color.Gray }; card.Controls.Add(desc);
-                    EventHandler click = (s, e) => Launch(tool); card.Click += click; foreach (Control c in card.Controls) c.Click += click;
-                    cardContainer.Controls.Add(card);
+            cardContainer.SuspendLayout();
+            try {
+                cardContainer.Controls.Clear();
+                
+                if (currentCategory == "ABOUT") {
+                    ShowAboutView();
+                } else {
+                    string query = (searchBox.Text == "Search admin tools...") ? "" : searchBox.Text.ToLower();
+                    var filtered = tools.Where(t => (currentCategory == "ALL" || t.Category == currentCategory) && 
+                                                   (t.SpecificName.ToLower().Contains(query) || t.Description.ToLower().Contains(query))).ToList();
+                    
+                    moduleCountLabel.Text = $"{filtered.Count} Modules Ready";
+                    
+                    foreach (var tool in filtered) {
+                        Panel card = CreateToolCard(tool);
+                        cardContainer.Controls.Add(card);
+                    }
                 }
+            } finally {
+                cardContainer.ResumeLayout();
             }
-            cardContainer.ResumeLayout();
+        }
+
+        private Panel CreateToolCard(ToolItem tool)
+        {
+            Panel card = new Panel { Size = new Size(320, 80), Margin = new Padding(0, 0, 20, 20), BackColor = cardBg, Cursor = Cursors.Hand };
+            card.Paint += (s, e) => ControlPaint.DrawBorder(e.Graphics, card.ClientRectangle, accentColor, ButtonBorderStyle.Solid);
+            
+            Label icon = new Label { Text = tool.Icon, Font = new Font("Segoe UI", 20), Location = new Point(15, 20), AutoSize = true, ForeColor = accentColor };
+            Label name = new Label { Text = tool.SpecificName, Font = new Font("Segoe UI Semibold", 11), Location = new Point(65, 18), Width = 240, ForeColor = Color.White };
+            Label desc = new Label { Text = tool.Description, Font = new Font("Segoe UI", 8), Location = new Point(66, 42), Width = 240, Height = 30, ForeColor = Color.Gray };
+            
+            EventHandler click = (s, e) => Launch(tool);
+            card.Click += click;
+            foreach (Control c in new Control[] { icon, name, desc }) {
+                c.Controls.Clear(); // Just to be safe
+                card.Controls.Add(c);
+                c.Click += click;
+            }
+            return card;
         }
 
         private void ShowAboutView()
@@ -504,8 +549,19 @@ namespace WindowsSystemToolMenu
             }
         }
 
-        private void SaveState() { try { File.WriteAllText("jem_state.cfg", currentCategory); } catch { } }
-        private void LoadState() { try { if (File.Exists("jem_state.cfg")) currentCategory = File.ReadAllText("jem_state.cfg"); } catch { } }
+        private void SaveState() { try { File.WriteAllText(StateFile, currentCategory); } catch { } }
+        private void LoadState() { try { if (File.Exists(StateFile)) currentCategory = File.ReadAllText(StateFile); } catch { } }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                cpuCounter?.Dispose();
+                statsTimer?.Dispose();
+                navTimer?.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
         private static string GetLogoBase64()
         {
