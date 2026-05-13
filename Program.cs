@@ -5,6 +5,16 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.Reflection;
+
+[assembly: AssemblyTitle("JEM TOOLS")]
+[assembly: AssemblyDescription("Professional Windows Administrative Suite")]
+[assembly: AssemblyCompany("JEM TOOLS")]
+[assembly: AssemblyProduct("JEM TOOLS | Admin Edition")]
+[assembly: AssemblyCopyright("Copyright © 2026 Jemmy Francisco")]
+[assembly: AssemblyTrademark("JEM TOOLS")]
+[assembly: AssemblyVersion("1.0.4.0")]
+[assembly: AssemblyFileVersion("1.0.4.0")]
 
 namespace WindowsSystemToolMenu
 {
