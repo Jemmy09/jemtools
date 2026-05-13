@@ -16,17 +16,6 @@
 
 ---
 
-## 💎 Overview
-
-# 💎 JEM TOOLS | Admin Edition v1.0.4
-> **Professional System Infrastructure & Administrative Security Suite**
-
-[![GitHub Release](https://img.shields.io/badge/Release-v1.0.4-blue?style=flat-square&logo=github)](https://github.com/Jemmy09/jemtools)
-[![Platform](https://img.shields.io/badge/Platform-Windows-0078D4?style=flat-square&logo=windows)](https://www.microsoft.com/windows)
-[![Privacy](https://img.shields.io/badge/Privacy-100%25_Offline-green?style=flat-square)](https://github.com/Jemmy09/jemtools)
-
----
-
 ## 🛠️ Project Blueprint
 **JEM TOOLS** is a commercial-grade administrative utility designed for power users and IT professionals. It provides a centralized command center for system-level maintenance, security auditing, and real-time performance monitoring, all within a high-fidelity, privacy-first architecture.
 
