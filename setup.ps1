@@ -12,12 +12,16 @@ Write-Host "--- $AppName Professional Setup ---" -ForegroundColor Cyan
 Clear-Host
 Write-Host "--- JEM TOOLS | USER AGREEMENT ---" -ForegroundColor Cyan
 Write-Host @"
-Version 1.0.4 - Effective May 2026
+Version 1.0.4 - Professional Edition
 
-1. ACCEPTANCE OF TERMS: By using JEM TOOLS, you agree to these terms.
-2. ADMINISTRATIVE PRIVILEGES: JEM TOOLS requires Administrator privileges.
-3. PRIVACY: No personal data is collected or transmitted.
-4. NO WARRANTY: Software provided 'AS IS'.
+1. ADMINISTRATIVE RESPONSIBILITY: JEM TOOLS performs high-level system modifications.
+   Execution of tools requires professional discretion.
+2. PRIVACY-FIRST ARCHITECTURE: Operates entirely offline. No telemetry or 
+   personal data is transmitted to external servers.
+3. NO WARRANTY: Software provided 'AS IS'. Jemmy Francisco is not liable for
+   system instability resulting from professional misuse.
+4. INTELLECTUAL PROPERTY: Branding and architecture are the exclusive property 
+   of the developer.
 
 By proceeding with this installation, you agree to these terms.
 "@ -ForegroundColor Gray
