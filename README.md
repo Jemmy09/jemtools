@@ -157,12 +157,12 @@ To update the app, recompile, sign, and push to GitHub in one go:
 
 ## 🛠️ Recent Updates (v1.0.4)
 
-- **Legal Framework**: Integrated a high-fidelity **User Agreement & Privacy Policy** viewer.
-- **Professional Setup**: Added `setup.ps1` for system-wide installation and shortcut creation.
+- **Compliance Engine**: Implemented a professional, **mandatory first-run User Agreement modal**.
+- **State Persistence**: Added smart tracking for EULA acceptance to ensure a seamless UX.
+- **Professional Setup**: Added `setup.ps1` for system-wide installation and trust registration.
 - **Repository Clean-up**: Organized files into `src`, `assets`, and `scripts`.
 - **Custom Branding**: Embedded a professional **32x32 Icon** into the binary.
 - **Publisher Verification**: Digitally signed by **Jemmy Francisco**.
-- **Admin Expansion**: Integrated advanced system management modules.
 
 ---
 
@@ -174,7 +174,7 @@ To update the app, recompile, sign, and push to GitHub in one go:
 | 📁 **`assets/`** | Branding icons and Publisher certificates |
 | 📁 **`scripts/`** | Deployment and automation scripts |
 | 📄 **`JEMTOOLS.exe`** | The signed, icon-embedded binary |
-| 📄 **`setup.ps1`** | **New!** System-wide installer engine |
+| 📄 **`setup.ps1`** | System-wide installer engine |
 | 📄 **`push.ps1`** | Developer one-click update tool |
 
 ---
