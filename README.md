@@ -139,12 +139,33 @@ mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools
 
 ---
 
+## 📂 Repository Structure
+
+| Folder | Description |
+|---|---|
+| 📁 **`src/`** | Core C# Source Code (`Program.cs`) |
+| 📁 **`assets/`** | Branding assets and Publisher certificates |
+| 📁 **`scripts/`** | Automation and embedding scripts |
+| 📄 **`JEMTOOLS.exe`** | The compiled, signed, and production-ready binary |
+| 📄 **`push.ps1`** | One-click automation script for updates |
+
+---
+
+## 🛠️ Automated Updates
+
+To update the app, recompile, sign, and push to GitHub in one go:
+1. Open PowerShell in the root directory.
+2. Run `.\push.ps1`.
+
+---
+
 ## 🛠️ Recent Updates (v1.0.4)
 
+- **Repository Clean-up**: Organized files into `src`, `assets`, and `scripts` for better maintenance.
+- **One-Click Deployment**: Added `push.ps1` for automated compilation, signing, and GitHub syncing.
 - **Admin Expansion**: Integrated **Program Uninstaller**, **Device Manager**, and **Disk Management** into the core dashboard.
 - **UI Polish**: Synchronized "JEM TOOLS" brand typography and increased sidebar font visibility.
 - **Embedded Branding**: Assets are now fully encapsulated within the binary for true portability.
-- **UX Fix**: Improved Search Box behavior with intelligent placeholder restoration.
 - **State Persistence**: Synchronized configuration engine to `jem_state.cfg`.
 
 ---

@@ -1,11 +1,13 @@
-$b64 = [System.IO.File]::ReadAllText('logo_b64.txt')
-$cs = [System.IO.File]::ReadAllText('Program.cs')
+$logoPath = "../assets/jem_logo.png"
+$csPath = "../src/Program.cs"
 
 # Replace the file-based loading with embedded Base64 loading
-$oldLine = 'try { logoBox.Image = Image.FromFile("jem_logo.png"); } catch { }'
+$oldLine = 'try { logoBox.Image = Image.FromFile("assets/jem_logo.png"); } catch { }'
 $newLine = 'try { byte[] imgBytes = Convert.FromBase64String(GetLogoBase64()); using (var ms = new System.IO.MemoryStream(imgBytes)) { logoBox.Image = new Bitmap(ms); } } catch { }'
 
-if ($cs.Contains($oldLine)) {
+if (Test-Path $csPath) {
+    $cs = [System.IO.File]::ReadAllText($csPath)
+    if ($cs.Contains($oldLine)) {
     $cs = $cs.Replace($oldLine, $newLine)
     Write-Host "Logo loading line replaced successfully."
 } else {
