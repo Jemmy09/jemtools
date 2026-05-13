@@ -248,7 +248,7 @@ namespace WindowsSystemToolMenu
 
             foreach (var cat in categoryData.Reverse()) {
                 Button btn = new Button { 
-                    Text = $"    {cat.Icon}  {cat.Name}", 
+                    Text = "    " + cat.Icon + "  " + cat.Name, 
                     Tag = cat.Name,
                     Height = 50, 
                     Dock = DockStyle.Top, 
@@ -335,7 +335,7 @@ namespace WindowsSystemToolMenu
         {
             try
             {
-                string entry = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {msg}{Environment.NewLine}";
+                string entry = string.Format("[{0:yyyy-MM-dd HH:mm:ss}] {1}{2}", DateTime.Now, msg, Environment.NewLine);
                 File.AppendAllText(LogFile, entry);
             }
             catch { /* Silent failure to prevent UI disruption */ }
@@ -402,7 +402,7 @@ namespace WindowsSystemToolMenu
                     var filtered = tools.Where(t => (currentCategory == "ALL" || t.Category == currentCategory) && 
                                                    (t.SpecificName.ToLower().Contains(query) || t.Description.ToLower().Contains(query))).ToList();
                     
-                    moduleCountLabel.Text = $"{filtered.Count} Modules Ready";
+                    moduleCountLabel.Text = filtered.Count.ToString() + " Modules Ready";
                     
                     foreach (var tool in filtered) {
                         Panel card = CreateToolCard(tool);
@@ -566,9 +566,9 @@ namespace WindowsSystemToolMenu
         {
             if (disposing)
             {
-                cpuCounter?.Dispose();
-                statsTimer?.Dispose();
-                navTimer?.Dispose();
+                if (cpuCounter != null) cpuCounter.Dispose();
+                if (statsTimer != null) statsTimer.Dispose();
+                if (navTimer != null) navTimer.Dispose();
             }
             base.Dispose(disposing);
         }
