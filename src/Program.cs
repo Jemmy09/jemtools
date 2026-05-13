@@ -102,6 +102,10 @@ namespace WindowsSystemToolMenu
             this.AutoScaleMode = AutoScaleMode.Dpi;
             toolTip = new ToolTip();
 
+            if (!CheckEULAAcceptance()) {
+                ShowEULAModal();
+            }
+
             InitializeCounters();
             InitializeTools();
             BuildUI();
@@ -641,8 +645,108 @@ namespace WindowsSystemToolMenu
             }
         }
 
-        private void SaveState() { try { File.WriteAllText(StateFile, currentCategory); } catch { } }
-        private void LoadState() { try { if (File.Exists(StateFile)) currentCategory = File.ReadAllText(StateFile); } catch { } }
+        private bool CheckEULAAcceptance()
+        {
+            try {
+                if (File.Exists(StateFile)) {
+                    string state = File.ReadAllText(StateFile);
+                    return state.Contains("EULA_ACCEPTED=TRUE");
+                }
+            } catch { }
+            return false;
+        }
+
+        private void ShowEULAModal()
+        {
+            Form eulaForm = new Form {
+                Text = "JEM TOOLS | User Agreement Compliance",
+                Size = new Size(600, 700),
+                StartPosition = FormStartPosition.CenterScreen,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                MaximizeBox = false,
+                MinimizeBox = false,
+                BackColor = darkBg,
+                ForeColor = Color.White
+            };
+
+            Label title = new Label { 
+                Text = "USER AGREEMENT & PRIVACY POLICY", 
+                Font = new Font("Segoe UI Bold", 14), 
+                ForeColor = accentColor, 
+                Dock = DockStyle.Top, 
+                Height = 60, 
+                TextAlign = ContentAlignment.MiddleCenter 
+            };
+
+            RichTextBox policy = new RichTextBox {
+                Dock = DockStyle.Fill,
+                BackColor = Color.FromArgb(20, 20, 25),
+                ForeColor = Color.LightGray,
+                ReadOnly = true,
+                BorderStyle = BorderStyle.None,
+                Font = new Font("Consolas", 10),
+                Text = "JEM TOOLS | OFFICIAL ADMINISTRATIVE SUITE\n" +
+                       "Version 1.0.4\n\n" +
+                       "By clicking 'I AGREE', you acknowledge and accept the following:\n\n" +
+                       "1. ADMINISTRATIVE PRIVILEGES\n" +
+                       "This application performs system-level modifications. You must use it with professional discretion.\n\n" +
+                       "2. PRIVACY-FIRST ARCHITECTURE\n" +
+                       "JEM TOOLS does not collect or transmit personal data. All activity logs remain local.\n\n" +
+                       "3. NO WARRANTY\n" +
+                       "The software is provided 'AS IS'. Jemmy Francisco is not liable for system instability resulting from misuse.\n\n" +
+                       "4. INTELLECTUAL PROPERTY\n" +
+                       "JEM TOOLS branding is the exclusive property of the developer.\n\n" +
+                       "--------------------------------------------------\n" +
+                       "© 2026 JEM TOOLS · Jemmy Francisco"
+            };
+
+            Panel btnPanel = new Panel { Dock = DockStyle.Bottom, Height = 80, Padding = new Padding(20) };
+            Button agreeBtn = new Button { 
+                Text = "I AGREE & CONTINUE", 
+                Dock = DockStyle.Fill, 
+                FlatStyle = FlatStyle.Flat, 
+                BackColor = accentColor, 
+                ForeColor = Color.Black, 
+                Font = new Font("Segoe UI Bold", 10),
+                Cursor = Cursors.Hand
+            };
+            agreeBtn.Click += (s, e) => {
+                File.AppendAllText(StateFile, "\nEULA_ACCEPTED=TRUE");
+                eulaForm.DialogResult = DialogResult.OK;
+                eulaForm.Close();
+            };
+            
+            Button exitBtn = new Button { 
+                Text = "EXIT", 
+                Width = 100, 
+                Dock = DockStyle.Right, 
+                FlatStyle = FlatStyle.Flat, 
+                ForeColor = Color.Gray,
+                Cursor = Cursors.Hand
+            };
+            exitBtn.Click += (s, e) => { Application.Exit(); Environment.Exit(0); };
+
+            btnPanel.Controls.Add(agreeBtn);
+            btnPanel.Controls.Add(exitBtn);
+            eulaForm.Controls.Add(policy);
+            eulaForm.Controls.Add(btnPanel);
+            eulaForm.Controls.Add(title);
+
+            if (eulaForm.ShowDialog() != DialogResult.OK) {
+                Environment.Exit(0);
+            }
+        }
+
+        private void SaveState() { try { File.WriteAllText(StateFile, currentCategory + (CheckEULAAcceptance() ? "\nEULA_ACCEPTED=TRUE" : "")); } catch { } }
+        private void LoadState() { 
+            try { 
+                if (File.Exists(StateFile)) {
+                    string content = File.ReadAllText(StateFile);
+                    if (content.Contains("\n")) currentCategory = content.Split('\n')[0];
+                    else currentCategory = content;
+                }
+            } catch { } 
+        }
 
         protected override void Dispose(bool disposing)
         {
