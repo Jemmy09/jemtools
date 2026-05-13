@@ -18,7 +18,7 @@
 
 ## 💎 Overview
 
-**JEM TOOLS** is a professional-grade Windows administrative suite that consolidates **35 essential system tools** into a single, modern, and responsive dashboard. Built for power users, IT professionals, and system administrators who demand efficiency without compromise.
+**JEM TOOLS** is a professional-grade Windows administrative suite that consolidates **46 essential system tools** into a single, modern, and responsive dashboard. Built for power users, IT professionals, and system administrators who demand efficiency without compromise.
 
 The "Admin Edition" features the signature **Digital Gemstone** UI, providing a high-fidelity experience that turns complex system management into a streamlined, visual process.
 
@@ -28,7 +28,7 @@ The "Admin Edition" features the signature **Digital Gemstone** UI, providing a 
 
 | Feature | Description |
 |---|---|
-| 🗂️ **35 Admin Modules** | Every essential Windows tool — from Registry Editor to Task Scheduler — in one place |
+| 🗂️ **46 Admin Modules** | Every essential Windows tool — from Registry Editor to Network Repair — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
 | 🔍 **Instant Search** | Find any tool in milliseconds with the built-in search bar (intelligent placeholder) |
 | 🗂️ **Category Filters** | Browse by Security, Admin, System, Maintenance, or Utilities |
@@ -107,6 +107,23 @@ mkdir "$env:USERPROFILE\Desktop\EMTools"; cd "$env:USERPROFILE\Desktop\EMTools";
 - 🧱 **Defender Firewall**: Advanced Windows Firewall configuration.
 - 🔗 **iSCSI Initiator**: Connect to external iSCSI storage arrays.
 - 🆘 **Recovery Drive**: Create a system repair and recovery environment.
+
+</details>
+
+<details>
+<summary><b>📡 Network (Troubleshooting & Connectivity)</b></summary>
+
+- 🔍 **Show IP configuration**: Detailed network interface configuration.
+- 🧼 **Flush DNS Cache**: Purge the DNS resolver cache.
+- 🔓 **Release IP Address**: Release the current IPv4 address.
+- 🔑 **Renew IP Address**: Request a new IPv4 address.
+- 🔄 **Reset Winsock**: Repair network catalog and protocols.
+- 📶 **Reset TCP/IP Stack**: Reset internet protocol suite to defaults.
+- 📡 **Ping Google**: Continuous connectivity test to Google.
+- 📊 **Network Statistics**: View active connections and ports.
+- 🔗 **Network Connections**: Manage network adapter settings.
+- 📶 **Wi-Fi Settings**: Windows 10/11 Wi-Fi configuration.
+- 🛠️ **Full Network Repair**: Total network protocol stack restoration.
 
 </details>
 

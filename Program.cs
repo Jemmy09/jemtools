@@ -147,7 +147,20 @@ namespace WindowsSystemToolMenu
                 new ToolItem { SpecificName = "Character Map", Command = "charmap", Icon = "🔣", Category = "UTILITIES", Description = "System character catalog." },
                 new ToolItem { SpecificName = "Steps Recorder", Command = "psr.exe", Icon = "📸", Category = "UTILITIES", Description = "Record UI actions for debugging." },
                 new ToolItem { SpecificName = "Memory Diagnostic", Command = "mdsched.exe", Icon = "🧠", Category = "UTILITIES", Description = "Check RAM for errors." },
-                new ToolItem { SpecificName = "Media Player Legacy", Command = "wmplayer.exe", Icon = "🎵", Category = "UTILITIES", Description = "Legacy multimedia hub." }
+                new ToolItem { SpecificName = "Media Player Legacy", Command = "wmplayer.exe", Icon = "🎵", Category = "UTILITIES", Description = "Legacy multimedia hub." },
+
+                // NETWORK
+                new ToolItem { SpecificName = "Show IP configuration", Command = "ipconfig /all", Icon = "🔍", Category = "NETWORK", Description = "Detailed network interface configuration." },
+                new ToolItem { SpecificName = "Flush DNS Cache", Command = "ipconfig /flushdns", Icon = "🧼", Category = "NETWORK", Description = "Purge the DNS resolver cache." },
+                new ToolItem { SpecificName = "Release IP Address", Command = "ipconfig /release", Icon = "🔓", Category = "NETWORK", Description = "Release the current IPv4 address." },
+                new ToolItem { SpecificName = "Renew IP Address", Command = "ipconfig /renew", Icon = "🔑", Category = "NETWORK", Description = "Request a new IPv4 address." },
+                new ToolItem { SpecificName = "Reset Winsock", Command = "netsh winsock reset", Icon = "🔄", Category = "NETWORK", Description = "Repair network catalog and protocols." },
+                new ToolItem { SpecificName = "Reset TCP/IP Stack", Command = "netsh int ip reset", Icon = "📶", Category = "NETWORK", Description = "Reset internet protocol suite to defaults." },
+                new ToolItem { SpecificName = "Ping Google", Command = "ping google.com -t", Icon = "📡", Category = "NETWORK", Description = "Continuous connectivity test to Google." },
+                new ToolItem { SpecificName = "Network Statistics", Command = "netstat -an", Icon = "📊", Category = "NETWORK", Description = "View active connections and ports." },
+                new ToolItem { SpecificName = "Network Connections", Command = "ncpa.cpl", Icon = "🔗", Category = "NETWORK", Description = "Manage network adapter settings." },
+                new ToolItem { SpecificName = "Wi-Fi Settings", Command = "explorer.exe ms-settings:network-wifi", Icon = "📶", Category = "NETWORK", Description = "Windows 10/11 Wi-Fi configuration." },
+                new ToolItem { SpecificName = "Full Network Repair", Command = "ipconfig /release & ipconfig /renew & ipconfig /flushdns & netsh winsock reset & netsh int ip reset", Icon = "🛠️", Category = "NETWORK", IsMacro = true, Description = "Total network protocol stack restoration." }
             };
         }
 
@@ -216,6 +229,7 @@ namespace WindowsSystemToolMenu
                 new { Name = "SYSTEM", Icon = "💻" },
                 new { Name = "ADMIN", Icon = "⚙️" },
                 new { Name = "SECURITY", Icon = "🛡️" },
+                new { Name = "NETWORK", Icon = "📡" },
                 new { Name = "UTILITIES", Icon = "🔣" }
             };
 
