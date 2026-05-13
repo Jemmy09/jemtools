@@ -659,8 +659,8 @@ namespace WindowsSystemToolMenu
         private void ShowEULAModal()
         {
             Form eulaForm = new Form {
-                Text = "JEM TOOLS | User Agreement Compliance",
-                Size = new Size(600, 700),
+                Text = "JEM TOOLS | Legal Compliance",
+                Size = new Size(600, 750),
                 StartPosition = FormStartPosition.CenterScreen,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 MaximizeBox = false,
@@ -671,46 +671,71 @@ namespace WindowsSystemToolMenu
 
             Label title = new Label { 
                 Text = "USER AGREEMENT & PRIVACY POLICY", 
-                Font = new Font("Segoe UI Bold", 14), 
+                Font = new Font("Segoe UI Bold", 16), 
                 ForeColor = accentColor, 
                 Dock = DockStyle.Top, 
-                Height = 60, 
+                Height = 80, 
                 TextAlign = ContentAlignment.MiddleCenter 
             };
 
             RichTextBox policy = new RichTextBox {
                 Dock = DockStyle.Fill,
-                BackColor = Color.FromArgb(20, 20, 25),
-                ForeColor = Color.LightGray,
+                BackColor = Color.FromArgb(15, 15, 20),
+                ForeColor = Color.FromArgb(200, 200, 210),
                 ReadOnly = true,
                 BorderStyle = BorderStyle.None,
-                Font = new Font("Consolas", 10),
+                Font = new Font("Segoe UI", 10),
+                Padding = new Padding(20),
                 Text = "JEM TOOLS | OFFICIAL ADMINISTRATIVE SUITE\n" +
-                       "Version 1.0.4\n\n" +
-                       "By clicking 'I AGREE', you acknowledge and accept the following:\n\n" +
-                       "1. ADMINISTRATIVE PRIVILEGES\n" +
-                       "This application performs system-level modifications. You must use it with professional discretion.\n\n" +
-                       "2. PRIVACY-FIRST ARCHITECTURE\n" +
-                       "JEM TOOLS does not collect or transmit personal data. All activity logs remain local.\n\n" +
-                       "3. NO WARRANTY\n" +
-                       "The software is provided 'AS IS'. Jemmy Francisco is not liable for system instability resulting from misuse.\n\n" +
-                       "4. INTELLECTUAL PROPERTY\n" +
-                       "JEM TOOLS branding is the exclusive property of the developer.\n\n" +
+                       "Version 1.0.4 - Professional Edition\n\n" +
+                       "Please review the following terms carefully before proceeding.\n\n" +
+                       "1. SCOPE OF USE\n" +
+                       "JEM TOOLS is a specialized administrative utility designed for system maintenance, security auditing, and infrastructure management. Users are granted a non-exclusive license for professional use.\n\n" +
+                       "2. ADMINISTRATIVE RESPONSIBILITY\n" +
+                       "The execution of tools within this suite requires elevated system privileges. You acknowledge that improper use of 'Macros' or 'Admin Tools' can lead to system-level modifications. User discretion is mandatory.\n\n" +
+                       "3. DATA PRIVACY & LOCAL LOGGING\n" +
+                       "Consistent with our 'Privacy-First' commitment, JEM TOOLS operates entirely offline. No telemetry or personal data is transmitted. All activity logs ('jem_activity.log') are stored locally and are accessible only by the system administrator.\n\n" +
+                       "4. NO WARRANTY & LIABILITY\n" +
+                       "JEM TOOLS is provided 'AS IS', without warranty of any kind. Jemmy Francisco shall not be liable for any direct or indirect damages resulting from the use or inability to use this software.\n\n" +
+                       "5. INTELLECTUAL PROPERTY\n" +
+                       "All branding, architecture, and integrated logic are the intellectual property of Jemmy Francisco.\n\n" +
                        "--------------------------------------------------\n" +
                        "© 2026 JEM TOOLS · Jemmy Francisco"
             };
 
-            Panel btnPanel = new Panel { Dock = DockStyle.Bottom, Height = 80, Padding = new Padding(20) };
-            Button agreeBtn = new Button { 
-                Text = "I AGREE & CONTINUE", 
-                Dock = DockStyle.Fill, 
-                FlatStyle = FlatStyle.Flat, 
-                BackColor = accentColor, 
-                ForeColor = Color.Black, 
-                Font = new Font("Segoe UI Bold", 10),
+            Panel footer = new Panel { Dock = DockStyle.Bottom, Height = 140, Padding = new Padding(30, 10, 30, 20) };
+            
+            CheckBox agreeCheck = new CheckBox {
+                Text = "I have read and agree to the User Agreement and Privacy Policy",
+                Dock = DockStyle.Top,
+                Height = 40,
+                ForeColor = Color.LightGray,
+                Font = new Font("Segoe UI", 9),
                 Cursor = Cursors.Hand
             };
-            agreeBtn.Click += (s, e) => {
+
+            Panel btnPanel = new Panel { Dock = DockStyle.Bottom, Height = 50 };
+            
+            Button continueBtn = new Button { 
+                Text = "CONTINUE TO DASHBOARD", 
+                Dock = DockStyle.Fill, 
+                FlatStyle = FlatStyle.Flat, 
+                BackColor = Color.FromArgb(40, 40, 50), 
+                ForeColor = Color.Gray, 
+                Font = new Font("Segoe UI Bold", 10),
+                Enabled = false,
+                Cursor = Cursors.No
+            };
+            continueBtn.FlatAppearance.BorderSize = 0;
+
+            agreeCheck.CheckedChanged += (s, e) => {
+                continueBtn.Enabled = agreeCheck.Checked;
+                continueBtn.BackColor = agreeCheck.Checked ? accentColor : Color.FromArgb(40, 40, 50);
+                continueBtn.ForeColor = agreeCheck.Checked ? Color.Black : Color.Gray;
+                continueBtn.Cursor = agreeCheck.Checked ? Cursors.Hand : Cursors.No;
+            };
+
+            continueBtn.Click += (s, e) => {
                 File.AppendAllText(StateFile, "\nEULA_ACCEPTED=TRUE");
                 eulaForm.DialogResult = DialogResult.OK;
                 eulaForm.Close();
@@ -721,15 +746,21 @@ namespace WindowsSystemToolMenu
                 Width = 100, 
                 Dock = DockStyle.Right, 
                 FlatStyle = FlatStyle.Flat, 
-                ForeColor = Color.Gray,
+                ForeColor = Color.DimGray,
+                Font = new Font("Segoe UI Semibold", 9),
                 Cursor = Cursors.Hand
             };
+            exitBtn.FlatAppearance.BorderSize = 0;
             exitBtn.Click += (s, e) => { Application.Exit(); Environment.Exit(0); };
 
-            btnPanel.Controls.Add(agreeBtn);
+            btnPanel.Controls.Add(continueBtn);
             btnPanel.Controls.Add(exitBtn);
+            
+            footer.Controls.Add(btnPanel);
+            footer.Controls.Add(agreeCheck);
+            
             eulaForm.Controls.Add(policy);
-            eulaForm.Controls.Add(btnPanel);
+            eulaForm.Controls.Add(footer);
             eulaForm.Controls.Add(title);
 
             if (eulaForm.ShowDialog() != DialogResult.OK) {
