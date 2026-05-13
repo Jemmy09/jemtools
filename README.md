@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="em_logo.png" width="120" height="120" alt="EM TOOLS Logo">
+  <img src="jem_logo.png" width="120" height="120" alt="JEM TOOLS Logo">
 
-  # EM TOOLS
+  # JEM TOOLS
   ### Admin Edition · v1.0.4
 
   *Precision System Intelligence for Windows Professionals.*
@@ -18,7 +18,7 @@
 
 ## 💎 Overview
 
-**EM TOOLS** is a professional-grade Windows administrative suite that consolidates **35 essential system tools** into a single, modern, and responsive dashboard. Built for power users, IT professionals, and system administrators who demand efficiency without compromise.
+**JEM TOOLS** is a professional-grade Windows administrative suite that consolidates **35 essential system tools** into a single, modern, and responsive dashboard. Built for power users, IT professionals, and system administrators who demand efficiency without compromise.
 
 The "Admin Edition" features the signature **Digital Gemstone** UI, providing a high-fidelity experience that turns complex system management into a streamlined, visual process.
 
@@ -125,10 +125,10 @@ mkdir "$env:USERPROFILE\Desktop\EMTools"; cd "$env:USERPROFILE\Desktop\EMTools";
 ## 🛠️ Recent Updates (v1.0.4)
 
 - **Admin Expansion**: Integrated **Program Uninstaller**, **Device Manager**, and **Disk Management** into the core dashboard.
-- **UI Polish**: Synchronized "EM TOOLS" brand typography and increased sidebar font visibility.
+- **UI Polish**: Synchronized "JEM TOOLS" brand typography and increased sidebar font visibility.
 - **Embedded Branding**: Assets are now fully encapsulated within the binary for true portability.
 - **UX Fix**: Improved Search Box behavior with intelligent placeholder restoration.
-- **State Persistence**: Synchronized configuration engine to `em_state.cfg`.
+- **State Persistence**: Synchronized configuration engine to `jem_state.cfg`.
 
 ---
 
@@ -152,7 +152,7 @@ EM TOOLS opens native Windows system utilities. Always ensure you understand wha
 
 ---
 
-**EM TOOLS · Admin Edition v1.0.4**
+**JEM TOOLS · Admin Edition v1.0.4**
 *© 2026 Jemmy Francisco · MIT License*
 
 </div>

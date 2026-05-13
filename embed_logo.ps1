@@ -2,7 +2,7 @@ $b64 = [System.IO.File]::ReadAllText('logo_b64.txt')
 $cs = [System.IO.File]::ReadAllText('Program.cs')
 
 # Replace the file-based loading with embedded Base64 loading
-$oldLine = 'try { logoBox.Image = Image.FromFile("em_logo.png"); } catch { }'
+$oldLine = 'try { logoBox.Image = Image.FromFile("jem_logo.png"); } catch { }'
 $newLine = 'try { byte[] imgBytes = Convert.FromBase64String(GetLogoBase64()); using (var ms = new System.IO.MemoryStream(imgBytes)) { logoBox.Image = new Bitmap(ms); } } catch { }'
 
 if ($cs.Contains($oldLine)) {
