@@ -42,13 +42,12 @@
 ### One-Line Install (PowerShell — Run as Administrator)
 
 ```powershell
-mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools"; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Jemmy09/jemtools/master/AdminTool.exe" -OutFile "AdminTool.exe"; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Jemmy09/jemtools/master/jem_logo.png" -OutFile "jem_logo.png"; Start-Process ".\AdminTool.exe" -Verb runAs
+mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools"; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Jemmy09/jemtools/master/AdminTool.exe" -OutFile "AdminTool.exe"; Start-Process ".\AdminTool.exe" -Verb runAs
 ```
 
 ### Manual Setup
-1. Download `AdminTool.exe` and `jem_logo.png` from this repository.
-2. Place both files in the **same folder**.
-3. **Right-click** `AdminTool.exe` → **Run as Administrator**.
+1. Download `AdminTool.exe` from this repository.
+2. **Right-click** `AdminTool.exe` → **Run as Administrator**.
 
 ---
 
