@@ -144,9 +144,10 @@ mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools
 | Folder | Description |
 |---|---|
 | 📁 **`src/`** | Core C# Source Code (`Program.cs`) |
-| 📁 **`assets/`** | Branding assets and Publisher certificates |
+| 📁 **`assets/`** | Publisher certificates and non-UI binary assets |
 | 📁 **`scripts/`** | Automation and embedding scripts |
 | 📄 **`JEMTOOLS.exe`** | The compiled, signed, and production-ready binary |
+| 📄 **`jem_logo.png`** | Application branding (Root for README visibility) |
 | 📄 **`push.ps1`** | One-click automation script for updates |
 
 ---
