@@ -6,7 +6,7 @@ Write-Host "--- JEM TOOLS Update Engine ---" -ForegroundColor Cyan
 # 1. Compile
 Write-Host "Compiling JEMTOOLS.exe..." -ForegroundColor Yellow
 $csc = "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
-& $csc /target:winexe /out:JEMTOOLS.exe /win32icon:assets/jem_logo.ico /reference:System.dll,System.Windows.Forms.dll,System.Drawing.dll,Microsoft.VisualBasic.dll,System.Core.dll src/Program.cs
+& $csc /target:winexe /out:JEMTOOLS.exe /win32icon:assets\jem_logo.ico /reference:System.dll,System.Windows.Forms.dll,System.Drawing.dll,Microsoft.VisualBasic.dll,System.Core.dll "src\Program.cs"
 
 if ($LASTEXITCODE -ne 0) { 
     Write-Host "ERROR: Compilation failed." -ForegroundColor Red
@@ -28,5 +28,5 @@ git add .
 git commit -m "Automated update: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
 git push origin master
 
-Write-Host "--- Update Complete! ---" -ForegroundColor Green
+Write-Host "`n--- Update Complete! ---" -ForegroundColor Green
 pause
