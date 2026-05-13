@@ -8,7 +8,24 @@ $StartMenuPath = "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\$AppNam
 
 Write-Host "--- $AppName Professional Setup ---" -ForegroundColor Cyan
 
-# 1. Check for Administrative Privileges
+# 1. Display User Agreement
+Clear-Host
+Write-Host "--- JEM TOOLS | USER AGREEMENT ---" -ForegroundColor Cyan
+Write-Host @"
+Version 1.0.4 - Effective May 2026
+
+1. ACCEPTANCE OF TERMS: By using JEM TOOLS, you agree to these terms.
+2. ADMINISTRATIVE PRIVILEGES: JEM TOOLS requires Administrator privileges.
+3. PRIVACY: No personal data is collected or transmitted.
+4. NO WARRANTY: Software provided 'AS IS'.
+
+By proceeding with this installation, you agree to these terms.
+"@ -ForegroundColor Gray
+Write-Host ""
+$choice = Read-Host "Do you accept these terms? (Y/N)"
+if ($choice -ne "Y") { Write-Host "Installation cancelled." -ForegroundColor Red; pause; exit }
+
+# 2. Check for Administrative Privileges
 $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 if (-not $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Host "ERROR: Setup must be run as Administrator." -ForegroundColor Red

@@ -550,6 +550,21 @@ namespace WindowsSystemToolMenu
             licWrap.Controls.Add(licTitle);
 
             aboutCenter.Controls.Add(licWrap);
+            
+            Button viewPoliciesBtn = new Button { 
+                Text = "VIEW FULL USER AGREEMENT & POLICY", 
+                Height = 40, 
+                Dock = DockStyle.Top, 
+                FlatStyle = FlatStyle.Flat, 
+                ForeColor = accentColor, 
+                Font = new Font("Segoe UI Bold", 9),
+                Cursor = Cursors.Hand,
+                Margin = new Padding(0, 10, 0, 0)
+            };
+            viewPoliciesBtn.FlatAppearance.BorderColor = accentColor;
+            viewPoliciesBtn.Click += (s, e) => { currentCategory = "POLICIES"; UpdateSidebarColors(); RefreshDisplay(); };
+            aboutCenter.Controls.Add(viewPoliciesBtn);
+
             aboutCenter.Controls.Add(contactPanel);
             aboutCenter.Controls.Add(devTitle);
             aboutCenter.Controls.Add(devName);
