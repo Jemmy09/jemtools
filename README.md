@@ -139,35 +139,43 @@ mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools
 
 ---
 
-## 📂 Repository Structure
+## 🚀 Professional Installation
 
-| Folder | Description |
-|---|---|
-| 📁 **`src/`** | Core C# Source Code (`Program.cs`) |
-| 📁 **`assets/`** | Publisher certificates and non-UI binary assets |
-| 📁 **`scripts/`** | Automation and embedding scripts |
-| 📄 **`JEMTOOLS.exe`** | The compiled, signed, and production-ready binary |
-| 📄 **`jem_logo.png`** | Application branding (Root for README visibility) |
-| 📄 **`push.ps1`** | One-click automation script for updates |
+To install **JEM TOOLS** system-wide (Desktop & Start Menu):
+1. Open PowerShell as **Administrator**.
+2. Run `.\setup.ps1`.
+3. The app will be installed to `C:\Program Files\JEM TOOLS` and the publisher certificate will be trusted automatically.
 
 ---
 
-## 🛠️ Automated Updates
+## 🛠️ Automated Updates (Developer Only)
 
 To update the app, recompile, sign, and push to GitHub in one go:
-1. Open PowerShell in the root directory.
-2. Run `.\push.ps1`.
+1. Run `.\push.ps1`.
 
 ---
 
 ## 🛠️ Recent Updates (v1.0.4)
 
-- **Repository Clean-up**: Organized files into `src`, `assets`, and `scripts` for better maintenance.
-- **One-Click Deployment**: Added `push.ps1` for automated compilation, signing, and GitHub syncing.
-- **Admin Expansion**: Integrated **Program Uninstaller**, **Device Manager**, and **Disk Management** into the core dashboard.
-- **UI Polish**: Synchronized "JEM TOOLS" brand typography and increased sidebar font visibility.
-- **Embedded Branding**: Assets are now fully encapsulated within the binary for true portability.
-- **State Persistence**: Synchronized configuration engine to `jem_state.cfg`.
+- **Legal Framework**: Integrated a high-fidelity **User Agreement & Privacy Policy** viewer.
+- **Professional Setup**: Added `setup.ps1` for system-wide installation and shortcut creation.
+- **Repository Clean-up**: Organized files into `src`, `assets`, and `scripts`.
+- **Custom Branding**: Embedded a professional **32x32 Icon** into the binary.
+- **Publisher Verification**: Digitally signed by **Jemmy Francisco**.
+- **Admin Expansion**: Integrated advanced system management modules.
+
+---
+
+## 📂 Repository Structure
+
+| File/Folder | Description |
+|---|---|
+| 📁 **`src/`** | Core C# Source Code |
+| 📁 **`assets/`** | Branding icons and Publisher certificates |
+| 📁 **`scripts/`** | Deployment and automation scripts |
+| 📄 **`JEMTOOLS.exe`** | The signed, icon-embedded binary |
+| 📄 **`setup.ps1`** | **New!** System-wide installer engine |
+| 📄 **`push.ps1`** | Developer one-click update tool |
 
 ---
 

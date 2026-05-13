@@ -253,7 +253,8 @@ namespace WindowsSystemToolMenu
                 new { Name = "ADMIN", Icon = "⚙️" },
                 new { Name = "SECURITY", Icon = "🛡️" },
                 new { Name = "NETWORK", Icon = "📡" },
-                new { Name = "UTILITIES", Icon = "🔣" }
+                new { Name = "UTILITIES", Icon = "🔣" },
+                new { Name = "POLICIES", Icon = "📜" }
             };
 
             foreach (var cat in categoryData) {
@@ -402,12 +403,15 @@ namespace WindowsSystemToolMenu
 
         private void RefreshDisplay()
         {
+            if (cardContainer == null) return;
             cardContainer.SuspendLayout();
             try {
                 cardContainer.Controls.Clear();
                 
                 if (currentCategory == "ABOUT") {
                     ShowAboutView();
+                } else if (currentCategory == "POLICIES") {
+                    ShowTermsView();
                 } else {
                     string query = (searchBox.Text == "Search admin tools...") ? "" : searchBox.Text.ToLower();
                     var filtered = tools.Where(t => (currentCategory == "ALL" || t.Category == currentCategory) && 
@@ -423,6 +427,58 @@ namespace WindowsSystemToolMenu
             } finally {
                 cardContainer.ResumeLayout();
             }
+        }
+
+        private void ShowTermsView()
+        {
+            moduleCountLabel.Text = "Legal & Compliance";
+            
+            Panel policyPanel = new Panel { 
+                Width = cardContainer.Width - 60, 
+                Height = 600, 
+                BackColor = Color.FromArgb(20, 20, 25),
+                Padding = new Padding(30)
+            };
+            
+            Label policyTitle = new Label { 
+                Text = "USER AGREEMENT & PRIVACY POLICY", 
+                Font = new Font("Segoe UI Bold", 18), 
+                ForeColor = accentColor, 
+                Dock = DockStyle.Top, 
+                Height = 50 
+            };
+            
+            RichTextBox policyText = new RichTextBox { 
+                Dock = DockStyle.Fill, 
+                BackColor = Color.FromArgb(20, 20, 25), 
+                ForeColor = Color.LightGray, 
+                BorderStyle = BorderStyle.None, 
+                ReadOnly = true,
+                Font = new Font("Consolas", 10),
+                Text = "JEM TOOLS | OFFICIAL ADMINISTRATIVE SUITE\n" +
+                       "Version 1.0.4 - Release Candidate\n\n" +
+                       "1. LICENSE GRANT\n" +
+                       "JEM TOOLS grants you a personal, non-exclusive license to use this software for administrative system management and maintenance.\n\n" +
+                       "2. INTELLECTUAL PROPERTY\n" +
+                       "All branding, logos, and source architecture are the exclusive property of Jemmy Francisco.\n\n" +
+                       "3. PRIVACY & TELEMETRY\n" +
+                       "JEM TOOLS is built with a 'Privacy-First' architecture. No data is transmitted to external servers. All system logs ('jem_activity.log') remain strictly on the local machine.\n\n" +
+                       "4. SYSTEM MODIFICATIONS\n" +
+                       "Users acknowledge that JEM TOOLS performs high-level system modifications (Registry, Disk, Network). Use with professional discretion.\n\n" +
+                       "5. LIABILITY LIMITATION\n" +
+                       "In no event shall the developer be liable for any direct, indirect, or incidental damages arising from the use of this suite.\n\n" +
+                       "--------------------------------------------------\n" +
+                       "BY USING THIS SOFTWARE, YOU AGREE TO THESE TERMS.\n" +
+                       "© 2026 JEM TOOLS · Jemmy Francisco"
+            };
+            
+            policyPanel.Controls.Add(policyText);
+            policyPanel.Controls.Add(policyTitle);
+            cardContainer.Controls.Add(policyPanel);
+            
+            policyPanel.Paint += (s, e) => {
+                ControlPaint.DrawBorder(e.Graphics, policyPanel.ClientRectangle, Color.FromArgb(40, 40, 50), ButtonBorderStyle.Solid);
+            };
         }
 
         private Panel CreateToolCard(ToolItem tool)
