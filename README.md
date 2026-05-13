@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="jem_logo.png" width="120" height="120" alt="JEM TOOLS Logo">
+  <img src="em_logo.png" width="120" height="120" alt="EM TOOLS Logo">
 
-  # JEM TOOLS
+  # EM TOOLS
   ### Admin Edition · v1.0.4
 
   *Precision System Intelligence for Windows Professionals.*
@@ -18,7 +18,7 @@
 
 ## 💎 Overview
 
-**JEM TOOLS** is a professional-grade Windows administrative suite that consolidates **35 essential system tools** into a single, modern, and responsive dashboard. Built for power users, IT professionals, and system administrators who demand efficiency without compromise.
+**EM TOOLS** is a professional-grade Windows administrative suite that consolidates **35 essential system tools** into a single, modern, and responsive dashboard. Built for power users, IT professionals, and system administrators who demand efficiency without compromise.
 
 The "Admin Edition" features the signature **Digital Gemstone** UI, providing a high-fidelity experience that turns complex system management into a streamlined, visual process.
 
@@ -44,7 +44,7 @@ The "Admin Edition" features the signature **Digital Gemstone** UI, providing a 
 ### One-Line Install (PowerShell — Run as Administrator)
 
 ```powershell
-mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools"; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Jemmy09/jemtools/master/AdminTool.exe" -OutFile "AdminTool.exe"; Start-Process ".\AdminTool.exe" -Verb runAs
+mkdir "$env:USERPROFILE\Desktop\EMTools"; cd "$env:USERPROFILE\Desktop\EMTools"; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Jemmy09/jemtools/master/AdminTool.exe" -OutFile "AdminTool.exe"; Start-Process ".\AdminTool.exe" -Verb runAs
 ```
 
 ### Manual Setup
@@ -125,16 +125,16 @@ mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools
 ## 🛠️ Recent Updates (v1.0.4)
 
 - **Admin Expansion**: Integrated **Program Uninstaller**, **Device Manager**, and **Disk Management** into the core dashboard.
-- **UI Polish**: Synchronized "JEM TOOLS" brand typography and increased sidebar font visibility.
+- **UI Polish**: Synchronized "EM TOOLS" brand typography and increased sidebar font visibility.
 - **Embedded Branding**: Assets are now fully encapsulated within the binary for true portability.
 - **UX Fix**: Improved Search Box behavior with intelligent placeholder restoration.
-- **State Persistence**: Synchronized configuration engine to `jem_state.cfg`.
+- **State Persistence**: Synchronized configuration engine to `em_state.cfg`.
 
 ---
 
 ## ⚠️ Safety Note
 
-JEM TOOLS opens native Windows system utilities. Always ensure you understand what a tool does before executing it. Run the application as **Administrator** to guarantee full functionality.
+EM TOOLS opens native Windows system utilities. Always ensure you understand what a tool does before executing it. Run the application as **Administrator** to guarantee full functionality.
 
 ---
 
@@ -152,7 +152,7 @@ JEM TOOLS opens native Windows system utilities. Always ensure you understand wh
 
 ---
 
-**JEM TOOLS · Admin Edition v1.0.4**
+**EM TOOLS · Admin Edition v1.0.4**
 *© 2026 Jemmy Francisco · MIT License*
 
 </div>

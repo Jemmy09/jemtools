@@ -69,7 +69,7 @@ namespace WindowsSystemToolMenu
 
         public ModernAdminForm()
         {
-            this.Text = "JEM TOOLS | Admin Edition v1.0.3";
+            this.Text = "EM TOOLS | Admin Edition v1.0.4";
             this.WindowState = FormWindowState.Maximized;
             this.MinimumSize = new Size(1200, 800);
             this.BackColor = darkBg;
@@ -187,7 +187,7 @@ namespace WindowsSystemToolMenu
             } catch { }
             
             Label brand = new Label { 
-                Text = "JEM TOOLS", 
+                Text = "EM TOOLS", 
                 Font = new Font("Segoe UI Black", 14), 
                 ForeColor = accentColor, 
                 Height = 48,
@@ -386,8 +386,8 @@ namespace WindowsSystemToolMenu
             aboutCenter.Location = new Point((centeringWrapper.Width - aboutCenter.Width) / 2, 20);
             if (aboutCenter.Left < 0) aboutCenter.Left = 0;
 
-            Label title = new Label { Text = "JEM TOOLS", Font = new Font("Segoe UI Black", 28), ForeColor = accentColor, Dock = DockStyle.Top, Height = 60, TextAlign = ContentAlignment.MiddleCenter };
-            Label version = new Label { Text = "Admin Edition v1.0.3", Font = new Font("Segoe UI Semibold", 10), ForeColor = Color.DimGray, Dock = DockStyle.Top, Height = 30, TextAlign = ContentAlignment.MiddleCenter };
+            Label title = new Label { Text = "EM TOOLS", Font = new Font("Segoe UI Black", 28), ForeColor = accentColor, Dock = DockStyle.Top, Height = 60, TextAlign = ContentAlignment.MiddleCenter };
+            Label version = new Label { Text = "Admin Edition v1.0.4", Font = new Font("Segoe UI Semibold", 10), ForeColor = Color.DimGray, Dock = DockStyle.Top, Height = 30, TextAlign = ContentAlignment.MiddleCenter };
             
             Panel spacer = new Panel { Dock = DockStyle.Top, Height = 30 };
             
@@ -490,8 +490,8 @@ namespace WindowsSystemToolMenu
             }
         }
 
-        private void SaveState() { try { File.WriteAllText("jem_state.cfg", currentCategory); } catch { } }
-        private void LoadState() { try { if (File.Exists("jem_state.cfg")) currentCategory = File.ReadAllText("jem_state.cfg"); } catch { } }
+        private void SaveState() { try { File.WriteAllText("em_state.cfg", currentCategory); } catch { } }
+        private void LoadState() { try { if (File.Exists("em_state.cfg")) currentCategory = File.ReadAllText("em_state.cfg"); } catch { } }
 
         private static string GetLogoBase64()
         {
