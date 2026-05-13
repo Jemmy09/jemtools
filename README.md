@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/jem_logo.png" width="120" height="120" alt="JEM TOOLS Logo">
+  <img src="jem_logo.png" width="120" height="120" alt="JEM TOOLS Logo">
 
   # JEM TOOLS
   ### Admin Edition · v1.0.4
