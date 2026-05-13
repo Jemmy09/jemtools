@@ -139,12 +139,39 @@ mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools
 
 ---
 
-## 🚀 Professional Installation
+## 📥 Installation Guide
 
-To install **JEM TOOLS** system-wide (Desktop & Start Menu):
-1. Open PowerShell as **Administrator**.
-2. Run `.\setup.ps1`.
-3. The app will be installed to `C:\Program Files\JEM TOOLS` and the publisher certificate will be trusted automatically.
+**JEM TOOLS** is a professional administrative suite. To ensure all system shortcuts and security certificates are correctly registered, follow one of the methods below:
+
+### **Method 1: PowerShell (Recommended)**
+1. Open **PowerShell** as **Administrator**.
+2. Navigate to the JEM TOOLS directory:
+   ```powershell
+   cd "C:\Path\To\WinSystemTools"
+   ```
+3. Run the setup engine:
+   ```powershell
+   .\setup.ps1
+   ```
+4. Read and **Accept** the User Agreement. The app will be installed to `C:\Program Files\JEM TOOLS`.
+
+### **Method 2: Command Prompt (CMD)**
+1. Open **Command Prompt** as **Administrator**.
+2. Navigate to the directory:
+   ```cmd
+   cd "C:\Path\To\WinSystemTools"
+   ```
+3. Execute the setup via PowerShell bridge:
+   ```cmd
+   powershell -ExecutionPolicy Bypass -File setup.ps1
+   ```
+
+### **Method 3: Manual Installation**
+If you prefer to deploy files manually:
+1. **Directory**: Create `C:\Program Files\JEM TOOLS`.
+2. **Transfer**: Copy `JEMTOOLS.exe`, `README.md`, `assets/`, and `src/` into that folder.
+3. **Security**: Right-click `assets/JemmyFrancisco.cer` -> **Install Certificate** -> **Local Machine** -> **Place all certificates in the following store** -> **Trusted Root Certification Authorities**.
+4. **Shortcuts**: Right-click `JEMTOOLS.exe` and select **Create Shortcut**. Move it to your Desktop or Start Menu.
 
 ---
 
