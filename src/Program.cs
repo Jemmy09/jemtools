@@ -395,14 +395,18 @@ namespace WindowsSystemToolMenu
             aboutView.Visible = (currentCategory == "ABOUT");
             policiesView.Visible = (currentCategory == "POLICIES");
 
+            if (currentCategory == "ALL") {
+                titleLabel.Text = "Infrastructure Nodes";
+            } else if (currentCategory == "ABOUT") {
+                titleLabel.Text = "About JEM TOOLS";
+            } else if (currentCategory == "POLICIES") {
+                titleLabel.Text = "User Policies";
+            } else {
+                string formattedCat = currentCategory.Substring(0, 1).ToUpper() + currentCategory.Substring(1).ToLower();
+                titleLabel.Text = formattedCat + " Nodes";
+            }
+
             if (dashboardView.Visible) {
-                if (currentCategory == "ALL") {
-                    titleLabel.Text = "Infrastructure Nodes";
-                } else {
-                    string formattedCat = currentCategory.Substring(0, 1).ToUpper() + currentCategory.Substring(1).ToLower();
-                    titleLabel.Text = formattedCat + " Nodes";
-                }
-                
                 cardContainer.SuspendLayout();
                 cardContainer.Controls.Clear();
                 string searchText = searchBox.Text.ToLower();
