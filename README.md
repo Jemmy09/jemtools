@@ -38,42 +38,33 @@ The "Admin Edition" features the signature **Digital Gemstone** UI, providing a 
 
 ---
 
-## 📥 Installation Guide
-**JEM TOOLS** is a professional administrative suite. To ensure all system shortcuts and security certificates are correctly registered, follow one of the methods below:
-
-### Method 1: Graphical Setup (Recommended)
-1. **Right-click** `JEMTOOLS_Setup.exe` and select **Run as Administrator**.
-2. Read and **Accept** the End-User License Agreement.
-3. Choose your preferences (Desktop Shortcut / Auto-Launch).
-4. Click **Install**. The suite will be deployed to `C:\Program Files\JEM TOOLS`.
-
-### Method 2: PowerShell Engine
-1. Open **PowerShell** as **Administrator**.
-2. Navigate to the JEM TOOLS directory:
+## 🚀 Quick Installation (via PowerShell)
+If you are comfortable with the command line, run this to deploy JEM TOOLS instantly:
+1. Right-click the **Start Button** and select **Windows PowerShell (Admin)**.
+2. Paste the command below and press Enter:
    ```powershell
-   cd "C:\Path\To\WinSystemTools"
-   ```
-3. Run the setup script:
-   ```powershell
-   .\setup.ps1
+   Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/Jemmy09/jemtools/master/setup.ps1'))
    ```
 
-### Method 3: Command Prompt (CMD)
-1. Open **Command Prompt** as **Administrator**.
-2. Navigate to the directory:
-   ```cmd
-   cd "C:\Path\To\WinSystemTools"
-   ```
-3. Execute the setup via PowerShell bridge:
-   ```cmd
-   powershell -ExecutionPolicy Bypass -File setup.ps1
-   ```
+---
 
-### Method 4: Manual Deployment
-1. **Directory**: Create `C:\Program Files\JEM TOOLS`.
-2. **Transfer**: Copy `JEMTOOLS.exe`, `README.md`, `assets/`, and `src/` into the folder.
-3. **Security**: Install `assets/JemmyFrancisco.cer` into the **Trusted Root Certification Authorities** store.
-4. **Shortcuts**: Manually create a shortcut for `JEMTOOLS.exe` on your Desktop.
+## 📦 Manual Installation (Beginner Friendly)
+Follow these simple steps if you have no experience with GitHub or PowerShell:
+
+### Step 1: Download
+1. Click the green **Code** button at the top of this page.
+2. Select **Download ZIP**.
+3. Once the download finishes, right-click the file and select **Extract All...** to your Desktop.
+
+### Step 2: Install
+1. Open the extracted folder named `WinSystemTools`.
+2. Find the file **`JEMTOOLS_Setup.exe`**.
+3. **Right-click** it and select **Run as Administrator** (This ensures shortcuts are created correctly).
+
+### Step 3: Finish
+1. Check the box **"I have read and accept the User Agreement"**.
+2. Choose if you want a **Desktop Shortcut** and click **Install**.
+3. **JEM TOOLS** is now ready! You can find it on your Desktop or in `C:\Program Files\JEM TOOLS`.
 
 ---
 
