@@ -528,22 +528,22 @@ namespace WindowsSystemToolMenu
                 using (MemoryStream ms = new MemoryStream(bytes)) bigLogo.Image = new Bitmap(ms);
             } catch {}
             content.Controls.Add(bigLogo);
-            y += 116;
+            y += 110;
 
             // App name & version
-            content.Controls.Add(MakeInfoLabel("JEM TOOLS | Admin Edition", new Font("Segoe UI Light", 22), ThemeAccent, y)); y += 46;
-            content.Controls.Add(MakeInfoLabel("Version 1.0.5 (Production)", new Font("Segoe UI", 11), Color.Gray, y)); y += 32;
+            content.Controls.Add(MakeInfoLabel("JEM TOOLS | Admin Edition", new Font("Segoe UI Light", 22), ThemeAccent, y, 45)); y += 45;
+            content.Controls.Add(MakeInfoLabel("Version 1.0.5 (Production)", new Font("Segoe UI", 11), Color.LightGray, y, 25)); y += 35;
 
             // Divider
             content.Controls.Add(new Panel { Size = new Size(420, 1), Location = new Point(0, y), BackColor = Color.FromArgb(50, 50, 65) });
             y += 22;
 
             // Developer info
-            content.Controls.Add(MakeInfoLabel("Jemmy Francisco", new Font("Segoe UI Semibold", 16), Color.White, y)); y += 38;
-            content.Controls.Add(MakeInfoLabel("Software Developer", new Font("Segoe UI", 11), Color.DimGray, y)); y += 40;
+            content.Controls.Add(MakeInfoLabel("Jemmy Francisco", new Font("Segoe UI Semibold", 16), Color.White, y, 35)); y += 35;
+            content.Controls.Add(MakeInfoLabel("Software Developer", new Font("Segoe UI", 11), Color.DimGray, y, 25)); y += 40;
 
             // Contact section header
-            content.Controls.Add(MakeInfoLabel("C O N T A C T", new Font("Segoe UI Semibold", 8), Color.FromArgb(85, 85, 110), y)); y += 28;
+            content.Controls.Add(MakeInfoLabel("C O N T A C T", new Font("Segoe UI Semibold", 8), Color.FromArgb(85, 85, 110), y, 20)); y += 28;
 
             // Facebook button — brand blue
             Button fbBtn = MakeContactBtn("  f   Facebook", Color.FromArgb(24, 119, 242));
@@ -563,7 +563,7 @@ namespace WindowsSystemToolMenu
             y += 20;
 
             // Copyright
-            content.Controls.Add(MakeInfoLabel("© 2026 JEM TOOLS · Released under MIT License", new Font("Segoe UI", 9), Color.FromArgb(72, 72, 88), y));
+            content.Controls.Add(MakeInfoLabel("© 2026 JEM TOOLS · Released under MIT License", new Font("Segoe UI", 9), Color.FromArgb(72, 72, 88), y, 20));
             y += 26;
 
             content.Height = y;
@@ -572,13 +572,13 @@ namespace WindowsSystemToolMenu
             return p;
         }
 
-        private Label MakeInfoLabel(string text, Font font, Color color, int y)
+        private Label MakeInfoLabel(string text, Font font, Color color, int y, int height)
         {
             Label l = new Label();
             l.Text = text;
             l.Font = font;
             l.ForeColor = color;
-            l.Size = new Size(420, (int)(font.Size * 2.5f) + 6);
+            l.Size = new Size(420, height);
             l.Location = new Point(0, y);
             l.TextAlign = ContentAlignment.MiddleCenter;
             l.BackColor = Color.Transparent;
