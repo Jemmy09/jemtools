@@ -186,6 +186,9 @@ namespace WindowsSystemToolMenu
             tools.Add(new ToolItem { SpecificName = "Network Connections", Command = "ncpa.cpl", Icon = "🔗", Category = "NETWORK", Description = "Manage adapter settings." });
             tools.Add(new ToolItem { SpecificName = "Wi-Fi Settings", Command = "explorer.exe ms-settings:network-wifi", Icon = "📶", Category = "NETWORK", Description = "Windows 10/11 Wi-Fi config." });
             tools.Add(new ToolItem { SpecificName = "Full Network Repair", Command = "ipconfig /release & ipconfig /renew & ipconfig /flushdns & netsh winsock reset & netsh int ip reset", Icon = "🛠️", Category = "NETWORK", IsMacro = true, Description = "Total protocol restoration." });
+
+            // Sort tools alphabetically
+            tools = tools.OrderBy(t => t.SpecificName).ToList();
         }
 
         private void BuildUI()
