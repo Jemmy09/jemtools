@@ -3,14 +3,20 @@ using System.IO;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Drawing;
+using Microsoft.Win32;
 
 namespace JEMToolsSetup
 {
     static class Program
     {
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            if (args.Length > 0 && args[0].ToLower() == "/uninstall")
+            {
+                SetupForm.Uninstall();
+                return;
+            }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new SetupForm());
@@ -185,6 +191,27 @@ namespace JEMToolsSetup
                 string base64 = "%%PAYLOAD%%";
                 byte[] bytes = Convert.FromBase64String(base64);
                 File.WriteAllBytes(exePath, bytes);
+
+                // Copy this setup file to target directory as an uninstaller
+                try { File.Copy(Process.GetCurrentProcess().MainModule.FileName, Path.Combine(targetDir, "JEMTOOLS_Setup.exe"), true); } catch { }
+
+                // Register in Programs and Features
+                try
+                {
+                    string uninstallKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\JEMTOOLS";
+                    using (RegistryKey key = Registry.LocalMachine.CreateSubKey(uninstallKey))
+                    {
+                        key.SetValue("DisplayName", "JEM TOOLS | Admin Edition");
+                        key.SetValue("UninstallString", "\"" + Path.Combine(targetDir, "JEMTOOLS_Setup.exe") + "\" /uninstall");
+                        key.SetValue("DisplayIcon", exePath);
+                        key.SetValue("Publisher", "Jemmy Francisco");
+                        key.SetValue("DisplayVersion", "1.0.7");
+                        key.SetValue("InstallLocation", targetDir);
+                        key.SetValue("EstimatedSize", bytes.Length / 1024);
+                        key.SetValue("NoModify", 1);
+                        key.SetValue("NoRepair", 1);
+                    }
+                } catch { }
                 
                 if (createShortcut) {
                     string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -212,6 +239,43 @@ namespace JEMToolsSetup
             {
                 MessageBox.Show("Installation failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
+            }
+        }
+
+        public static void Uninstall()
+        {
+            try
+            {
+                string targetDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "JEM TOOLS");
+                
+                // Kill running instances
+                foreach (var proc in Process.GetProcessesByName("JEMTOOLS"))
+                {
+                    try { proc.Kill(); proc.WaitForExit(1000); } catch { }
+                }
+
+                // Remove Desktop Shortcut
+                string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string shortcutPath = Path.Combine(desktop, "JEM TOOLS.lnk");
+                if (File.Exists(shortcutPath)) File.Delete(shortcutPath);
+
+                // Remove Registry Keys
+                try { Registry.LocalMachine.DeleteSubKeyTree(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\JEMTOOLS", false); } catch { }
+                try { Registry.CurrentUser.DeleteSubKeyTree(@"Software\JEMTOOLS", false); } catch { }
+
+                // Schedule directory deletion (cannot delete self while running)
+                ProcessStartInfo psi = new ProcessStartInfo();
+                psi.FileName = "cmd.exe";
+                psi.Arguments = "/C timeout /T 2 & rd /S /Q \"" + targetDir + "\"";
+                psi.WindowStyle = ProcessWindowStyle.Hidden;
+                psi.CreateNoWindow = true;
+                Process.Start(psi);
+
+                MessageBox.Show("JEM TOOLS has been successfully uninstalled.", "Uninstall Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Uninstall Error: " + ex.Message, "JEM TOOLS", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
