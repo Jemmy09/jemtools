@@ -19,10 +19,13 @@ namespace JEMToolsSetup
 
     public class SetupForm : Form
     {
+        private Button btnInstall;
+        private Label lblStatus;
+
         public SetupForm()
         {
-            this.Text = "JEM TOOLS Installer";
-            this.Size = new Size(400, 150);
+            this.Text = "JEM TOOLS | Setup";
+            this.Size = new Size(500, 420);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -30,25 +33,79 @@ namespace JEMToolsSetup
             this.BackColor = Color.FromArgb(20, 20, 25);
             this.ForeColor = Color.White;
             
-            Label lbl = new Label();
-            lbl.Text = "Installing JEM TOOLS...";
-            lbl.Font = new Font("Segoe UI Semibold", 14);
-            lbl.AutoSize = true;
-            lbl.Location = new Point(85, 40);
-            this.Controls.Add(lbl);
+            Label title = new Label();
+            title.Text = "JEM TOOLS - Installation";
+            title.Font = new Font("Segoe UI Semibold", 14);
+            title.AutoSize = true;
+            title.Location = new Point(20, 15);
+            this.Controls.Add(title);
             
-            this.Shown += SetupForm_Shown;
-        }
-
-        private void SetupForm_Shown(object sender, EventArgs e)
-        {
-            Timer t = new Timer();
-            t.Interval = 500;
-            t.Tick += delegate {
-                t.Stop();
+            TextBox eula = new TextBox();
+            eula.Multiline = true;
+            eula.ReadOnly = true;
+            eula.ScrollBars = ScrollBars.Vertical;
+            eula.Location = new Point(20, 50);
+            eula.Size = new Size(445, 230);
+            eula.BackColor = Color.FromArgb(30, 30, 35);
+            eula.ForeColor = Color.LightGray;
+            eula.Font = new Font("Segoe UI", 9);
+            eula.Text = "END-USER LICENSE AGREEMENT (EULA)\r\n\r\n" +
+                        "IMPORTANT - READ CAREFULLY:\r\n" +
+                        "This End-User License Agreement is a legal agreement between you and JEM TOOLS. " +
+                        "By installing, copying, or otherwise using the software, you agree to be bound by the terms of this EULA.\r\n\r\n" +
+                        "1. GRANT OF LICENSE\r\n" +
+                        "JEM TOOLS grants you a personal, non-exclusive license to install and use the software.\r\n\r\n" +
+                        "2. DESCRIPTION OF OTHER RIGHTS AND LIMITATIONS\r\n" +
+                        "- You must not use the software to violate any local, state, national, or international law.\r\n" +
+                        "- You are responsible for any actions taken using the administrative tools provided.\r\n\r\n" +
+                        "3. DISCLAIMER OF WARRANTY\r\n" +
+                        "The software is provided \"AS IS\" without warranty of any kind. The entire risk arising out of use " +
+                        "or performance of the software remains with you.";
+            this.Controls.Add(eula);
+            
+            CheckBox chkAccept = new CheckBox();
+            chkAccept.Text = "I have read and accept the User Agreement";
+            chkAccept.Location = new Point(20, 290);
+            chkAccept.AutoSize = true;
+            chkAccept.Font = new Font("Segoe UI", 9);
+            chkAccept.ForeColor = Color.White;
+            this.Controls.Add(chkAccept);
+            
+            btnInstall = new Button();
+            btnInstall.Text = "Install";
+            btnInstall.Location = new Point(345, 335);
+            btnInstall.Size = new Size(120, 35);
+            btnInstall.FlatStyle = FlatStyle.Flat;
+            btnInstall.BackColor = Color.Gray;
+            btnInstall.ForeColor = Color.White;
+            btnInstall.Font = new Font("Segoe UI Semibold", 9);
+            btnInstall.Enabled = false;
+            btnInstall.Cursor = Cursors.Hand;
+            btnInstall.FlatAppearance.BorderSize = 0;
+            this.Controls.Add(btnInstall);
+            
+            lblStatus = new Label();
+            lblStatus.Text = "Waiting for user agreement...";
+            lblStatus.Location = new Point(20, 345);
+            lblStatus.AutoSize = true;
+            lblStatus.Font = new Font("Segoe UI", 9);
+            lblStatus.ForeColor = Color.Gray;
+            this.Controls.Add(lblStatus);
+            
+            chkAccept.CheckedChanged += delegate {
+                btnInstall.Enabled = chkAccept.Checked;
+                btnInstall.BackColor = chkAccept.Checked ? Color.FromArgb(0, 120, 215) : Color.Gray;
+            };
+            
+            btnInstall.Click += delegate {
+                chkAccept.Enabled = false;
+                btnInstall.Enabled = false;
+                btnInstall.BackColor = Color.Gray;
+                btnInstall.Text = "Installing...";
+                lblStatus.Text = "Extracting files and creating shortcuts...";
+                Application.DoEvents();
                 Install();
             };
-            t.Start();
         }
 
         private void Install()
