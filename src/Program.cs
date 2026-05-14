@@ -398,12 +398,15 @@ namespace WindowsSystemToolMenu
                 cardContainer.SuspendLayout();
                 cardContainer.Controls.Clear();
                 string searchText = searchBox.Text.ToLower();
+                int visibleCount = 0;
                 foreach (ToolItem tool in tools) {
                     if ((currentCategory == "ALL" || tool.Category == currentCategory) && 
                         (string.IsNullOrEmpty(searchText) || tool.SpecificName.ToLower().Contains(searchText))) {
                         cardContainer.Controls.Add(CreateToolCard(tool));
+                        visibleCount++;
                     }
                 }
+                moduleCountLabel.Text = "Administrative Modules Available: " + visibleCount.ToString() + " / " + tools.Count.ToString();
                 cardContainer.ResumeLayout();
             }
         }
@@ -426,15 +429,15 @@ namespace WindowsSystemToolMenu
             name.Text = tool.SpecificName;
             name.Font = new Font("Segoe UI Bold", 11);
             name.ForeColor = Color.White;
-            name.Location = new Point(75, 18);
+            name.Location = new Point(85, 18);
             name.AutoSize = true;
             
             Label desc = new Label();
             desc.Text = tool.Description;
             desc.Font = new Font("Segoe UI", 9);
             desc.ForeColor = Color.Gray;
-            desc.Location = new Point(75, 45);
-            desc.Size = new Size(280, 45);
+            desc.Location = new Point(85, 45);
+            desc.Size = new Size(270, 45);
             
             Button runBtn = new Button();
             runBtn.Text = "LAUNCH NODE";
@@ -449,9 +452,9 @@ namespace WindowsSystemToolMenu
             ToolItem currentTool = tool;
             runBtn.Click += delegate(object s, EventArgs e) { Launch(currentTool); };
 
-            card.Controls.Add(icon);
             card.Controls.Add(name);
             card.Controls.Add(desc);
+            card.Controls.Add(icon);
             card.Controls.Add(runBtn);
             return card;
         }
