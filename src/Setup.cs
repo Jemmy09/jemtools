@@ -67,9 +67,9 @@ namespace JEMToolsSetup
                 string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 string shortcutPath = Path.Combine(desktop, "JEM TOOLS.lnk");
                 
-                string psCommand = $"$s=(New-Object -COM WScript.Shell).CreateShortcut('{shortcutPath}');$s.TargetPath='{exePath}';$s.WorkingDirectory='{targetDir}';$s.Save()";
+                string psCommand = string.Format("$s=(New-Object -COM WScript.Shell).CreateShortcut('{0}');$s.TargetPath='{1}';$s.WorkingDirectory='{2}';$s.Save()", shortcutPath, exePath, targetDir);
                 
-                ProcessStartInfo psi = new ProcessStartInfo("powershell", $"-NoProfile -Command \"{psCommand}\"");
+                ProcessStartInfo psi = new ProcessStartInfo("powershell", string.Format("-NoProfile -Command \"{0}\"", psCommand));
                 psi.CreateNoWindow = true;
                 psi.UseShellExecute = false;
                 Process.Start(psi)?.WaitForExit();
