@@ -268,38 +268,40 @@ namespace WindowsSystemToolMenu
             mainBurgerBtn.Font = new Font("Segoe UI", 22);
             mainBurgerBtn.ForeColor = Color.White;
             mainBurgerBtn.Size = new Size(55, 55);
+            mainBurgerBtn.Location = new Point(0, 5);
             mainBurgerBtn.FlatStyle = FlatStyle.Flat;
-            mainBurgerBtn.Visible = false;
-            mainBurgerBtn.BackColor = ThemeAccent;
+            mainBurgerBtn.Visible = true;
+            mainBurgerBtn.BackColor = ThemeDarkBg;
             mainBurgerBtn.FlatAppearance.BorderSize = 0;
+            mainBurgerBtn.Cursor = Cursors.Hand;
             mainBurgerBtn.Click += delegate(object s, EventArgs e) { StartNavToggle(); };
             
             titleLabel = new Label();
             titleLabel.Text = "Infrastructure Nodes";
             titleLabel.Font = new Font("Segoe UI Light", 28);
             titleLabel.ForeColor = Color.White;
-            titleLabel.Location = new Point(0, 10);
+            titleLabel.Location = new Point(60, 10);
             titleLabel.AutoSize = true;
             
             moduleCountLabel = new Label();
             moduleCountLabel.Text = "Administrative Suite Online";
             moduleCountLabel.ForeColor = Color.DimGray;
             moduleCountLabel.Font = new Font("Segoe UI", 10);
-            moduleCountLabel.Location = new Point(5, 70);
+            moduleCountLabel.Location = new Point(65, 70);
             moduleCountLabel.AutoSize = true;
             
             cpuLabel = new Label();
             cpuLabel.Text = "CPU: 0%";
             cpuLabel.ForeColor = ThemeAccent;
             cpuLabel.Font = new Font("Consolas", 12);
-            cpuLabel.Location = new Point(0, 100);
+            cpuLabel.Location = new Point(60, 100);
             cpuLabel.AutoSize = true;
             
             ramLabel = new Label();
             ramLabel.Text = "RAM: 0%";
             ramLabel.ForeColor = ThemeAccent;
             ramLabel.Font = new Font("Consolas", 12);
-            ramLabel.Location = new Point(140, 100);
+            ramLabel.Location = new Point(200, 100);
             ramLabel.AutoSize = true;
             
             headerPanel.Controls.Add(mainBurgerBtn);
@@ -588,18 +590,7 @@ namespace WindowsSystemToolMenu
 
         private void SyncLayout()
         {
-            if (!isSidebarExpanded) {
-                titleLabel.Left = 70;
-                moduleCountLabel.Left = 75;
-                cpuLabel.Left = 70;
-                ramLabel.Left = 210;
-                mainBurgerBtn.Visible = true;
-            } else {
-                titleLabel.Left = 0;
-                moduleCountLabel.Left = 5;
-                cpuLabel.Left = 0;
-                ramLabel.Left = 140;
-            }
+            // Labels are now statically offset so the mainBurgerBtn is always visible.
         }
 
         private void UpdateSidebarColors()
