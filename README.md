@@ -40,23 +40,44 @@ The "Admin Edition" features the signature **Digital Gemstone** UI, providing a 
 
 ---
 
-## 🚀 Quick Start
+## 📥 Installation Guide
+**JEM TOOLS** is a professional administrative suite. To ensure all system shortcuts and security certificates are correctly registered, follow one of the methods below:
 
-### Option 1: Setup Installer (Recommended)
-Download and run the provided **`JEMTOOLS_Setup.exe`**.
-This will automatically install the application to your local app data, create a convenient Desktop shortcut, and launch the suite seamlessly.
+### Method 1: PowerShell (Recommended)
+1. Open **PowerShell** as Administrator.
+2. Navigate to the JEM TOOLS directory:
+   ```powershell
+   cd "C:\Path\To\WinSystemTools"
+   ```
+3. Run the setup engine:
+   ```powershell
+   .\setup.ps1
+   ```
+4. Read and Accept the User Agreement. The app will be installed to `C:\Program Files\JEM TOOLS`.
 
-### Option 2: Portable Executable
-Download the **`JEMTOOLS.exe`** standalone binary and run it directly. No installation required.
+### Method 2: Command Prompt (CMD)
+1. Open **Command Prompt** as Administrator.
+2. Navigate to the directory:
+   ```cmd
+   cd "C:\Path\To\WinSystemTools"
+   ```
+3. Execute the setup via PowerShell bridge:
+   ```cmd
+   powershell -ExecutionPolicy Bypass -File setup.ps1
+   ```
 
-### Option 3: PowerShell Script Deployment
-```powershell
-mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools"; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Jemmy09/jemtools/master/JEMTOOLS_Setup.exe" -OutFile "JEMTOOLS_Setup.exe"; Start-Process ".\JEMTOOLS_Setup.exe"
-```
+### Method 3: Manual Installation
+If you prefer to deploy files manually:
+- **Directory**: Create `C:\Program Files\JEM TOOLS`.
+- **Transfer**: Copy `JEMTOOLS.exe`, `README.md`, `assets/`, and `src/` into that folder.
+- **Security**: Right-click `assets/JemmyFrancisco.cer` -> Install Certificate -> Local Machine -> Place all certificates in the following store -> Trusted Root Certification Authorities.
+- **Shortcuts**: Right-click `JEMTOOLS.exe` and select Create Shortcut. Move it to your Desktop or Start Menu.
 
-### Manual Setup
-1. Download `JEMTOOLS.exe` from this repository.
-2. **Right-click** `JEMTOOLS.exe` → **Run as Administrator**.
+---
+
+## 🛠️ Automated Updates (Developer Only)
+To update the app, recompile, sign, and push to GitHub in one go:
+- Run `.\push.ps1`.
 
 ---
 
