@@ -614,7 +614,7 @@ namespace WindowsSystemToolMenu
         private void SetToolTips()
         {
             toolTip.SetToolTip(searchBox, "Filter administrative modules");
-            foreach (Button b in categoryButtons) toolTip.SetToolTip(b, "Show " + b.Text.Trim() + " Nodes");
+            foreach (Button b in categoryButtons) toolTip.SetToolTip(b, "Show " + (string)b.Tag + " Nodes");
         }
 
         private void LogActivity(string m) { try { File.AppendAllText(LogFile, string.Format("[{0:yyyy-MM-dd HH:mm:ss}] {1}\n", DateTime.Now, m)); } catch {} }

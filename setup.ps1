@@ -37,20 +37,20 @@ if (-not $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Adm
     exit
 }
 
-# 2. Create Installation Directory
+# 3. Create Installation Directory
 Write-Host "Creating installation directory at $InstallDir..." -ForegroundColor Yellow
 if (-not (Test-Path $InstallDir)) {
     New-Item -Path $InstallDir -ItemType Directory | Out-Null
 }
 
-# 3. Deploy Assets
+# 4. Deploy Assets
 Write-Host "Deploying JEM TOOLS assets..." -ForegroundColor Yellow
 Copy-Item "JEMTOOLS.exe" "$InstallDir\" -Force
 Copy-Item "README.md" "$InstallDir\" -Force
 if (Test-Path "assets") { Copy-Item "assets" "$InstallDir\" -Recurse -Force }
 if (Test-Path "src") { Copy-Item "src" "$InstallDir\" -Recurse -Force }
 
-# 4. Register Publisher Certificate (Trust)
+# 5. Register Publisher Certificate (Trust)
 Write-Host "Registering Publisher Certificate (Jemmy Francisco)..." -ForegroundColor Yellow
 $certPath = "$InstallDir\assets\JemmyFrancisco.cer"
 if (Test-Path $certPath) {
@@ -58,7 +58,7 @@ if (Test-Path $certPath) {
     Write-Host "Certificate installed to Trusted Root." -ForegroundColor Green
 }
 
-# 5. Create Desktop Shortcut
+# 6. Create Desktop Shortcut
 Write-Host "Creating Desktop Shortcut..." -ForegroundColor Yellow
 $WshShell = New-Object -ComObject WScript.Shell
 $DesktopShortcut = $WshShell.CreateShortcut("$env:PUBLIC\Desktop\$AppName.lnk")
@@ -67,7 +67,7 @@ $DesktopShortcut.WorkingDirectory = $InstallDir
 $DesktopShortcut.IconLocation = "$InstallDir\assets\jem_logo.ico"
 $DesktopShortcut.Save()
 
-# 6. Create Start Menu Shortcut
+# 7. Create Start Menu Shortcut
 Write-Host "Creating Start Menu entries..." -ForegroundColor Yellow
 if (-not (Test-Path $StartMenuPath)) { New-Item -Path $StartMenuPath -ItemType Directory | Out-Null }
 $StartShortcut = $WshShell.CreateShortcut("$StartMenuPath\$AppName.lnk")

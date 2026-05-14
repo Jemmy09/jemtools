@@ -24,7 +24,7 @@ if ($LASTEXITCODE -ne 0) {
     exit 
 }
 
-# 2. Sign
+# 3. Sign
 Write-Host "Applying Digital Signature..." -ForegroundColor Yellow
 $cert = Get-ChildItem -Path Cert:\CurrentUser\My | Where-Object { $_.Subject -like "*CN=Jemmy Francisco*" } | Select-Object -First 1
 if ($cert) {
@@ -33,7 +33,7 @@ if ($cert) {
     Write-Host "WARNING: Signing certificate not found. Skipping signing." -ForegroundColor Magenta
 }
 
-# 3. Git Sync
+# 4. Git Sync
 Write-Host "Syncing with GitHub..." -ForegroundColor Yellow
 git add .
 git commit -m "Automated update: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
