@@ -396,6 +396,13 @@ namespace WindowsSystemToolMenu
             policiesView.Visible = (currentCategory == "POLICIES");
 
             if (dashboardView.Visible) {
+                if (currentCategory == "ALL") {
+                    titleLabel.Text = "Infrastructure Nodes";
+                } else {
+                    string formattedCat = currentCategory.Substring(0, 1).ToUpper() + currentCategory.Substring(1).ToLower();
+                    titleLabel.Text = formattedCat + " Nodes";
+                }
+                
                 cardContainer.SuspendLayout();
                 cardContainer.Controls.Clear();
                 string searchText = searchBox.Text.ToLower();
