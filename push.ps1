@@ -7,7 +7,14 @@ Write-Host "--- JEM TOOLS Update Engine ---" -ForegroundColor Cyan
 Write-Host "Embedding branding assets..." -ForegroundColor Yellow
 powershell.exe -ExecutionPolicy Bypass -File "scripts\embed_logo.ps1"
 
-# 1. Compile
+# 1. Bypass Active Process Lock
+if (Test-Path "JEMTOOLS_old.exe") { Remove-Item "JEMTOOLS_old.exe" -Force -ErrorAction SilentlyContinue }
+if (Test-Path "JEMTOOLS.exe") { 
+    Write-Host "Bypassing active process locks..." -ForegroundColor Yellow
+    Rename-Item "JEMTOOLS.exe" "JEMTOOLS_old.exe" -Force -ErrorAction SilentlyContinue 
+}
+
+# 2. Compile
 Write-Host "Compiling JEMTOOLS.exe..." -ForegroundColor Yellow
 $csc = "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
 & $csc /target:winexe /out:JEMTOOLS.exe /win32icon:assets\jem_logo.ico /reference:System.dll,System.Windows.Forms.dll,System.Drawing.dll,Microsoft.VisualBasic.dll,System.Core.dll "src\Program.cs"
