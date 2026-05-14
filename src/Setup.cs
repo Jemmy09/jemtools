@@ -149,6 +149,8 @@ namespace JEMToolsSetup
                     
                     if (progress >= 100) {
                         progTimer.Stop();
+                        // Register EULA Acceptance in Registry
+                        try { Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\JEMTOOLS").SetValue("AcceptedEULA", 1); } catch { }
                         Install(chkShortcut.Checked, chkLaunch.Checked);
                     }
                 };

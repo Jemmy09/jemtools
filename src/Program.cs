@@ -29,6 +29,16 @@ namespace WindowsSystemToolMenu
         static void Main()
         {
             try {
+                // Verify Professional Initialization (EULA Check)
+                var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\JEMTOOLS");
+                object accepted = (key != null) ? key.GetValue("AcceptedEULA") : null;
+
+                if (accepted == null || (int)accepted != 1)
+                {
+                    MessageBox.Show("JEM TOOLS has not been initialized correctly.\n\nPlease run JEMTOOLS_Setup.exe to accept the User Agreement and complete the professional installation process.", "JEM TOOLS | Security", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 if (Environment.OSVersion.Version.Major >= 6) SetProcessDPIAware();
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
