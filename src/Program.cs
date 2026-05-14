@@ -211,6 +211,7 @@ namespace WindowsSystemToolMenu
             burgerBtn.BackColor = Color.Transparent;
             burgerBtn.Cursor = Cursors.Hand;
             burgerBtn.Click += delegate(object s, EventArgs e) { StartNavToggle(); };
+            toolTip.SetToolTip(burgerBtn, "Toggle Navigation Sidebar");
 
             PictureBox logo = new PictureBox();
             logo.Size = new Size(40, 40);
@@ -254,8 +255,8 @@ namespace WindowsSystemToolMenu
             mainArea.Padding = new Padding(30, 20, 30, 20);
             this.Controls.Add(mainArea);
             
-            mainArea.BringToFront();
-            sidebar.BringToFront();
+            // Fix Form Docking: sidebar must dock first (Left), then mainArea fills the rest.
+            sidebar.SendToBack();
 
             // Dashboard Header
             headerPanel = new Panel();
@@ -337,12 +338,9 @@ namespace WindowsSystemToolMenu
             policiesView = CreatePoliciesView();
             mainArea.Controls.Add(policiesView);
 
-            // Set Z-Order correctly for docking
-            dashboardView.BringToFront();
-            aboutView.BringToFront();
-            policiesView.BringToFront();
-            searchPanel.BringToFront();
-            headerPanel.BringToFront();
+            // Set Z-Order correctly for mainArea controls: Edge docks first, Fill docks last.
+            headerPanel.SendToBack();
+            searchPanel.SendToBack();
 
             this.Resize += delegate(object s, EventArgs e) { SyncLayout(); };
             RefreshDisplay();
