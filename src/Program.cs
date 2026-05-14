@@ -463,10 +463,32 @@ namespace WindowsSystemToolMenu
         private void Launch(ToolItem tool)
         {
             try {
-                ProcessStartInfo psi = new ProcessStartInfo("cmd.exe", "/c " + tool.Command);
-                psi.Verb = tool.IsMacro ? "runas" : "";
+                ProcessStartInfo psi = new ProcessStartInfo();
                 psi.UseShellExecute = true;
-                psi.WindowStyle = ProcessWindowStyle.Hidden;
+                // Avoid opening in the app's directory to look clean and professional
+                psi.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                
+                if (tool.IsMacro) {
+                    psi.FileName = "cmd.exe";
+                    psi.Arguments = "/c " + tool.Command;
+                    psi.Verb = "runas";
+                    psi.WindowStyle = ProcessWindowStyle.Hidden;
+                } else if (tool.Category == "NETWORK" && !tool.Command.EndsWith(".cpl") && !tool.Command.StartsWith("explorer.exe")) {
+                    psi.FileName = "cmd.exe";
+                    psi.Arguments = "/k " + tool.Command;
+                    psi.WindowStyle = ProcessWindowStyle.Normal;
+                } else if (tool.Command == "cmd") {
+                    psi.FileName = "cmd.exe";
+                    psi.WindowStyle = ProcessWindowStyle.Normal;
+                } else if (tool.Command == "powershell") {
+                    psi.FileName = "powershell.exe";
+                    psi.WindowStyle = ProcessWindowStyle.Normal;
+                } else {
+                    psi.FileName = "cmd.exe";
+                    psi.Arguments = "/c start \"\" " + tool.Command;
+                    psi.WindowStyle = ProcessWindowStyle.Hidden;
+                }
+                
                 Process.Start(psi);
                 LogActivity("Executed Infrastructure Node: " + tool.SpecificName);
             } catch (Exception ex) { MessageBox.Show("Infrastructure Execution Error: " + ex.Message, "JEM TOOLS", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
