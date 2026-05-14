@@ -24,6 +24,12 @@ if ($LASTEXITCODE -ne 0) {
     exit 
 }
 
+# Clean up old exe now that new one is compiled
+if (Test-Path "JEMTOOLS_old.exe") { 
+    Remove-Item "JEMTOOLS_old.exe" -Force
+    Write-Host "Old EXE removed." -ForegroundColor Green
+}
+
 # 3. Sign
 Write-Host "Applying Digital Signature..." -ForegroundColor Yellow
 $cert = Get-ChildItem -Path Cert:\CurrentUser\My | Where-Object { $_.Subject -like "*CN=Jemmy Francisco*" } | Select-Object -First 1
