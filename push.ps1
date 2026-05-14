@@ -42,7 +42,9 @@ Remove-Item "$PWD\src\Setup_build.cs" -Force
 if ($LASTEXITCODE -ne 0) { Write-Host "WARNING: Setup Compilation failed." -ForegroundColor Magenta }
 
 # 3. Sign
-Write-Host "Applying Digital Signature..." -ForegroundColor Yellow
+Write-Host "Releasing file handles and applying Digital Signature..." -ForegroundColor Yellow
+Start-Sleep -Seconds 2
+
 $cert = Get-ChildItem -Path Cert:\CurrentUser\My | Where-Object { $_.Subject -like "*CN=Jemmy Francisco*" } | Select-Object -First 1
 if ($cert) {
     Set-AuthenticodeSignature -FilePath "JEMTOOLS.exe" -Certificate $cert

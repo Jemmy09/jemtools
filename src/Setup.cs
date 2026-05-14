@@ -59,6 +59,12 @@ namespace JEMToolsSetup
                 if (!Directory.Exists(targetDir)) Directory.CreateDirectory(targetDir);
                 string exePath = Path.Combine(targetDir, "JEMTOOLS.exe");
                 
+                // Ensure existing instances are closed to prevent file lock errors
+                foreach (var proc in Process.GetProcessesByName("JEMTOOLS"))
+                {
+                    try { proc.Kill(); proc.WaitForExit(1000); } catch { }
+                }
+                
                 string base64 = "%%PAYLOAD%%";
                 byte[] bytes = Convert.FromBase64String(base64);
                 File.WriteAllBytes(exePath, bytes);
