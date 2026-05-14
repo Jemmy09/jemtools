@@ -554,7 +554,7 @@ namespace WindowsSystemToolMenu
             // Gmail button — brand red
             Button gmailBtn = MakeContactBtn("  \u2709  Gmail", Color.FromArgb(219, 68, 55));
             gmailBtn.Location = new Point(207, y);
-            gmailBtn.Click += delegate(object s, EventArgs e) { try { Process.Start("mailto:Jemmyfrancisco30@gmail.com"); } catch {} };
+            gmailBtn.Click += delegate(object s, EventArgs e) { try { Process.Start("https://mail.google.com/mail/?view=cm&to=Jemmyfrancisco30@gmail.com&su=JEM+TOOLS+Inquiry"); } catch {} };
             content.Controls.Add(gmailBtn);
             y += 56;
 
