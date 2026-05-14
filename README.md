@@ -19,11 +19,11 @@
 ## 🛠️ Project Blueprint
 **JEM TOOLS** is a commercial-grade administrative utility designed for power users and IT professionals. It provides a centralized command center for system-level maintenance, security auditing, and real-time performance monitoring, all within a high-fidelity, privacy-first architecture.
 
-The "Admin Edition" features the signature **Digital Gemstone** UI, providing a high-fidelity experience that turns complex system management into a streamlined, visual process.
+The "Admin Edition" features a high-fidelity experience that turns complex system management into a streamlined, visual process.
 
 ---
 
-## ✨ Premium Features
+## ✨ Features
 
 | Feature | Description |
 |---|---|
@@ -48,7 +48,7 @@ If you are comfortable with the command line, run this to deploy JEM TOOLS insta
 
 ---
 
-## 📦 Manual Installation (Beginner Friendly)
+## 📦 Manual Installation
 Follow these simple steps if you have no experience with GitHub or PowerShell:
 
 ### Step 1: Download
@@ -65,12 +65,6 @@ Follow these simple steps if you have no experience with GitHub or PowerShell:
 1. Check the box **"I have read and accept the User Agreement"**.
 2. Choose if you want a **Desktop Shortcut** and click **Install**.
 3. **JEM TOOLS** is now ready! You can find it on your Desktop or in `C:\Program Files\JEM TOOLS`.
-
----
-
-## 🛠️ Automated Updates (Developer Only)
-To update the application, recompile binaries, apply digital signatures, and sync with GitHub:
-- Run `.\push.ps1`.
 
 ---
 
