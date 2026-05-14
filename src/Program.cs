@@ -329,6 +329,7 @@ namespace WindowsSystemToolMenu
             cardContainer = new FlowLayoutPanel();
             cardContainer.Dock = DockStyle.Fill;
             cardContainer.AutoScroll = true;
+            cardContainer.MouseEnter += delegate(object s, EventArgs e) { cardContainer.Focus(); };
             dashboardView.Controls.Add(cardContainer);
             mainArea.Controls.Add(dashboardView);
             
