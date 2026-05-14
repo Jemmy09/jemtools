@@ -23,11 +23,12 @@ namespace JEMToolsSetup
         private Label lblStatus;
         private CheckBox chkShortcut;
         private CheckBox chkLaunch;
+        private ProgressBar pbar;
 
         public SetupForm()
         {
             this.Text = "JEM TOOLS | Setup";
-            this.Size = new Size(500, 480);
+            this.Size = new Size(500, 520);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -91,9 +92,16 @@ namespace JEMToolsSetup
             chkLaunch.Checked = true;
             this.Controls.Add(chkLaunch);
             
+            pbar = new ProgressBar();
+            pbar.Location = new Point(20, 390);
+            pbar.Size = new Size(445, 10);
+            pbar.Style = ProgressBarStyle.Continuous;
+            pbar.Visible = false;
+            this.Controls.Add(pbar);
+            
             btnInstall = new Button();
             btnInstall.Text = "Install";
-            btnInstall.Location = new Point(345, 390);
+            btnInstall.Location = new Point(345, 420);
             btnInstall.Size = new Size(120, 35);
             btnInstall.FlatStyle = FlatStyle.Flat;
             btnInstall.BackColor = Color.Gray;
@@ -106,7 +114,7 @@ namespace JEMToolsSetup
             
             lblStatus = new Label();
             lblStatus.Text = "Waiting for user agreement...";
-            lblStatus.Location = new Point(20, 400);
+            lblStatus.Location = new Point(20, 430);
             lblStatus.AutoSize = true;
             lblStatus.Font = new Font("Segoe UI", 9);
             lblStatus.ForeColor = Color.Gray;
@@ -124,9 +132,27 @@ namespace JEMToolsSetup
                 btnInstall.Enabled = false;
                 btnInstall.BackColor = Color.Gray;
                 btnInstall.Text = "Installing...";
-                lblStatus.Text = "Installing JEM TOOLS...";
-                Application.DoEvents();
-                Install(chkShortcut.Checked, chkLaunch.Checked);
+                
+                pbar.Visible = true;
+                
+                Timer progTimer = new Timer();
+                progTimer.Interval = 50;
+                int progress = 0;
+                progTimer.Tick += delegate {
+                    progress += 4;
+                    if (progress <= 100) pbar.Value = progress;
+                    
+                    if (progress == 20) lblStatus.Text = "Preparing extraction...";
+                    if (progress == 40) lblStatus.Text = "Extracting JEMTOOLS.exe to AppData...";
+                    if (progress == 60) lblStatus.Text = "Configuring system settings...";
+                    if (progress == 80) lblStatus.Text = "Finalizing installation...";
+                    
+                    if (progress >= 100) {
+                        progTimer.Stop();
+                        Install(chkShortcut.Checked, chkLaunch.Checked);
+                    }
+                };
+                progTimer.Start();
             };
         }
 
