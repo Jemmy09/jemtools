@@ -66,7 +66,6 @@ namespace WindowsSystemToolMenu
         private TextBox searchBox;
         private ToolTip toolTip;
         private bool isSidebarExpanded = true;
-        private Button mainBurgerBtn;
         private List<Button> categoryButtons = new List<Button>();
         private PerformanceCounter cpuCounter;
         private Microsoft.VisualBasic.Devices.ComputerInfo computerInfo;
@@ -201,9 +200,21 @@ namespace WindowsSystemToolMenu
             sideHeader.Dock = DockStyle.Top;
             sideHeader.BackColor = ThemeSideHeaderBg;
             
+            Button burgerBtn = new Button();
+            burgerBtn.Text = "≡";
+            burgerBtn.Font = new Font("Segoe UI", 20);
+            burgerBtn.ForeColor = Color.White;
+            burgerBtn.Size = new Size(40, 40);
+            burgerBtn.Location = new Point(10, 25);
+            burgerBtn.FlatStyle = FlatStyle.Flat;
+            burgerBtn.FlatAppearance.BorderSize = 0;
+            burgerBtn.BackColor = Color.Transparent;
+            burgerBtn.Cursor = Cursors.Hand;
+            burgerBtn.Click += delegate(object s, EventArgs e) { StartNavToggle(); };
+
             PictureBox logo = new PictureBox();
-            logo.Size = new Size(45, 45);
-            logo.Location = new Point(15, 20);
+            logo.Size = new Size(40, 40);
+            logo.Location = new Point(60, 25);
             logo.SizeMode = PictureBoxSizeMode.Zoom;
             logo.Cursor = Cursors.Hand;
             SetAppBranding(logo);
@@ -212,24 +223,12 @@ namespace WindowsSystemToolMenu
             brandName.Text = "JEM TOOLS";
             brandName.Font = new Font("Segoe UI Black", 14);
             brandName.ForeColor = ThemeAccent;
-            brandName.Location = new Point(65, 30);
+            brandName.Location = new Point(105, 30);
             brandName.AutoSize = true;
             
-            Button closeNavBtn = new Button();
-            closeNavBtn.Text = "≡";
-            closeNavBtn.Font = new Font("Segoe UI", 18);
-            closeNavBtn.ForeColor = Color.Gray;
-            closeNavBtn.Size = new Size(40, 40);
-            closeNavBtn.Location = new Point(SidebarMaxWidth - 50, 25);
-            closeNavBtn.FlatStyle = FlatStyle.Flat;
-            closeNavBtn.FlatAppearance.BorderSize = 0;
-            closeNavBtn.BackColor = Color.Transparent;
-            closeNavBtn.Cursor = Cursors.Hand;
-            closeNavBtn.Click += delegate(object s, EventArgs e) { StartNavToggle(); };
-            
+            sideHeader.Controls.Add(burgerBtn);
             sideHeader.Controls.Add(logo);
             sideHeader.Controls.Add(brandName);
-            sideHeader.Controls.Add(closeNavBtn);
             sidebar.Controls.Add(sideHeader);
 
             string[] categories = new string[] { "POLICIES", "UTILITIES", "NETWORK", "SECURITY", "ADMIN", "SYSTEM", "MAINTENANCE", "ALL" };
@@ -263,48 +262,34 @@ namespace WindowsSystemToolMenu
             headerPanel.Dock = DockStyle.Top;
             headerPanel.Height = 140;
             
-            mainBurgerBtn = new Button();
-            mainBurgerBtn.Text = "≡";
-            mainBurgerBtn.Font = new Font("Segoe UI", 22);
-            mainBurgerBtn.ForeColor = Color.White;
-            mainBurgerBtn.Size = new Size(55, 55);
-            mainBurgerBtn.Location = new Point(0, 5);
-            mainBurgerBtn.FlatStyle = FlatStyle.Flat;
-            mainBurgerBtn.Visible = true;
-            mainBurgerBtn.BackColor = ThemeDarkBg;
-            mainBurgerBtn.FlatAppearance.BorderSize = 0;
-            mainBurgerBtn.Cursor = Cursors.Hand;
-            mainBurgerBtn.Click += delegate(object s, EventArgs e) { StartNavToggle(); };
-            
             titleLabel = new Label();
             titleLabel.Text = "Infrastructure Nodes";
             titleLabel.Font = new Font("Segoe UI Light", 28);
             titleLabel.ForeColor = Color.White;
-            titleLabel.Location = new Point(60, 10);
+            titleLabel.Location = new Point(0, 10);
             titleLabel.AutoSize = true;
             
             moduleCountLabel = new Label();
             moduleCountLabel.Text = "Administrative Suite Online";
             moduleCountLabel.ForeColor = Color.DimGray;
             moduleCountLabel.Font = new Font("Segoe UI", 10);
-            moduleCountLabel.Location = new Point(65, 70);
+            moduleCountLabel.Location = new Point(5, 70);
             moduleCountLabel.AutoSize = true;
             
             cpuLabel = new Label();
             cpuLabel.Text = "CPU: 0%";
             cpuLabel.ForeColor = ThemeAccent;
             cpuLabel.Font = new Font("Consolas", 12);
-            cpuLabel.Location = new Point(60, 100);
+            cpuLabel.Location = new Point(0, 100);
             cpuLabel.AutoSize = true;
             
             ramLabel = new Label();
             ramLabel.Text = "RAM: 0%";
             ramLabel.ForeColor = ThemeAccent;
             ramLabel.Font = new Font("Consolas", 12);
-            ramLabel.Location = new Point(200, 100);
+            ramLabel.Location = new Point(140, 100);
             ramLabel.AutoSize = true;
             
-            headerPanel.Controls.Add(mainBurgerBtn);
             headerPanel.Controls.Add(titleLabel);
             headerPanel.Controls.Add(moduleCountLabel);
             headerPanel.Controls.Add(cpuLabel);
@@ -572,15 +557,14 @@ namespace WindowsSystemToolMenu
             navTimer.Interval = 1;
             navTimer.Tick += delegate(object s, EventArgs e) {
                 if (isSidebarExpanded) {
-                    if (sidebar.Width > 0) {
-                        sidebar.Width -= 60;
-                        if (sidebar.Width <= 0) { sidebar.Width = 0; sidebar.Visible = false; isSidebarExpanded = false; navTimer.Stop(); mainBurgerBtn.Visible = true; SyncLayout(); }
+                    if (sidebar.Width > 60) {
+                        sidebar.Width -= 40;
+                        if (sidebar.Width <= 60) { sidebar.Width = 60; isSidebarExpanded = false; navTimer.Stop(); }
                     }
                 } else {
                     if (sidebar.Width < SidebarMaxWidth) {
-                        sidebar.Visible = true;
-                        sidebar.Width += 60;
-                        if (sidebar.Width >= SidebarMaxWidth) { sidebar.Width = SidebarMaxWidth; isSidebarExpanded = true; navTimer.Stop(); mainBurgerBtn.Visible = false; SyncLayout(); }
+                        sidebar.Width += 40;
+                        if (sidebar.Width >= SidebarMaxWidth) { sidebar.Width = SidebarMaxWidth; isSidebarExpanded = true; navTimer.Stop(); }
                     }
                 }
             };
@@ -604,7 +588,6 @@ namespace WindowsSystemToolMenu
 
         private void SetToolTips()
         {
-            toolTip.SetToolTip(mainBurgerBtn, "Toggle Infrastructure Nodes");
             toolTip.SetToolTip(searchBox, "Filter administrative modules");
             foreach (Button b in categoryButtons) toolTip.SetToolTip(b, "Show " + b.Text.Trim() + " Nodes");
         }
