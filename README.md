@@ -43,20 +43,25 @@ The "Admin Edition" features the signature **Digital Gemstone** UI, providing a 
 ## 📥 Installation Guide
 **JEM TOOLS** is a professional administrative suite. To ensure all system shortcuts and security certificates are correctly registered, follow one of the methods below:
 
-### Method 1: PowerShell (Recommended)
-1. Open **PowerShell** as Administrator.
+### Method 1: Graphical Setup (Recommended)
+1. **Right-click** `JEMTOOLS_Setup.exe` and select **Run as Administrator**.
+2. Read and **Accept** the User Agreement.
+3. Choose your preferences (Desktop Shortcut / Auto-Launch).
+4. Click **Install**. The app will be deployed to `C:\Program Files\JEM TOOLS`.
+
+### Method 2: PowerShell Engine
+1. Open **PowerShell** as **Administrator**.
 2. Navigate to the JEM TOOLS directory:
    ```powershell
    cd "C:\Path\To\WinSystemTools"
    ```
-3. Run the setup engine:
+3. Run the setup script:
    ```powershell
    .\setup.ps1
    ```
-4. Read and Accept the User Agreement. The app will be installed to `C:\Program Files\JEM TOOLS`.
 
-### Method 2: Command Prompt (CMD)
-1. Open **Command Prompt** as Administrator.
+### Method 3: Command Prompt (CMD)
+1. Open **Command Prompt** as **Administrator**.
 2. Navigate to the directory:
    ```cmd
    cd "C:\Path\To\WinSystemTools"

@@ -160,7 +160,17 @@ namespace JEMToolsSetup
         {
             try
             {
-                string targetDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JEMTOOLS");
+                // Check for Admin Rights
+                var identity = System.Security.Principal.WindowsIdentity.GetCurrent();
+                var principal = new System.Security.Principal.WindowsPrincipal(identity);
+                if (!principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator))
+                {
+                    MessageBox.Show("Please run the installer as Administrator to deploy to Program Files.", "Admin Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Application.Exit();
+                    return;
+                }
+
+                string targetDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "JEM TOOLS");
                 if (!Directory.Exists(targetDir)) Directory.CreateDirectory(targetDir);
                 string exePath = Path.Combine(targetDir, "JEMTOOLS.exe");
                 
