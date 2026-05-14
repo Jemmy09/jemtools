@@ -29,7 +29,7 @@ The "Admin Edition" features the signature **Digital Gemstone** UI, providing a 
 
 | Feature | Description |
 |---|---|
-| 🗂️ **48 Admin Modules** | Every essential Windows tool — from Registry Editor to Network Repair — in one place |
+| 🗂️ **47 Admin Modules** | Every essential Windows tool — from Registry Editor to Network Repair — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
 | 🔍 **Instant Search** | Find any tool in milliseconds with the built-in search bar (intelligent placeholder) |
 | 🗂️ **Category Filters** | Browse by Security, Admin, System, Maintenance, or Utilities |
@@ -76,6 +76,7 @@ mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools
 <details>
 <summary><b>💻 System (Core Management)</b></summary>
 
+- 🔌 **Driver Updates**: Manage hardware and driver updates.
 - 🗑️ **Program Uninstaller**: Manage and remove installed applications.
 - 💻 **Command Prompt**: Elevated terminal access.
 - 🎛️ **Control Panel**: Centralized system settings.
@@ -95,7 +96,6 @@ mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools
 <summary><b>⚙️ Admin (Infrastructure Tools)</b></summary>
 
 - 🖥️ **Computer Management**: Consolidates multiple admin tools into one console.
-- 🔌 **Device Manager**: Manage hardware drivers and device status.
 - 💽 **Disk Management**: Partitioning and disk volume control.
 - ⚙️ **Component Services**: Manage COM+ applications and DCOM configuration.
 - 📜 **Event Viewer**: Analyze system logs and application errors.
@@ -135,10 +135,11 @@ mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools
 </details>
 
 <details>
-<summary><b>🔣 Utilities (Standard Tools)</b></summary>
+<summary><b>🔣 Utilities (Auxiliary Tools)</b></summary>
 
-- 🔣 **Character Map**: View and copy special characters from all fonts.
-- 📸 **Steps Recorder**: Capture steps to reproduce system issues.
+- 🔑 **Activation Methods**: Permanently activate Windows and Office via MAS.
+- 🔣 **Character Map**: View and copy system character catalog.
+- 📸 **Steps Recorder**: Record UI actions for support and debugging.
 - 🧠 **Memory Diagnostic**: Check for hardware-level RAM errors.
 - 🎵 **Media Player Legacy**: Classic Windows media playback.
 

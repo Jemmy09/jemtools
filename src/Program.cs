@@ -151,7 +151,6 @@ namespace WindowsSystemToolMenu
 
             // ADMIN
             tools.Add(new ToolItem { SpecificName = "Computer Management", Command = "compmgmt.msc", Icon = "🖥️", Category = "ADMIN", Description = "Unified admin console." });
-            tools.Add(new ToolItem { SpecificName = "Device Manager", Command = "devmgmt.msc", Icon = "🔌", Category = "ADMIN", Description = "Hardware and driver control." });
             tools.Add(new ToolItem { SpecificName = "Disk Management", Command = "diskmgmt.msc", Icon = "💽", Category = "ADMIN", Description = "Storage volume management." });
             tools.Add(new ToolItem { SpecificName = "Component Services", Command = "dcomcnfg", Icon = "⚙️", Category = "ADMIN", Description = "COM+ and DCOM management." });
             tools.Add(new ToolItem { SpecificName = "Event Viewer", Command = "eventvwr", Icon = "📜", Category = "ADMIN", Description = "System logs." });
