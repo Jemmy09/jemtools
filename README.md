@@ -57,7 +57,7 @@ Follow these simple steps if you have no experience with GitHub or PowerShell:
 3. Once the download finishes, right-click the file and select **Extract All...** to your Desktop.
 
 ### Step 2: Install
-1. Open the extracted folder named `WinSystemTools`.
+1. Open the extracted folder named `jemtools-master`.
 2. Find the file **`JEMTOOLS_Setup.exe`**.
 3. **Right-click** it and select **Run as Administrator** (This ensures shortcuts are created correctly).
 
