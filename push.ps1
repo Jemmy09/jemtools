@@ -3,6 +3,10 @@
 
 Write-Host "--- JEM TOOLS Update Engine ---" -ForegroundColor Cyan
 
+# 0. Embed Logo
+Write-Host "Embedding branding assets..." -ForegroundColor Yellow
+powershell.exe -ExecutionPolicy Bypass -File "scripts\embed_logo.ps1"
+
 # 1. Compile
 Write-Host "Compiling JEMTOOLS.exe..." -ForegroundColor Yellow
 $csc = "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"

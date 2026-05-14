@@ -19,6 +19,10 @@ using System.Runtime.InteropServices;
 
 namespace WindowsSystemToolMenu
 {
+    /// <summary>
+    /// JEM TOOLS | Admin Edition - High-fidelity system administration suite.
+    /// v1.0.5 Optimized for performance and professional deployment.
+    /// </summary>
     public class Program
     {
         [STAThread]
@@ -30,7 +34,7 @@ namespace WindowsSystemToolMenu
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new ModernAdminForm());
             } catch (Exception ex) {
-                MessageBox.Show("Infrastructure Error: " + ex.Message, "System Critical", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Infrastructure Critical Error: " + ex.Message, "JEM TOOLS", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -50,12 +54,14 @@ namespace WindowsSystemToolMenu
 
     public class ModernAdminForm : Form
     {
+        // Core Components
         private Panel sidebar;
         private Panel mainArea;
+        private Panel headerPanel;
         private FlowLayoutPanel cardContainer;
         private List<ToolItem> tools;
         private string currentCategory = "ALL";
-        private Label cpuLabel, ramLabel, moduleCountLabel;
+        private Label cpuLabel, ramLabel, moduleCountLabel, titleLabel;
         private Timer statsTimer, navTimer;
         private TextBox searchBox;
         private ToolTip toolTip;
@@ -65,14 +71,18 @@ namespace WindowsSystemToolMenu
         private PerformanceCounter cpuCounter;
         private Microsoft.VisualBasic.Devices.ComputerInfo computerInfo;
 
+        // View Panels
         private Panel dashboardView;
         private Panel aboutView;
         private Panel policiesView;
 
+        // Theme Definitions
         private static readonly Color ThemeAccent = Color.FromArgb(0, 180, 255);
         private static readonly Color ThemeDarkBg = Color.FromArgb(10, 10, 12);
         private static readonly Color ThemeCardBg = Color.FromArgb(20, 20, 26);
         private static readonly Color ThemeSidebarBg = Color.FromArgb(15, 15, 20);
+        private static readonly Color ThemeSideHeaderBg = Color.FromArgb(25, 25, 30);
+        
         private const string StateFile = "jem_state.cfg";
         private const string LogFile = "jem_activity.log";
         private const int SidebarMaxWidth = 300;
@@ -85,13 +95,13 @@ namespace WindowsSystemToolMenu
         {
             this.Text = "JEM TOOLS | Admin Edition v1.0.5";
             this.WindowState = FormWindowState.Maximized;
-            this.MinimumSize = new Size(1100, 700);
+            this.MinimumSize = new Size(1200, 800);
             this.BackColor = ThemeDarkBg;
             this.ForeColor = Color.White;
             this.Font = new Font("Segoe UI", 10);
             this.DoubleBuffered = true;
             this.AutoScaleMode = AutoScaleMode.Dpi;
-            this.toolTip = new ToolTip();
+            toolTip = new ToolTip();
 
             if (!CheckEULAAcceptance()) ShowEULAModal();
 
@@ -102,6 +112,7 @@ namespace WindowsSystemToolMenu
             UpdateSidebarColors();
             StartStats();
             InitNavAnimation();
+            SetToolTips();
         }
 
         private void InitializeCounters()
@@ -110,17 +121,21 @@ namespace WindowsSystemToolMenu
                 cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
                 cpuCounter.NextValue();
                 computerInfo = new Microsoft.VisualBasic.Devices.ComputerInfo();
-            } catch (Exception ex) { LogActivity("Telemetry limited: " + ex.Message); }
+            } catch { LogActivity("Telemetry operational but limited."); }
         }
 
         private void InitializeTools()
         {
             tools = new List<ToolItem>();
+            
+            // MAINTENANCE
             tools.Add(new ToolItem { SpecificName = "System Deep Clean", Command = "cleanmgr /sageset:1 & cleanmgr /sagerun:1", Icon = "⚡", Category = "MAINTENANCE", IsMacro = true, Description = "Full administrative system maintenance." });
             tools.Add(new ToolItem { SpecificName = "Network Refresh", Command = "ipconfig /release & ipconfig /renew & ipconfig /flushdns", Icon = "📡", Category = "MAINTENANCE", IsMacro = true, Description = "Reset adapters and flush DNS." });
             tools.Add(new ToolItem { SpecificName = "Security Lockdown", Command = "netsh advfirewall set allprofiles state on", Icon = "🛡️", Category = "MAINTENANCE", IsMacro = true, Description = "Enable all firewall profiles." });
             tools.Add(new ToolItem { SpecificName = "Disk Cleanup", Command = "cleanmgr", Icon = "🧹", Category = "MAINTENANCE", Description = "Remove redundant files." });
             tools.Add(new ToolItem { SpecificName = "Defragment Drives", Command = "dfrgui", Icon = "💿", Category = "MAINTENANCE", Description = "Optimize storage performance." });
+
+            // SYSTEM
             tools.Add(new ToolItem { SpecificName = "Program Uninstaller", Command = "appwiz.cpl", Icon = "🗑️", Category = "SYSTEM", Description = "Add or remove programs." });
             tools.Add(new ToolItem { SpecificName = "Command Prompt", Command = "cmd", Icon = "💻", Category = "SYSTEM", Description = "Standard command-line." });
             tools.Add(new ToolItem { SpecificName = "Control Panel", Command = "control", Icon = "🎛️", Category = "SYSTEM", Description = "Legacy settings." });
@@ -129,18 +144,52 @@ namespace WindowsSystemToolMenu
             tools.Add(new ToolItem { SpecificName = "Task Manager", Command = "taskmgr", Icon = "📋", Category = "SYSTEM", Description = "Process governance." });
             tools.Add(new ToolItem { SpecificName = "Resource Monitor", Command = "resmon", Icon = "📊", Category = "SYSTEM", Description = "Resource analytics." });
             tools.Add(new ToolItem { SpecificName = "PowerShell Core", Command = "powershell", Icon = "🐚", Category = "SYSTEM", Description = "Modern system shell." });
+            tools.Add(new ToolItem { SpecificName = "PowerShell ISE", Command = "powershell_ise", Icon = "🌀", Category = "SYSTEM", Description = "Integrated Scripting Environment." });
             tools.Add(new ToolItem { SpecificName = "Registry Editor", Command = "regedit", Icon = "🔑", Category = "SYSTEM", Description = "Registry modification." });
+            tools.Add(new ToolItem { SpecificName = "Remote Desktop", Command = "mstsc", Icon = "📡", Category = "SYSTEM", Description = "Remote access." });
+            tools.Add(new ToolItem { SpecificName = "Run Dialog", Command = "explorer.exe shell:::{2559a1f3-21d7-11d4-bdaf-00c04f60b9f0}", Icon = "🏃", Category = "SYSTEM", Description = "Classic run command." });
+
+            // ADMIN
             tools.Add(new ToolItem { SpecificName = "Computer Management", Command = "compmgmt.msc", Icon = "🖥️", Category = "ADMIN", Description = "Unified admin console." });
             tools.Add(new ToolItem { SpecificName = "Device Manager", Command = "devmgmt.msc", Icon = "🔌", Category = "ADMIN", Description = "Hardware and driver control." });
+            tools.Add(new ToolItem { SpecificName = "Disk Management", Command = "diskmgmt.msc", Icon = "💽", Category = "ADMIN", Description = "Storage volume management." });
+            tools.Add(new ToolItem { SpecificName = "Component Services", Command = "dcomcnfg", Icon = "⚙️", Category = "ADMIN", Description = "COM+ and DCOM management." });
+            tools.Add(new ToolItem { SpecificName = "Event Viewer", Command = "eventvwr", Icon = "📜", Category = "ADMIN", Description = "System logs." });
+            tools.Add(new ToolItem { SpecificName = "Performance Monitor", Command = "perfmon", Icon = "📈", Category = "ADMIN", Description = "Real-time HW monitoring." });
             tools.Add(new ToolItem { SpecificName = "Services", Command = "services.msc", Icon = "🛠️", Category = "ADMIN", Description = "Service management." });
+            tools.Add(new ToolItem { SpecificName = "Task Scheduler", Command = "taskschd.msc", Icon = "📅", Category = "ADMIN", Description = "Automated task engine." });
+            tools.Add(new ToolItem { SpecificName = "Print Management", Command = "printmanagement.msc", Icon = "🖨️", Category = "ADMIN", Description = "Printer and driver console." });
+            tools.Add(new ToolItem { SpecificName = "ODBC Data Sources", Command = "odbcad32.exe", Icon = "🗄️", Category = "ADMIN", Description = "Database connectivity (64-bit)." });
+
+            // SECURITY
             tools.Add(new ToolItem { SpecificName = "Security Policy", Command = "secpol.msc", Icon = "🔒", Category = "SECURITY", Description = "Local security policies." });
+            tools.Add(new ToolItem { SpecificName = "Defender Firewall", Command = "wf.msc", Icon = "🧱", Category = "SECURITY", Description = "Network security." });
+            tools.Add(new ToolItem { SpecificName = "iSCSI Initiator", Command = "iscsicpl.exe", Icon = "🔗", Category = "SECURITY", Description = "Storage area network config." });
+            tools.Add(new ToolItem { SpecificName = "Recovery Drive", Command = "recoverydrive.exe", Icon = "🆘", Category = "SECURITY", Description = "Create system recovery media." });
+
+            // UTILITIES
+            tools.Add(new ToolItem { SpecificName = "Character Map", Command = "charmap", Icon = "🔣", Category = "UTILITIES", Description = "System character catalog." });
+            tools.Add(new ToolItem { SpecificName = "Steps Recorder", Command = "psr.exe", Icon = "📸", Category = "UTILITIES", Description = "Record UI actions for debugging." });
+            tools.Add(new ToolItem { SpecificName = "Memory Diagnostic", Command = "mdsched.exe", Icon = "🧠", Category = "UTILITIES", Description = "Check RAM for errors." });
+            tools.Add(new ToolItem { SpecificName = "Media Player Legacy", Command = "wmplayer.exe", Icon = "🎵", Category = "UTILITIES", Description = "Legacy multimedia hub." });
+
+            // NETWORK
             tools.Add(new ToolItem { SpecificName = "IP Config (All)", Command = "ipconfig /all", Icon = "🔍", Category = "NETWORK", Description = "Detailed network interface configuration." });
-            tools.Add(new ToolItem { SpecificName = "Flush DNS", Command = "ipconfig /flushdns", Icon = "🧼", Category = "NETWORK", Description = "Purge the DNS resolver cache." });
-            tools.Add(new ToolItem { SpecificName = "Network Repair Macro", Command = "ipconfig /release & ipconfig /renew & ipconfig /flushdns & netsh winsock reset & netsh int ip reset", Icon = "🛠️", Category = "NETWORK", IsMacro = true, Description = "Total network protocol restoration." });
+            tools.Add(new ToolItem { SpecificName = "Flush DNS Cache", Command = "ipconfig /flushdns", Icon = "🧼", Category = "NETWORK", Description = "Purge the DNS resolver cache." });
+            tools.Add(new ToolItem { SpecificName = "Release IP", Command = "ipconfig /release", Icon = "🔓", Category = "NETWORK", Description = "Release current IPv4." });
+            tools.Add(new ToolItem { SpecificName = "Renew IP", Command = "ipconfig /renew", Icon = "🔑", Category = "NETWORK", Description = "Request new IPv4." });
+            tools.Add(new ToolItem { SpecificName = "Winsock Reset", Command = "netsh winsock reset", Icon = "🔄", Category = "NETWORK", Description = "Repair network catalog." });
+            tools.Add(new ToolItem { SpecificName = "TCP/IP Reset", Command = "netsh int ip reset", Icon = "📶", Category = "NETWORK", Description = "Reset TCP/IP stack." });
+            tools.Add(new ToolItem { SpecificName = "Ping Google", Command = "ping google.com -t", Icon = "📡", Category = "NETWORK", Description = "Continuous connectivity test." });
+            tools.Add(new ToolItem { SpecificName = "Network Stats", Command = "netstat -an", Icon = "📊", Category = "NETWORK", Description = "View active ports." });
+            tools.Add(new ToolItem { SpecificName = "Network Connections", Command = "ncpa.cpl", Icon = "🔗", Category = "NETWORK", Description = "Manage adapter settings." });
+            tools.Add(new ToolItem { SpecificName = "Wi-Fi Settings", Command = "explorer.exe ms-settings:network-wifi", Icon = "📶", Category = "NETWORK", Description = "Windows 10/11 Wi-Fi config." });
+            tools.Add(new ToolItem { SpecificName = "Full Network Repair", Command = "ipconfig /release & ipconfig /renew & ipconfig /flushdns & netsh winsock reset & netsh int ip reset", Icon = "🛠️", Category = "NETWORK", IsMacro = true, Description = "Total protocol restoration." });
         }
 
         private void BuildUI()
         {
+            // Sidebar Navigation
             sidebar = new Panel();
             sidebar.Width = SidebarMaxWidth;
             sidebar.Dock = DockStyle.Left;
@@ -150,12 +199,13 @@ namespace WindowsSystemToolMenu
             Panel sideHeader = new Panel();
             sideHeader.Height = 80;
             sideHeader.Dock = DockStyle.Top;
-            sideHeader.BackColor = Color.FromArgb(25, 25, 30);
+            sideHeader.BackColor = ThemeSideHeaderBg;
             
             PictureBox logo = new PictureBox();
             logo.Size = new Size(40, 40);
             logo.Location = new Point(15, 20);
             logo.SizeMode = PictureBoxSizeMode.Zoom;
+            logo.Cursor = Cursors.Hand;
             SetAppBranding(logo);
             
             Label brandName = new Label();
@@ -169,10 +219,10 @@ namespace WindowsSystemToolMenu
             sideHeader.Controls.Add(brandName);
             sidebar.Controls.Add(sideHeader);
 
-            string[] categories = new string[] { "POLICIES", "NETWORK", "SECURITY", "ADMIN", "SYSTEM", "MAINTENANCE", "ALL" };
+            string[] categories = new string[] { "POLICIES", "UTILITIES", "NETWORK", "SECURITY", "ADMIN", "SYSTEM", "MAINTENANCE", "ALL" };
             foreach (string cat in categories) {
                 Button btn = CreateNavButton(cat, GetCatIcon(cat));
-                btn.Click += delegate(object s, EventArgs e) { currentCategory = cat; UpdateSidebarColors(); RefreshDisplay(); SaveState(); };
+                btn.Click += delegate(object s, EventArgs e) { currentCategory = (string)((Button)s).Tag; UpdateSidebarColors(); RefreshDisplay(); SaveState(); };
                 sidebar.Controls.Add(btn);
                 categoryButtons.Add(btn);
             }
@@ -180,64 +230,70 @@ namespace WindowsSystemToolMenu
             Button aboutNav = CreateNavButton("ABOUT", "👤");
             aboutNav.Dock = DockStyle.Bottom;
             aboutNav.Height = 60;
+            aboutNav.BackColor = Color.FromArgb(20, 20, 25);
             aboutNav.Click += delegate(object s, EventArgs e) { currentCategory = "ABOUT"; UpdateSidebarColors(); RefreshDisplay(); SaveState(); };
             sidebar.Controls.Add(aboutNav);
             categoryButtons.Add(aboutNav);
 
+            // Main Content Area
             mainArea = new Panel();
             mainArea.Dock = DockStyle.Fill;
             mainArea.BackColor = ThemeDarkBg;
-            mainArea.Padding = new Padding(40);
+            mainArea.Padding = new Padding(60, 40, 60, 40);
             this.Controls.Add(mainArea);
 
-            Panel headerPanel = new Panel();
+            // Dashboard Header
+            headerPanel = new Panel();
             headerPanel.Dock = DockStyle.Top;
             headerPanel.Height = 120;
             
             mainBurgerBtn = new Button();
             mainBurgerBtn.Text = "≡";
-            mainBurgerBtn.Font = new Font("Segoe UI", 20);
+            mainBurgerBtn.Font = new Font("Segoe UI", 22);
             mainBurgerBtn.ForeColor = Color.White;
-            mainBurgerBtn.Size = new Size(50, 50);
+            mainBurgerBtn.Size = new Size(55, 55);
             mainBurgerBtn.FlatStyle = FlatStyle.Flat;
             mainBurgerBtn.Visible = false;
+            mainBurgerBtn.BackColor = ThemeAccent;
             mainBurgerBtn.FlatAppearance.BorderSize = 0;
             mainBurgerBtn.Click += delegate(object s, EventArgs e) { StartNavToggle(); };
             
-            Label title = new Label();
-            title.Text = "Infrastructure Dashboard";
-            title.Font = new Font("Segoe UI Light", 28);
-            title.ForeColor = Color.White;
-            title.Location = new Point(0, 0);
-            title.AutoSize = true;
+            titleLabel = new Label();
+            titleLabel.Text = "Infrastructure Nodes";
+            titleLabel.Font = new Font("Segoe UI Light", 32);
+            titleLabel.ForeColor = Color.White;
+            titleLabel.Location = new Point(0, 0);
+            titleLabel.AutoSize = true;
             
             moduleCountLabel = new Label();
-            moduleCountLabel.Text = "Active Modules: " + tools.Count;
-            moduleCountLabel.ForeColor = Color.Gray;
-            moduleCountLabel.Location = new Point(5, 60);
+            moduleCountLabel.Text = "Administrative Suite Online";
+            moduleCountLabel.ForeColor = Color.DimGray;
+            moduleCountLabel.Font = new Font("Segoe UI", 10);
+            moduleCountLabel.Location = new Point(5, 65);
             moduleCountLabel.AutoSize = true;
             
             cpuLabel = new Label();
             cpuLabel.Text = "CPU: 0%";
             cpuLabel.ForeColor = ThemeAccent;
-            cpuLabel.Font = new Font("Consolas", 10);
-            cpuLabel.Location = new Point(0, 90);
+            cpuLabel.Font = new Font("Consolas", 12);
+            cpuLabel.Location = new Point(0, 95);
             cpuLabel.AutoSize = true;
             
             ramLabel = new Label();
             ramLabel.Text = "RAM: 0%";
             ramLabel.ForeColor = ThemeAccent;
-            ramLabel.Font = new Font("Consolas", 10);
-            ramLabel.Location = new Point(120, 90);
+            ramLabel.Font = new Font("Consolas", 12);
+            ramLabel.Location = new Point(140, 95);
             ramLabel.AutoSize = true;
             
             headerPanel.Controls.Add(mainBurgerBtn);
-            headerPanel.Controls.Add(title);
+            headerPanel.Controls.Add(titleLabel);
             headerPanel.Controls.Add(moduleCountLabel);
             headerPanel.Controls.Add(cpuLabel);
             headerPanel.Controls.Add(ramLabel);
             mainArea.Controls.Add(headerPanel);
 
+            // Search Interface
             Panel searchPanel = new Panel();
             searchPanel.Dock = DockStyle.Top;
             searchPanel.Height = 60;
@@ -248,19 +304,20 @@ namespace WindowsSystemToolMenu
             searchBox.BackColor = Color.FromArgb(25, 25, 30);
             searchBox.ForeColor = Color.White;
             searchBox.BorderStyle = BorderStyle.None;
-            searchBox.Font = new Font("Segoe UI", 12);
-            SendMessage(searchBox.Handle, EM_SETCUEBANNER, 0, "Search system tools...");
+            searchBox.Font = new Font("Segoe UI", 14);
+            SendMessage(searchBox.Handle, EM_SETCUEBANNER, 0, "Search administrative modules...");
             searchBox.TextChanged += delegate(object s, EventArgs e) { RefreshDisplay(); };
             
             Panel border = new Panel();
             border.Dock = DockStyle.Bottom;
             border.Height = 1;
-            border.BackColor = Color.FromArgb(40, 40, 50);
+            border.BackColor = Color.FromArgb(50, 50, 60);
             
             searchPanel.Controls.Add(searchBox);
             searchPanel.Controls.Add(border);
             mainArea.Controls.Add(searchPanel);
 
+            // View Management
             dashboardView = new Panel();
             dashboardView.Dock = DockStyle.Fill;
             dashboardView.Visible = true;
@@ -279,7 +336,7 @@ namespace WindowsSystemToolMenu
 
             this.Resize += delegate(object s, EventArgs e) { SyncLayout(); };
             RefreshDisplay();
-            LogActivity("Admin Infrastructure Online.");
+            LogActivity("Admin Infrastructure Synchronized.");
         }
 
         private Button CreateNavButton(string text, string icon)
@@ -305,6 +362,7 @@ namespace WindowsSystemToolMenu
             if (cat == "ADMIN") return "⚙️";
             if (cat == "SECURITY") return "🛡️";
             if (cat == "NETWORK") return "📡";
+            if (cat == "UTILITIES") return "🔣";
             if (cat == "POLICIES") return "📜";
             return "🌐";
         }
@@ -344,14 +402,14 @@ namespace WindowsSystemToolMenu
         private Control CreateToolCard(ToolItem tool)
         {
             Panel card = new Panel();
-            card.Size = new Size(300, 100);
+            card.Size = new Size(320, 110);
             card.BackColor = ThemeCardBg;
-            card.Margin = new Padding(0, 0, 15, 15);
+            card.Margin = new Padding(0, 0, 20, 20);
             card.Padding = new Padding(15);
             
             Label icon = new Label();
             icon.Text = tool.Icon;
-            icon.Font = new Font("Segoe UI", 20);
+            icon.Font = new Font("Segoe UI", 22);
             icon.Location = new Point(15, 15);
             icon.AutoSize = true;
             
@@ -359,20 +417,20 @@ namespace WindowsSystemToolMenu
             name.Text = tool.SpecificName;
             name.Font = new Font("Segoe UI Bold", 10);
             name.ForeColor = Color.White;
-            name.Location = new Point(60, 18);
+            name.Location = new Point(65, 18);
             name.AutoSize = true;
             
             Label desc = new Label();
             desc.Text = tool.Description;
             desc.Font = new Font("Segoe UI", 8);
             desc.ForeColor = Color.Gray;
-            desc.Location = new Point(60, 40);
-            desc.Size = new Size(220, 35);
+            desc.Location = new Point(65, 42);
+            desc.Size = new Size(240, 35);
             
             Button runBtn = new Button();
-            runBtn.Text = "LAUNCH";
+            runBtn.Text = "LAUNCH NODE";
             runBtn.Dock = DockStyle.Bottom;
-            runBtn.Height = 30;
+            runBtn.Height = 32;
             runBtn.FlatStyle = FlatStyle.Flat;
             runBtn.BackColor = Color.FromArgb(30, 30, 40);
             runBtn.ForeColor = ThemeAccent;
@@ -397,8 +455,8 @@ namespace WindowsSystemToolMenu
                 psi.UseShellExecute = true;
                 psi.WindowStyle = ProcessWindowStyle.Hidden;
                 Process.Start(psi);
-                LogActivity("Executed: " + tool.SpecificName);
-            } catch (Exception ex) { MessageBox.Show("Execution Error: " + ex.Message); }
+                LogActivity("Executed Infrastructure Node: " + tool.SpecificName);
+            } catch (Exception ex) { MessageBox.Show("Infrastructure Execution Error: " + ex.Message, "JEM TOOLS", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
         }
 
         private Panel CreateAboutView()
@@ -406,14 +464,33 @@ namespace WindowsSystemToolMenu
             Panel p = new Panel();
             p.Dock = DockStyle.Fill;
             p.Visible = false;
-            p.Padding = new Padding(20);
-            Label l = new Label();
-            l.Text = "JEM TOOLS | Admin Edition\n\nDeveloper: Jemmy Francisco\nVersion: 1.0.5\n\nProfessional infrastructure management suite designed for rapid system maintenance and administrative control.\n\n© 2026 Jemmy Francisco. All rights reserved.";
-            l.Font = new Font("Segoe UI Light", 14);
-            l.ForeColor = Color.LightGray;
-            l.Dock = DockStyle.Fill;
-            l.TextAlign = ContentAlignment.TopLeft;
-            p.Controls.Add(l);
+            
+            TableLayoutPanel layout = new TableLayoutPanel();
+            layout.Dock = DockStyle.Fill;
+            layout.ColumnCount = 1;
+            layout.RowCount = 2;
+            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 40));
+            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 60));
+
+            PictureBox bigLogo = new PictureBox();
+            bigLogo.Size = new Size(120, 120);
+            bigLogo.SizeMode = PictureBoxSizeMode.Zoom;
+            bigLogo.Anchor = AnchorStyles.None;
+            try { 
+                byte[] bytes = Convert.FromBase64String(GetLogoBase64());
+                using (MemoryStream ms = new MemoryStream(bytes)) bigLogo.Image = new Bitmap(ms);
+            } catch {}
+
+            Label info = new Label();
+            info.Text = "JEM TOOLS | Admin Edition\nVersion 1.0.5 (Production)\n\nDeveloper: Jemmy Francisco\nLead Architect & Systems Engineer\n\nContact: Jemmyfrancisco30@gmail.com\n\n© 2026 JEM TOOLS. Released under MIT License.";
+            info.Font = new Font("Segoe UI Light", 16);
+            info.ForeColor = Color.LightGray;
+            info.TextAlign = ContentAlignment.TopCenter;
+            info.Dock = DockStyle.Fill;
+
+            layout.Controls.Add(bigLogo, 0, 0);
+            layout.Controls.Add(info, 0, 1);
+            p.Controls.Add(layout);
             return p;
         }
 
@@ -423,6 +500,7 @@ namespace WindowsSystemToolMenu
             p.Dock = DockStyle.Fill;
             p.Visible = false;
             p.Padding = new Padding(20);
+            
             TextBox t = new TextBox();
             t.Multiline = true;
             t.ReadOnly = true;
@@ -430,8 +508,18 @@ namespace WindowsSystemToolMenu
             t.BackColor = ThemeDarkBg;
             t.ForeColor = Color.Gray;
             t.BorderStyle = BorderStyle.None;
-            t.Font = new Font("Consolas", 10);
-            t.Text = "USER AGREEMENT & PRIVACY POLICY\n\n1. Use at own risk.\n2. No data collection.\n3. Admin rights required.\n4. Commercial use prohibited.";
+            t.Font = new Font("Consolas", 11);
+            t.Text = "JEM TOOLS | USER AGREEMENT & PRIVACY POLICY\r\n" +
+                     "--------------------------------------------------\r\n\r\n" +
+                     "1. ADMINISTRATIVE RESPONSIBILITY\r\n" +
+                     "JEM TOOLS performs high-level system modifications. Execution of tools requires professional discretion.\r\n\r\n" +
+                     "2. PRIVACY-FIRST ARCHITECTURE\r\n" +
+                     "Operates entirely offline. No telemetry or personal data is transmitted to external servers.\r\n\r\n" +
+                     "3. NO WARRANTY\r\n" +
+                     "Software provided 'AS IS'. The developer is not liable for system instability resulting from professional misuse.\r\n\r\n" +
+                     "4. INTELLECTUAL PROPERTY\r\n" +
+                     "Branding and architecture are the exclusive property of the developer.\r\n\r\n" +
+                     "© 2026 JEM TOOLS · MIT LICENSE";
             p.Controls.Add(t);
             return p;
         }
@@ -439,18 +527,14 @@ namespace WindowsSystemToolMenu
         private void StartStats()
         {
             statsTimer = new Timer();
-            statsTimer.Interval = 2000;
+            statsTimer.Interval = 2500;
             statsTimer.Tick += delegate(object s, EventArgs e) {
                 try {
-                    if (cpuCounter != null) {
-                        float cpu = cpuCounter.NextValue();
-                        cpuLabel.Text = string.Format("CPU: {0:0}%", cpu);
-                    }
+                    if (cpuCounter != null) cpuLabel.Text = string.Format("CPU: {0:0}%", cpuCounter.NextValue());
                     if (computerInfo != null) {
-                        ulong totalRam = computerInfo.TotalPhysicalMemory;
-                        ulong freeRam = computerInfo.AvailablePhysicalMemory;
-                        double ramUsed = 100 - ((double)freeRam / totalRam * 100);
-                        ramLabel.Text = string.Format("RAM: {0:0}%", ramUsed);
+                        ulong total = computerInfo.TotalPhysicalMemory;
+                        ulong free = computerInfo.AvailablePhysicalMemory;
+                        ramLabel.Text = string.Format("RAM: {0:0}%", 100 - ((double)free / total * 100));
                     }
                 } catch { }
             };
@@ -460,43 +544,128 @@ namespace WindowsSystemToolMenu
         private void InitNavAnimation()
         {
             navTimer = new Timer();
-            navTimer.Interval = 10;
+            navTimer.Interval = 1;
             navTimer.Tick += delegate(object s, EventArgs e) {
                 if (isSidebarExpanded) {
-                    sidebar.Width -= 30;
-                    if (sidebar.Width <= 0) { sidebar.Width = 0; isSidebarExpanded = false; navTimer.Stop(); mainBurgerBtn.Visible = true; }
+                    if (sidebar.Width > 0) {
+                        sidebar.Width -= 60;
+                        if (sidebar.Width <= 0) { sidebar.Width = 0; sidebar.Visible = false; isSidebarExpanded = false; navTimer.Stop(); mainBurgerBtn.Visible = true; SyncLayout(); }
+                    }
                 } else {
-                    sidebar.Width += 30;
-                    if (sidebar.Width >= SidebarMaxWidth) { sidebar.Width = SidebarMaxWidth; isSidebarExpanded = true; navTimer.Stop(); mainBurgerBtn.Visible = false; }
+                    if (sidebar.Width < SidebarMaxWidth) {
+                        sidebar.Visible = true;
+                        sidebar.Width += 60;
+                        if (sidebar.Width >= SidebarMaxWidth) { sidebar.Width = SidebarMaxWidth; isSidebarExpanded = true; navTimer.Stop(); mainBurgerBtn.Visible = false; SyncLayout(); }
+                    }
                 }
             };
         }
 
         private void StartNavToggle() { navTimer.Start(); }
-        private void SyncLayout() { if (!isSidebarExpanded) mainBurgerBtn.Visible = true; }
-        private void UpdateSidebarColors() { foreach(Button b in categoryButtons) { b.ForeColor = (string)b.Tag == currentCategory ? ThemeAccent : Color.Gray; b.BackColor = (string)b.Tag == currentCategory ? Color.FromArgb(25, 25, 30) : Color.Transparent; } }
+
+        private void SyncLayout()
+        {
+            if (!isSidebarExpanded) {
+                titleLabel.Left = 70;
+                moduleCountLabel.Left = 75;
+                cpuLabel.Left = 70;
+                ramLabel.Left = 210;
+                mainBurgerBtn.Visible = true;
+            } else {
+                titleLabel.Left = 0;
+                moduleCountLabel.Left = 5;
+                cpuLabel.Left = 0;
+                ramLabel.Left = 140;
+            }
+        }
+
+        private void UpdateSidebarColors()
+        {
+            foreach(Button b in categoryButtons) {
+                bool active = (string)b.Tag == currentCategory;
+                b.ForeColor = active ? ThemeAccent : Color.Gray;
+                b.BackColor = active ? Color.FromArgb(25, 25, 30) : Color.Transparent;
+            }
+        }
+
+        private void SetToolTips()
+        {
+            toolTip.SetToolTip(mainBurgerBtn, "Toggle Infrastructure Nodes");
+            toolTip.SetToolTip(searchBox, "Filter administrative modules");
+            foreach (Button b in categoryButtons) toolTip.SetToolTip(b, "Show " + b.Text.Trim() + " Nodes");
+        }
+
         private void LogActivity(string m) { try { File.AppendAllText(LogFile, string.Format("[{0:yyyy-MM-dd HH:mm:ss}] {1}\n", DateTime.Now, m)); } catch {} }
         private bool CheckEULAAcceptance() { try { return File.ReadAllText(StateFile).Contains("EULA_ACCEPTED=TRUE"); } catch { return false; } }
-        private void ShowEULAModal() { 
+        
+        private void ShowEULAModal()
+        { 
             Form f = new Form();
-            f.Text = "Legal Notice";
-            f.Size = new Size(500, 400);
+            f.Text = "JEM TOOLS | Legal Compliance";
+            f.Size = new Size(600, 500);
             f.StartPosition = FormStartPosition.CenterScreen;
             f.FormBorderStyle = FormBorderStyle.FixedDialog;
             f.BackColor = ThemeSidebarBg;
+            f.ForeColor = Color.White;
+            
+            Label l = new Label();
+            l.Text = "USER AGREEMENT & PRIVACY POLICY";
+            l.Font = new Font("Segoe UI Bold", 14);
+            l.Dock = DockStyle.Top;
+            l.Height = 60;
+            l.TextAlign = ContentAlignment.MiddleCenter;
+            
+            TextBox t = new TextBox();
+            t.Multiline = true; t.ReadOnly = true; t.Dock = DockStyle.Fill;
+            t.BackColor = ThemeDarkBg; t.ForeColor = Color.Gray;
+            t.BorderStyle = BorderStyle.None; t.Font = new Font("Segoe UI", 10);
+            t.Text = "By using JEM TOOLS, you agree to the following:\r\n\r\n" +
+                     "1. RAPID SYSTEM MODIFICATION: Tools can change system settings instantly.\r\n" +
+                     "2. OFFLINE PRIVACY: Zero data transmission to external servers.\r\n" +
+                     "3. USER LIABILITY: You assume full responsibility for all administrative actions.\r\n\r\n" +
+                     "Do you accept these professional terms?";
+            
+            CheckBox cb = new CheckBox();
+            cb.Text = "I have read and agree to the professional terms of use.";
+            cb.Dock = DockStyle.Bottom;
+            cb.Height = 40;
+            cb.Padding = new Padding(20, 0, 0, 0);
+            cb.Font = new Font("Segoe UI", 10);
+            cb.ForeColor = Color.White;
+            
             Button b = new Button();
-            b.Text = "I AGREE";
+            b.Text = "ACCEPT & CONTINUE";
             b.Dock = DockStyle.Bottom;
-            b.Height = 50;
+            b.Height = 60;
             b.FlatStyle = FlatStyle.Flat;
-            b.ForeColor = ThemeAccent;
+            b.BackColor = Color.Gray;
+            b.ForeColor = Color.Black;
+            b.Font = new Font("Segoe UI Bold", 10);
+            b.Enabled = false;
+            
+            cb.CheckedChanged += delegate(object s, EventArgs e) { 
+                b.Enabled = cb.Checked; 
+                b.BackColor = cb.Checked ? ThemeAccent : Color.Gray; 
+            };
+            
             b.Click += delegate(object s, EventArgs e) { SaveState(); f.DialogResult = DialogResult.OK; };
+            
+            f.Controls.Add(t);
+            f.Controls.Add(cb);
+            f.Controls.Add(l);
             f.Controls.Add(b);
-            f.ShowDialog();
-            if (f.DialogResult != DialogResult.OK) Environment.Exit(0);
+            if (f.ShowDialog() != DialogResult.OK) Environment.Exit(0);
         }
+
         private void SaveState() { try { File.WriteAllText(StateFile, string.Format("{0}\nEULA_ACCEPTED=TRUE", currentCategory)); } catch {} }
-        private void LoadState() { try { if (File.Exists(StateFile)) currentCategory = File.ReadAllLines(StateFile)[0]; } catch {} }
+        private void LoadState() { 
+            try { 
+                if (File.Exists(StateFile)) {
+                    string[] lines = File.ReadAllLines(StateFile);
+                    if (lines.Length > 0) currentCategory = lines[0];
+                }
+            } catch {} 
+        }
 
         protected override void Dispose(bool disposing) {
             if (disposing) { if (cpuCounter != null) cpuCounter.Dispose(); if (statsTimer != null) statsTimer.Dispose(); if (navTimer != null) navTimer.Dispose(); }

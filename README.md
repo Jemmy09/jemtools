@@ -183,8 +183,10 @@ To update the app, recompile, sign, and push to GitHub in one go:
 
 ---
 
-## 🛠️ Recent Updates (v1.0.4)
+## 🛠️ Recent Updates (v1.0.5)
 
+- **Legal Compliance**: Updated the EULA modal with a mandatory consent checkbox.
+- **Automated Branding**: Integrated logo embedding step directly into the build pipeline.
 - **Compliance Engine**: Implemented a professional, **mandatory first-run User Agreement modal**.
 - **State Persistence**: Added smart tracking for EULA acceptance to ensure a seamless UX.
 - **Professional Setup**: Added `setup.ps1` for system-wide installation and trust registration.
