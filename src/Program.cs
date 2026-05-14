@@ -545,7 +545,25 @@ namespace WindowsSystemToolMenu
             content.Controls.Add(MakeInfoLabel("JEM TOOLS | Admin Edition", new Font("Segoe UI Light", 22), ThemeAccent, y, 45)); y += 45;
             content.Controls.Add(MakeInfoLabel("Version 1.0.5 (Production)", new Font("Segoe UI", 11), Color.LightGray, y, 25)); y += 35;
 
-            // Divider
+            // Divider 1
+            content.Controls.Add(new Panel { Size = new Size(420, 1), Location = new Point(0, y), BackColor = Color.FromArgb(50, 50, 65) });
+            y += 22;
+
+            // Explanation Header
+            content.Controls.Add(MakeInfoLabel("A B O U T   T H I S   S U I T E", new Font("Segoe UI Semibold", 8), Color.FromArgb(85, 85, 110), y, 20)); y += 22;
+
+            // Explanation Text
+            Label descLabel = new Label();
+            descLabel.Text = "JEM TOOLS is an advanced infrastructure command suite for Windows. Use the sidebar to navigate modular toolkits. Execution is securely isolated to your local machine, providing optimal performance for system diagnostics, network operations, and advanced maintenance.";
+            descLabel.Font = new Font("Segoe UI", 10);
+            descLabel.ForeColor = Color.DarkGray;
+            descLabel.Size = new Size(400, 85);
+            descLabel.Location = new Point(10, y);
+            descLabel.TextAlign = ContentAlignment.TopCenter;
+            content.Controls.Add(descLabel);
+            y += 90;
+
+            // Divider 2
             content.Controls.Add(new Panel { Size = new Size(420, 1), Location = new Point(0, y), BackColor = Color.FromArgb(50, 50, 65) });
             y += 22;
 
