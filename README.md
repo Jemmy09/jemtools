@@ -2,12 +2,12 @@
   <img src="assets/jem_logo.png" width="120" height="120" alt="JEM TOOLS Logo">
 
   # JEM TOOLS
-  ### Admin Edition · v1.0.6
+  ### Admin Edition · v1.0.7
 
   *Precision System Intelligence for Windows Professionals.*
 
   [![Status](https://img.shields.io/badge/STATUS-LIVE-00c853?style=for-the-badge)](#)
-  [![Version](https://img.shields.io/badge/VERSION-1.0.6-0288d1?style=for-the-badge)](#)
+  [![Version](https://img.shields.io/badge/VERSION-1.0.7-0288d1?style=for-the-badge)](#)
   [![OS](https://img.shields.io/badge/WINDOWS-7%20%7C%208%20%7C%2010%20%7C%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white)](#)
   [![Tech](https://img.shields.io/badge/C%23-.NET%204.8-7b1fa2?style=for-the-badge&logo=dotnet&logoColor=white)](#)
   [![License](https://img.shields.io/badge/License-MIT-f9a825?style=for-the-badge)](LICENSE)
@@ -27,7 +27,7 @@ The "Admin Edition" features the signature **Digital Gemstone** UI, providing a 
 
 | Feature | Description |
 |---|---|
-| 🗂️ **47 Admin Modules** | Every essential Windows tool — from Registry Editor to Network Repair — in one place |
+| 🗂️ **51 Admin Modules** | Every essential Windows tool — from Registry Editor to Spotify Optimization — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
 | 🔍 **Instant Search** | Find any tool in milliseconds with the built-in search bar |
 | 🗂️ **Category Filters** | Browse by Security, Admin, System, Maintenance, Network, or Utilities |
@@ -44,7 +44,7 @@ The "Admin Edition" features the signature **Digital Gemstone** UI, providing a 
 ### Method 1: Graphical Setup (Recommended)
 1. **Right-click** `JEMTOOLS_Setup.exe` and select **Run as Administrator**.
 2. Read and **Accept** the End-User License Agreement.
-3. Configure preferences: **Desktop Shortcut** and **Auto-Launch**.
+3. Choose your preferences (Desktop Shortcut / Auto-Launch).
 4. Click **Install**. The suite will be deployed to `C:\Program Files\JEM TOOLS`.
 
 ### Method 2: PowerShell Engine
@@ -159,6 +159,10 @@ To update the application, recompile binaries, apply digital signatures, and syn
 <summary><b>🔣 Utilities (Auxiliary Tools)</b></summary>
 
 - 🔑 **Activation Methods**: Permanently activate Windows/Office via MAS.
+- 🎵 **Spotify SpotX (Full)**: Comprehensive Spotify ad-blocker and optimizer.
+- 🟢 **Spotify SpotX (New)**: Standard SpotX install with New Theme.
+- 📻 **Spotify SpotX (Old)**: SpotX v1.2.13 with Old Theme and update blocking.
+- 💎 **Spotify SpotX (Premium)**: Optimized configuration for Premium accounts.
 - 🔣 **Character Map**: View and copy system character catalog.
 - 📸 **Steps Recorder**: Capture UI actions for troubleshooting.
 - 🧠 **Memory Diagnostic**: Check RAM for hardware-level errors.
@@ -168,13 +172,14 @@ To update the application, recompile binaries, apply digital signatures, and syn
 
 ---
 
-## 🛠️ Recent Updates (v1.0.6)
+## 🛠️ Recent Updates (v1.0.7)
 
+- **Spotify SpotX Integration**: Added a dedicated suite of Spotify optimization tools for ad-blocking and theming.
 - **Interactive Setup**: Redesigned `JEMTOOLS_Setup.exe` with EULA consent and customizable install options.
 - **Visual Progress**: Added an animated loading bar to the installer for better feedback.
 - **Module Expansion**: Integrated **Driver Updates** and **Activation Methods** (MAS).
 - **Architecture**: Standardized installation to `C:\Program Files\JEM TOOLS` with Admin verification.
-- **Optimization**: Implemented native alphabetical sorting for the entire 47-module library.
+- **Optimization**: Implemented native alphabetical sorting for the entire 51-module library.
 - **Publisher Verification**: Fully signed binaries by **Jemmy Francisco**.
 
 ---
@@ -212,7 +217,7 @@ JEM TOOLS opens native Windows system utilities. Always ensure you understand a 
 
 ---
 
-**JEM TOOLS · Admin Edition v1.0.6**
+**JEM TOOLS · Admin Edition v1.0.7**
 *© 2026 Jemmy Francisco · MIT License*
 
 </div>

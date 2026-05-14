@@ -14,14 +14,14 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("JEM TOOLS | Admin Edition")]
 [assembly: AssemblyCopyright("Copyright © 2026 Jemmy Francisco")]
 [assembly: AssemblyTrademark("JEM TOOLS")]
-[assembly: AssemblyVersion("1.0.6.0")]
-[assembly: AssemblyFileVersion("1.0.6.0")]
+[assembly: AssemblyVersion("1.0.7.0")]
+[assembly: AssemblyFileVersion("1.0.7.0")]
 
 namespace WindowsSystemToolMenu
 {
     /// <summary>
     /// JEM TOOLS | Admin Edition - High-fidelity system administration suite.
-    /// v1.0.6 Optimized for performance and professional deployment.
+    /// v1.0.7 Optimized for performance and professional deployment.
     /// </summary>
     public class Program
     {
@@ -92,7 +92,7 @@ namespace WindowsSystemToolMenu
 
         public ModernAdminForm()
         {
-            this.Text = "JEM TOOLS | Admin Edition v1.0.6";
+            this.Text = "JEM TOOLS | Admin Edition v1.0.7";
             this.WindowState = FormWindowState.Maximized;
             this.MinimumSize = new Size(1200, 800);
             this.BackColor = ThemeDarkBg;
@@ -168,6 +168,10 @@ namespace WindowsSystemToolMenu
 
             // UTILITIES
             tools.Add(new ToolItem { SpecificName = "Activation Methods", Command = "powershell -NoProfile -Command \"irm https://get.activated.win | iex\"", Icon = "🔑", Category = "UTILITIES", Description = "Permanently activate Windows and Office." });
+            tools.Add(new ToolItem { SpecificName = "Spotify SpotX (Full)", Command = "powershell -NoProfile -Command \"iex \\\"& { $(iwr -useb 'https://raw.githubusercontent.com/SpotX-Official/SpotX/refs/heads/main/run.ps1') } -confirm_uninstall_ms_spoti -confirm_spoti_recomended_over -podcasts_off -block_update_on -start_spoti -new_theme -adsections_off -lyrics_stat spotify\\\"\"", Icon = "🎵", Category = "UTILITIES", Description = "Full Spotify ad-block and theme optimization." });
+            tools.Add(new ToolItem { SpecificName = "Spotify SpotX (New)", Command = "powershell -NoProfile -Command \"iex \\\"& { $(iwr -useb 'https://raw.githubusercontent.com/SpotX-Official/SpotX/refs/heads/main/run.ps1') } -new_theme\\\"\"", Icon = "🟢", Category = "UTILITIES", Description = "SpotX installation with New Theme." });
+            tools.Add(new ToolItem { SpecificName = "Spotify SpotX (Old)", Command = "powershell -NoProfile -Command \"iex \\\"& { $(iwr -useb 'https://raw.githubusercontent.com/SpotX-Official/SpotX/refs/heads/main/run.ps1') } -v 1.2.13.661.ga588f749 -confirm_spoti_recomended_over -block_update_on\\\"\"", Icon = "📻", Category = "UTILITIES", Description = "SpotX installation with Old Theme (v1.2.13)." });
+            tools.Add(new ToolItem { SpecificName = "Spotify SpotX (Premium)", Command = "powershell -NoProfile -Command \"iex \\\"& { $(iwr -useb 'https://raw.githubusercontent.com/SpotX-Official/SpotX/refs/heads/main/run.ps1') } -premium -new_theme\\\"\"", Icon = "💎", Category = "UTILITIES", Description = "Spotify optimization for Premium accounts." });
             tools.Add(new ToolItem { SpecificName = "Character Map", Command = "charmap", Icon = "🔣", Category = "UTILITIES", Description = "System character catalog." });
             tools.Add(new ToolItem { SpecificName = "Steps Recorder", Command = "psr.exe", Icon = "📸", Category = "UTILITIES", Description = "Record UI actions for debugging." });
             tools.Add(new ToolItem { SpecificName = "Memory Diagnostic", Command = "mdsched.exe", Icon = "🧠", Category = "UTILITIES", Description = "Check RAM for errors." });
@@ -551,7 +555,7 @@ namespace WindowsSystemToolMenu
 
             // App name & version
             content.Controls.Add(MakeInfoLabel("JEM TOOLS | Admin Edition", new Font("Segoe UI Light", 22), ThemeAccent, y, 45)); y += 45;
-            content.Controls.Add(MakeInfoLabel("Version 1.0.5 (Production)", new Font("Segoe UI", 11), Color.LightGray, y, 25)); y += 35;
+            content.Controls.Add(MakeInfoLabel("Version 1.0.7 (Production)", new Font("Segoe UI", 11), Color.LightGray, y, 25)); y += 35;
 
             // Divider 1
             content.Controls.Add(new Panel { Size = new Size(420, 1), Location = new Point(0, y), BackColor = Color.FromArgb(50, 50, 65) });
