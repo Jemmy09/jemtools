@@ -21,11 +21,13 @@ namespace JEMToolsSetup
     {
         private Button btnInstall;
         private Label lblStatus;
+        private CheckBox chkShortcut;
+        private CheckBox chkLaunch;
 
         public SetupForm()
         {
             this.Text = "JEM TOOLS | Setup";
-            this.Size = new Size(500, 420);
+            this.Size = new Size(500, 480);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -71,9 +73,27 @@ namespace JEMToolsSetup
             chkAccept.ForeColor = Color.White;
             this.Controls.Add(chkAccept);
             
+            chkShortcut = new CheckBox();
+            chkShortcut.Text = "Create a Desktop shortcut";
+            chkShortcut.Location = new Point(20, 320);
+            chkShortcut.AutoSize = true;
+            chkShortcut.Font = new Font("Segoe UI", 9);
+            chkShortcut.ForeColor = Color.White;
+            chkShortcut.Checked = true;
+            this.Controls.Add(chkShortcut);
+            
+            chkLaunch = new CheckBox();
+            chkLaunch.Text = "Launch JEM TOOLS when finished";
+            chkLaunch.Location = new Point(20, 350);
+            chkLaunch.AutoSize = true;
+            chkLaunch.Font = new Font("Segoe UI", 9);
+            chkLaunch.ForeColor = Color.White;
+            chkLaunch.Checked = true;
+            this.Controls.Add(chkLaunch);
+            
             btnInstall = new Button();
             btnInstall.Text = "Install";
-            btnInstall.Location = new Point(345, 335);
+            btnInstall.Location = new Point(345, 390);
             btnInstall.Size = new Size(120, 35);
             btnInstall.FlatStyle = FlatStyle.Flat;
             btnInstall.BackColor = Color.Gray;
@@ -86,7 +106,7 @@ namespace JEMToolsSetup
             
             lblStatus = new Label();
             lblStatus.Text = "Waiting for user agreement...";
-            lblStatus.Location = new Point(20, 345);
+            lblStatus.Location = new Point(20, 400);
             lblStatus.AutoSize = true;
             lblStatus.Font = new Font("Segoe UI", 9);
             lblStatus.ForeColor = Color.Gray;
@@ -99,16 +119,18 @@ namespace JEMToolsSetup
             
             btnInstall.Click += delegate {
                 chkAccept.Enabled = false;
+                chkShortcut.Enabled = false;
+                chkLaunch.Enabled = false;
                 btnInstall.Enabled = false;
                 btnInstall.BackColor = Color.Gray;
                 btnInstall.Text = "Installing...";
-                lblStatus.Text = "Extracting files and creating shortcuts...";
+                lblStatus.Text = "Installing JEM TOOLS...";
                 Application.DoEvents();
-                Install();
+                Install(chkShortcut.Checked, chkLaunch.Checked);
             };
         }
 
-        private void Install()
+        private void Install(bool createShortcut, bool autoLaunch)
         {
             try
             {
@@ -126,23 +148,25 @@ namespace JEMToolsSetup
                 byte[] bytes = Convert.FromBase64String(base64);
                 File.WriteAllBytes(exePath, bytes);
                 
-                // Create Desktop Shortcut via powershell
-                string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                string shortcutPath = Path.Combine(desktop, "JEM TOOLS.lnk");
+                if (createShortcut) {
+                    string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                    string shortcutPath = Path.Combine(desktop, "JEM TOOLS.lnk");
+                    
+                    string psCommand = string.Format("$s=(New-Object -COM WScript.Shell).CreateShortcut('{0}');$s.TargetPath='{1}';$s.WorkingDirectory='{2}';$s.Save()", shortcutPath, exePath, targetDir);
+                    
+                    ProcessStartInfo psi = new ProcessStartInfo("powershell", string.Format("-NoProfile -Command \"{0}\"", psCommand));
+                    psi.CreateNoWindow = true;
+                    psi.UseShellExecute = false;
+                    Process p = Process.Start(psi);
+                    if (p != null) p.WaitForExit();
+                }
                 
-                string psCommand = string.Format("$s=(New-Object -COM WScript.Shell).CreateShortcut('{0}');$s.TargetPath='{1}';$s.WorkingDirectory='{2}';$s.Save()", shortcutPath, exePath, targetDir);
-                
-                ProcessStartInfo psi = new ProcessStartInfo("powershell", string.Format("-NoProfile -Command \"{0}\"", psCommand));
-                psi.CreateNoWindow = true;
-                psi.UseShellExecute = false;
-                Process p = Process.Start(psi);
-                if (p != null) p.WaitForExit();
-                
-                // Launch
-                ProcessStartInfo launchPsi = new ProcessStartInfo();
-                launchPsi.FileName = exePath;
-                launchPsi.WorkingDirectory = targetDir;
-                Process.Start(launchPsi);
+                if (autoLaunch) {
+                    ProcessStartInfo launchPsi = new ProcessStartInfo();
+                    launchPsi.FileName = exePath;
+                    launchPsi.WorkingDirectory = targetDir;
+                    Process.Start(launchPsi);
+                }
                 
                 Application.Exit();
             }
