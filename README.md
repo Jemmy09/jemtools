@@ -29,7 +29,7 @@ The "Admin Edition" features the signature **Digital Gemstone** UI, providing a 
 
 | Feature | Description |
 |---|---|
-| 🗂️ **46 Admin Modules** | Every essential Windows tool — from Registry Editor to Network Repair — in one place |
+| 🗂️ **47 Admin Modules** | Every essential Windows tool — from Registry Editor to Network Repair — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
 | 🔍 **Instant Search** | Find any tool in milliseconds with the built-in search bar (intelligent placeholder) |
 | 🗂️ **Category Filters** | Browse by Security, Admin, System, Maintenance, or Utilities |

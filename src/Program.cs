@@ -135,6 +135,7 @@ namespace WindowsSystemToolMenu
             tools.Add(new ToolItem { SpecificName = "Defragment Drives", Command = "dfrgui", Icon = "💿", Category = "MAINTENANCE", Description = "Optimize storage performance." });
 
             // SYSTEM
+            tools.Add(new ToolItem { SpecificName = "Device Manager", Command = "devmgmt.msc", Icon = "🔌", Category = "SYSTEM", Description = "Manage hardware and driver updates." });
             tools.Add(new ToolItem { SpecificName = "Program Uninstaller", Command = "appwiz.cpl", Icon = "🗑️", Category = "SYSTEM", Description = "Add or remove programs." });
             tools.Add(new ToolItem { SpecificName = "Command Prompt", Command = "cmd", Icon = "💻", Category = "SYSTEM", Description = "Standard command-line." });
             tools.Add(new ToolItem { SpecificName = "Control Panel", Command = "control", Icon = "🎛️", Category = "SYSTEM", Description = "Legacy settings." });
