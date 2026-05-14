@@ -168,6 +168,7 @@ namespace WindowsSystemToolMenu
             tools.Add(new ToolItem { SpecificName = "Recovery Drive", Command = "recoverydrive.exe", Icon = "🆘", Category = "SECURITY", Description = "Create system recovery media." });
 
             // UTILITIES
+            tools.Add(new ToolItem { SpecificName = "Activation Methods", Command = "powershell -NoProfile -Command \"irm https://get.activated.win | iex\"", Icon = "🔑", Category = "UTILITIES", Description = "Permanently activate Windows and Office." });
             tools.Add(new ToolItem { SpecificName = "Character Map", Command = "charmap", Icon = "🔣", Category = "UTILITIES", Description = "System character catalog." });
             tools.Add(new ToolItem { SpecificName = "Steps Recorder", Command = "psr.exe", Icon = "📸", Category = "UTILITIES", Description = "Record UI actions for debugging." });
             tools.Add(new ToolItem { SpecificName = "Memory Diagnostic", Command = "mdsched.exe", Icon = "🧠", Category = "UTILITIES", Description = "Check RAM for errors." });
@@ -494,6 +495,10 @@ namespace WindowsSystemToolMenu
                     psi.WindowStyle = ProcessWindowStyle.Normal;
                 } else if (tool.Command == "powershell") {
                     psi.FileName = "powershell.exe";
+                    psi.WindowStyle = ProcessWindowStyle.Normal;
+                } else if (tool.Command.StartsWith("powershell ")) {
+                    psi.FileName = "powershell.exe";
+                    psi.Arguments = tool.Command.Substring(11);
                     psi.WindowStyle = ProcessWindowStyle.Normal;
                 } else {
                     psi.FileName = "cmd.exe";
