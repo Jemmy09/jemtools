@@ -351,7 +351,8 @@ namespace WindowsSystemToolMenu
         private Button CreateNavButton(string text, string icon)
         {
             Button btn = new Button();
-            btn.Text = "    " + icon + "          " + text;
+            string gap = new String('\u00A0', 12);
+            btn.Text = "    " + icon + gap + text;
             btn.Tag = text;
             btn.Height = 60;
             btn.Dock = DockStyle.Top;
