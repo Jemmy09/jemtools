@@ -72,7 +72,8 @@ namespace JEMToolsSetup
                 ProcessStartInfo psi = new ProcessStartInfo("powershell", string.Format("-NoProfile -Command \"{0}\"", psCommand));
                 psi.CreateNoWindow = true;
                 psi.UseShellExecute = false;
-                Process.Start(psi)?.WaitForExit();
+                Process p = Process.Start(psi);
+                if (p != null) p.WaitForExit();
                 
                 // Launch
                 ProcessStartInfo launchPsi = new ProcessStartInfo();
