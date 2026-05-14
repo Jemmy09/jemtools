@@ -42,10 +42,16 @@ The "Admin Edition" features the signature **Digital Gemstone** UI, providing a 
 
 ## 🚀 Quick Start
 
-### One-Line Install (PowerShell — Run as Administrator)
+### Option 1: Setup Installer (Recommended)
+Download and run the provided **`JEMTOOLS_Setup.exe`**.
+This will automatically install the application to your local app data, create a convenient Desktop shortcut, and launch the suite seamlessly.
 
+### Option 2: Portable Executable
+Download the **`JEMTOOLS.exe`** standalone binary and run it directly. No installation required.
+
+### Option 3: PowerShell Script Deployment
 ```powershell
-mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools"; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Jemmy09/jemtools/master/JEMTOOLS.exe" -OutFile "JEMTOOLS.exe"; Start-Process ".\JEMTOOLS.exe" -Verb runAs
+mkdir "$env:USERPROFILE\Desktop\JEMTools"; cd "$env:USERPROFILE\Desktop\JEMTools"; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Jemmy09/jemtools/master/JEMTOOLS_Setup.exe" -OutFile "JEMTOOLS_Setup.exe"; Start-Process ".\JEMTOOLS_Setup.exe"
 ```
 
 ### Manual Setup

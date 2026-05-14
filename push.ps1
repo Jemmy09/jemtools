@@ -30,11 +30,25 @@ if (Test-Path "JEMTOOLS_old.exe") {
     Write-Host "Old EXE removed." -ForegroundColor Green
 }
 
+# 2.5 Build Setup Installer
+Write-Host "Building Setup Installer (JEMTOOLS_Setup.exe)..." -ForegroundColor Yellow
+$payloadBytes = [System.IO.File]::ReadAllBytes("$PWD\JEMTOOLS.exe")
+$payloadBase64 = [System.Convert]::ToBase64String($payloadBytes)
+$setupTemplate = Get-Content "$PWD\src\Setup.cs" -Raw
+$setupTemplate = $setupTemplate.Replace("%%PAYLOAD%%", $payloadBase64)
+Set-Content -Path "$PWD\src\Setup_build.cs" -Value $setupTemplate
+& $csc /target:winexe /out:JEMTOOLS_Setup.exe /win32icon:assets\jem_logo.ico /reference:System.dll,System.Windows.Forms.dll,System.Drawing.dll,Microsoft.VisualBasic.dll,System.Core.dll "src\Setup_build.cs"
+Remove-Item "$PWD\src\Setup_build.cs" -Force
+if ($LASTEXITCODE -ne 0) { Write-Host "WARNING: Setup Compilation failed." -ForegroundColor Magenta }
+
 # 3. Sign
 Write-Host "Applying Digital Signature..." -ForegroundColor Yellow
 $cert = Get-ChildItem -Path Cert:\CurrentUser\My | Where-Object { $_.Subject -like "*CN=Jemmy Francisco*" } | Select-Object -First 1
 if ($cert) {
     Set-AuthenticodeSignature -FilePath "JEMTOOLS.exe" -Certificate $cert
+    if (Test-Path "JEMTOOLS_Setup.exe") {
+        Set-AuthenticodeSignature -FilePath "JEMTOOLS_Setup.exe" -Certificate $cert
+    }
 } else {
     Write-Host "WARNING: Signing certificate not found. Skipping signing." -ForegroundColor Magenta
 }
