@@ -14,14 +14,14 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("JEM TOOLS | Admin Edition")]
 [assembly: AssemblyCopyright("Copyright © 2026 Jemmy Francisco")]
 [assembly: AssemblyTrademark("JEM TOOLS")]
-[assembly: AssemblyVersion("1.0.5.0")]
-[assembly: AssemblyFileVersion("1.0.5.0")]
+[assembly: AssemblyVersion("1.0.6.0")]
+[assembly: AssemblyFileVersion("1.0.6.0")]
 
 namespace WindowsSystemToolMenu
 {
     /// <summary>
     /// JEM TOOLS | Admin Edition - High-fidelity system administration suite.
-    /// v1.0.5 Optimized for performance and professional deployment.
+    /// v1.0.6 Optimized for performance and professional deployment.
     /// </summary>
     public class Program
     {
@@ -92,7 +92,7 @@ namespace WindowsSystemToolMenu
 
         public ModernAdminForm()
         {
-            this.Text = "JEM TOOLS | Admin Edition v1.0.5";
+            this.Text = "JEM TOOLS | Admin Edition v1.0.6";
             this.WindowState = FormWindowState.Maximized;
             this.MinimumSize = new Size(1200, 800);
             this.BackColor = ThemeDarkBg;

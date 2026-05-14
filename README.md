@@ -2,12 +2,12 @@
   <img src="assets/jem_logo.png" width="120" height="120" alt="JEM TOOLS Logo">
 
   # JEM TOOLS
-  ### Admin Edition · v1.0.5
+  ### Admin Edition · v1.0.6
 
   *Precision System Intelligence for Windows Professionals.*
 
   [![Status](https://img.shields.io/badge/STATUS-LIVE-00c853?style=for-the-badge)](#)
-  [![Version](https://img.shields.io/badge/VERSION-1.0.5-0288d1?style=for-the-badge)](#)
+  [![Version](https://img.shields.io/badge/VERSION-1.0.6-0288d1?style=for-the-badge)](#)
   [![OS](https://img.shields.io/badge/WINDOWS-7%20%7C%208%20%7C%2010%20%7C%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white)](#)
   [![Tech](https://img.shields.io/badge/C%23-.NET%204.8-7b1fa2?style=for-the-badge&logo=dotnet&logoColor=white)](#)
   [![License](https://img.shields.io/badge/License-MIT-f9a825?style=for-the-badge)](LICENSE)
@@ -19,24 +19,22 @@
 ## 🛠️ Project Blueprint
 **JEM TOOLS** is a commercial-grade administrative utility designed for power users and IT professionals. It provides a centralized command center for system-level maintenance, security auditing, and real-time performance monitoring, all within a high-fidelity, privacy-first architecture.
 
----
-
 The "Admin Edition" features the signature **Digital Gemstone** UI, providing a high-fidelity experience that turns complex system management into a streamlined, visual process.
 
 ---
 
-## ✨ Features
+## ✨ Premium Features
 
 | Feature | Description |
 |---|---|
 | 🗂️ **47 Admin Modules** | Every essential Windows tool — from Registry Editor to Network Repair — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
-| 🔍 **Instant Search** | Find any tool in milliseconds with the built-in search bar (intelligent placeholder) |
-| 🗂️ **Category Filters** | Browse by Security, Admin, System, Maintenance, or Utilities |
-| 👤 **About & Legal** | Dedicated in-app profile section with full MIT License transparency |
+| 🔍 **Instant Search** | Find any tool in milliseconds with the built-in search bar |
+| 🗂️ **Category Filters** | Browse by Security, Admin, System, Maintenance, Network, or Utilities |
+| 🛡️ **Interactive Setup** | Professional installer with EULA consent and customizable install options |
 | ⚡ **Admin Macros** | One-click automated maintenance sequences for deep system care |
-| 🖥️ **Portable** | Single `.exe` file with embedded branding — no installation required |
-| 🛡️ **Cross-Compatible** | Supports Windows 7, 8, 10, and 11 |
+| 🖊️ **Digital Signature** | All binaries are verified and signed for system trust |
+| 🖥️ **Portable Mode** | Use as a single `.exe` or install for system-wide integration |
 
 ---
 
@@ -45,9 +43,9 @@ The "Admin Edition" features the signature **Digital Gemstone** UI, providing a 
 
 ### Method 1: Graphical Setup (Recommended)
 1. **Right-click** `JEMTOOLS_Setup.exe` and select **Run as Administrator**.
-2. Read and **Accept** the User Agreement.
-3. Choose your preferences (Desktop Shortcut / Auto-Launch).
-4. Click **Install**. The app will be deployed to `C:\Program Files\JEM TOOLS`.
+2. Read and **Accept** the End-User License Agreement.
+3. Configure preferences: **Desktop Shortcut** and **Auto-Launch**.
+4. Click **Install**. The suite will be deployed to `C:\Program Files\JEM TOOLS`.
 
 ### Method 2: PowerShell Engine
 1. Open **PowerShell** as **Administrator**.
@@ -71,17 +69,16 @@ The "Admin Edition" features the signature **Digital Gemstone** UI, providing a 
    powershell -ExecutionPolicy Bypass -File setup.ps1
    ```
 
-### Method 3: Manual Installation
-If you prefer to deploy files manually:
-- **Directory**: Create `C:\Program Files\JEM TOOLS`.
-- **Transfer**: Copy `JEMTOOLS.exe`, `README.md`, `assets/`, and `src/` into that folder.
-- **Security**: Right-click `assets/JemmyFrancisco.cer` -> Install Certificate -> Local Machine -> Place all certificates in the following store -> Trusted Root Certification Authorities.
-- **Shortcuts**: Right-click `JEMTOOLS.exe` and select Create Shortcut. Move it to your Desktop or Start Menu.
+### Method 4: Manual Deployment
+1. **Directory**: Create `C:\Program Files\JEM TOOLS`.
+2. **Transfer**: Copy `JEMTOOLS.exe`, `README.md`, `assets/`, and `src/` into the folder.
+3. **Security**: Install `assets/JemmyFrancisco.cer` into the **Trusted Root Certification Authorities** store.
+4. **Shortcuts**: Manually create a shortcut for `JEMTOOLS.exe` on your Desktop.
 
 ---
 
 ## 🛠️ Automated Updates (Developer Only)
-To update the app, recompile, sign, and push to GitHub in one go:
+To update the application, recompile binaries, apply digital signatures, and sync with GitHub:
 - Run `.\push.ps1`.
 
 ---
@@ -102,7 +99,7 @@ To update the app, recompile, sign, and push to GitHub in one go:
 <details>
 <summary><b>💻 System (Core Management)</b></summary>
 
-- 🔌 **Driver Updates**: Manage hardware and driver updates.
+- 🔌 **Driver Updates**: Manage hardware drivers and resolve shortages.
 - 🗑️ **Program Uninstaller**: Manage and remove installed applications.
 - 💻 **Command Prompt**: Elevated terminal access.
 - 🎛️ **Control Panel**: Centralized system settings.
@@ -110,9 +107,9 @@ To update the app, recompile, sign, and push to GitHub in one go:
 - ℹ️ **System Information**: Detailed hardware and software specifications.
 - 📋 **Task Manager**: Real-time process monitoring and control.
 - 📊 **Resource Monitor**: In-depth analysis of CPU, Memory, Disk, and Network.
-- 🐚 **PowerShell Core**: Modern task automation and configuration management.
+- 🐚 **PowerShell Core**: Modern task automation shell.
 - 🌀 **PowerShell ISE**: Integrated Scripting Environment for PowerShell.
-- 🔑 **Registry Editor**: Advanced modification of the Windows Registry database.
+- 🔑 **Registry Editor**: Advanced system registry database modification.
 - 📡 **Remote Desktop**: Connect to and control remote workstations.
 - 🏃 **Run Dialog**: Quickly execute commands or open programs.
 
@@ -121,14 +118,14 @@ To update the app, recompile, sign, and push to GitHub in one go:
 <details>
 <summary><b>⚙️ Admin (Infrastructure Tools)</b></summary>
 
-- 🖥️ **Computer Management**: Consolidates multiple admin tools into one console.
-- 💽 **Disk Management**: Partitioning and disk volume control.
-- ⚙️ **Component Services**: Manage COM+ applications and DCOM configuration.
+- 🖥️ **Computer Management**: Consolidates multiple admin consoles.
+- 💽 **Disk Management**: Partitioning and storage volume control.
+- ⚙️ **Component Services**: Manage COM+ and DCOM configuration.
 - 📜 **Event Viewer**: Analyze system logs and application errors.
-- 📈 **Performance Monitor**: Detailed system performance logging.
+- 📈 **Performance Monitor**: Detailed real-time system performance logging.
 - 🛠️ **Services**: Manage background system services.
-- 📅 **Task Scheduler**: Automate tasks and scripts at specific times.
-- 🖨️ **Print Management**: Centralized printer and print server control.
+- 📅 **Task Scheduler**: Automate tasks and scripts via triggers.
+- 🖨️ **Print Management**: Centralized printer and server control.
 - 🗄️ **ODBC Data Sources**: Configure database connections and drivers.
 
 </details>
@@ -137,52 +134,48 @@ To update the app, recompile, sign, and push to GitHub in one go:
 <summary><b>🛡️ Security (Protection & Recovery)</b></summary>
 
 - 🔒 **Security Policy**: Enforce local security and audit policies.
-- 🧱 **Defender Firewall**: Advanced Windows Firewall configuration.
-- 🔗 **iSCSI Initiator**: Connect to external iSCSI storage arrays.
-- 🆘 **Recovery Drive**: Create a system repair and recovery environment.
+- 🧱 **Defender Firewall**: Advanced inbound/outbound security rules.
+- 🔗 **iSCSI Initiator**: Connect to external network storage arrays.
+- 🆘 **Recovery Drive**: Create a system repair environment.
 
 </details>
 
 <details>
 <summary><b>📡 Network (Troubleshooting & Connectivity)</b></summary>
 
-- 🔍 **Show IP configuration**: Detailed network interface configuration.
-- 🧼 **Flush DNS Cache**: Purge the DNS resolver cache.
-- 🔓 **Release IP Address**: Release the current IPv4 address.
-- 🔑 **Renew IP Address**: Request a new IPv4 address.
+- 🔍 **IP Configuration**: Detailed network interface diagnostics.
+- 🧼 **Flush DNS Cache**: Purge the local DNS resolver cache.
+- 🔓 **Release/Renew IP**: Manage DHCP address leases.
 - 🔄 **Reset Winsock**: Repair network catalog and protocols.
-- 📶 **Reset TCP/IP Stack**: Reset internet protocol suite to defaults.
-- 📡 **Ping Google**: Continuous connectivity test to Google.
-- 📊 **Network Statistics**: View active connections and ports.
-- 🔗 **Network Connections**: Manage network adapter settings.
-- 📶 **Wi-Fi Settings**: Windows 10/11 Wi-Fi configuration.
-- 🛠️ **Full Network Repair**: Total network protocol stack restoration.
+- 📶 **Reset TCP/IP**: Restore internet protocol suite to defaults.
+- 📡 **Ping Google**: Continuous connectivity and latency test.
+- 📊 **Network Statistics**: View active connections and listening ports.
+- 🔗 **Network Connections**: Manage physical and virtual adapter settings.
+- 🛠️ **Full Network Repair**: Total protocol stack restoration macro.
 
 </details>
 
 <details>
 <summary><b>🔣 Utilities (Auxiliary Tools)</b></summary>
 
-- 🔑 **Activation Methods**: Permanently activate Windows and Office via MAS.
+- 🔑 **Activation Methods**: Permanently activate Windows/Office via MAS.
 - 🔣 **Character Map**: View and copy system character catalog.
-- 📸 **Steps Recorder**: Record UI actions for support and debugging.
-- 🧠 **Memory Diagnostic**: Check for hardware-level RAM errors.
-- 🎵 **Media Player Legacy**: Classic Windows media playback.
+- 📸 **Steps Recorder**: Capture UI actions for troubleshooting.
+- 🧠 **Memory Diagnostic**: Check RAM for hardware-level errors.
+- 🎵 **Media Player Legacy**: Classic Windows media playback hub.
 
 </details>
 
+---
 
+## 🛠️ Recent Updates (v1.0.6)
 
-## 🛠️ Recent Updates (v1.0.5)
-
-- **Legal Compliance**: Updated the EULA modal with a mandatory consent checkbox.
-- **Automated Branding**: Integrated logo embedding step directly into the build pipeline.
-- **Compliance Engine**: Implemented a professional, **mandatory first-run User Agreement modal**.
-- **State Persistence**: Added smart tracking for EULA acceptance to ensure a seamless UX.
-- **Professional Setup**: Added `setup.ps1` for system-wide installation and trust registration.
-- **Repository Clean-up**: Organized files into `src`, `assets`, and `scripts`.
-- **Custom Branding**: Embedded a professional **32x32 Icon** into the binary.
-- **Publisher Verification**: Digitally signed by **Jemmy Francisco**.
+- **Interactive Setup**: Redesigned `JEMTOOLS_Setup.exe` with EULA consent and customizable install options.
+- **Visual Progress**: Added an animated loading bar to the installer for better feedback.
+- **Module Expansion**: Integrated **Driver Updates** and **Activation Methods** (MAS).
+- **Architecture**: Standardized installation to `C:\Program Files\JEM TOOLS` with Admin verification.
+- **Optimization**: Implemented native alphabetical sorting for the entire 47-module library.
+- **Publisher Verification**: Fully signed binaries by **Jemmy Francisco**.
 
 ---
 
@@ -190,19 +183,18 @@ To update the app, recompile, sign, and push to GitHub in one go:
 
 | File/Folder | Description |
 |---|---|
-| 📁 **`src/`** | Core C# Source Code |
-| 📁 **`assets/`** | Branding icons and Publisher certificates |
-| 📁 **`scripts/`** | Deployment and automation scripts |
-| 📄 **`JEMTOOLS.exe`** | The signed, icon-embedded binary |
-| 📄 **`JEMTOOLS_Setup.exe`** | Automated C#-based graphical setup installer |
-| 📄 **`setup.ps1`** | System-wide PowerShell installer engine |
-| 📄 **`push.ps1`** | Developer one-click update tool |
+| 📁 **`src/`** | Core C# Source Code (Program.cs, Setup.cs) |
+| 📁 **`assets/`** | Branding assets, icons, and Publisher certificates |
+| 📁 **`scripts/`** | Deployment and automation logic |
+| 📄 **`JEMTOOLS.exe`** | The signed, high-fidelity administrative suite |
+| 📄 **`JEMTOOLS_Setup.exe`** | Professional graphical setup installer |
+| 📄 **`setup.ps1`** | System-wide PowerShell deployment engine |
+| 📄 **`push.ps1`** | Developer one-click build and sync tool |
 
 ---
 
 ## ⚠️ Safety Note
-
-JEM TOOLS opens native Windows system utilities. Always ensure you understand what a tool does before executing it. Run the application as **Administrator** to guarantee full functionality.
+JEM TOOLS opens native Windows system utilities. Always ensure you understand a tool's function before execution. Run as **Administrator** to guarantee full functionality.
 
 ---
 
@@ -220,7 +212,7 @@ JEM TOOLS opens native Windows system utilities. Always ensure you understand wh
 
 ---
 
-**JEM TOOLS · Admin Edition v1.0.5**
+**JEM TOOLS · Admin Edition v1.0.6**
 *© 2026 Jemmy Francisco · MIT License*
 
 </div>
