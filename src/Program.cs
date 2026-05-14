@@ -197,12 +197,12 @@ namespace WindowsSystemToolMenu
             this.Controls.Add(sidebar);
 
             Panel sideHeader = new Panel();
-            sideHeader.Height = 80;
+            sideHeader.Height = 90;
             sideHeader.Dock = DockStyle.Top;
             sideHeader.BackColor = ThemeSideHeaderBg;
             
             PictureBox logo = new PictureBox();
-            logo.Size = new Size(40, 40);
+            logo.Size = new Size(45, 45);
             logo.Location = new Point(15, 20);
             logo.SizeMode = PictureBoxSizeMode.Zoom;
             logo.Cursor = Cursors.Hand;
@@ -212,11 +212,24 @@ namespace WindowsSystemToolMenu
             brandName.Text = "JEM TOOLS";
             brandName.Font = new Font("Segoe UI Black", 14);
             brandName.ForeColor = ThemeAccent;
-            brandName.Location = new Point(60, 26);
+            brandName.Location = new Point(65, 30);
             brandName.AutoSize = true;
+            
+            Button closeNavBtn = new Button();
+            closeNavBtn.Text = "≡";
+            closeNavBtn.Font = new Font("Segoe UI", 18);
+            closeNavBtn.ForeColor = Color.Gray;
+            closeNavBtn.Size = new Size(40, 40);
+            closeNavBtn.Location = new Point(SidebarMaxWidth - 50, 25);
+            closeNavBtn.FlatStyle = FlatStyle.Flat;
+            closeNavBtn.FlatAppearance.BorderSize = 0;
+            closeNavBtn.BackColor = Color.Transparent;
+            closeNavBtn.Cursor = Cursors.Hand;
+            closeNavBtn.Click += delegate(object s, EventArgs e) { StartNavToggle(); };
             
             sideHeader.Controls.Add(logo);
             sideHeader.Controls.Add(brandName);
+            sideHeader.Controls.Add(closeNavBtn);
             sidebar.Controls.Add(sideHeader);
 
             string[] categories = new string[] { "POLICIES", "UTILITIES", "NETWORK", "SECURITY", "ADMIN", "SYSTEM", "MAINTENANCE", "ALL" };
@@ -239,13 +252,16 @@ namespace WindowsSystemToolMenu
             mainArea = new Panel();
             mainArea.Dock = DockStyle.Fill;
             mainArea.BackColor = ThemeDarkBg;
-            mainArea.Padding = new Padding(60, 40, 60, 40);
+            mainArea.Padding = new Padding(30, 20, 30, 20);
             this.Controls.Add(mainArea);
+            
+            mainArea.BringToFront();
+            sidebar.BringToFront();
 
             // Dashboard Header
             headerPanel = new Panel();
             headerPanel.Dock = DockStyle.Top;
-            headerPanel.Height = 120;
+            headerPanel.Height = 140;
             
             mainBurgerBtn = new Button();
             mainBurgerBtn.Text = "≡";
@@ -260,30 +276,30 @@ namespace WindowsSystemToolMenu
             
             titleLabel = new Label();
             titleLabel.Text = "Infrastructure Nodes";
-            titleLabel.Font = new Font("Segoe UI Light", 32);
+            titleLabel.Font = new Font("Segoe UI Light", 28);
             titleLabel.ForeColor = Color.White;
-            titleLabel.Location = new Point(0, 0);
+            titleLabel.Location = new Point(0, 10);
             titleLabel.AutoSize = true;
             
             moduleCountLabel = new Label();
             moduleCountLabel.Text = "Administrative Suite Online";
             moduleCountLabel.ForeColor = Color.DimGray;
             moduleCountLabel.Font = new Font("Segoe UI", 10);
-            moduleCountLabel.Location = new Point(5, 65);
+            moduleCountLabel.Location = new Point(5, 70);
             moduleCountLabel.AutoSize = true;
             
             cpuLabel = new Label();
             cpuLabel.Text = "CPU: 0%";
             cpuLabel.ForeColor = ThemeAccent;
             cpuLabel.Font = new Font("Consolas", 12);
-            cpuLabel.Location = new Point(0, 95);
+            cpuLabel.Location = new Point(0, 100);
             cpuLabel.AutoSize = true;
             
             ramLabel = new Label();
             ramLabel.Text = "RAM: 0%";
             ramLabel.ForeColor = ThemeAccent;
             ramLabel.Font = new Font("Consolas", 12);
-            ramLabel.Location = new Point(140, 95);
+            ramLabel.Location = new Point(140, 100);
             ramLabel.AutoSize = true;
             
             headerPanel.Controls.Add(mainBurgerBtn);
@@ -296,15 +312,15 @@ namespace WindowsSystemToolMenu
             // Search Interface
             Panel searchPanel = new Panel();
             searchPanel.Dock = DockStyle.Top;
-            searchPanel.Height = 60;
-            searchPanel.Padding = new Padding(0, 10, 0, 10);
+            searchPanel.Height = 70;
+            searchPanel.Padding = new Padding(0, 15, 0, 15);
             
             searchBox = new TextBox();
             searchBox.Dock = DockStyle.Fill;
             searchBox.BackColor = Color.FromArgb(25, 25, 30);
             searchBox.ForeColor = Color.White;
             searchBox.BorderStyle = BorderStyle.None;
-            searchBox.Font = new Font("Segoe UI", 14);
+            searchBox.Font = new Font("Segoe UI", 16);
             SendMessage(searchBox.Handle, EM_SETCUEBANNER, 0, "Search administrative modules...");
             searchBox.TextChanged += delegate(object s, EventArgs e) { RefreshDisplay(); };
             
@@ -327,12 +343,19 @@ namespace WindowsSystemToolMenu
             cardContainer.AutoScroll = true;
             dashboardView.Controls.Add(cardContainer);
             mainArea.Controls.Add(dashboardView);
-
+            
             aboutView = CreateAboutView();
             mainArea.Controls.Add(aboutView);
 
             policiesView = CreatePoliciesView();
             mainArea.Controls.Add(policiesView);
+
+            // Set Z-Order correctly for docking
+            dashboardView.BringToFront();
+            aboutView.BringToFront();
+            policiesView.BringToFront();
+            searchPanel.BringToFront();
+            headerPanel.BringToFront();
 
             this.Resize += delegate(object s, EventArgs e) { SyncLayout(); };
             RefreshDisplay();
@@ -344,11 +367,11 @@ namespace WindowsSystemToolMenu
             Button btn = new Button();
             btn.Text = "    " + icon + "  " + text;
             btn.Tag = text;
-            btn.Height = 50;
+            btn.Height = 60;
             btn.Dock = DockStyle.Top;
             btn.FlatStyle = FlatStyle.Flat;
             btn.TextAlign = ContentAlignment.MiddleLeft;
-            btn.Font = new Font("Segoe UI Semibold", 9);
+            btn.Font = new Font("Segoe UI Semibold", 10);
             btn.ForeColor = Color.Gray;
             btn.Cursor = Cursors.Hand;
             btn.FlatAppearance.BorderSize = 0;
@@ -402,39 +425,39 @@ namespace WindowsSystemToolMenu
         private Control CreateToolCard(ToolItem tool)
         {
             Panel card = new Panel();
-            card.Size = new Size(320, 110);
+            card.Size = new Size(380, 140);
             card.BackColor = ThemeCardBg;
             card.Margin = new Padding(0, 0, 20, 20);
             card.Padding = new Padding(15);
             
             Label icon = new Label();
             icon.Text = tool.Icon;
-            icon.Font = new Font("Segoe UI", 22);
+            icon.Font = new Font("Segoe UI", 26);
             icon.Location = new Point(15, 15);
             icon.AutoSize = true;
             
             Label name = new Label();
             name.Text = tool.SpecificName;
-            name.Font = new Font("Segoe UI Bold", 10);
+            name.Font = new Font("Segoe UI Bold", 11);
             name.ForeColor = Color.White;
-            name.Location = new Point(65, 18);
+            name.Location = new Point(75, 18);
             name.AutoSize = true;
             
             Label desc = new Label();
             desc.Text = tool.Description;
-            desc.Font = new Font("Segoe UI", 8);
+            desc.Font = new Font("Segoe UI", 9);
             desc.ForeColor = Color.Gray;
-            desc.Location = new Point(65, 42);
-            desc.Size = new Size(240, 35);
+            desc.Location = new Point(75, 45);
+            desc.Size = new Size(280, 45);
             
             Button runBtn = new Button();
             runBtn.Text = "LAUNCH NODE";
             runBtn.Dock = DockStyle.Bottom;
-            runBtn.Height = 32;
+            runBtn.Height = 36;
             runBtn.FlatStyle = FlatStyle.Flat;
             runBtn.BackColor = Color.FromArgb(30, 30, 40);
             runBtn.ForeColor = ThemeAccent;
-            runBtn.Font = new Font("Segoe UI Bold", 8);
+            runBtn.Font = new Font("Segoe UI Bold", 9);
             runBtn.Cursor = Cursors.Hand;
             runBtn.FlatAppearance.BorderSize = 0;
             ToolItem currentTool = tool;
