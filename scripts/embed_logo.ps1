@@ -1,39 +1,41 @@
-$logoPath = "../assets/jem_logo.png"
-$csPath = "../src/Program.cs"
+# JEM TOOLS | Logo Embedding Automation
+# This script reads the logo image, converts it to Base64, and injects it into Program.cs
 
-# Replace the file-based loading with embedded Base64 loading
-$oldLine = 'try { logoBox.Image = Image.FromFile("assets/jem_logo.png"); } catch { }'
-$newLine = 'try { byte[] imgBytes = Convert.FromBase64String(GetLogoBase64()); using (var ms = new System.IO.MemoryStream(imgBytes)) { logoBox.Image = new Bitmap(ms); } } catch { }'
+$logoPath = "assets/jem_logo.png"
+$csPath = "src/Program.cs"
 
-if (Test-Path $csPath) {
-    $cs = [System.IO.File]::ReadAllText($csPath)
-    if ($cs.Contains($oldLine)) {
-    $cs = $cs.Replace($oldLine, $newLine)
-    Write-Host "Logo loading line replaced successfully."
-} else {
-    Write-Host "WARNING: Old line not found. Searching..."
-    # Show what's around line 176
-    $lines = $cs -split "`n"
-    $lines[173..179] | ForEach-Object { Write-Host $_ }
-}
-
-# Add the GetLogoBase64 method before the closing brace of the class
-$methodToAdd = @"
-
-        private static string GetLogoBase64()
-        {
-            return "$b64";
+if (Test-Path $logoPath) {
+    Write-Host "Encoding logo from $logoPath..." -ForegroundColor Cyan
+    $bytes = [System.IO.File]::ReadAllBytes($logoPath)
+    $b64 = [Convert]::ToBase64String($bytes)
+    
+    if (Test-Path $csPath) {
+        Write-Host "Injecting Base64 into $csPath..." -ForegroundColor Yellow
+        $csContent = [System.IO.File]::ReadAllText($csPath)
+        
+        $placeholder = 'return "BASE64_PLACEHOLDER";'
+        $newValue = 'return "' + $b64 + '";'
+        
+        if ($csContent.Contains($placeholder)) {
+            $csContent = $csContent.Replace($placeholder, $newValue)
+            [System.IO.File]::WriteAllText($csPath, $csContent)
+            Write-Host "Logo successfully embedded!" -ForegroundColor Green
+        } else {
+            Write-Host "WARNING: Placeholder not found in $csPath. Checking for existing logo..." -ForegroundColor Magenta
+            # Regex to find existing return "..." in GetLogoBase64
+            $regex = '(?s)private static string GetLogoBase64\(\)\s*\{.*?return ".*?";\s*\}'
+            $newMethod = "private static string GetLogoBase64()`r`n        {`r`n            return `"$b64`";`r`n        }"
+            if ($csContent -match $regex) {
+                $csContent = $csContent -replace $regex, $newMethod
+                [System.IO.File]::WriteAllText($csPath, $csContent)
+                Write-Host "Existing logo updated successfully!" -ForegroundColor Green
+            } else {
+                Write-Host "ERROR: Could not find GetLogoBase64 method to update." -ForegroundColor Red
+            }
         }
-"@
-
-# Insert before the last closing brace of the class
-$insertMarker = '    }' + "`r`n}"
-if ($cs.Contains($insertMarker)) {
-    $cs = $cs.Replace($insertMarker, $methodToAdd + "`r`n    }`r`n}")
-    Write-Host "GetLogoBase64 method added."
+    } else {
+        Write-Host "ERROR: $csPath not found." -ForegroundColor Red
+    }
 } else {
-    Write-Host "WARNING: Insert marker not found."
+    Write-Host "ERROR: $logoPath not found." -ForegroundColor Red
 }
-
-[System.IO.File]::WriteAllText('Program.cs', $cs)
-Write-Host "Program.cs updated successfully."

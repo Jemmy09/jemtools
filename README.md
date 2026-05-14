@@ -1,13 +1,13 @@
 <div align="center">
-  <img src="jem_logo.png" width="120" height="120" alt="JEM TOOLS Logo">
+  <img src="assets/jem_logo.png" width="120" height="120" alt="JEM TOOLS Logo">
 
   # JEM TOOLS
-  ### Admin Edition · v1.0.4
+  ### Admin Edition · v1.0.5
 
   *Precision System Intelligence for Windows Professionals.*
 
   [![Status](https://img.shields.io/badge/STATUS-LIVE-00c853?style=for-the-badge)](#)
-  [![Version](https://img.shields.io/badge/VERSION-1.0.4-0288d1?style=for-the-badge)](#)
+  [![Version](https://img.shields.io/badge/VERSION-1.0.5-0288d1?style=for-the-badge)](#)
   [![OS](https://img.shields.io/badge/WINDOWS-7%20%7C%208%20%7C%2010%20%7C%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white)](#)
   [![Tech](https://img.shields.io/badge/C%23-.NET%204.8-7b1fa2?style=for-the-badge&logo=dotnet&logoColor=white)](#)
   [![License](https://img.shields.io/badge/License-MIT-f9a825?style=for-the-badge)](LICENSE)
@@ -227,7 +227,7 @@ JEM TOOLS opens native Windows system utilities. Always ensure you understand wh
 
 ---
 
-**JEM TOOLS · Admin Edition v1.0.4**
+**JEM TOOLS · Admin Edition v1.0.5**
 *© 2026 Jemmy Francisco · MIT License*
 
 </div>
