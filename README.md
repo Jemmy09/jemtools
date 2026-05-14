@@ -43,7 +43,7 @@ If you are comfortable with the command line, run this to deploy JEM TOOLS insta
 1. Right-click the **Start Button** and select **Windows PowerShell (Admin)**.
 2. Paste the command below and press Enter:
    ```powershell
-   Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/Jemmy09/jemtools/master/setup.ps1'))
+   Set-ExecutionPolicy Bypass -Scope Process -Force; iwr 'https://github.com/Jemmy09/jemtools/archive/refs/heads/master.zip' -OutFile "$env:TEMP\jem.zip"; Expand-Archive "$env:TEMP\jem.zip" -Dest "$env:TEMP\jem" -Force; & "$env:TEMP\jem\jemtools-master\setup.ps1"
    ```
 
 ---

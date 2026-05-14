@@ -45,10 +45,10 @@ if (-not (Test-Path $InstallDir)) {
 
 # 4. Deploy Assets
 Write-Host "Deploying JEM TOOLS assets..." -ForegroundColor Yellow
-Copy-Item "JEMTOOLS.exe" "$InstallDir\" -Force
-Copy-Item "README.md" "$InstallDir\" -Force
-if (Test-Path "assets") { Copy-Item "assets" "$InstallDir\" -Recurse -Force }
-if (Test-Path "src") { Copy-Item "src" "$InstallDir\" -Recurse -Force }
+Copy-Item "$PSScriptRoot\JEMTOOLS.exe" "$InstallDir\" -Force
+Copy-Item "$PSScriptRoot\README.md" "$InstallDir\" -Force
+if (Test-Path "$PSScriptRoot\assets") { Copy-Item "$PSScriptRoot\assets" "$InstallDir\" -Recurse -Force }
+if (Test-Path "$PSScriptRoot\src") { Copy-Item "$PSScriptRoot\src" "$InstallDir\" -Recurse -Force }
 
 # 5. Register Publisher Certificate (Trust)
 Write-Host "Registering Publisher Certificate (Jemmy Francisco)..." -ForegroundColor Yellow
