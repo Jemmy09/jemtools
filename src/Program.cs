@@ -29,13 +29,20 @@ namespace WindowsSystemToolMenu
         static void Main()
         {
             try {
-                // Verify Professional Initialization (EULA Check)
+                // Security Lock: Ensure app is running from the official installation path
+                string currentPath = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\');
+                string officialPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "JEM TOOLS").TrimEnd('\\');
+                
+                // Also check for EULA Acceptance in Registry
                 var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\JEMTOOLS");
                 object accepted = (key != null) ? key.GetValue("AcceptedEULA") : null;
 
-                if (accepted == null || (int)accepted != 1)
+                bool isInstalled = currentPath.Equals(officialPath, StringComparison.OrdinalIgnoreCase);
+                bool isAuthorized = (accepted != null && (int)accepted == 1);
+
+                if (!isInstalled || !isAuthorized)
                 {
-                    MessageBox.Show("JEM TOOLS has not been initialized correctly.\n\nPlease run JEMTOOLS_Setup.exe to accept the User Agreement and complete the professional installation process.", "JEM TOOLS | Security", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("UNAUTHORIZED EXECUTION DETECTED\n\nJEM TOOLS must be installed through the professional setup to ensure system integrity.\n\nPlease run JEMTOOLS_Setup.exe to complete the installation process.", "JEM TOOLS | Security Lock", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     return;
                 }
 
