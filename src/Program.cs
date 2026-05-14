@@ -501,106 +501,86 @@ namespace WindowsSystemToolMenu
             p.Visible = false;
             p.BackColor = ThemeDarkBg;
 
-            // Centered flow container
-            FlowLayoutPanel flow = new FlowLayoutPanel();
-            flow.FlowDirection = FlowDirection.TopDown;
-            flow.WrapContents = false;
-            flow.AutoSize = false;
-            flow.Width = 420;
-            flow.BackColor = Color.Transparent;
-            flow.Padding = new Padding(0);
+            // TableLayoutPanel fills the outer panel and centers the content card
+            TableLayoutPanel outer = new TableLayoutPanel();
+            outer.Dock = DockStyle.Fill;
+            outer.RowCount = 1;
+            outer.ColumnCount = 1;
+            outer.RowStyles.Add(new RowStyle(SizeType.Percent, 100f));
+            outer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f));
+            outer.BackColor = Color.Transparent;
 
-            // App Logo
+            // Inner fixed-size content panel — Anchor=None centers it in the table cell
+            Panel content = new Panel();
+            content.Width = 420;
+            content.BackColor = Color.Transparent;
+            content.Anchor = AnchorStyles.None;
+
+            int y = 0;
+
+            // Logo — centered at x = (420-100)/2 = 160
             PictureBox bigLogo = new PictureBox();
             bigLogo.Size = new Size(100, 100);
+            bigLogo.Location = new Point(160, y);
             bigLogo.SizeMode = PictureBoxSizeMode.Zoom;
-            bigLogo.Margin = new Padding(160, 0, 0, 18);
             try {
                 byte[] bytes = Convert.FromBase64String(GetLogoBase64());
                 using (MemoryStream ms = new MemoryStream(bytes)) bigLogo.Image = new Bitmap(ms);
             } catch {}
-            flow.Controls.Add(bigLogo);
+            content.Controls.Add(bigLogo);
+            y += 116;
 
-            // App Name
-            flow.Controls.Add(MakeAboutLabel("JEM TOOLS | Admin Edition", new Font("Segoe UI Light", 22), ThemeAccent, new Padding(0, 0, 0, 4)));
-            flow.Controls.Add(MakeAboutLabel("Version 1.0.5 (Production)", new Font("Segoe UI", 11), Color.Gray, new Padding(0, 0, 0, 22)));
+            // App name & version
+            content.Controls.Add(MakeInfoLabel("JEM TOOLS | Admin Edition", new Font("Segoe UI Light", 22), ThemeAccent, y)); y += 46;
+            content.Controls.Add(MakeInfoLabel("Version 1.0.5 (Production)", new Font("Segoe UI", 11), Color.Gray, y)); y += 32;
 
             // Divider
-            Panel div1 = new Panel();
-            div1.Size = new Size(420, 1);
-            div1.BackColor = Color.FromArgb(45, 45, 58);
-            div1.Margin = new Padding(0, 0, 0, 22);
-            flow.Controls.Add(div1);
+            content.Controls.Add(new Panel { Size = new Size(420, 1), Location = new Point(0, y), BackColor = Color.FromArgb(50, 50, 65) });
+            y += 22;
 
-            // Developer Info
-            flow.Controls.Add(MakeAboutLabel("Jemmy Francisco", new Font("Segoe UI Semibold", 16), Color.White, new Padding(0, 0, 0, 6)));
-            flow.Controls.Add(MakeAboutLabel("Software Developer", new Font("Segoe UI", 11), Color.DimGray, new Padding(0, 0, 0, 26)));
+            // Developer info
+            content.Controls.Add(MakeInfoLabel("Jemmy Francisco", new Font("Segoe UI Semibold", 16), Color.White, y)); y += 38;
+            content.Controls.Add(MakeInfoLabel("Software Developer", new Font("Segoe UI", 11), Color.DimGray, y)); y += 40;
 
-            // Contact header
-            flow.Controls.Add(MakeAboutLabel("C O N T A C T", new Font("Segoe UI Semibold", 8), Color.FromArgb(90, 90, 115), new Padding(0, 0, 0, 14)));
+            // Contact section header
+            content.Controls.Add(MakeInfoLabel("C O N T A C T", new Font("Segoe UI Semibold", 8), Color.FromArgb(85, 85, 110), y)); y += 28;
 
-            // Buttons row
-            FlowLayoutPanel btnRow = new FlowLayoutPanel();
-            btnRow.FlowDirection = FlowDirection.LeftToRight;
-            btnRow.WrapContents = false;
-            btnRow.AutoSize = true;
-            btnRow.BackColor = Color.Transparent;
-            btnRow.Margin = new Padding(15, 0, 0, 26);
+            // Facebook button — brand blue
+            Button fbBtn = MakeContactBtn("  f   Facebook", Color.FromArgb(24, 119, 242));
+            fbBtn.Location = new Point(5, y);
+            fbBtn.Click += delegate(object s, EventArgs e) { try { Process.Start("https://www.facebook.com/jemmy.francisco.98"); } catch {} };
+            content.Controls.Add(fbBtn);
 
-            // Facebook button  (brand blue #1877F2)
-            Button fbBtn = MakeContactBtn("  \uD83D\uDCCC  Facebook", Color.FromArgb(24, 119, 242));
-            fbBtn.Click += delegate(object s, EventArgs e) {
-                try { Process.Start("https://www.facebook.com/jemmy.francisco.98"); } catch {}
-            };
-
-            // Gmail button (brand red)
+            // Gmail button — brand red
             Button gmailBtn = MakeContactBtn("  \u2709  Gmail", Color.FromArgb(219, 68, 55));
-            gmailBtn.Margin = new Padding(14, 0, 0, 0);
-            gmailBtn.Click += delegate(object s, EventArgs e) {
-                try { Process.Start("mailto:Jemmyfrancisco30@gmail.com"); } catch {}
-            };
+            gmailBtn.Location = new Point(207, y);
+            gmailBtn.Click += delegate(object s, EventArgs e) { try { Process.Start("mailto:Jemmyfrancisco30@gmail.com"); } catch {} };
+            content.Controls.Add(gmailBtn);
+            y += 56;
 
-            btnRow.Controls.Add(fbBtn);
-            btnRow.Controls.Add(gmailBtn);
-            flow.Controls.Add(btnRow);
-
-            // Divider
-            Panel div2 = new Panel();
-            div2.Size = new Size(420, 1);
-            div2.BackColor = Color.FromArgb(35, 35, 48);
-            div2.Margin = new Padding(0, 0, 0, 18);
-            flow.Controls.Add(div2);
+            // Bottom divider
+            content.Controls.Add(new Panel { Size = new Size(420, 1), Location = new Point(0, y), BackColor = Color.FromArgb(38, 38, 52) });
+            y += 20;
 
             // Copyright
-            flow.Controls.Add(MakeAboutLabel("© 2026 JEM TOOLS · Released under MIT License", new Font("Segoe UI", 9), Color.FromArgb(75, 75, 92), new Padding(0)));
+            content.Controls.Add(MakeInfoLabel("© 2026 JEM TOOLS · Released under MIT License", new Font("Segoe UI", 9), Color.FromArgb(72, 72, 88), y));
+            y += 26;
 
-            p.Controls.Add(flow);
-
-            // Center the flow panel dynamically
-            EventHandler center = delegate(object s, EventArgs e) {
-                if (flow.Height < 10) return;
-                flow.Location = new Point(
-                    Math.Max(0, (p.ClientSize.Width - flow.Width) / 2),
-                    Math.Max(0, (p.ClientSize.Height - flow.Height) / 2)
-                );
-            };
-            p.Resize += center;
-            p.VisibleChanged += center;
-            flow.Resize += center;
+            content.Height = y;
+            outer.Controls.Add(content, 0, 0);
+            p.Controls.Add(outer);
             return p;
         }
 
-        private Label MakeAboutLabel(string text, Font font, Color color, Padding margin)
+        private Label MakeInfoLabel(string text, Font font, Color color, int y)
         {
             Label l = new Label();
             l.Text = text;
             l.Font = font;
             l.ForeColor = color;
-            l.Width = 420;
-            l.AutoSize = false;
-            l.Height = (int)(font.Size * 2.4f) + 6;
+            l.Size = new Size(420, (int)(font.Size * 2.5f) + 6);
+            l.Location = new Point(0, y);
             l.TextAlign = ContentAlignment.MiddleCenter;
-            l.Margin = margin;
             l.BackColor = Color.Transparent;
             return l;
         }
@@ -609,7 +589,7 @@ namespace WindowsSystemToolMenu
         {
             Button btn = new Button();
             btn.Text = text;
-            btn.Size = new Size(188, 44);
+            btn.Size = new Size(200, 44);
             btn.FlatStyle = FlatStyle.Flat;
             btn.BackColor = bg;
             btn.ForeColor = Color.White;
@@ -617,7 +597,7 @@ namespace WindowsSystemToolMenu
             btn.FlatAppearance.BorderSize = 0;
             btn.Cursor = Cursors.Hand;
             btn.TextAlign = ContentAlignment.MiddleLeft;
-            btn.Padding = new Padding(10, 0, 0, 0);
+            btn.Padding = new Padding(12, 0, 0, 0);
             return btn;
         }
 
