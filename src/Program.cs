@@ -127,7 +127,9 @@ namespace WindowsSystemToolMenu
             InitializeTools();
             BuildUI();
             LoadState();
+            currentCategory = "ALL"; // Ensure direct entry into Infrastructure Nodes
             UpdateSidebarColors();
+            RefreshDisplay();
             StartStats();
             InitNavAnimation();
             SetToolTips();
