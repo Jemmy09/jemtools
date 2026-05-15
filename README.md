@@ -27,7 +27,7 @@ The "Admin Edition" features a high-fidelity experience that turns complex syste
 
 | Feature | Description |
 |---|---|
-| 🗂️ **58 Admin Modules** | Every essential Windows tool — from Registry Editor to MRT — in one place |
+| 🗂️ **59 Admin Modules** | Every essential Windows tool — from Registry Editor to MRT — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
 | 🔍 **Instant Search** | Find any tool in milliseconds with the built-in search bar |
 | 🗂️ **Category Filters** | Browse by Security, Admin, System, Maintenance, Network, or Utilities |
@@ -79,6 +79,7 @@ Follow these simple steps if you have no experience with GitHub or PowerShell:
 - 🧹 **Disk Cleanup**: Native Windows disk optimization utility.
 - 💿 **Defragment Drives**: Optimize file allocation for HDD performance.
 - 📂 **Prefetch Data**: Access prefetch optimization data for system speed.
+- 🖼️ **Clear Icon Cache**: Reset and rebuild the Windows icon database.
 
 </details>
 
@@ -172,7 +173,8 @@ Follow these simple steps if you have no experience with GitHub or PowerShell:
 - **Visual Progress**: Added an animated loading bar to the installer for better feedback.
 - **Module Expansion**: Integrated **Driver Updates** and **Activation Methods** (MAS).
 - **Architecture**: Standardized installation to `C:\Program Files\JEM TOOLS` with Admin verification.
-- **Optimization**: Implemented native alphabetical sorting for the entire 58-module library.
+- **Optimization**: Implemented native alphabetical sorting for the entire 59-module library.
+- **Standalone Uninstaller**: Added a dedicated `uninstaller.exe` with process detection and deep cleanup logic.
 - **Publisher Verification**: Fully signed binaries by **Jemmy Francisco**.
 
 ---
@@ -181,11 +183,12 @@ Follow these simple steps if you have no experience with GitHub or PowerShell:
 
 | File/Folder | Description |
 |---|---|
-| 📁 **`src/`** | Core C# Source Code (Program.cs, Setup.cs) |
+| 📁 **`src/`** | Core C# Source Code (Program.cs, Setup.cs, Uninstall.cs) |
 | 📁 **`assets/`** | Branding assets, icons, and Publisher certificates |
 | 📁 **`scripts/`** | Deployment and automation logic |
 | 📄 **`JEMTOOLS.exe`** | The signed, high-fidelity administrative suite |
 | 📄 **`JEMTOOLS_Setup.exe`** | Professional graphical setup installer |
+| 📄 **`uninstaller.exe`** | Standalone professional uninstaller binary |
 | 📄 **`setup.ps1`** | System-wide PowerShell deployment engine |
 | 📄 **`push.ps1`** | Developer one-click build and sync tool |
 
