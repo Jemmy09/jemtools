@@ -27,7 +27,7 @@ The "Admin Edition" features a high-fidelity experience that turns complex syste
 
 | Feature | Description |
 |---|---|
-| 🗂️ **59 Admin Modules** | Every essential Windows tool — from Registry Editor to MRT — in one place |
+| 🗂️ **60 Admin Modules** | Every essential Windows tool — from Registry Editor to MRT — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
 | 🔍 **Instant Search** | Find any tool in milliseconds with the built-in search bar |
 | 🗂️ **Category Filters** | Browse by Security, Admin, System, Maintenance, Network, or Utilities |
@@ -158,8 +158,9 @@ Follow these simple steps if you have no experience with GitHub or PowerShell:
 - 💎 **Spotify SpotX (Premium)**: Optimized configuration for Premium accounts.
 - 🔣 **Character Map**: View and copy system character catalog.
 - 📸 **Steps Recorder**: Capture UI actions for troubleshooting.
-- 🧠 **Memory Diagnostic**: Check RAM for hardware-level errors.
-- 🎵 **Media Player Legacy**: Classic Windows media playback hub.
+- 🧠 **Ollama AI Core**: Install and run local AI models (Llama3).
+- 🧠 **Memory Diagnostic**: Check system RAM for hardware errors.
+- 🎵 **Media Player Legacy**: Access the classic multimedia player.
 
 </details>
 
@@ -173,7 +174,7 @@ Follow these simple steps if you have no experience with GitHub or PowerShell:
 - **Visual Progress**: Added an animated loading bar to the installer for better feedback.
 - **Module Expansion**: Integrated **Driver Updates** and **Activation Methods** (MAS).
 - **Architecture**: Standardized installation to `C:\Program Files\JEM TOOLS` with Admin verification.
-- **Optimization**: Implemented native alphabetical sorting for the entire 59-module library.
+- **Optimization**: Implemented native alphabetical sorting for the entire 60-module library.
 - **Standalone Uninstaller**: Added a dedicated `uninstaller.exe` with process detection and deep cleanup logic.
 - **Publisher Verification**: Fully signed binaries by **Jemmy Francisco**.
 
