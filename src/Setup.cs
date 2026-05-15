@@ -202,8 +202,13 @@ namespace JEMToolsSetup
                 byte[] bytes = Convert.FromBase64String(base64);
                 File.WriteAllBytes(exePath, bytes);
 
-                // Copy this setup file to target directory as an uninstaller
-                try { File.Copy(Process.GetCurrentProcess().MainModule.FileName, Path.Combine(targetDir, "JEMTOOLS_Setup.exe"), true); } catch { }
+                string uninstallBase64 = "%%UNINSTALL_PAYLOAD%%";
+                string uninstallPath = Path.Combine(targetDir, "uninstaller.exe");
+                if (uninstallBase64.Length > 20) {
+                    try { File.WriteAllBytes(uninstallPath, Convert.FromBase64String(uninstallBase64)); } catch { }
+                }
+
+                // No longer needed to copy setup file as we have a dedicated uninstaller
 
                 // Register in Programs and Features
                 try
@@ -212,7 +217,7 @@ namespace JEMToolsSetup
                     using (RegistryKey key = Registry.LocalMachine.CreateSubKey(uninstallKey))
                     {
                         key.SetValue("DisplayName", "JEM TOOLS | Admin Edition");
-                        key.SetValue("UninstallString", "\"" + Path.Combine(targetDir, "JEMTOOLS_Setup.exe") + "\" /uninstall");
+                        key.SetValue("UninstallString", "\"" + Path.Combine(targetDir, "uninstaller.exe") + "\"");
                         key.SetValue("DisplayIcon", exePath);
                         key.SetValue("Publisher", "Jemmy Francisco");
                         key.SetValue("DisplayVersion", "1.0.8");
