@@ -331,7 +331,6 @@ namespace WindowsSystemToolMenu
             headerPanel.Controls.Add(moduleCountLabel);
             headerPanel.Controls.Add(cpuLabel);
             headerPanel.Controls.Add(ramLabel);
-            mainArea.Controls.Add(headerPanel);
 
             // Search Interface
             Panel searchPanel = new Panel();
@@ -355,7 +354,6 @@ namespace WindowsSystemToolMenu
             
             searchPanel.Controls.Add(searchBox);
             searchPanel.Controls.Add(border);
-            mainArea.Controls.Add(searchPanel);
 
             // View Management
             dashboardView = new Panel();
@@ -367,17 +365,16 @@ namespace WindowsSystemToolMenu
             cardContainer.AutoScroll = true;
             cardContainer.MouseEnter += delegate(object s, EventArgs e) { cardContainer.Focus(); };
             dashboardView.Controls.Add(cardContainer);
-            mainArea.Controls.Add(dashboardView);
             
             aboutView = CreateAboutView();
-            mainArea.Controls.Add(aboutView);
-
             policiesView = CreatePoliciesView();
-            mainArea.Controls.Add(policiesView);
 
-            // Set Z-Order correctly for mainArea controls: Edge docks first, Fill docks last.
-            headerPanel.SendToBack();
-            searchPanel.SendToBack();
+            // DOCKING ORDER: Add Fill first (index 0), then Top (highest index)
+            mainArea.Controls.Add(dashboardView); // index 0
+            mainArea.Controls.Add(aboutView);     // index 1
+            mainArea.Controls.Add(policiesView);  // index 2
+            mainArea.Controls.Add(headerPanel);   // index 3 (Top)
+            mainArea.Controls.Add(searchPanel);   // index 4 (Top)
 
             this.Resize += delegate(object s, EventArgs e) { SyncLayout(); };
             RefreshDisplay();
