@@ -2,12 +2,12 @@
   <img src="assets/jem_logo.png" width="120" height="120" alt="JEM TOOLS Logo">
 
   # JEM TOOLS
-  ### Admin Edition · v1.0.7
+  ### Admin Edition · v1.0.8
 
   *Precision System Intelligence for Windows Professionals.*
 
   [![Status](https://img.shields.io/badge/STATUS-LIVE-00c853?style=for-the-badge)](#)
-  [![Version](https://img.shields.io/badge/VERSION-1.0.7-0288d1?style=for-the-badge)](#)
+  [![Version](https://img.shields.io/badge/VERSION-1.0.8-0288d1?style=for-the-badge)](#)
   [![OS](https://img.shields.io/badge/WINDOWS-7%20%7C%208%20%7C%2010%20%7C%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white)](#)
   [![Tech](https://img.shields.io/badge/C%23-.NET%204.8-7b1fa2?style=for-the-badge&logo=dotnet&logoColor=white)](#)
   [![License](https://img.shields.io/badge/License-MIT-f9a825?style=for-the-badge)](LICENSE)
@@ -27,7 +27,7 @@ The "Admin Edition" features a high-fidelity experience that turns complex syste
 
 | Feature | Description |
 |---|---|
-| 🗂️ **51 Admin Modules** | Every essential Windows tool — from Registry Editor to Spotify Optimization — in one place |
+| 🗂️ **58 Admin Modules** | Every essential Windows tool — from Registry Editor to MRT — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
 | 🔍 **Instant Search** | Find any tool in milliseconds with the built-in search bar |
 | 🗂️ **Category Filters** | Browse by Security, Admin, System, Maintenance, Network, or Utilities |
@@ -78,6 +78,7 @@ Follow these simple steps if you have no experience with GitHub or PowerShell:
 - 🛡️ **Security Lockdown**: Enforce recommended system security defaults.
 - 🧹 **Disk Cleanup**: Native Windows disk optimization utility.
 - 💿 **Defragment Drives**: Optimize file allocation for HDD performance.
+- 📂 **Prefetch Data**: Access prefetch optimization data for system speed.
 
 </details>
 
@@ -97,6 +98,8 @@ Follow these simple steps if you have no experience with GitHub or PowerShell:
 - 🔑 **Registry Editor**: Advanced system registry database modification.
 - 📡 **Remote Desktop**: Connect to and control remote workstations.
 - 🏃 **Run Dialog**: Quickly execute commands or open programs.
+- ⚙️ **System Properties**: Advanced system properties and environment variables.
+- 🔑 **License Information**: View Windows license and activation status.
 
 </details>
 
@@ -112,6 +115,8 @@ Follow these simple steps if you have no experience with GitHub or PowerShell:
 - 📅 **Task Scheduler**: Automate tasks and scripts via triggers.
 - 🖨️ **Print Management**: Centralized printer and server control.
 - 🗄️ **ODBC Data Sources**: Configure database connections and drivers.
+- 👥 **User Accounts (Advanced)**: Advanced user account management (netplwiz).
+- 👤 **Local Users and Groups**: Local users and group management console.
 
 </details>
 
@@ -122,6 +127,8 @@ Follow these simple steps if you have no experience with GitHub or PowerShell:
 - 🧱 **Defender Firewall**: Advanced inbound/outbound security rules.
 - 🔗 **iSCSI Initiator**: Connect to external network storage arrays.
 - 🆘 **Recovery Drive**: Create a system repair environment.
+- 🛡️ **Malicious Software Removal**: Microsoft Malicious Software Removal Tool (MRT).
+- 🖋️ **File Signature Verifier**: Verify the integrity and signatures of system files.
 
 </details>
 
@@ -157,14 +164,15 @@ Follow these simple steps if you have no experience with GitHub or PowerShell:
 
 ---
 
-## 🛠️ Recent Updates (v1.0.7)
+## 🛠️ Recent Updates (v1.0.8)
 
+- **Infrastructure Expansion**: Added 7 new critical system tools: Prefetch, MRT, System Properties, License Info, netplwiz, sigverif, and lusrmgr.
 - **Spotify SpotX Integration**: Added a dedicated suite of Spotify optimization tools for ad-blocking and theming.
 - **Interactive Setup**: Redesigned `JEMTOOLS_Setup.exe` with EULA consent and customizable install options.
 - **Visual Progress**: Added an animated loading bar to the installer for better feedback.
 - **Module Expansion**: Integrated **Driver Updates** and **Activation Methods** (MAS).
 - **Architecture**: Standardized installation to `C:\Program Files\JEM TOOLS` with Admin verification.
-- **Optimization**: Implemented native alphabetical sorting for the entire 51-module library.
+- **Optimization**: Implemented native alphabetical sorting for the entire 58-module library.
 - **Publisher Verification**: Fully signed binaries by **Jemmy Francisco**.
 
 ---
@@ -202,7 +210,7 @@ JEM TOOLS opens native Windows system utilities. Always ensure you understand a 
 
 ---
 
-**JEM TOOLS · Admin Edition v1.0.7**
+**JEM TOOLS · Admin Edition v1.0.8**
 *© 2026 Jemmy Francisco · MIT License*
 
 </div>

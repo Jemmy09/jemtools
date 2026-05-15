@@ -14,14 +14,14 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("JEM TOOLS | Admin Edition")]
 [assembly: AssemblyCopyright("Copyright © 2026 Jemmy Francisco")]
 [assembly: AssemblyTrademark("JEM TOOLS")]
-[assembly: AssemblyVersion("1.0.7.0")]
-[assembly: AssemblyFileVersion("1.0.7.0")]
+[assembly: AssemblyVersion("1.0.8.0")]
+[assembly: AssemblyFileVersion("1.0.8.0")]
 
 namespace WindowsSystemToolMenu
 {
     /// <summary>
     /// JEM TOOLS | Admin Edition - High-fidelity system administration suite.
-    /// v1.0.7 Optimized for performance and professional deployment.
+    /// v1.0.8 Optimized for performance and professional deployment.
     /// </summary>
     public class Program
     {
@@ -109,7 +109,7 @@ namespace WindowsSystemToolMenu
 
         public ModernAdminForm()
         {
-            this.Text = "JEM TOOLS | Admin Edition v1.0.7";
+            this.Text = "JEM TOOLS | Admin Edition v1.0.8";
             this.WindowState = FormWindowState.Maximized;
             this.MinimumSize = new Size(1200, 800);
             this.BackColor = ThemeDarkBg;
@@ -150,6 +150,7 @@ namespace WindowsSystemToolMenu
             tools.Add(new ToolItem { SpecificName = "Security Lockdown", Command = "netsh advfirewall set allprofiles state on", Icon = "🛡️", Category = "MAINTENANCE", IsMacro = true, Description = "Enable all firewall profiles." });
             tools.Add(new ToolItem { SpecificName = "Disk Cleanup", Command = "cleanmgr", Icon = "🧹", Category = "MAINTENANCE", Description = "Remove redundant files." });
             tools.Add(new ToolItem { SpecificName = "Defragment Drives", Command = "dfrgui", Icon = "💿", Category = "MAINTENANCE", Description = "Optimize storage performance." });
+            tools.Add(new ToolItem { SpecificName = "Prefetch Data", Command = "explorer.exe C:\\Windows\\Prefetch", Icon = "📂", Category = "MAINTENANCE", Description = "Access prefetch optimization data." });
 
             // SYSTEM
             tools.Add(new ToolItem { SpecificName = "Driver Updates", Command = "devmgmt.msc", Icon = "🔌", Category = "SYSTEM", Description = "Manage hardware and driver updates." });
@@ -165,6 +166,8 @@ namespace WindowsSystemToolMenu
             tools.Add(new ToolItem { SpecificName = "Registry Editor", Command = "regedit", Icon = "🔑", Category = "SYSTEM", Description = "Registry modification." });
             tools.Add(new ToolItem { SpecificName = "Remote Desktop", Command = "mstsc", Icon = "📡", Category = "SYSTEM", Description = "Remote access." });
             tools.Add(new ToolItem { SpecificName = "Run Dialog", Command = "explorer.exe shell:::{2559a1f3-21d7-11d4-bdaf-00c04f60b9f0}", Icon = "🏃", Category = "SYSTEM", Description = "Classic run command." });
+            tools.Add(new ToolItem { SpecificName = "System Properties", Command = "sysdm.cpl", Icon = "⚙️", Category = "SYSTEM", Description = "Advanced system properties and variables." });
+            tools.Add(new ToolItem { SpecificName = "License Information", Command = "slmgr.vbs /dli", Icon = "🔑", Category = "SYSTEM", Description = "View Windows license and activation status." });
 
             // ADMIN
             tools.Add(new ToolItem { SpecificName = "Computer Management", Command = "compmgmt.msc", Icon = "🖥️", Category = "ADMIN", Description = "Unified admin console." });
@@ -176,12 +179,16 @@ namespace WindowsSystemToolMenu
             tools.Add(new ToolItem { SpecificName = "Task Scheduler", Command = "taskschd.msc", Icon = "📅", Category = "ADMIN", Description = "Automated task engine." });
             tools.Add(new ToolItem { SpecificName = "Print Management", Command = "printmanagement.msc", Icon = "🖨️", Category = "ADMIN", Description = "Printer and driver console." });
             tools.Add(new ToolItem { SpecificName = "ODBC Data Sources", Command = "odbcad32.exe", Icon = "🗄️", Category = "ADMIN", Description = "Database connectivity (64-bit)." });
+            tools.Add(new ToolItem { SpecificName = "User Accounts (Advanced)", Command = "netplwiz", Icon = "👥", Category = "ADMIN", Description = "Advanced user account management." });
+            tools.Add(new ToolItem { SpecificName = "Local Users and Groups", Command = "lusrmgr.msc", Icon = "👤", Category = "ADMIN", Description = "Local users and group console." });
 
             // SECURITY
             tools.Add(new ToolItem { SpecificName = "Security Policy", Command = "secpol.msc", Icon = "🔒", Category = "SECURITY", Description = "Local security policies." });
             tools.Add(new ToolItem { SpecificName = "Defender Firewall", Command = "wf.msc", Icon = "🧱", Category = "SECURITY", Description = "Network security." });
             tools.Add(new ToolItem { SpecificName = "iSCSI Initiator", Command = "iscsicpl.exe", Icon = "🔗", Category = "SECURITY", Description = "Storage area network config." });
             tools.Add(new ToolItem { SpecificName = "Recovery Drive", Command = "recoverydrive.exe", Icon = "🆘", Category = "SECURITY", Description = "Create system recovery media." });
+            tools.Add(new ToolItem { SpecificName = "Malicious Software Removal", Command = "mrt", Icon = "🛡️", Category = "SECURITY", Description = "Microsoft Malicious Software Removal Tool." });
+            tools.Add(new ToolItem { SpecificName = "File Signature Verifier", Command = "sigverif", Icon = "🖋️", Category = "SECURITY", Description = "Verify the integrity of system files." });
 
             // UTILITIES
             tools.Add(new ToolItem { SpecificName = "Activation Methods", Command = "powershell -NoProfile -Command \"irm https://get.activated.win | iex\"", Icon = "🔑", Category = "UTILITIES", Description = "Permanently activate Windows and Office." });
@@ -572,7 +579,7 @@ namespace WindowsSystemToolMenu
 
             // App name & version
             content.Controls.Add(MakeInfoLabel("JEM TOOLS | Admin Edition", new Font("Segoe UI Light", 22), ThemeAccent, y, 45)); y += 45;
-            content.Controls.Add(MakeInfoLabel("Version 1.0.7 (Production)", new Font("Segoe UI", 11), Color.LightGray, y, 25)); y += 35;
+            content.Controls.Add(MakeInfoLabel("Version 1.0.8 (Production)", new Font("Segoe UI", 11), Color.LightGray, y, 25)); y += 35;
 
             // Divider 1
             content.Controls.Add(new Panel { Size = new Size(420, 1), Location = new Point(0, y), BackColor = Color.FromArgb(50, 50, 65) });

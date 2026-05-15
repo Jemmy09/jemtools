@@ -4,6 +4,16 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.Drawing;
 using Microsoft.Win32;
+using System.Reflection;
+
+[assembly: AssemblyTitle("JEM TOOLS | Setup")]
+[assembly: AssemblyDescription("Professional Installer for JEM TOOLS")]
+[assembly: AssemblyCompany("JEM TOOLS")]
+[assembly: AssemblyProduct("JEM TOOLS Suite")]
+[assembly: AssemblyCopyright("Copyright © 2026 Jemmy Francisco")]
+[assembly: AssemblyVersion("1.0.8.0")]
+[assembly: AssemblyFileVersion("1.0.8.0")]
+
 
 namespace JEMToolsSetup
 {
@@ -205,7 +215,7 @@ namespace JEMToolsSetup
                         key.SetValue("UninstallString", "\"" + Path.Combine(targetDir, "JEMTOOLS_Setup.exe") + "\" /uninstall");
                         key.SetValue("DisplayIcon", exePath);
                         key.SetValue("Publisher", "Jemmy Francisco");
-                        key.SetValue("DisplayVersion", "1.0.7");
+                        key.SetValue("DisplayVersion", "1.0.8");
                         key.SetValue("InstallLocation", targetDir);
                         key.SetValue("EstimatedSize", bytes.Length / 1024);
                         key.SetValue("NoModify", 1);
