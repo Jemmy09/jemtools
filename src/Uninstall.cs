@@ -100,7 +100,7 @@ namespace JEMToolsUninstall
             try
             {
                 // 1. Check if running
-                Process[] procs = Process.GetProcessesByName("JEMTOOLS");
+                Process[] procs = Process.GetProcessesByName("Jem Tools");
                 if (procs.Length > 0)
                 {
                     MessageBox.Show("Please close JEM TOOLS before uninstalling.", "Active Process Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);

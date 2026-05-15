@@ -1,16 +1,16 @@
 # JEM TOOLS | Professional Setup Engine
 # This script handles system integration, shortcut creation, and certificate trust.
 
-$AppName = "JEM TOOLS"
-$InstallDir = "C:\Program Files\JEM TOOLS"
-$ExeName = "JEMTOOLS.exe"
+$AppName = "Jem Tools"
+$InstallDir = "C:\Program Files\Jem Tools"
+$ExeName = "Jem Tools.exe"
 $StartMenuPath = "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\$AppName"
 
 Write-Host "--- $AppName Professional Setup ---" -ForegroundColor Cyan
 
 # 1. Display User Agreement
 Clear-Host
-Write-Host "--- JEM TOOLS | USER AGREEMENT ---" -ForegroundColor Cyan
+Write-Host "--- Jem Tools | USER AGREEMENT ---" -ForegroundColor Cyan
 Write-Host @"
 Version 1.0.8 - Professional Edition
 

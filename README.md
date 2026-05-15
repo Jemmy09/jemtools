@@ -1,8 +1,8 @@
 <div align="center">
   <img src="assets/jem_logo.png" width="120" height="120" alt="JEM TOOLS Logo">
 
-  # JEM TOOLS
-  ### Admin Edition · v1.0.8
+  # Jem Tools
+  ### v1.0.8
 
   *Precision System Intelligence for Windows Professionals.*
 
@@ -17,7 +17,7 @@
 ---
 
 ## 🛠️ Project Blueprint
-**JEM TOOLS** is a commercial-grade administrative utility designed for power users and IT professionals. It provides a centralized command center for system-level maintenance, security auditing, and real-time performance monitoring, all within a high-fidelity, privacy-first architecture.
+**Jem Tools** is a commercial-grade administrative utility designed for power users and IT professionals. It provides a centralized command center for system-level maintenance, security auditing, and real-time performance monitoring, all within a high-fidelity, privacy-first architecture.
 
 The "Admin Edition" features a high-fidelity experience that turns complex system management into a streamlined, visual process.
 
@@ -186,9 +186,9 @@ Follow these simple steps if you have no experience with GitHub or PowerShell:
 | 📁 **`src/`** | Core C# Source Code (Program.cs, Setup.cs, Uninstall.cs) |
 | 📁 **`assets/`** | Branding assets, icons, and Publisher certificates |
 | 📁 **`scripts/`** | Deployment and automation logic |
-| 📄 **`JEMTOOLS.exe`** | The signed, high-fidelity administrative suite |
-| 📄 **`JEMTOOLS_Setup.exe`** | Professional graphical setup installer |
-| 📄 **`uninstaller.exe`** | Standalone professional uninstaller binary |
+| 📄 **`Jem Tools.exe`** | The signed, high-fidelity administrative suite |
+| 📄 **`Setup.exe`** | Professional graphical setup installer |
+| 📄 **`Uninstaller.exe`** | Standalone professional uninstaller binary |
 | 📄 **`setup.ps1`** | System-wide PowerShell deployment engine |
 | 📄 **`push.ps1`** | Developer one-click build and sync tool |
 

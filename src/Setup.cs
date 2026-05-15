@@ -188,12 +188,12 @@ namespace JEMToolsSetup
                     return;
                 }
 
-                string targetDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "JEM TOOLS");
+                string targetDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Jem Tools");
                 if (!Directory.Exists(targetDir)) Directory.CreateDirectory(targetDir);
-                string exePath = Path.Combine(targetDir, "JEMTOOLS.exe");
+                string exePath = Path.Combine(targetDir, "Jem Tools.exe");
                 
                 // Ensure existing instances are closed to prevent file lock errors
-                foreach (var proc in Process.GetProcessesByName("JEMTOOLS"))
+                foreach (var proc in Process.GetProcessesByName("Jem Tools"))
                 {
                     try { proc.Kill(); proc.WaitForExit(1000); } catch { }
                 }
@@ -203,21 +203,20 @@ namespace JEMToolsSetup
                 File.WriteAllBytes(exePath, bytes);
 
                 string uninstallBase64 = "%%UNINSTALL_PAYLOAD%%";
-                string uninstallPath = Path.Combine(targetDir, "uninstaller.exe");
+                string uninstallPath = Path.Combine(targetDir, "Uninstaller.exe");
                 if (uninstallBase64.Length > 20) {
                     try { File.WriteAllBytes(uninstallPath, Convert.FromBase64String(uninstallBase64)); } catch { }
                 }
 
                 // No longer needed to copy setup file as we have a dedicated uninstaller
 
-                // Register in Programs and Features
                 try
                 {
-                    string uninstallKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\JEMTOOLS";
+                    string uninstallKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\JemTools";
                     using (RegistryKey key = Registry.LocalMachine.CreateSubKey(uninstallKey))
                     {
-                        key.SetValue("DisplayName", "JEM TOOLS | Admin Edition");
-                        key.SetValue("UninstallString", "\"" + Path.Combine(targetDir, "uninstaller.exe") + "\"");
+                        key.SetValue("DisplayName", "Jem Tools");
+                        key.SetValue("UninstallString", "\"" + Path.Combine(targetDir, "Uninstaller.exe") + "\"");
                         key.SetValue("DisplayIcon", exePath);
                         key.SetValue("Publisher", "Jemmy Francisco");
                         key.SetValue("DisplayVersion", "1.0.8");
@@ -230,7 +229,7 @@ namespace JEMToolsSetup
                 
                 if (createShortcut) {
                     string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                    string shortcutPath = Path.Combine(desktop, "JEM TOOLS.lnk");
+                    string shortcutPath = Path.Combine(desktop, "Jem Tools.lnk");
                     
                     string psCommand = string.Format("$s=(New-Object -COM WScript.Shell).CreateShortcut('{0}');$s.TargetPath='{1}';$s.WorkingDirectory='{2}';$s.Save()", shortcutPath, exePath, targetDir);
                     
