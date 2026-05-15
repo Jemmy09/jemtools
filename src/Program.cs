@@ -67,6 +67,8 @@ namespace WindowsSystemToolMenu
         public string Description { get; set; }
         public string Category { get; set; }
         public bool IsMacro { get; set; }
+        public string Guide { get; set; }
+        public string ManualLaunch { get; set; }
     }
 
     public class ModernAdminForm : Form
@@ -145,74 +147,74 @@ namespace WindowsSystemToolMenu
             tools = new List<ToolItem>();
             
             // MAINTENANCE
-            tools.Add(new ToolItem { SpecificName = "System Deep Clean", Command = "cleanmgr /sageset:1 & cleanmgr /sagerun:1", Icon = "⚡", Category = "MAINTENANCE", IsMacro = true, Description = "Full administrative system maintenance." });
-            tools.Add(new ToolItem { SpecificName = "Network Refresh", Command = "ipconfig /release & ipconfig /renew & ipconfig /flushdns", Icon = "📡", Category = "MAINTENANCE", IsMacro = true, Description = "Reset adapters and flush DNS." });
-            tools.Add(new ToolItem { SpecificName = "Security Lockdown", Command = "netsh advfirewall set allprofiles state on", Icon = "🛡️", Category = "MAINTENANCE", IsMacro = true, Description = "Enable all firewall profiles." });
-            tools.Add(new ToolItem { SpecificName = "Disk Cleanup", Command = "cleanmgr", Icon = "🧹", Category = "MAINTENANCE", Description = "Remove redundant files." });
-            tools.Add(new ToolItem { SpecificName = "Defragment Drives", Command = "dfrgui", Icon = "💿", Category = "MAINTENANCE", Description = "Optimize storage performance." });
-            tools.Add(new ToolItem { SpecificName = "Prefetch Data", Command = "explorer.exe C:\\Windows\\Prefetch", Icon = "📂", Category = "MAINTENANCE", Description = "Access prefetch optimization data." });
+            tools.Add(new ToolItem { SpecificName = "System Deep Clean", Command = "cleanmgr /sageset:1 & cleanmgr /sagerun:1", Icon = "⚡", Category = "MAINTENANCE", IsMacro = true, Description = "Full administrative system maintenance.", Guide = "Purges deep system cache and redundant files. Use monthly to maintain performance.", ManualLaunch = "cleanmgr /sageset:1" });
+            tools.Add(new ToolItem { SpecificName = "Network Refresh", Command = "ipconfig /release & ipconfig /renew & ipconfig /flushdns", Icon = "📡", Category = "MAINTENANCE", IsMacro = true, Description = "Reset adapters and flush DNS.", Guide = "Automated sequence to release/renew IP and clear DNS cache to fix local connection drops.", ManualLaunch = "ipconfig /flushdns" });
+            tools.Add(new ToolItem { SpecificName = "Security Lockdown", Command = "netsh advfirewall set allprofiles state on", Icon = "🛡️", Category = "MAINTENANCE", IsMacro = true, Description = "Enable all firewall profiles.", Guide = "Forces all Windows Firewall profiles to 'ON' state. Prevents unauthorized inbound connections.", ManualLaunch = "netsh advfirewall set allprofiles state on" });
+            tools.Add(new ToolItem { SpecificName = "Disk Cleanup", Command = "cleanmgr", Icon = "🧹", Category = "MAINTENANCE", Description = "Remove redundant files.", Guide = "Standard cleanup utility to safely delete temporary files and system leftovers.", ManualLaunch = "cleanmgr" });
+            tools.Add(new ToolItem { SpecificName = "Defragment Drives", Command = "dfrgui", Icon = "💿", Category = "MAINTENANCE", Description = "Optimize storage performance.", Guide = "Optimizes file allocation on HDDs. Note: SSDs do not require defragmentation.", ManualLaunch = "dfrgui" });
+            tools.Add(new ToolItem { SpecificName = "Prefetch Data", Command = "explorer.exe C:\\Windows\\Prefetch", Icon = "📂", Category = "MAINTENANCE", Description = "Access prefetch optimization data.", Guide = "Opens the prefetch folder. Deleting contents can resolve application launch bottlenecks.", ManualLaunch = "C:\\Windows\\Prefetch" });
 
             // SYSTEM
-            tools.Add(new ToolItem { SpecificName = "Driver Updates", Command = "devmgmt.msc", Icon = "🔌", Category = "SYSTEM", Description = "Manage hardware and driver updates." });
-            tools.Add(new ToolItem { SpecificName = "Program Uninstaller", Command = "appwiz.cpl", Icon = "🗑️", Category = "SYSTEM", Description = "Add or remove programs." });
-            tools.Add(new ToolItem { SpecificName = "Command Prompt", Command = "cmd", Icon = "💻", Category = "SYSTEM", Description = "Standard command-line." });
-            tools.Add(new ToolItem { SpecificName = "Control Panel", Command = "control", Icon = "🎛️", Category = "SYSTEM", Description = "Legacy settings." });
-            tools.Add(new ToolItem { SpecificName = "System Configuration", Command = "msconfig", Icon = "⚙️", Category = "SYSTEM", Description = "Boot and service config." });
-            tools.Add(new ToolItem { SpecificName = "System Information", Command = "msinfo32", Icon = "ℹ️", Category = "SYSTEM", Description = "HW and SW environment details." });
-            tools.Add(new ToolItem { SpecificName = "Task Manager", Command = "taskmgr", Icon = "📋", Category = "SYSTEM", Description = "Process governance." });
-            tools.Add(new ToolItem { SpecificName = "Resource Monitor", Command = "resmon", Icon = "📊", Category = "SYSTEM", Description = "Resource analytics." });
-            tools.Add(new ToolItem { SpecificName = "PowerShell Core", Command = "powershell", Icon = "🐚", Category = "SYSTEM", Description = "Modern system shell." });
-            tools.Add(new ToolItem { SpecificName = "PowerShell ISE", Command = "powershell_ise", Icon = "🌀", Category = "SYSTEM", Description = "Integrated Scripting Environment." });
-            tools.Add(new ToolItem { SpecificName = "Registry Editor", Command = "regedit", Icon = "🔑", Category = "SYSTEM", Description = "Registry modification." });
-            tools.Add(new ToolItem { SpecificName = "Remote Desktop", Command = "mstsc", Icon = "📡", Category = "SYSTEM", Description = "Remote access." });
-            tools.Add(new ToolItem { SpecificName = "Run Dialog", Command = "explorer.exe shell:::{2559a1f3-21d7-11d4-bdaf-00c04f60b9f0}", Icon = "🏃", Category = "SYSTEM", Description = "Classic run command." });
-            tools.Add(new ToolItem { SpecificName = "System Properties", Command = "sysdm.cpl", Icon = "⚙️", Category = "SYSTEM", Description = "Advanced system properties and variables." });
-            tools.Add(new ToolItem { SpecificName = "License Information", Command = "slmgr.vbs /dli", Icon = "🔑", Category = "SYSTEM", Description = "View Windows license and activation status." });
+            tools.Add(new ToolItem { SpecificName = "Driver Updates", Command = "devmgmt.msc", Icon = "🔌", Category = "SYSTEM", Description = "Manage hardware and driver updates.", Guide = "Launch Device Manager to update, roll back, or disable hardware drivers.", ManualLaunch = "devmgmt.msc" });
+            tools.Add(new ToolItem { SpecificName = "Program Uninstaller", Command = "appwiz.cpl", Icon = "🗑️", Category = "SYSTEM", Description = "Add or remove programs.", Guide = "Legacy console for managing installed software and Windows features.", ManualLaunch = "appwiz.cpl" });
+            tools.Add(new ToolItem { SpecificName = "Command Prompt", Command = "cmd", Icon = "💻", Category = "SYSTEM", Description = "Standard command-line.", Guide = "Launch an elevated terminal for advanced command execution.", ManualLaunch = "cmd" });
+            tools.Add(new ToolItem { SpecificName = "Control Panel", Command = "control", Icon = "🎛️", Category = "SYSTEM", Description = "Legacy settings.", Guide = "The classic Windows interface for managing system-wide settings and hardware.", ManualLaunch = "control" });
+            tools.Add(new ToolItem { SpecificName = "System Configuration", Command = "msconfig", Icon = "⚙️", Category = "SYSTEM", Description = "Boot and service config.", Guide = "Configure startup applications, boot parameters, and background services.", ManualLaunch = "msconfig" });
+            tools.Add(new ToolItem { SpecificName = "System Information", Command = "msinfo32", Icon = "ℹ️", Category = "SYSTEM", Description = "HW and SW environment details.", Guide = "View comprehensive specifications for hardware, drivers, and software resources.", ManualLaunch = "msinfo32" });
+            tools.Add(new ToolItem { SpecificName = "Task Manager", Command = "taskmgr", Icon = "📋", Category = "SYSTEM", Description = "Process governance.", Guide = "Monitor active processes, CPU/RAM usage, and startup impacts.", ManualLaunch = "taskmgr" });
+            tools.Add(new ToolItem { SpecificName = "Resource Monitor", Command = "resmon", Icon = "📊", Category = "SYSTEM", Description = "Resource analytics.", Guide = "Detailed real-time analysis of Disk, Memory, CPU, and Network bandwidth.", ManualLaunch = "resmon" });
+            tools.Add(new ToolItem { SpecificName = "PowerShell Core", Command = "powershell", Icon = "🐚", Category = "SYSTEM", Description = "Modern system shell.", Guide = "Advanced command-line shell and scripting language for task automation.", ManualLaunch = "powershell" });
+            tools.Add(new ToolItem { SpecificName = "PowerShell ISE", Command = "powershell_ise", Icon = "🌀", Category = "SYSTEM", Description = "Integrated Scripting Environment.", Guide = "Write, test, and debug PowerShell scripts in a graphical environment.", ManualLaunch = "powershell_ise" });
+            tools.Add(new ToolItem { SpecificName = "Registry Editor", Command = "regedit", Icon = "🔑", Category = "SYSTEM", Description = "Registry modification.", Guide = "Modify the system configuration database. Warning: Incorrect edits can cause instability.", ManualLaunch = "regedit" });
+            tools.Add(new ToolItem { SpecificName = "Remote Desktop", Command = "mstsc", Icon = "📡", Category = "SYSTEM", Description = "Remote access.", Guide = "Connect to and control remote workstations over a network connection.", ManualLaunch = "mstsc" });
+            tools.Add(new ToolItem { SpecificName = "Run Dialog", Command = "explorer.exe shell:::{2559a1f3-21d7-11d4-bdaf-00c04f60b9f0}", Icon = "🏃", Category = "SYSTEM", Description = "Classic run command.", Guide = "Access the native Windows Run dialog to execute system commands directly.", ManualLaunch = "shell:::{2559a1f3-21d7-11d4-bdaf-00c04f60b9f0}" });
+            tools.Add(new ToolItem { SpecificName = "System Properties", Command = "sysdm.cpl", Icon = "⚙️", Category = "SYSTEM", Description = "Advanced system properties and variables.", Guide = "Manage computer name, environment variables, and system protection settings.", ManualLaunch = "sysdm.cpl" });
+            tools.Add(new ToolItem { SpecificName = "License Information", Command = "slmgr.vbs /dli", Icon = "🔑", Category = "SYSTEM", Description = "View Windows license and activation status.", Guide = "Display detailed information about the current Windows activation and license type.", ManualLaunch = "slmgr.vbs /dli" });
 
             // ADMIN
-            tools.Add(new ToolItem { SpecificName = "Computer Management", Command = "compmgmt.msc", Icon = "🖥️", Category = "ADMIN", Description = "Unified admin console." });
-            tools.Add(new ToolItem { SpecificName = "Disk Management", Command = "diskmgmt.msc", Icon = "💽", Category = "ADMIN", Description = "Storage volume management." });
-            tools.Add(new ToolItem { SpecificName = "Component Services", Command = "dcomcnfg", Icon = "⚙️", Category = "ADMIN", Description = "COM+ and DCOM management." });
-            tools.Add(new ToolItem { SpecificName = "Event Viewer", Command = "eventvwr", Icon = "📜", Category = "ADMIN", Description = "System logs." });
-            tools.Add(new ToolItem { SpecificName = "Performance Monitor", Command = "perfmon", Icon = "📈", Category = "ADMIN", Description = "Real-time HW monitoring." });
-            tools.Add(new ToolItem { SpecificName = "Services", Command = "services.msc", Icon = "🛠️", Category = "ADMIN", Description = "Service management." });
-            tools.Add(new ToolItem { SpecificName = "Task Scheduler", Command = "taskschd.msc", Icon = "📅", Category = "ADMIN", Description = "Automated task engine." });
-            tools.Add(new ToolItem { SpecificName = "Print Management", Command = "printmanagement.msc", Icon = "🖨️", Category = "ADMIN", Description = "Printer and driver console." });
-            tools.Add(new ToolItem { SpecificName = "ODBC Data Sources", Command = "odbcad32.exe", Icon = "🗄️", Category = "ADMIN", Description = "Database connectivity (64-bit)." });
-            tools.Add(new ToolItem { SpecificName = "User Accounts (Advanced)", Command = "netplwiz", Icon = "👥", Category = "ADMIN", Description = "Advanced user account management." });
-            tools.Add(new ToolItem { SpecificName = "Local Users and Groups", Command = "lusrmgr.msc", Icon = "👤", Category = "ADMIN", Description = "Local users and group console." });
+            tools.Add(new ToolItem { SpecificName = "Computer Management", Command = "compmgmt.msc", Icon = "🖥️", Category = "ADMIN", Description = "Unified admin console.", Guide = "Consolidated console for managing disks, users, and system performance.", ManualLaunch = "compmgmt.msc" });
+            tools.Add(new ToolItem { SpecificName = "Disk Management", Command = "diskmgmt.msc", Icon = "💽", Category = "ADMIN", Description = "Storage volume management.", Guide = "Manage partitions, initialize new disks, and change drive letters.", ManualLaunch = "diskmgmt.msc" });
+            tools.Add(new ToolItem { SpecificName = "Component Services", Command = "dcomcnfg", Icon = "⚙️", Category = "ADMIN", Description = "COM+ and DCOM management.", Guide = "Configure and manage COM components and DCOM configuration settings.", ManualLaunch = "dcomcnfg" });
+            tools.Add(new ToolItem { SpecificName = "Event Viewer", Command = "eventvwr", Icon = "📜", Category = "ADMIN", Description = "System logs.", Guide = "Analyze application, security, and system logs to troubleshoot errors.", ManualLaunch = "eventvwr" });
+            tools.Add(new ToolItem { SpecificName = "Performance Monitor", Command = "perfmon", Icon = "📈", Category = "ADMIN", Description = "Real-time HW monitoring.", Guide = "Track hardware performance data using customizable counters and logs.", ManualLaunch = "perfmon" });
+            tools.Add(new ToolItem { SpecificName = "Services", Command = "services.msc", Icon = "🛠️", Category = "ADMIN", Description = "Service management.", Guide = "Control background system services. Manage startup types and recovery options.", ManualLaunch = "services.msc" });
+            tools.Add(new ToolItem { SpecificName = "Task Scheduler", Command = "taskschd.msc", Icon = "📅", Category = "ADMIN", Description = "Automated task engine.", Guide = "Create and manage automated tasks that run based on triggers or time.", ManualLaunch = "taskschd.msc" });
+            tools.Add(new ToolItem { SpecificName = "Print Management", Command = "printmanagement.msc", Icon = "🖨️", Category = "ADMIN", Description = "Printer and driver console.", Guide = "Centralized interface for managing printers, drivers, and print servers.", ManualLaunch = "printmanagement.msc" });
+            tools.Add(new ToolItem { SpecificName = "ODBC Data Sources", Command = "odbcad32.exe", Icon = "🗄️", Category = "ADMIN", Description = "Database connectivity (64-bit).", Guide = "Configure database connections and drivers for 64-bit applications.", ManualLaunch = "odbcad32.exe" });
+            tools.Add(new ToolItem { SpecificName = "User Accounts (Advanced)", Command = "netplwiz", Icon = "👥", Category = "ADMIN", Description = "Advanced user account management.", Guide = "Advanced interface for user login settings and password management.", ManualLaunch = "netplwiz" });
+            tools.Add(new ToolItem { SpecificName = "Local Users and Groups", Command = "lusrmgr.msc", Icon = "👤", Category = "ADMIN", Description = "Local users and group console.", Guide = "Manage users and group memberships for the local computer.", ManualLaunch = "lusrmgr.msc" });
 
             // SECURITY
-            tools.Add(new ToolItem { SpecificName = "Security Policy", Command = "secpol.msc", Icon = "🔒", Category = "SECURITY", Description = "Local security policies." });
-            tools.Add(new ToolItem { SpecificName = "Defender Firewall", Command = "wf.msc", Icon = "🧱", Category = "SECURITY", Description = "Network security." });
-            tools.Add(new ToolItem { SpecificName = "iSCSI Initiator", Command = "iscsicpl.exe", Icon = "🔗", Category = "SECURITY", Description = "Storage area network config." });
-            tools.Add(new ToolItem { SpecificName = "Recovery Drive", Command = "recoverydrive.exe", Icon = "🆘", Category = "SECURITY", Description = "Create system recovery media." });
-            tools.Add(new ToolItem { SpecificName = "Malicious Software Removal", Command = "mrt", Icon = "🛡️", Category = "SECURITY", Description = "Microsoft Malicious Software Removal Tool." });
-            tools.Add(new ToolItem { SpecificName = "File Signature Verifier", Command = "sigverif", Icon = "🖋️", Category = "SECURITY", Description = "Verify the integrity of system files." });
+            tools.Add(new ToolItem { SpecificName = "Security Policy", Command = "secpol.msc", Icon = "🔒", Category = "SECURITY", Description = "Local security policies.", Guide = "Configure local security settings, password policies, and user rights assignments.", ManualLaunch = "secpol.msc" });
+            tools.Add(new ToolItem { SpecificName = "Defender Firewall", Command = "wf.msc", Icon = "🧱", Category = "SECURITY", Description = "Network security.", Guide = "Advanced interface for configuring inbound and outbound firewall rules.", ManualLaunch = "wf.msc" });
+            tools.Add(new ToolItem { SpecificName = "iSCSI Initiator", Command = "iscsicpl.exe", Icon = "🔗", Category = "SECURITY", Description = "Storage area network config.", Guide = "Configure connections between your computer and external iSCSI storage devices.", ManualLaunch = "iscsicpl.exe" });
+            tools.Add(new ToolItem { SpecificName = "Recovery Drive", Command = "recoverydrive.exe", Icon = "🆘", Category = "SECURITY", Description = "Create system recovery media.", Guide = "Create a USB recovery drive to troubleshoot and fix Windows when it won't start.", ManualLaunch = "recoverydrive.exe" });
+            tools.Add(new ToolItem { SpecificName = "Malicious Software Removal", Command = "mrt", Icon = "🛡️", Category = "SECURITY", Description = "Microsoft Malicious Software Removal Tool.", Guide = "Run a deep system scan for specific, prevalent malicious software (viruses, worms).", ManualLaunch = "mrt" });
+            tools.Add(new ToolItem { SpecificName = "File Signature Verifier", Command = "sigverif", Icon = "🖋️", Category = "SECURITY", Description = "Verify the integrity of system files.", Guide = "Identify unsigned system files which may indicate unauthorized system modifications.", ManualLaunch = "sigverif" });
 
             // UTILITIES
-            tools.Add(new ToolItem { SpecificName = "Activation Methods", Command = "powershell -NoProfile -Command \"irm https://get.activated.win | iex\"", Icon = "🔑", Category = "UTILITIES", Description = "Permanently activate Windows and Office." });
-            tools.Add(new ToolItem { SpecificName = "Spotify SpotX (Full)", Command = "powershell -NoProfile -Command \"iex \\\"& { $(iwr -useb 'https://raw.githubusercontent.com/SpotX-Official/SpotX/refs/heads/main/run.ps1') } -confirm_uninstall_ms_spoti -confirm_spoti_recomended_over -podcasts_off -block_update_on -start_spoti -new_theme -adsections_off -lyrics_stat spotify\\\"\"", Icon = "🎵", Category = "UTILITIES", Description = "Full Spotify ad-block and theme optimization." });
-            tools.Add(new ToolItem { SpecificName = "Spotify SpotX (New)", Command = "powershell -NoProfile -Command \"iex \\\"& { $(iwr -useb 'https://raw.githubusercontent.com/SpotX-Official/SpotX/refs/heads/main/run.ps1') } -new_theme\\\"\"", Icon = "🟢", Category = "UTILITIES", Description = "SpotX installation with New Theme." });
-            tools.Add(new ToolItem { SpecificName = "Spotify SpotX (Old)", Command = "powershell -NoProfile -Command \"iex \\\"& { $(iwr -useb 'https://raw.githubusercontent.com/SpotX-Official/SpotX/refs/heads/main/run.ps1') } -v 1.2.13.661.ga588f749 -confirm_spoti_recomended_over -block_update_on\\\"\"", Icon = "📻", Category = "UTILITIES", Description = "SpotX installation with Old Theme (v1.2.13)." });
-            tools.Add(new ToolItem { SpecificName = "Spotify SpotX (Premium)", Command = "powershell -NoProfile -Command \"iex \\\"& { $(iwr -useb 'https://raw.githubusercontent.com/SpotX-Official/SpotX/refs/heads/main/run.ps1') } -premium -new_theme\\\"\"", Icon = "💎", Category = "UTILITIES", Description = "Spotify optimization for Premium accounts." });
-            tools.Add(new ToolItem { SpecificName = "Character Map", Command = "charmap", Icon = "🔣", Category = "UTILITIES", Description = "System character catalog." });
-            tools.Add(new ToolItem { SpecificName = "Steps Recorder", Command = "psr.exe", Icon = "📸", Category = "UTILITIES", Description = "Record UI actions for debugging." });
-            tools.Add(new ToolItem { SpecificName = "Memory Diagnostic", Command = "mdsched.exe", Icon = "🧠", Category = "UTILITIES", Description = "Check RAM for errors." });
-            tools.Add(new ToolItem { SpecificName = "Media Player Legacy", Command = "wmplayer.exe", Icon = "🎵", Category = "UTILITIES", Description = "Legacy multimedia hub." });
+            tools.Add(new ToolItem { SpecificName = "Activation Methods", Command = "powershell -NoProfile -Command \"irm https://get.activated.win | iex\"", Icon = "🔑", Category = "UTILITIES", Description = "Permanently activate Windows and Office.", Guide = "Automated script to permanently activate Windows/Office using MAS (Microsoft Activation Scripts).", ManualLaunch = "irm https://get.activated.win | iex" });
+            tools.Add(new ToolItem { SpecificName = "Spotify SpotX (Full)", Command = "powershell -NoProfile -Command \"iex \\\"& { $(iwr -useb 'https://raw.githubusercontent.com/SpotX-Official/SpotX/refs/heads/main/run.ps1') } -confirm_uninstall_ms_spoti -confirm_spoti_recomended_over -podcasts_off -block_update_on -start_spoti -new_theme -adsections_off -lyrics_stat spotify\\\"\"", Icon = "🎵", Category = "UTILITIES", Description = "Full Spotify ad-block and theme optimization.", Guide = "Complete Spotify modification including ad-blocking, podcasts removal, and theme optimization.", ManualLaunch = "SpotX run.ps1" });
+            tools.Add(new ToolItem { SpecificName = "Spotify SpotX (New)", Command = "powershell -NoProfile -Command \"iex \\\"& { $(iwr -useb 'https://raw.githubusercontent.com/SpotX-Official/SpotX/refs/heads/main/run.ps1') } -new_theme\\\"\"", Icon = "🟢", Category = "UTILITIES", Description = "SpotX installation with New Theme.", Guide = "Install SpotX modification with the modern visual theme enabled by default.", ManualLaunch = "SpotX -new_theme" });
+            tools.Add(new ToolItem { SpecificName = "Spotify SpotX (Old)", Command = "powershell -NoProfile -Command \"iex \\\"& { $(iwr -useb 'https://raw.githubusercontent.com/SpotX-Official/SpotX/refs/heads/main/run.ps1') } -v 1.2.13.661.ga588f749 -confirm_spoti_recomended_over -block_update_on\\\"\"", Icon = "📻", Category = "UTILITIES", Description = "SpotX installation with Old Theme (v1.2.13).", Guide = "Install a specific legacy version (v1.2.13) of Spotify with the classic visual theme.", ManualLaunch = "SpotX -v 1.2.13" });
+            tools.Add(new ToolItem { SpecificName = "Spotify SpotX (Premium)", Command = "powershell -NoProfile -Command \"iex \\\"& { $(iwr -useb 'https://raw.githubusercontent.com/SpotX-Official/SpotX/refs/heads/main/run.ps1') } -premium -new_theme\\\"\"", Icon = "💎", Category = "UTILITIES", Description = "Spotify optimization for Premium accounts.", Guide = "Optimized SpotX configuration specifically designed for users with Spotify Premium subscriptions.", ManualLaunch = "SpotX -premium" });
+            tools.Add(new ToolItem { SpecificName = "Character Map", Command = "charmap", Icon = "🔣", Category = "UTILITIES", Description = "System character catalog.", Guide = "View all characters available in any installed font and copy them to the clipboard.", ManualLaunch = "charmap" });
+            tools.Add(new ToolItem { SpecificName = "Steps Recorder", Command = "psr.exe", Icon = "📸", Category = "UTILITIES", Description = "Record UI actions for debugging.", Guide = "Capture a series of screenshots and descriptions to document a system issue or process.", ManualLaunch = "psr.exe" });
+            tools.Add(new ToolItem { SpecificName = "Memory Diagnostic", Command = "mdsched.exe", Icon = "🧠", Category = "UTILITIES", Description = "Check RAM for errors.", Guide = "Schedule a system restart to check your computer's memory for hardware defects.", ManualLaunch = "mdsched.exe" });
+            tools.Add(new ToolItem { SpecificName = "Media Player Legacy", Command = "wmplayer.exe", Icon = "🎵", Category = "UTILITIES", Description = "Legacy multimedia hub.", Guide = "Access the classic Windows Media Player for local multimedia playback and library management.", ManualLaunch = "wmplayer.exe" });
 
             // NETWORK
-            tools.Add(new ToolItem { SpecificName = "IP Config (All)", Command = "ipconfig /all", Icon = "🔍", Category = "NETWORK", Description = "Detailed network interface configuration." });
-            tools.Add(new ToolItem { SpecificName = "Flush DNS Cache", Command = "ipconfig /flushdns", Icon = "🧼", Category = "NETWORK", Description = "Purge the DNS resolver cache." });
-            tools.Add(new ToolItem { SpecificName = "Release IP", Command = "ipconfig /release", Icon = "🔓", Category = "NETWORK", Description = "Release current IPv4." });
-            tools.Add(new ToolItem { SpecificName = "Renew IP", Command = "ipconfig /renew", Icon = "🔑", Category = "NETWORK", Description = "Request new IPv4." });
-            tools.Add(new ToolItem { SpecificName = "Winsock Reset", Command = "netsh winsock reset", Icon = "🔄", Category = "NETWORK", Description = "Repair network catalog." });
-            tools.Add(new ToolItem { SpecificName = "TCP/IP Reset", Command = "netsh int ip reset", Icon = "📶", Category = "NETWORK", Description = "Reset TCP/IP stack." });
-            tools.Add(new ToolItem { SpecificName = "Ping Google", Command = "ping google.com -t", Icon = "📡", Category = "NETWORK", Description = "Continuous connectivity test." });
-            tools.Add(new ToolItem { SpecificName = "Network Stats", Command = "netstat -an", Icon = "📊", Category = "NETWORK", Description = "View active ports." });
-            tools.Add(new ToolItem { SpecificName = "Network Connections", Command = "ncpa.cpl", Icon = "🔗", Category = "NETWORK", Description = "Manage adapter settings." });
-            tools.Add(new ToolItem { SpecificName = "Wi-Fi Settings", Command = "explorer.exe ms-settings:network-wifi", Icon = "📶", Category = "NETWORK", Description = "Windows 10/11 Wi-Fi config." });
-            tools.Add(new ToolItem { SpecificName = "Full Network Repair", Command = "ipconfig /release & ipconfig /renew & ipconfig /flushdns & netsh winsock reset & netsh int ip reset", Icon = "🛠️", Category = "NETWORK", IsMacro = true, Description = "Total protocol restoration." });
+            tools.Add(new ToolItem { SpecificName = "IP Config (All)", Command = "ipconfig /all", Icon = "🔍", Category = "NETWORK", Description = "Detailed network interface configuration.", Guide = "Display detailed TCP/IP configuration for all network adapters, including DNS and DHCP.", ManualLaunch = "ipconfig /all" });
+            tools.Add(new ToolItem { SpecificName = "Flush DNS Cache", Command = "ipconfig /flushdns", Icon = "🧼", Category = "NETWORK", Description = "Purge the DNS resolver cache.", Guide = "Clear the local DNS cache. Resolves 'server not found' errors and stale connection data.", ManualLaunch = "ipconfig /flushdns" });
+            tools.Add(new ToolItem { SpecificName = "Release IP", Command = "ipconfig /release", Icon = "🔓", Category = "NETWORK", Description = "Release current IPv4.", Guide = "Forces the computer to give up its current DHCP assigned IP address.", ManualLaunch = "ipconfig /release" });
+            tools.Add(new ToolItem { SpecificName = "Renew IP", Command = "ipconfig /renew", Icon = "🔑", Category = "NETWORK", Description = "Request new IPv4.", Guide = "Requests a new IP address from the DHCP server (router). Re-establishes connection.", ManualLaunch = "ipconfig /renew" });
+            tools.Add(new ToolItem { SpecificName = "Winsock Reset", Command = "netsh winsock reset", Icon = "🔄", Category = "NETWORK", Description = "Repair network catalog.", Guide = "Resets the Windows Sockets API to default. Fixes 'no internet' despite being connected.", ManualLaunch = "netsh winsock reset" });
+            tools.Add(new ToolItem { SpecificName = "TCP/IP Reset", Command = "netsh int ip reset", Icon = "📶", Category = "NETWORK", Description = "Reset TCP/IP stack.", Guide = "Rewrites the TCP/IP registry keys. Repairs fundamental network protocol corruption.", ManualLaunch = "netsh int ip reset" });
+            tools.Add(new ToolItem { SpecificName = "Ping Google", Command = "ping google.com -t", Icon = "📡", Category = "NETWORK", Description = "Continuous connectivity test.", Guide = "Continuously pings Google's servers to monitor network latency and packet loss.", ManualLaunch = "ping google.com -t" });
+            tools.Add(new ToolItem { SpecificName = "Network Stats", Command = "netstat -an", Icon = "📊", Category = "NETWORK", Description = "View active ports.", Guide = "Display all active TCP/UDP connections and the listening ports on your machine.", ManualLaunch = "netstat -an" });
+            tools.Add(new ToolItem { SpecificName = "Network Connections", Command = "ncpa.cpl", Icon = "🔗", Category = "NETWORK", Description = "Manage adapter settings.", Guide = "Open the Network Connections console to enable, disable, or bridge network adapters.", ManualLaunch = "ncpa.cpl" });
+            tools.Add(new ToolItem { SpecificName = "Wi-Fi Settings", Command = "explorer.exe ms-settings:network-wifi", Icon = "📶", Category = "NETWORK", Description = "Windows 10/11 Wi-Fi config.", Guide = "Opens the modern Windows Settings page for Wi-Fi management and known networks.", ManualLaunch = "ms-settings:network-wifi" });
+            tools.Add(new ToolItem { SpecificName = "Full Network Repair", Command = "ipconfig /release & ipconfig /renew & ipconfig /flushdns & netsh winsock reset & netsh int ip reset", Icon = "🛠️", Category = "NETWORK", IsMacro = true, Description = "Total protocol restoration.", Guide = "The 'Nuclear Option'. Performs a complete flush and reset of all network stacks and caches.", ManualLaunch = "ipconfig /flushdns & netsh winsock reset" });
 
             // Sort tools alphabetically
             tools = tools.OrderBy(t => t.SpecificName).ToList();
@@ -485,8 +487,8 @@ namespace WindowsSystemToolMenu
             
             Button runBtn = new Button();
             runBtn.Text = "LAUNCH NODE";
-            runBtn.Dock = DockStyle.Bottom;
-            runBtn.Height = 36;
+            runBtn.Size = new Size(240, 36);
+            runBtn.Location = new Point(15, 90);
             runBtn.FlatStyle = FlatStyle.Flat;
             runBtn.BackColor = Color.FromArgb(30, 30, 40);
             runBtn.ForeColor = ThemeAccent;
@@ -496,11 +498,82 @@ namespace WindowsSystemToolMenu
             ToolItem currentTool = tool;
             runBtn.Click += delegate(object s, EventArgs e) { Launch(currentTool); };
 
+            Button infoBtn = new Button();
+            infoBtn.Text = "ⓘ";
+            infoBtn.Size = new Size(40, 36);
+            infoBtn.Location = new Point(265, 90);
+            infoBtn.FlatStyle = FlatStyle.Flat;
+            infoBtn.BackColor = Color.FromArgb(40, 40, 50);
+            infoBtn.ForeColor = Color.White;
+            infoBtn.Font = new Font("Segoe UI", 12);
+            infoBtn.Cursor = Cursors.Hand;
+            infoBtn.FlatAppearance.BorderSize = 0;
+            infoBtn.Click += delegate(object s, EventArgs e) { ShowGuideModal(currentTool); };
+            toolTip.SetToolTip(infoBtn, "View Usage Guide & Manual Shortcut");
+
             card.Controls.Add(name);
             card.Controls.Add(desc);
             card.Controls.Add(icon);
             card.Controls.Add(runBtn);
+            card.Controls.Add(infoBtn);
             return card;
+        }
+
+        private void ShowGuideModal(ToolItem tool)
+        {
+            Form f = new Form();
+            f.Text = "JEM TOOLS | Documentation - " + tool.SpecificName;
+            f.Size = new Size(500, 450);
+            f.StartPosition = FormStartPosition.CenterParent;
+            f.FormBorderStyle = FormBorderStyle.FixedDialog;
+            f.MaximizeBox = false;
+            f.MinimizeBox = false;
+            f.BackColor = ThemeSidebarBg;
+            f.ForeColor = Color.White;
+
+            Label l = new Label();
+            l.Text = tool.SpecificName.ToUpper();
+            l.Font = new Font("Segoe UI Bold", 14);
+            l.Dock = DockStyle.Top;
+            l.Height = 50;
+            l.TextAlign = ContentAlignment.MiddleCenter;
+            l.ForeColor = ThemeAccent;
+
+            TextBox t = new TextBox();
+            t.Multiline = true;
+            t.ReadOnly = true;
+            t.Dock = DockStyle.Fill;
+            t.BackColor = ThemeDarkBg;
+            t.ForeColor = Color.LightGray;
+            t.BorderStyle = BorderStyle.None;
+            t.Font = new Font("Segoe UI", 10);
+            t.Padding = new Padding(15);
+            
+            string manualNote = string.IsNullOrEmpty(tool.ManualLaunch) ? tool.Command : tool.ManualLaunch;
+            
+            t.Text = "DESCRIPTION:\r\n" + tool.Description + "\r\n\r\n" +
+                     "USAGE GUIDE:\r\n" + (string.IsNullOrEmpty(tool.Guide) ? "Follow on-screen instructions after launching." : tool.Guide) + "\r\n\r\n" +
+                     "MANUAL LAUNCH SHORTCUT:\r\n" +
+                     "Press [Win + R], type the following and hit Enter:\r\n" +
+                     "--------------------------------------------------\r\n" +
+                     manualNote + "\r\n" +
+                     "--------------------------------------------------\r\n\r\n" +
+                     "AVAILABILITY: System-Integrated Node";
+
+            Button b = new Button();
+            b.Text = "CLOSE";
+            b.Dock = DockStyle.Bottom;
+            b.Height = 50;
+            b.FlatStyle = FlatStyle.Flat;
+            b.BackColor = Color.FromArgb(40, 40, 50);
+            b.ForeColor = Color.White;
+            b.Font = new Font("Segoe UI Bold", 10);
+            b.Click += delegate { f.Close(); };
+
+            f.Controls.Add(t);
+            f.Controls.Add(l);
+            f.Controls.Add(b);
+            f.ShowDialog();
         }
 
         private void Launch(ToolItem tool)
