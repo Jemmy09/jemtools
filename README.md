@@ -27,7 +27,7 @@ The "Admin Edition" features a **Digital Gemstone** UI experience. v1.2.2 introd
 
 | Feature | Description |
 |---|---|
-| 🗂️ **73+ Admin Modules** | Every essential system tool — from Registry Editor to MRT — in one place |
+| 🗂️ **77 Professional Admin Modules** | Every essential system tool — from Registry Editor to MRT — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
 | 🧠 **Ollama AI Core** | Automated local AI deployment via Winget and Llama3 for on-device intelligence |
 | 🎵 **SpotX Integration** | Dedicated suite for Spotify optimization, ad-blocking, and modern theming |
@@ -70,7 +70,7 @@ dotnet run --project src/Linux/JemTools.Linux.csproj
 ---
 
 ## 🗂️ Module Library (Cross-Platform Parity)
-*All platforms (Windows, macOS, and Linux) feature exactly 73 professional administrative modules organized into the following 8 identical categories.*
+*All platforms (Windows, macOS, and Linux) feature exactly 77 professional administrative modules organized into the following 8 identical categories.*
 
 <details>
 <summary><b>🔧 Maintenance</b></summary>
@@ -173,17 +173,20 @@ dotnet run --project src/Linux/JemTools.Linux.csproj
 <details>
 <summary><b>📥 Installers</b></summary>
 
-- ?? **Install 7-Zip**: Open-source file archiver.
-- ??? **Install WinRAR**: Popular compression utility.
-- ??? **Install PeaZip**: Free archive manager.
-- ?? **Install VS Code**: Modern source code editor.
-- ?? **Install Cursor**: AI-first code editor.
-- ? **Install Eclipse**: Java Development IDE.
-- ?? **Install Blender**: 3D creation suite.
-- ?? **Install Acrobat**: PDF viewer by Adobe.
-- ??? **Install Photoshop CS6**: Search for Portable CS6.
-- ??? **Install Photoshop CS3**: Search for Portable CS3.
-
+- 📦 **Install 7-Zip**: Open-source file archiver.
+- 🗜️ **Install WinRAR**: Popular compression utility.
+- 🗃️ **Install PeaZip**: Free archive manager.
+- 💻 **Install VS Code**: Modern source code editor.
+- 🤖 **Install Cursor**: AI-first code editor.
+- ☕ **Install Eclipse**: Java Development IDE.
+- 🎨 **Install Blender**: 3D creation suite.
+- 📄 **Install Acrobat**: PDF viewer by Adobe.
+- 🎬 **Install DaVinci Resolve**: Free video editor (Stable).
+- 🖼️ **Install Photoshop CS6 x64**: Portable CS6 (x64).
+- 🖌️ **Install Photoshop CS6 x86**: Portable CS6 (x86).
+- 🎨 **Install Photoshop CS3**: Portable CS3.
+- 💿 **Install CrystalDiskMark**: Disk benchmark tool v9.0.2.
+- 🔥 **Install OCCT**: PC stability & stress test.
 </details>
 
 ## 🗂️ Module Library (macOS)
