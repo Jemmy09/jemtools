@@ -27,7 +27,7 @@ The "Admin Edition" features a **Digital Gemstone** UI experience. v1.2.2 introd
 
 | Feature | Description |
 |---|---|
-| 🗂️ **63+ Admin Modules** | Every essential system tool — from Registry Editor to MRT — in one place |
+| 🗂️ **73+ Admin Modules** | Every essential system tool — from Registry Editor to MRT — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
 | 🧠 **Ollama AI Core** | Automated local AI deployment via Winget and Llama3 for on-device intelligence |
 | 🎵 **SpotX Integration** | Dedicated suite for Spotify optimization, ad-blocking, and modern theming |
@@ -70,127 +70,121 @@ dotnet run --project src/Linux/JemTools.Linux.csproj
 ---
 
 ## 🗂️ Module Library (Cross-Platform Parity)
-*All platforms (Windows, macOS, and Linux) feature exactly 63 professional administrative modules organized into the following 7 identical categories.*
+*All platforms (Windows, macOS, and Linux) feature exactly 73 professional administrative modules organized into the following 8 identical categories.*
 
 <details>
-<summary><b>🔧 Maintenance (Deep Optimization)</b></summary>
+<summary><b>🔧 Maintenance</b></summary>
 
-- ⚡ **System Deep Clean**: Advanced junk removal and cache purging.
-- 🌐 **Network Refresh**: Reset DNS, flush sockets, and optimize connectivity.
-- 🛡️ **Security Lockdown**: Enforce recommended system security defaults.
-- 🧹 **Disk Cleanup**: Native Windows disk optimization utility.
-- 💿 **Defragment Drives**: Optimize file allocation for HDD performance.
-- 📂 **Prefetch Data**: Access prefetch optimization data for system speed.
-- 🖼️ **Clear Icon Cache**: Reset and rebuild the Windows icon database.
-
+- ⚡ **System Deep Clean**: Full administrative system maintenance.
+- 📡 **Network Refresh**: Reset adapters and flush DNS.
+- 🛡️ **Security Lockdown**: Enable all firewall profiles.
+- 🧹 **Disk Cleanup**: Remove redundant files.
+- 💿 **Defragment Drives**: Optimize storage performance.
+- 📂 **Prefetch Data**: Access prefetch optimization data.
+- 🖼️ **Clear Icon Cache**: Reset and rebuild the icon database.
 </details>
 
 <details>
-<summary><b>💻 System (Core Management)</b></summary>
+<summary><b>💻 System</b></summary>
 
-- 🔌 **Driver Updates**: Manage hardware drivers and resolve shortages.
-- 🗑️ **Program Uninstaller**: Manage and remove installed applications.
-- 💻 **Command Prompt**: Elevated terminal access.
-- 🎛️ **Control Panel**: Centralized system settings.
-- ⚙️ **System Configuration**: Manage startup and boot parameters (msconfig).
-- ℹ️ **System Information**: Detailed hardware and software specifications.
-- 📋 **Task Manager**: Real-time process monitoring and control.
-- 📊 **Resource Monitor**: In-depth analysis of CPU, Memory, Disk, and Network.
-- 🐚 **PowerShell Core**: Modern task automation shell.
-- 🌀 **PowerShell ISE**: Integrated Scripting Environment for PowerShell.
-- 🔑 **Registry Editor**: Advanced system registry database modification.
-- 📡 **Remote Desktop**: Connect to and control remote workstations.
-- 🏃 **Run Dialog**: Quickly execute commands or open programs.
-- ⚙️ **System Properties**: Advanced system properties and environment variables.
+- 🔌 **Driver Updates**: Manage hardware and driver updates.
+- 🗑️ **Program Uninstaller**: Add or remove programs.
+- 💻 **Command Prompt**: Standard command-line.
+- 🎛️ **Control Panel**: Legacy settings.
+- ⚙️ **System Configuration**: Boot and service config.
+- ℹ️ **System Information**: HW and SW environment details.
+- 📋 **Task Manager**: Process governance.
+- 📊 **Resource Monitor**: Resource analytics.
+- 🐚 **PowerShell Core**: Modern system shell.
+- 🌀 **PowerShell ISE**: Integrated Scripting Environment.
+- 🔑 **Registry Editor**: Registry modification.
+- 📡 **Remote Desktop**: Remote access.
+- 🏃 **Run Dialog**: Classic run command.
+- ⚙️ **System Properties**: Advanced system properties and variables.
 - 🔑 **License Information**: View Windows license and activation status.
-
 </details>
 
 <details>
-<summary><b>⚙️ Admin (Infrastructure Tools)</b></summary>
+<summary><b>⚙️ Admin</b></summary>
 
-- 🖥️ **Computer Management**: Consolidates multiple admin consoles.
-- 💽 **Disk Management**: Partitioning and storage volume control.
-- ⚙️ **Component Services**: Manage COM+ and DCOM configuration.
-- 📜 **Event Viewer**: Analyze system logs and application errors.
-- 📈 **Performance Monitor**: Detailed real-time system performance logging.
-- 🛠️ **Services**: Manage background system services.
-- 📅 **Task Scheduler**: Automate tasks and scripts via triggers.
-- 🖨️ **Print Management**: Centralized printer and server control.
-- 🗄️ **ODBC Data Sources**: Configure database connections and drivers.
-- 👥 **User Accounts (Advanced)**: Advanced user account management (netplwiz).
-- 👤 **Local Users and Groups**: Local users and group management console.
-
+- 🖥️ **Computer Management**: Unified admin console.
+- 💽 **Disk Management**: Storage volume management.
+- ⚙️ **Component Services**: COM+ and DCOM management.
+- 📜 **Event Viewer**: System logs.
+- 📈 **Performance Monitor**: Real-time HW monitoring.
+- 🛠️ **Services**: Service management.
+- 📅 **Task Scheduler**: Automated task engine.
+- 🖨️ **Print Management**: Printer and driver console.
+- 🗄️ **ODBC Data Sources**: Database connectivity (64-bit).
+- 👥 **User Accounts (Advanced)**: Advanced user account management.
+- 👤 **Local Users and Groups**: Local users and group console.
 </details>
 
 <details>
-<summary><b>🛡️ Security (Protection & Recovery)</b></summary>
+<summary><b>🛡️ Security</b></summary>
 
-- 🔒 **Security Policy**: Enforce local security and audit policies.
-- 🧱 **Defender Firewall**: Advanced inbound/outbound security rules.
-- 🔗 **iSCSI Initiator**: Connect to external network storage arrays.
-- 🆘 **Recovery Drive**: Create a system repair environment.
-- 🛡️ **Malicious Software Removal**: Microsoft Malicious Software Removal Tool (MRT).
-- 🖋️ **File Signature Verifier**: Verify the integrity and signatures of system files.
-
+- 🔒 **Security Policy**: Local security policies.
+- 🧱 **Defender Firewall**: Network security.
+- 🔗 **iSCSI Initiator**: Storage area network config.
+- 🆘 **Recovery Drive**: Create system recovery media.
+- 🛡️ **Malicious Software Removal**: Microsoft Malicious Software Removal Tool.
+- 🖋️ **File Signature Verifier**: Verify the integrity of system files.
 </details>
 
 <details>
-<summary><b>📡 Network (Troubleshooting & Connectivity)</b></summary>
+<summary><b>🔣 Utilities</b></summary>
 
-- 🔍 **IP Configuration**: Detailed network interface diagnostics.
-- 🧼 **Flush DNS Cache**: Purge the local DNS resolver cache.
-- 🔓 **Release/Renew IP**: Manage DHCP address leases.
-- 🔄 **Reset Winsock**: Repair network catalog and protocols.
-- 📶 **Reset TCP/IP**: Restore internet protocol suite to defaults.
-- 📡 **Ping Google**: Continuous connectivity and latency test.
-- 📊 **Network Statistics**: View active connections and listening ports.
-- 🔗 **Network Connections**: Manage physical and virtual adapter settings.
-- 📶 **Wi-Fi Settings**: Modern Windows Wi-Fi configuration portal.
-- 🛠️ **Full Network Repair**: Total protocol stack restoration macro.
-
+- 🔑 **Activation Methods**: Permanently activate Windows and Office.
+- 🎵 **Spotify SpotX (Full)**: Full Spotify ad-block and theme optimization.
+- 🟢 **Spotify SpotX (New)**: SpotX installation with New Theme.
+- 📻 **Spotify SpotX (Old)**: SpotX installation with Old Theme (v1.2.13).
+- 💎 **Spotify SpotX (Premium)**: Spotify optimization for Premium accounts.
+- 🔣 **Character Map**: System character catalog.
+- 📸 **Steps Recorder**: Record UI actions for debugging.
+- 🧠 **Memory Diagnostic**: Check RAM for errors.
+- 🎵 **Media Player Legacy**: Legacy multimedia hub.
+- 🧠 **Ollama AI Core**: Deploy local AI with Llama3.
 </details>
 
 <details>
-<summary><b>🔣 Utilities (Auxiliary Tools)</b></summary>
+<summary><b>📡 Network</b></summary>
 
-- 🔑 **Activation Methods**: Permanently activate Windows/Office via MAS.
-- 🎵 **Spotify SpotX (Full)**: Comprehensive Spotify ad-blocker and optimizer.
-- 🟢 **Spotify SpotX (New)**: Standard SpotX install with New Theme.
-- 📻 **Spotify SpotX (Old)**: SpotX v1.2.13 with Old Theme and update blocking.
-- 💎 **Spotify SpotX (Premium)**: Optimized configuration for Premium accounts.
-- 🔣 **Character Map**: View and copy system character catalog.
-- 📸 **Steps Recorder**: Capture UI actions for troubleshooting.
-- 🧠 **Memory Diagnostic**: Check system RAM for hardware errors.
-- 🎵 **Media Player Legacy**: Access the classic multimedia player.
-- 🧠 **Ollama AI Core**: Automated local AI deployment (Llama3).
-
+- 🔍 **IP Config (All)**: Detailed network interface configuration.
+- 🧼 **Flush DNS Cache**: Purge the DNS resolver cache.
+- 🔓 **Release IP**: Release current IPv4.
+- 🔑 **Renew IP**: Request new IPv4.
+- 🔄 **Winsock Reset**: Repair network catalog.
+- 📶 **TCP/IP Reset**: Reset TCP/IP stack.
+- 📡 **Ping Google**: Continuous connectivity test.
+- 📊 **Network Stats**: View active ports.
+- 🔗 **Network Connections**: Manage adapter settings.
+- 📶 **Wi-Fi Settings**: Windows 10/11 Wi-Fi config.
+- 🛠️ **Full Network Repair**: Total protocol restoration.
 </details>
 
 <details>
-<summary><b>🔌 JemBoot (Bootable Media Engine)</b></summary>
+<summary><b>🔌 JemBoot</b></summary>
 
-- 🔌 **Boot Command**: Dual-mode bootable creation (Single/Multi-Boot).
-- 💿 **Integrated Engine**: Install JemBoot Core and simply drag & drop ISO files.
-- 🛡️ **Secure Boot Support**: Signed bootloader for modern UEFI compatibility.
-- 💾 **Universal Targets**: Transform USB Flash, SSD, and HDD into bootable media.
-- 🧹 **Quick Format USB**: One-click NTFS/GPT initialization for removable storage.
-- ⏏️ **Safely Eject All**: Automated sequence to safely unmount all USB devices.
-
+- 🔌 **List USB Drives**: List all connected USB storage devices.
+- 🧹 **Quick Format USB**: Wipe and format USB drive as NTFS.
+- ⏏️ **Eject All USBs**: Safely remove all USB storage devices.
 </details>
 
-<details open>
-<summary><b>🌍 Multi-Platform Expansion (Windows, macOS, Linux)</b></summary>
+<details>
+<summary><b>📥 Installers</b></summary>
 
-- 🖥️ **Shared Intelligence**: Consistent 1:1 module parity across all operating systems.
-- 🍎 **macOS Native Integration**: Tools utilizing `diskutil`, `softwareupdate`, `system_profiler`, and native launch daemons.
-- 🐧 **Linux Native Integration**: Bash scripts leveraging `ufw`, `journalctl`, `fstrim`, `apt/dnf`, and `systemd`.
-- 🔄 **Synchronized TUI**: High-fidelity Terminal User Interface (TUI) for Unix systems powered by `.NET 8`, ensuring the same "Digital Gemstone" aesthetic.
-- 📦 **Native Execution**: Optimized command delivery using native shells (PowerShell, Zsh, Bash) for ultimate stability.
+- ?? **Install 7-Zip**: Open-source file archiver.
+- ??? **Install WinRAR**: Popular compression utility.
+- ??? **Install PeaZip**: Free archive manager.
+- ?? **Install VS Code**: Modern source code editor.
+- ?? **Install Cursor**: AI-first code editor.
+- ? **Install Eclipse**: Java Development IDE.
+- ?? **Install Blender**: 3D creation suite.
+- ?? **Install Acrobat**: PDF viewer by Adobe.
+- ??? **Install Photoshop CS6**: Search for Portable CS6.
+- ??? **Install Photoshop CS3**: Search for Portable CS3.
 
 </details>
-
----
 
 ## 🗂️ Module Library (macOS)
 

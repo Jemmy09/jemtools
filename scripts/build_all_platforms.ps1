@@ -36,8 +36,8 @@ if (-not (Test-Path $Csc)) {
         "$SrcDir\Program.cs"
     )
     $MainRefs = "System.dll,System.Windows.Forms.dll,System.Drawing.dll,Microsoft.VisualBasic.dll,System.Core.dll"
-    $MainOut  = "`"$ReleaseDir\Jem Tools.exe`""
-    $MainIcon = "`"$AssetsDir\jem_logo.ico`""
+    $MainOut  = "$ReleaseDir\Jem Tools.exe"
+    $MainIcon = "$AssetsDir\jem_logo.ico"
     $MainArgs = @("/target:winexe", "/out:$MainOut", "/win32icon:$MainIcon", "/reference:$MainRefs") + $MainSources
     & $Csc @MainArgs 2>&1 | Where-Object { $_ -notmatch "^Microsoft|^for C#|^Copyright|^This compiler" }
     if ($LASTEXITCODE -eq 0) {
@@ -59,8 +59,8 @@ if (-not (Test-Path $Csc)) {
     Write-Host "  [SKIP] .NET Framework csc.exe not found." -ForegroundColor Magenta
 } else {
     $SetupRefs = "System.dll,System.Windows.Forms.dll,System.Drawing.dll"
-    $SetupOut  = "`"$ProjectRoot\Setup.exe`""
-    $SetupIcon = "`"$AssetsDir\jem_logo.ico`""
+    $SetupOut  = "$ProjectRoot\Setup.exe"
+    $SetupIcon = "$AssetsDir\jem_logo.ico"
     $SetupArgs = @("/target:winexe", "/out:$SetupOut", "/win32icon:$SetupIcon", "/reference:$SetupRefs", "$SrcDir\Setup.cs")
     & $Csc @SetupArgs 2>&1 | Where-Object { $_ -notmatch "^Microsoft|^for C#|^Copyright|^This compiler" }
     if ($LASTEXITCODE -eq 0) {

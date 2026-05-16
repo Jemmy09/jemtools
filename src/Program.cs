@@ -328,6 +328,7 @@ namespace WindowsSystemToolMenu
             if (cat == "NETWORK") return "📡";
             if (cat == "UTILITIES") return "🔣";
             if (cat == "POLICIES") return "📜";
+            if (cat == "INSTALLERS") return "📥";
             if (cat == "JEMBOOT") return "🔌";
             return "🌐";
         }
