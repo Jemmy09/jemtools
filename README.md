@@ -19,7 +19,7 @@
 ## 🛠️ Project Blueprint
 **Jem Tools** is a commercial-grade administrative utility designed for power users and IT professionals. It provides a centralized command center for system-level maintenance, security auditing, and real-time performance monitoring, all within a high-fidelity, privacy-first architecture.
 
-v1.2.2 introduces the **JemBoot Command Center**, featuring a high-fidelity, card-based interface and professional system terminal for streamlined media creation across all major operating systems.
+The "Admin Edition" features a **Digital Gemstone** UI experience. v1.2.2 introduces the **JemBoot Command Center**, featuring a high-fidelity, card-based interface and professional system terminal for streamlined media creation.
 
 ---
 
@@ -39,16 +39,15 @@ v1.2.2 introduces the **JemBoot Command Center**, featuring a high-fidelity, car
 
 ---
 
-## 🚀 Installation Guides
+## 🚀 Installation
 
 ### 🟦 Windows (PowerShell)
-Run this in an **Elevated PowerShell** window for instant deployment:
+Run this command in an **Elevated PowerShell** window to deploy JEM TOOLS instantly:
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; iwr 'https://github.com/Jemmy09/jemtools/archive/refs/heads/master.zip' -OutFile "$env:TEMP\jem.zip"; Expand-Archive "$env:TEMP\jem.zip" -Dest "$env:TEMP\jem" -Force; Start-Process "$env:TEMP\jem\jemtools-master\Setup.exe" -Verb RunAs
 ```
 
 ### 🍎 macOS (Terminal)
-Ensure you have the .NET SDK installed, then run:
 ```bash
 git clone https://github.com/Jemmy09/jemtools.git
 cd jemtools
@@ -56,7 +55,6 @@ dotnet run --project src/macOS/Program.macOS.cs
 ```
 
 ### 🐧 Linux (Bash)
-Install the .NET Runtime and run:
 ```bash
 git clone https://github.com/Jemmy09/jemtools.git
 cd jemtools
@@ -65,7 +63,7 @@ dotnet run --project src/Linux/Program.Linux.cs
 
 ---
 
-## 🗂️ Module Library (Windows Edition)
+## 🗂️ Module Library (Windows)
 
 <details>
 <summary><b>🔧 Maintenance (Deep Optimization)</b></summary>
@@ -127,6 +125,50 @@ dotnet run --project src/Linux/Program.Linux.cs
 - 🆘 **Recovery Drive**: Create a system repair environment.
 - 🛡️ **Malicious Software Removal**: Microsoft Malicious Software Removal Tool (MRT).
 - 🖋️ **File Signature Verifier**: Verify the integrity and signatures of system files.
+
+</details>
+
+<details>
+<summary><b>📡 Network (Troubleshooting & Connectivity)</b></summary>
+
+- 🔍 **IP Configuration**: Detailed network interface diagnostics.
+- 🧼 **Flush DNS Cache**: Purge the local DNS resolver cache.
+- 🔓 **Release/Renew IP**: Manage DHCP address leases.
+- 🔄 **Reset Winsock**: Repair network catalog and protocols.
+- 📶 **Reset TCP/IP**: Restore internet protocol suite to defaults.
+- 📡 **Ping Google**: Continuous connectivity and latency test.
+- 📊 **Network Statistics**: View active connections and listening ports.
+- 🔗 **Network Connections**: Manage physical and virtual adapter settings.
+- 📶 **Wi-Fi Settings**: Modern Windows Wi-Fi configuration portal.
+- 🛠️ **Full Network Repair**: Total protocol stack restoration macro.
+
+</details>
+
+<details>
+<summary><b>🔣 Utilities (Auxiliary Tools)</b></summary>
+
+- 🔑 **Activation Methods**: Permanently activate Windows/Office via MAS.
+- 🎵 **Spotify SpotX (Full)**: Comprehensive Spotify ad-blocker and optimizer.
+- 🟢 **Spotify SpotX (New)**: Standard SpotX install with New Theme.
+- 📻 **Spotify SpotX (Old)**: SpotX v1.2.13 with Old Theme and update blocking.
+- 💎 **Spotify SpotX (Premium)**: Optimized configuration for Premium accounts.
+- 🔣 **Character Map**: View and copy system character catalog.
+- 📸 **Steps Recorder**: Capture UI actions for troubleshooting.
+- 🧠 **Memory Diagnostic**: Check system RAM for hardware errors.
+- 🎵 **Media Player Legacy**: Access the classic multimedia player.
+- 🧠 **Ollama AI Core**: Automated local AI deployment (Llama3).
+
+</details>
+
+<details>
+<summary><b>🔌 JemBoot (Bootable Media Engine)</b></summary>
+
+- 🔌 **Boot Command**: Dual-mode bootable creation (Single/Multi-Boot).
+- 💿 **Integrated Engine**: Install JemBoot Core and simply drag & drop ISO files.
+- 🛡️ **Secure Boot Support**: Signed bootloader for modern UEFI compatibility.
+- 💾 **Universal Targets**: Transform USB Flash, SSD, and HDD into bootable media.
+- 🧹 **Quick Format USB**: One-click NTFS/GPT initialization for removable storage.
+- ⏏️ **Safely Eject All**: Automated sequence to safely unmount all USB devices.
 
 </details>
 
