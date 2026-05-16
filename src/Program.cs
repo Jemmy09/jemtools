@@ -904,10 +904,78 @@ namespace WindowsSystemToolMenu
             };
 
             guideBtn.Click += (s, e) => {
-                Form guide = new Form { Text = "COMMAND GUIDE", Size = new Size(550, 600), StartPosition = FormStartPosition.CenterParent, BackColor = Color.FromArgb(15, 15, 20), ForeColor = Color.White, FormBorderStyle = FormBorderStyle.FixedDialog, MaximizeBox = false };
-                RichTextBox gTxt = new RichTextBox { Dock = DockStyle.Fill, BackColor = Color.FromArgb(15, 15, 20), ForeColor = Color.LightGray, BorderStyle = BorderStyle.None, ReadOnly = true, Padding = new Padding(20) };
-                gTxt.Text = "JEMBOOT v1.2.0 PROFESSIONAL GUIDE\n\n1. SELECT DISK: Choose your target USB/SSD/HDD.\n2. CHOOSE MODE:\n   - FLASH FORGE: Burn a single ISO to the disk.\n   - MULTI-BOOT: Install the Core once, then just copy ISOs to the drive.\n3. CONFIGURE: GPT for UEFI, MBR for Legacy.\n4. IGNITE: Start the process. This erases all data.";
-                guide.Controls.Add(gTxt);
+                Form guide = new Form {
+                    Text = "JEMBOOT | COMPLETE COMMAND GUIDE",
+                    Size = new Size(550, 650),
+                    StartPosition = FormStartPosition.CenterParent,
+                    BackColor = Color.FromArgb(15, 15, 20),
+                    ForeColor = Color.White,
+                    FormBorderStyle = FormBorderStyle.FixedDialog,
+                    MaximizeBox = false,
+                    MinimizeBox = false,
+                    Font = new Font("Segoe UI", 10)
+                };
+
+                Panel content = new Panel { Dock = DockStyle.Fill, Padding = new Padding(25) };
+                Label gTitle = new Label { Text = "WELCOME TO JEMBOOT v1.2.0", Font = new Font("Segoe UI Bold", 16), ForeColor = ThemeAccent, Dock = DockStyle.Top, Height = 40 };
+                
+                RichTextBox txt = new RichTextBox { 
+                    Dock = DockStyle.Fill, 
+                    BackColor = Color.FromArgb(15, 15, 20), 
+                    ForeColor = Color.LightGray, 
+                    BorderStyle = BorderStyle.None, 
+                    ReadOnly = true,
+                    Text = "This guide will help you transform any USB, SSD, or HDD into a professional bootable tool.\n\n" +
+                           "--------------------------------------------------\n" +
+                           "🚀 PHASE 1: CHOOSE YOUR COMMAND\n" +
+                           "--------------------------------------------------\n" +
+                           "JemBoot offers two distinct ways to create bootable media:\n\n" +
+                           "1. FLASH FORGE (Single Mode)\n" +
+                           "   Best for: Creating a dedicated installer (e.g., Windows 11 only).\n" +
+                           "   Process: Select ISO -> Select Drive -> Click FORGE.\n" +
+                           "   Result: The drive is formatted and the ISO is extracted immediately.\n\n" +
+                           "2. MULTI-BOOT ENGINE (Pro Mode)\n" +
+                           "   Best for: Carrying dozens of OS installers on one drive.\n" +
+                           "   Process: Select Drive -> Click INSTALL JEMBOOT CORE.\n" +
+                           "   Result: Once the core is installed, you can simply COPY/PASTE any ISO files to the drive using File Explorer. No more re-formatting!\n\n" +
+                           "--------------------------------------------------\n" +
+                           "🛠️ PHASE 2: TECHNICAL CONFIGURATION\n" +
+                           "--------------------------------------------------\n" +
+                           "• SCHEME (GPT vs MBR):\n" +
+                           "  - Use GPT for modern UEFI computers (Fast Boot, Secure Boot).\n" +
+                           "  - Use MBR for older BIOS/Legacy computers (Pre-2015).\n\n" +
+                           "• SECURE BOOT:\n" +
+                           "  JemBoot includes a signed bootloader. Keep this checked to ensure your drive boots on systems with Secure Boot enabled.\n\n" +
+                           "--------------------------------------------------\n" +
+                           "⌨️ PHASE 3: BOOTING YOUR DRIVE\n" +
+                           "--------------------------------------------------\n" +
+                           "1. Plug the drive into the target computer.\n" +
+                           "2. Power on and immediately tap the BOOT MENU KEY.\n" +
+                           "   (Common: F12, F11, F8, or ESC depending on your PC brand).\n" +
+                           "3. Select 'JemBoot' or 'UEFI: USB Storage' from the list.\n\n" +
+                           "--------------------------------------------------\n" +
+                           "⚠️ CRITICAL SECURITY WARNING\n" +
+                           "--------------------------------------------------\n" +
+                           "Forging a drive or Installing the Core will ERASE ALL DATA on the target disk. Always double-check that you have selected the correct drive before proceeding."
+                };
+
+                Button closeBtn = new Button { 
+                    Text = "I UNDERSTAND", 
+                    Dock = DockStyle.Bottom, 
+                    Height = 45, 
+                    FlatStyle = FlatStyle.Flat, 
+                    BackColor = ThemeAccent, 
+                    ForeColor = Color.Black, 
+                    Font = new Font("Segoe UI Bold", 10),
+                    Cursor = Cursors.Hand
+                };
+                closeBtn.FlatAppearance.BorderSize = 0;
+                closeBtn.Click += (se, ev) => guide.Close();
+
+                content.Controls.Add(txt);
+                content.Controls.Add(gTitle);
+                guide.Controls.Add(content);
+                guide.Controls.Add(closeBtn);
                 guide.ShowDialog();
             };
 
