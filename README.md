@@ -1,104 +1,172 @@
 <div align="center">
-  <img src="assets/jem_logo.png" width="140" height="140" alt="JEM TOOLS Logo">
+  <img src="assets/jem_logo.png" width="120" height="120" alt="JEM TOOLS Logo">
 
-  # JEM TOOLS | Professional Edition
-  ### v1.2.2 — Precision System Intelligence
+  # Jem Tools
+  ### v1.2.2 (Multi-Platform Edition)
 
-  *The definitive administrative command center for Windows, macOS, and Linux professionals.*
+  *Precision System Intelligence for Windows, macOS, and Linux Professionals.*
 
   [![Status](https://img.shields.io/badge/STATUS-LIVE-00c853?style=for-the-badge)](#)
   [![Version](https://img.shields.io/badge/VERSION-1.2.2-0288d1?style=for-the-badge)](#)
   [![Platforms](https://img.shields.io/badge/PLATFORMS-WIN%20%7C%20MAC%20%7C%20LINUX-0078d4?style=for-the-badge&logo=windows&logoColor=white)](#)
-  [![Tech](https://img.shields.io/badge/TECH-C%23%20%7C%20.NET%208-7b1fa2?style=for-the-badge&logo=dotnet&logoColor=white)](#)
+  [![Tech](https://img.shields.io/badge/C%23-.NET%208%20%2F%204.8-7b1fa2?style=for-the-badge&logo=dotnet&logoColor=white)](#)
   [![License](https://img.shields.io/badge/License-MIT-f9a825?style=for-the-badge)](LICENSE)
 
 </div>
 
 ---
 
-## 💎 Project Philosophy
-**JEM TOOLS** is a commercial-grade infrastructure management suite designed for power users, system administrators, and IT architects. It consolidates complex system maintenance, security auditing, and media deployment into a high-fidelity, "Digital Gemstone" user experience.
+## 🛠️ Project Blueprint
+**Jem Tools** is a commercial-grade administrative utility designed for power users and IT professionals. It provides a centralized command center for system-level maintenance, security auditing, and real-time performance monitoring, all within a high-fidelity, privacy-first architecture.
 
-Built with a **Privacy-First** architecture, JEM TOOLS operates entirely offline, ensuring no telemetry or sensitive system data ever leaves your machine.
-
----
-
-## 🔥 Command Centers
-
-### 🗂️ Infrastructure Nodes (63+ Modules)
-Access the full power of Windows Administration through a unified interface. From **Registry Management** to **Security Policy Lockdown**, every tool is one click away.
-- **63+ Professional Modules**: Categorized into Maintenance, System, Admin, and Security.
-- **Instant Infrastructure Search**: Find any system utility in milliseconds.
-- **Administrative Macros**: One-click sequences for deep system cleaning and network repair.
-
-### 🔌 JemBoot Command Center
-A premium, card-based engine for high-performance bootable media creation.
-- **Dual-Mode Forge**: Toggle between **Single-Boot Flash** and the **Multi-Boot Engine**.
-- **JemBoot Core**: Transform any USB, SSD, or HDD into a drag-and-drop ISO deployment tool.
-- ** UEFI/Secure Boot**: Fully signed bootloader for modern hardware compatibility.
-
-### 🧠 AI Core (Ollama Integration)
-On-device intelligence powered by **Llama3**. 
-- **Automated Deployment**: One-click installation of the Ollama framework via Winget.
-- **Zero-Config Execution**: Automatically manages environment PATHs and initializes the Llama3 model for immediate use.
-
-### 📊 Telemetry Engine
-Real-time system health monitoring integrated directly into the dashboard.
-- **Live CPU & RAM Tracking**: Continuous performance telemetry with visual alerts.
-*   **Infrastructure Logging**: Every administrative action is logged for audit trails.
+v1.2.2 introduces the **JemBoot Command Center**, featuring a high-fidelity, card-based interface and professional system terminal for streamlined media creation across all major operating systems.
 
 ---
 
-## 🌍 Multi-Platform Ecosystem
-Starting with v1.2.2, JEM TOOLS is evolving into a universal suite.
-- **Windows**: Full High-Fidelity WinForms GUI with 63+ modules.
-- **macOS**: Native Darwin mappings for Activity Monitor, Disk Utility, and Network diagnostics.
-- **Linux**: Integrated support for GNOME/KDE system monitors and GParted.
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| 🗂️ **63+ Admin Modules** | Every essential system tool — from Registry Editor to MRT — in one place |
+| 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
+| 🧠 **Ollama AI Core** | Automated local AI deployment via Winget and Llama3 for on-device intelligence |
+| 🎵 **SpotX Integration** | Dedicated suite for Spotify optimization, ad-blocking, and modern theming |
+| 🔍 **Instant Search** | Find any tool in milliseconds with the built-in infrastructure search |
+| 🛡️ **Interactive Setup** | Professional installer with EULA consent and customizable deployment |
+| ⚡ **Admin Macros** | One-click automated maintenance sequences for deep system care |
+| 🔌 **JemBoot Core** | Premium card-based boot engine for ISO/WIM/VHD deployment |
+| 🖊️ **Digital Trust** | Signed binaries by **Jemmy Francisco** with included publisher certificate |
 
 ---
 
-## 🚀 Deployment
+## 🚀 Installation Guides
 
-### Method A: One-Click PowerShell (Elevated)
-Run this command to deploy JEM TOOLS instantly:
+### 🟦 Windows (PowerShell)
+Run this in an **Elevated PowerShell** window for instant deployment:
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; iwr 'https://github.com/Jemmy09/jemtools/archive/refs/heads/master.zip' -OutFile "$env:TEMP\jem.zip"; Expand-Archive "$env:TEMP\jem.zip" -Dest "$env:TEMP\jem" -Force; Start-Process "$env:TEMP\jem\jemtools-master\Setup.exe" -Verb RunAs
 ```
 
-### Method B: Manual Installation
-1. **Download**: Grab the latest release from the [GitHub Releases](#) page.
-2. **Setup**: Run `Setup.exe` as Administrator.
-3. **Accept**: Accept the Professional EULA and select your installation path.
-4. **Ignite**: Launch JEM TOOLS from your Desktop or Start Menu.
+### 🍎 macOS (Terminal)
+Ensure you have the .NET SDK installed, then run:
+```bash
+git clone https://github.com/Jemmy09/jemtools.git
+cd jemtools
+dotnet run --project src/macOS/Program.macOS.cs
+```
+
+### 🐧 Linux (Bash)
+Install the .NET Runtime and run:
+```bash
+git clone https://github.com/Jemmy09/jemtools.git
+cd jemtools
+dotnet run --project src/Linux/Program.Linux.cs
+```
 
 ---
 
-## 📂 Repository Map
+## 🗂️ Module Library (Windows Edition)
 
-| Directory | Purpose |
+<details>
+<summary><b>🔧 Maintenance (Deep Optimization)</b></summary>
+
+- ⚡ **System Deep Clean**: Advanced junk removal and cache purging.
+- 🌐 **Network Refresh**: Reset DNS, flush sockets, and optimize connectivity.
+- 🛡️ **Security Lockdown**: Enforce recommended system security defaults.
+- 🧹 **Disk Cleanup**: Native Windows disk optimization utility.
+- 💿 **Defragment Drives**: Optimize file allocation for HDD performance.
+- 📂 **Prefetch Data**: Access prefetch optimization data for system speed.
+- 🖼️ **Clear Icon Cache**: Reset and rebuild the Windows icon database.
+
+</details>
+
+<details>
+<summary><b>💻 System (Core Management)</b></summary>
+
+- 🔌 **Driver Updates**: Manage hardware drivers and resolve shortages.
+- 🗑️ **Program Uninstaller**: Manage and remove installed applications.
+- 💻 **Command Prompt**: Elevated terminal access.
+- 🎛️ **Control Panel**: Centralized system settings.
+- ⚙️ **System Configuration**: Manage startup and boot parameters (msconfig).
+- ℹ️ **System Information**: Detailed hardware and software specifications.
+- 📋 **Task Manager**: Real-time process monitoring and control.
+- 📊 **Resource Monitor**: In-depth analysis of CPU, Memory, Disk, and Network.
+- 🐚 **PowerShell Core**: Modern task automation shell.
+- 🌀 **PowerShell ISE**: Integrated Scripting Environment for PowerShell.
+- 🔑 **Registry Editor**: Advanced system registry database modification.
+- 📡 **Remote Desktop**: Connect to and control remote workstations.
+- 🏃 **Run Dialog**: Quickly execute commands or open programs.
+- ⚙️ **System Properties**: Advanced system properties and environment variables.
+- 🔑 **License Information**: View Windows license and activation status.
+
+</details>
+
+<details>
+<summary><b>⚙️ Admin (Infrastructure Tools)</b></summary>
+
+- 🖥️ **Computer Management**: Consolidates multiple admin consoles.
+- 💽 **Disk Management**: Partitioning and storage volume control.
+- ⚙️ **Component Services**: Manage COM+ and DCOM configuration.
+- 📜 **Event Viewer**: Analyze system logs and application errors.
+- 📈 **Performance Monitor**: Detailed real-time system performance logging.
+- 🛠️ **Services**: Manage background system services.
+- 📅 **Task Scheduler**: Automate tasks and scripts via triggers.
+- 🖨️ **Print Management**: Centralized printer and server control.
+- 🗄️ **ODBC Data Sources**: Configure database connections and drivers.
+- 👥 **User Accounts (Advanced)**: Advanced user account management (netplwiz).
+- 👤 **Local Users and Groups**: Local users and group management console.
+
+</details>
+
+<details>
+<summary><b>🛡️ Security (Protection & Recovery)</b></summary>
+
+- 🔒 **Security Policy**: Enforce local security and audit policies.
+- 🧱 **Defender Firewall**: Advanced inbound/outbound security rules.
+- 🔗 **iSCSI Initiator**: Connect to external network storage arrays.
+- 🆘 **Recovery Drive**: Create a system repair environment.
+- 🛡️ **Malicious Software Removal**: Microsoft Malicious Software Removal Tool (MRT).
+- 🖋️ **File Signature Verifier**: Verify the integrity and signatures of system files.
+
+</details>
+
+<details>
+<summary><b>🌍 Multi-Platform Expansion</b></summary>
+
+- 🍎 **macOS Support**: Dedicated module mapping to macOS System Information and Disk Utility.
+- 🐧 **Linux Support**: Native integration with GParted and Systemd-resolved.
+- 🔄 **Unified Architecture**: Shared C# models for consistent tool delivery across operating systems.
+
+</details>
+
+---
+
+## 🔒 Security & Trust
+Jem Tools is built with a **Privacy-First** philosophy:
+- **Offline Operation**: No telemetry or personal data leaves your machine.
+- **Signed Binaries**: All executables are signed for publisher verification.
+- **Manual Control**: Every tool can be launched via manual shortcut documented in the `About` view.
+
+---
+
+## 📂 Repository Structure
+
+| File/Folder | Description |
 |---|---|
-| 📁 **`Release/`** | Production binaries (Jem Tools.exe, Uninstaller.exe) |
-| 📁 **`src/Shared/`** | Universal C# models for multi-platform synchronization |
-| 📁 **`src/Windows/`** | Windows-specific module definitions (63 Tools) |
-| 📁 **`src/macOS/`** | Native Apple Darwin tool mappings |
-| 📁 **`src/Linux/`** | Native Linux/X11 tool mappings |
-| 📁 **`scripts/`** | Build automation and deployment logic |
-| 📄 **`Setup.exe`** | Root installation engine |
+| 📁 **`Release/`** | Production-ready, signed binaries (Jem Tools.exe, Uninstaller.exe) |
+| 📁 **`src/`** | Core C# Source Code (Shared, Windows, macOS, Linux) |
+| 📁 **`assets/`** | Branding assets, icons, and Publisher certificates |
+| 📁 **`scripts/`** | Build, deployment, and automation logic |
+| 📄 **`Setup.exe`** | Professional graphical setup installer |
 
 ---
 
-## 🛡️ Security & Digital Trust
-- **Signed Binaries**: Every executable is digitally signed by **Jemmy Francisco**.
-- **Publisher Verification**: Certificates are included in the `/assets` directory.
-- **Open Source Integrity**: The full build pipeline is transparent and documented in `push.ps1`.
+## 👤 Developer
 
----
-
-## 👤 Lead Architect
 **Jemmy Francisco**  
-*Infrastructure Developer & Security Researcher*
+*Lead Architect & Developer*
 
 ---
 <div align="center">
-  Generated by the JEM TOOLS Build Engine | 2026
+  JEM TOOLS Build Engine | 2026
 </div>
