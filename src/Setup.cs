@@ -11,8 +11,8 @@ using System.Reflection;
 [assembly: AssemblyCompany("JEM TOOLS")]
 [assembly: AssemblyProduct("JEM TOOLS Suite")]
 [assembly: AssemblyCopyright("Copyright © 2026 Jemmy Francisco")]
-[assembly: AssemblyVersion("1.0.8.0")]
-[assembly: AssemblyFileVersion("1.0.8.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]
 
 
 namespace JEMToolsSetup
@@ -212,14 +212,14 @@ namespace JEMToolsSetup
 
                 try
                 {
-                    string uninstallKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\JemTools";
+                    string uninstallKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\JEMTOOLS";
                     using (RegistryKey key = Registry.LocalMachine.CreateSubKey(uninstallKey))
                     {
                         key.SetValue("DisplayName", "Jem Tools");
                         key.SetValue("UninstallString", "\"" + Path.Combine(targetDir, "Uninstaller.exe") + "\"");
                         key.SetValue("DisplayIcon", exePath);
                         key.SetValue("Publisher", "Jemmy Francisco");
-                        key.SetValue("DisplayVersion", "1.0.8");
+                        key.SetValue("DisplayVersion", "1.2.0");
                         key.SetValue("InstallLocation", targetDir);
                         key.SetValue("EstimatedSize", bytes.Length / 1024);
                         key.SetValue("NoModify", 1);
@@ -260,10 +260,10 @@ namespace JEMToolsSetup
         {
             try
             {
-                string targetDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "JEM TOOLS");
+                string targetDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Jem Tools");
                 
                 // Kill running instances
-                foreach (var proc in Process.GetProcessesByName("JEMTOOLS"))
+                foreach (var proc in Process.GetProcessesByName("Jem Tools"))
                 {
                     try { proc.Kill(); proc.WaitForExit(1000); } catch { }
                 }

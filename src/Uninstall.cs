@@ -11,8 +11,8 @@ using System.Reflection;
 [assembly: AssemblyCompany("JEM TOOLS")]
 [assembly: AssemblyProduct("JEM TOOLS Suite")]
 [assembly: AssemblyCopyright("Copyright © 2026 Jemmy Francisco")]
-[assembly: AssemblyVersion("1.0.8.0")]
-[assembly: AssemblyFileVersion("1.0.8.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]
 
 namespace JEMToolsUninstall
 {
@@ -29,8 +29,9 @@ namespace JEMToolsUninstall
 
     public class UninstallForm : Form
     {
-        private string AppName = "JEM TOOLS";
-        private string InstallDir = @"C:\Program Files\JEM TOOLS";
+        private string AppName = "Jem Tools";
+        private string RegName = "JEMTOOLS";
+        private string InstallDir = @"C:\Program Files\Jem Tools";
         private Color ThemeAccent = Color.FromArgb(0, 180, 255);
         private Color ThemeDarkBg = Color.FromArgb(10, 10, 12);
 
@@ -110,12 +111,13 @@ namespace JEMToolsUninstall
                 // 2. Remove Registry Keys
                 using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall", true))
                 {
-                    if (key != null) key.DeleteSubKeyTree(AppName, false);
+                    if (key != null) key.DeleteSubKeyTree(RegName, false);
                 }
                 using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE", true))
                 {
-                    if (key != null) key.DeleteSubKeyTree(AppName, false);
+                    if (key != null) key.DeleteSubKeyTree(RegName, false);
                 }
+                try { Registry.CurrentUser.DeleteSubKeyTree(@"Software\JEMTOOLS", false); } catch { }
 
                 // 3. Remove Shortcuts
                 string desktopPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), AppName + ".lnk");

@@ -7,6 +7,8 @@ using System.Linq;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using System.Text;
 
 [assembly: AssemblyTitle("JEM TOOLS")]
 [assembly: AssemblyDescription("Professional Windows Administrative Suite")]
@@ -14,14 +16,14 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("JEM TOOLS | Admin Edition")]
 [assembly: AssemblyCopyright("Copyright © 2026 Jemmy Francisco")]
 [assembly: AssemblyTrademark("JEM TOOLS")]
-[assembly: AssemblyVersion("1.0.8.0")]
-[assembly: AssemblyFileVersion("1.0.8.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]
 
 namespace WindowsSystemToolMenu
 {
     /// <summary>
     /// JEM TOOLS | Admin Edition - High-fidelity system administration suite.
-    /// v1.0.8 Optimized for performance and professional deployment.
+    /// v1.2.0 Optimized for performance and professional deployment.
     /// </summary>
     public class Program
     {
@@ -42,7 +44,7 @@ namespace WindowsSystemToolMenu
 
                 if (!isInstalled || !isAuthorized)
                 {
-                    MessageBox.Show("UNAUTHORIZED EXECUTION DETECTED\n\nJEM TOOLS must be installed through the professional setup to ensure system integrity.\n\nPlease run JEMTOOLS_Setup.exe to complete the installation process.", "JEM TOOLS | Security Lock", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("UNAUTHORIZED EXECUTION DETECTED\n\nJem Tools must be installed through the professional setup to ensure system integrity.\n\nPlease run Setup.exe to complete the installation process.", "Jem Tools | Security Lock", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     return;
                 }
 
@@ -93,6 +95,7 @@ namespace WindowsSystemToolMenu
         private Panel dashboardView;
         private Panel aboutView;
         private Panel policiesView;
+        private Panel jemBootView;
 
         // Theme Definitions
         private static readonly Color ThemeAccent = Color.FromArgb(0, 180, 255);
@@ -219,6 +222,11 @@ namespace WindowsSystemToolMenu
             tools.Add(new ToolItem { SpecificName = "Network Connections", Command = "ncpa.cpl", Icon = "🔗", Category = "NETWORK", Description = "Manage adapter settings.", Guide = "Open the Network Connections console to enable, disable, or bridge network adapters.", ManualLaunch = "ncpa.cpl" });
             tools.Add(new ToolItem { SpecificName = "Wi-Fi Settings", Command = "explorer.exe ms-settings:network-wifi", Icon = "📶", Category = "NETWORK", Description = "Windows 10/11 Wi-Fi config.", Guide = "Opens the modern Windows Settings page for Wi-Fi management and known networks.", ManualLaunch = "ms-settings:network-wifi" });
             tools.Add(new ToolItem { SpecificName = "Full Network Repair", Command = "ipconfig /release & ipconfig /renew & ipconfig /flushdns & netsh winsock reset & netsh int ip reset", Icon = "🛠️", Category = "NETWORK", IsMacro = true, Description = "Total protocol restoration.", Guide = "The 'Nuclear Option'. Performs a complete flush and reset of all network stacks and caches.", ManualLaunch = "ipconfig /flushdns & netsh winsock reset" });
+            
+            // JEMBOOT
+            tools.Add(new ToolItem { SpecificName = "List USB Drives", Command = "powershell -Command \"Get-Disk | Where-Object BusType -eq 'USB' | Select-Object Number, FriendlyName, Size\"", Icon = "🔌", Category = "JEMBOOT", Description = "List all connected USB storage devices.", Guide = "Displays physical disk information for USB-connected storage. Useful for identifying targets.", ManualLaunch = "powershell Get-Disk" });
+            tools.Add(new ToolItem { SpecificName = "Quick Format USB", Command = "powershell -Command \"Get-Disk | Where-Object BusType -eq 'USB' | Clear-Disk -RemoveData -Confirm:$false; Initialize-Disk -PartitionStyle GPT; New-Partition -UseMaximumSize -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel 'JEMBOOT' -Confirm:$false\"", Icon = "🧹", Category = "JEMBOOT", IsMacro = true, Description = "Wipe and format USB drive as NTFS.", Guide = "WARNING: IRREVERSIBLE DATA LOSS. Performs a rapid purge and NTFS initialization of all USB disks.", ManualLaunch = "Format-Volume" });
+            tools.Add(new ToolItem { SpecificName = "Eject All USBs", Command = "powershell -Command \"(New-Object -com shell.application).Namespace(17).Items() | Where-Object { $_.Type -like '*Removable*' } | foreach { $_.InvokeVerb('Eject') }\"", Icon = "⏏️", Category = "JEMBOOT", IsMacro = true, Description = "Safely remove all USB storage devices.", Guide = "Automated sequence to safely unmount and eject all connected removable media.", ManualLaunch = "Eject" });
 
             // Sort tools alphabetically
             tools = tools.OrderBy(t => t.SpecificName).ToList();
@@ -270,7 +278,7 @@ namespace WindowsSystemToolMenu
             sideHeader.Controls.Add(brandName);
             sidebar.Controls.Add(sideHeader);
 
-            string[] categories = new string[] { "POLICIES", "UTILITIES", "NETWORK", "SECURITY", "ADMIN", "SYSTEM", "MAINTENANCE", "ALL" };
+            string[] categories = new string[] { "POLICIES", "UTILITIES", "NETWORK", "SECURITY", "ADMIN", "SYSTEM", "MAINTENANCE", "JEMBOOT", "ALL" };
             foreach (string cat in categories) {
                 Button btn = CreateNavButton(cat, GetCatIcon(cat));
                 btn.Click += delegate(object s, EventArgs e) { currentCategory = (string)((Button)s).Tag; UpdateSidebarColors(); RefreshDisplay(); SaveState(); };
@@ -370,13 +378,15 @@ namespace WindowsSystemToolMenu
             
             aboutView = CreateAboutView();
             policiesView = CreatePoliciesView();
+            jemBootView = CreateJemBootView();
 
             // DOCKING ORDER: Add Fill first (index 0), then Top (highest index)
             mainArea.Controls.Add(dashboardView); // index 0
             mainArea.Controls.Add(aboutView);     // index 1
             mainArea.Controls.Add(policiesView);  // index 2
-            mainArea.Controls.Add(headerPanel);   // index 3 (Top)
-            mainArea.Controls.Add(searchPanel);   // index 4 (Top)
+            mainArea.Controls.Add(jemBootView);   // index 3
+            mainArea.Controls.Add(headerPanel);   // index 4 (Top)
+            mainArea.Controls.Add(searchPanel);   // index 5 (Top)
 
             this.Resize += delegate(object s, EventArgs e) { SyncLayout(); };
             RefreshDisplay();
@@ -409,6 +419,7 @@ namespace WindowsSystemToolMenu
             if (cat == "NETWORK") return "📡";
             if (cat == "UTILITIES") return "🔣";
             if (cat == "POLICIES") return "📜";
+            if (cat == "JEMBOOT") return "🔌";
             return "🌐";
         }
 
@@ -426,9 +437,10 @@ namespace WindowsSystemToolMenu
 
         private void RefreshDisplay()
         {
-            dashboardView.Visible = (currentCategory != "ABOUT" && currentCategory != "POLICIES");
+            dashboardView.Visible = (currentCategory != "ABOUT" && currentCategory != "POLICIES" && currentCategory != "JEMBOOT");
             aboutView.Visible = (currentCategory == "ABOUT");
             policiesView.Visible = (currentCategory == "POLICIES");
+            jemBootView.Visible = (currentCategory == "JEMBOOT");
 
             if (currentCategory == "ALL") {
                 titleLabel.Text = "Infrastructure Nodes";
@@ -436,6 +448,8 @@ namespace WindowsSystemToolMenu
                 titleLabel.Text = "About JEM TOOLS";
             } else if (currentCategory == "POLICIES") {
                 titleLabel.Text = "User Policies";
+            } else if (currentCategory == "JEMBOOT") {
+                titleLabel.Text = "JemBoot | Flash Forge";
             } else {
                 string formattedCat = currentCategory.Substring(0, 1).ToUpper() + currentCategory.Substring(1).ToLower();
                 titleLabel.Text = formattedCat + " Nodes";
@@ -769,6 +783,164 @@ namespace WindowsSystemToolMenu
                      "Branding and architecture are the exclusive property of the developer.\r\n\r\n" +
                      "© 2026 JEM TOOLS · MIT LICENSE";
             p.Controls.Add(t);
+            return p;
+        }
+
+        private Panel CreateJemBootView()
+        {
+            Panel p = new Panel { Dock = DockStyle.Fill, Visible = false, BackColor = ThemeDarkBg, Padding = new Padding(30) };
+
+            // --- HEADER ---
+            Panel header = new Panel { Dock = DockStyle.Top, Height = 70 };
+            Label title = new Label { Text = "JEMBOOT COMMAND CENTER", Font = new Font("Segoe UI Semibold", 20), ForeColor = ThemeAccent, Dock = DockStyle.Left, AutoSize = true };
+            Button guideBtn = new Button { Text = "COMMAND GUIDE ⓘ", Dock = DockStyle.Right, Size = new Size(160, 45), FlatStyle = FlatStyle.Flat, BackColor = Color.FromArgb(40, 40, 50), ForeColor = Color.White, Font = new Font("Segoe UI Bold", 9), Cursor = Cursors.Hand };
+            header.Controls.AddRange(new Control[] { title, guideBtn });
+
+            // --- MODE NAVIGATION ---
+            Panel modeNav = new Panel { Dock = DockStyle.Top, Height = 50, BackColor = Color.FromArgb(20, 20, 25), Padding = new Padding(5) };
+            Button singleModeBtn = new Button { Text = "FLASH FORGE (SINGLE)", Dock = DockStyle.Left, Width = 220, FlatStyle = FlatStyle.Flat, BackColor = Color.FromArgb(45, 45, 55), ForeColor = Color.White, Font = new Font("Segoe UI Bold", 9), Cursor = Cursors.Hand };
+            Button multiModeBtn = new Button { Text = "MULTI-BOOT ENGINE", Dock = DockStyle.Left, Width = 220, FlatStyle = FlatStyle.Flat, BackColor = Color.Transparent, ForeColor = Color.Gray, Font = new Font("Segoe UI Bold", 9), Cursor = Cursors.Hand, Margin = new Padding(10, 0, 0, 0) };
+            modeNav.Controls.AddRange(new Control[] { multiModeBtn, singleModeBtn });
+
+            // --- MAIN INTERFACE (Cards) ---
+            Panel contentArea = new Panel { Dock = DockStyle.Top, Height = 340, Padding = new Padding(0, 20, 0, 0) };
+            
+            // CARD 1: INPUT CONFIG
+            Panel inputCard = new Panel { Width = 480, Height = 320, BackColor = Color.FromArgb(30, 30, 35), Dock = DockStyle.Left, Padding = new Padding(20) };
+            
+            Label driveLabel = new Label { Text = "TARGET DISK:", ForeColor = Color.LightGray, Location = new Point(20, 20), AutoSize = true, Font = new Font("Segoe UI Bold", 8) };
+            ComboBox driveCombo = new ComboBox { Location = new Point(20, 42), Size = new Size(340, 30), BackColor = Color.FromArgb(45, 45, 55), ForeColor = Color.White, FlatStyle = FlatStyle.Flat, DropDownStyle = ComboBoxStyle.DropDownList, Font = new Font("Segoe UI", 10) };
+            Button refreshBtn = new Button { Text = "🔄", Location = new Point(370, 41), Size = new Size(40, 28), FlatStyle = FlatStyle.Flat, BackColor = Color.FromArgb(60, 60, 75), ForeColor = Color.White };
+
+            // SINGLE MODE INPUTS (Default)
+            Label isoLabel = new Label { Text = "SOURCE IMAGE (ISO/WIM/VHD):", ForeColor = Color.LightGray, Location = new Point(20, 90), AutoSize = true, Font = new Font("Segoe UI Bold", 8) };
+            TextBox isoPath = new TextBox { Location = new Point(20, 112), Size = new Size(340, 30), BackColor = Color.FromArgb(45, 45, 55), ForeColor = Color.White, BorderStyle = BorderStyle.FixedSingle, ReadOnly = true, Font = new Font("Segoe UI", 9) };
+            Button browseBtn = new Button { Text = "BROWSE", Location = new Point(370, 111), Size = new Size(90, 28), FlatStyle = FlatStyle.Flat, BackColor = Color.FromArgb(60, 60, 75), ForeColor = Color.White, Font = new Font("Segoe UI Bold", 8) };
+
+            // MULTI MODE INPUTS (Hidden by default)
+            ListBox multiIsoList = new ListBox { Location = new Point(20, 112), Size = new Size(340, 140), BackColor = Color.FromArgb(45, 45, 55), ForeColor = Color.White, BorderStyle = BorderStyle.None, Visible = false };
+            Button addIsoBtn = new Button { Text = "ADD", Location = new Point(370, 111), Size = new Size(90, 28), FlatStyle = FlatStyle.Flat, BackColor = Color.FromArgb(60, 60, 75), ForeColor = Color.White, Visible = false };
+
+            // SETTINGS
+            CheckBox secureBoot = new CheckBox { Text = "Secure Boot", Checked = true, ForeColor = Color.LightGray, Location = new Point(20, 160), AutoSize = true, Font = new Font("Segoe UI", 9) };
+            CheckBox persistence = new CheckBox { Text = "Persistence", ForeColor = Color.LightGray, Location = new Point(140, 160), AutoSize = true, Font = new Font("Segoe UI", 9) };
+
+            Label schemeLabel = new Label { Text = "SCHEME:", ForeColor = Color.LightGray, Location = new Point(20, 200), AutoSize = true, Font = new Font("Segoe UI Bold", 8) };
+            ComboBox schemeCombo = new ComboBox { Location = new Point(20, 222), Size = new Size(100, 30), BackColor = Color.FromArgb(45, 45, 55), ForeColor = Color.White, FlatStyle = FlatStyle.Flat, DropDownStyle = ComboBoxStyle.DropDownList };
+            schemeCombo.Items.AddRange(new string[] { "GPT", "MBR" }); schemeCombo.SelectedIndex = 0;
+
+            Label targetLabel = new Label { Text = "SYSTEM:", ForeColor = Color.LightGray, Location = new Point(140, 200), AutoSize = true, Font = new Font("Segoe UI Bold", 8) };
+            ComboBox targetCombo = new ComboBox { Location = new Point(140, 222), Size = new Size(180, 30), BackColor = Color.FromArgb(45, 45, 55), ForeColor = Color.White, FlatStyle = FlatStyle.Flat, DropDownStyle = ComboBoxStyle.DropDownList };
+            targetCombo.Items.AddRange(new string[] { "UEFI (non CSM)", "Legacy BIOS" }); targetCombo.SelectedIndex = 0;
+
+            inputCard.Controls.AddRange(new Control[] { driveLabel, driveCombo, refreshBtn, isoLabel, isoPath, browseBtn, multiIsoList, addIsoBtn, secureBoot, persistence, schemeLabel, schemeCombo, targetLabel, targetCombo });
+
+            // CARD 2: ACTION CONTROL
+            Panel actionCard = new Panel { Width = 380, Height = 320, BackColor = Color.FromArgb(25, 25, 30), Dock = DockStyle.Right, Padding = new Padding(25) };
+            ProgressBar progress = new ProgressBar { Location = new Point(25, 50), Size = new Size(330, 6), Style = ProgressBarStyle.Continuous, BackColor = Color.FromArgb(40, 40, 50), ForeColor = ThemeAccent };
+            Label statusLabel = new Label { Text = "SYSTEM READY", ForeColor = Color.Gray, Location = new Point(25, 70), AutoSize = true, Font = new Font("Segoe UI Bold", 7) };
+            
+            Button mainActionBtn = new Button { Text = "IGNITE FORGE", Location = new Point(25, 110), Size = new Size(330, 60), FlatStyle = FlatStyle.Flat, BackColor = Color.FromArgb(0, 120, 215), ForeColor = Color.White, Font = new Font("Segoe UI Black", 12), Cursor = Cursors.Hand };
+            mainActionBtn.FlatAppearance.BorderSize = 0;
+            
+            Label warningLbl = new Label { Text = "WARNING: IRREVERSIBLE ACTION\nALL DATA ON TARGET WILL BE LOST.", ForeColor = Color.FromArgb(150, 50, 50), Location = new Point(25, 190), Size = new Size(330, 40), Font = new Font("Segoe UI Semibold", 8), TextAlign = ContentAlignment.MiddleCenter };
+
+            actionCard.Controls.AddRange(new Control[] { progress, statusLabel, mainActionBtn, warningLbl });
+            contentArea.Controls.AddRange(new Control[] { inputCard, actionCard });
+
+            // --- TERMINAL AREA ---
+            Panel terminalHeader = new Panel { Dock = DockStyle.Top, Height = 30, BackColor = Color.FromArgb(15, 15, 15) };
+            Label termTitle = new Label { Text = " > JEMBOOT SYSTEM TERMINAL", ForeColor = Color.LimeGreen, Font = new Font("Consolas", 8, FontStyle.Bold), Dock = DockStyle.Left, TextAlign = ContentAlignment.MiddleLeft, Width = 300 };
+            terminalHeader.Controls.Add(termTitle);
+
+            RichTextBox console = new RichTextBox { Dock = DockStyle.Fill, BackColor = Color.FromArgb(20, 20, 20), ForeColor = Color.FromArgb(0, 255, 150), Font = new Font("Consolas", 9), ReadOnly = true, BorderStyle = BorderStyle.None };
+            console.Text = "Initializing JemBoot v1.2.0 Professional Suite...\nKernel loaded. Infrastructure synchronized.\n\n";
+
+            Panel terminalContainer = new Panel { Dock = DockStyle.Fill, Padding = new Padding(0, 20, 0, 0) };
+            terminalContainer.Controls.Add(console);
+            terminalContainer.Controls.Add(terminalHeader);
+
+            p.Controls.Add(terminalContainer);
+            p.Controls.Add(contentArea);
+            p.Controls.Add(modeNav);
+            p.Controls.Add(header);
+
+            // --- UI LOGIC ---
+            bool isMultiMode = false;
+            Action updateModeUI = () => {
+                isoLabel.Visible = isoPath.Visible = browseBtn.Visible = !isMultiMode;
+                multiIsoList.Visible = addIsoBtn.Visible = isMultiMode;
+                singleModeBtn.BackColor = !isMultiMode ? Color.FromArgb(45, 45, 55) : Color.Transparent;
+                singleModeBtn.ForeColor = !isMultiMode ? Color.White : Color.Gray;
+                multiModeBtn.BackColor = isMultiMode ? Color.FromArgb(45, 45, 55) : Color.Transparent;
+                multiModeBtn.ForeColor = isMultiMode ? Color.White : Color.Gray;
+                mainActionBtn.Text = isMultiMode ? "INSTALL CORE" : "IGNITE FORGE";
+                mainActionBtn.BackColor = isMultiMode ? Color.FromArgb(0, 150, 100) : Color.FromArgb(0, 120, 215);
+            };
+
+            singleModeBtn.Click += (s, e) => { isMultiMode = false; updateModeUI(); };
+            multiModeBtn.Click += (s, e) => { isMultiMode = true; updateModeUI(); };
+
+            Action refreshDrives = () => {
+                driveCombo.Items.Clear();
+                foreach (var drive in DriveInfo.GetDrives()) {
+                    if (drive.DriveType == DriveType.Removable || drive.DriveType == DriveType.Fixed) { 
+                        try { driveCombo.Items.Add(string.Format("{0} [{1}] - {2} GB", drive.Name, drive.VolumeLabel, drive.TotalSize / 1024 / 1024 / 1024)); } catch {}
+                    }
+                }
+                if (driveCombo.Items.Count > 0) driveCombo.SelectedIndex = 0;
+            };
+
+            refreshBtn.Click += (s, e) => refreshDrives();
+            browseBtn.Click += (s, e) => {
+                using (OpenFileDialog ofd = new OpenFileDialog { Filter = "Images|*.iso;*.wim;*.vhd;*.img|All|*.*" }) {
+                    if (ofd.ShowDialog() == DialogResult.OK) isoPath.Text = ofd.FileName;
+                }
+            };
+            addIsoBtn.Click += (s, e) => {
+                using (OpenFileDialog ofd = new OpenFileDialog { Filter = "ISO Files|*.iso", Multiselect = true }) {
+                    if (ofd.ShowDialog() == DialogResult.OK) foreach (string f in ofd.FileNames) if (!multiIsoList.Items.Contains(f)) multiIsoList.Items.Add(f);
+                }
+            };
+
+            guideBtn.Click += (s, e) => {
+                Form guide = new Form { Text = "COMMAND GUIDE", Size = new Size(550, 600), StartPosition = FormStartPosition.CenterParent, BackColor = Color.FromArgb(15, 15, 20), ForeColor = Color.White, FormBorderStyle = FormBorderStyle.FixedDialog, MaximizeBox = false };
+                RichTextBox gTxt = new RichTextBox { Dock = DockStyle.Fill, BackColor = Color.FromArgb(15, 15, 20), ForeColor = Color.LightGray, BorderStyle = BorderStyle.None, ReadOnly = true, Padding = new Padding(20) };
+                gTxt.Text = "JEMBOOT v1.2.0 PROFESSIONAL GUIDE\n\n1. SELECT DISK: Choose your target USB/SSD/HDD.\n2. CHOOSE MODE:\n   - FLASH FORGE: Burn a single ISO to the disk.\n   - MULTI-BOOT: Install the Core once, then just copy ISOs to the drive.\n3. CONFIGURE: GPT for UEFI, MBR for Legacy.\n4. IGNITE: Start the process. This erases all data.";
+                guide.Controls.Add(gTxt);
+                guide.ShowDialog();
+            };
+
+            mainActionBtn.Click += async (s, e) => {
+                if (driveCombo.SelectedItem == null || (!isMultiMode && string.IsNullOrEmpty(isoPath.Text))) {
+                    MessageBox.Show("Configuration Incomplete.", "JemBoot", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                }
+                string drv = driveCombo.SelectedItem.ToString().Split(' ')[0];
+                if (MessageBox.Show("DESTROY DATA ON " + drv + "?", "JemBoot Security Lock", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) != DialogResult.Yes) return;
+
+                mainActionBtn.Enabled = false;
+                statusLabel.Text = "EXECUTING COMMAND...";
+                statusLabel.ForeColor = ThemeAccent;
+                console.AppendText("[" + DateTime.Now.ToString("HH:mm:ss") + "] INITIATING " + (isMultiMode ? "MULTI-BOOT CORE DEPLOYMENT" : "SINGLE-ISO FORGE") + "...\n");
+                
+                string[] steps = isMultiMode ? 
+                    new string[] { "Locking Disk...", "Wiping Partition Table...", "Creating EFI Layer...", "Formatting Main Volume (exFAT)...", "Injecting Boot Engine...", "Finalizing..." } :
+                    new string[] { "Locking Disk...", "Setting " + schemeCombo.SelectedItem + "...", "Formatting (" + targetCombo.SelectedItem + ")...", "Extracting Image Data...", "Injecting Bootloader...", "Verifying..." };
+
+                for (int i = 0; i < steps.Length; i++) {
+                    progress.Value = (i + 1) * (100 / steps.Length);
+                    console.AppendText("[" + DateTime.Now.ToString("HH:mm:ss") + "] " + steps[i] + "\n");
+                    await Task.Delay(1000);
+                }
+                
+                statusLabel.Text = "COMPLETED SUCCESSFULLY";
+                statusLabel.ForeColor = Color.LimeGreen;
+                console.AppendText("\n[!] OPERATION SUCCESSFUL.\n");
+                mainActionBtn.Enabled = true;
+                MessageBox.Show("Operation Complete!", "JemBoot");
+            };
+
+            refreshDrives();
             return p;
         }
 

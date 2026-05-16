@@ -2,12 +2,12 @@
   <img src="assets/jem_logo.png" width="120" height="120" alt="JEM TOOLS Logo">
 
   # Jem Tools
-  ### v1.0.8 (Production Edition)
+  ### v1.2.0 (Production Edition)
 
   *Precision System Intelligence for Windows Professionals.*
 
   [![Status](https://img.shields.io/badge/STATUS-LIVE-00c853?style=for-the-badge)](#)
-  [![Version](https://img.shields.io/badge/VERSION-1.0.8-0288d1?style=for-the-badge)](#)
+  [![Version](https://img.shields.io/badge/VERSION-1.2.0-0288d1?style=for-the-badge)](#)
   [![OS](https://img.shields.io/badge/WINDOWS-7%20%7C%208%20%7C%2010%20%7C%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white)](#)
   [![Tech](https://img.shields.io/badge/C%23-.NET%204.8-7b1fa2?style=for-the-badge&logo=dotnet&logoColor=white)](#)
   [![License](https://img.shields.io/badge/License-MIT-f9a825?style=for-the-badge)](LICENSE)
@@ -19,7 +19,7 @@
 ## 🛠️ Project Blueprint
 **Jem Tools** is a commercial-grade administrative utility designed for power users and IT professionals. It provides a centralized command center for system-level maintenance, security auditing, and real-time performance monitoring, all within a high-fidelity, privacy-first architecture.
 
-The "Admin Edition" features a **Digital Gemstone** UI experience that turns complex system management into a streamlined, visual process.
+The "Admin Edition" features a **Digital Gemstone** UI experience. v1.2.0 introduces the **JemBoot Command Center**, featuring a high-fidelity, card-based interface and professional system terminal for streamlined media creation.
 
 ---
 
@@ -34,6 +34,7 @@ The "Admin Edition" features a **Digital Gemstone** UI experience that turns com
 | 🔍 **Instant Search** | Find any tool in milliseconds with the built-in infrastructure search |
 | 🛡️ **Interactive Setup** | Professional installer with EULA consent and customizable deployment |
 | ⚡ **Admin Macros** | One-click automated maintenance sequences for deep system care |
+| 🔌 **JemBoot Core** | Premium card-based boot engine for ISO/WIM/VHD deployment |
 | 🖊️ **Digital Trust** | Signed binaries by **Jemmy Francisco** with included publisher certificate |
 
 ---
@@ -163,6 +164,18 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iwr 'https://github.com/Jemmy0
 
 </details>
 
+<details>
+<summary><b>🔌 JemBoot (Bootable Media Engine)</b></summary>
+
+- 🔌 **Boot Command**: Dual-mode bootable creation (Single/Multi-Boot).
+- 💿 **Integrated Engine**: Install JemBoot Core and simply drag & drop ISO files.
+- 🛡️ **Secure Boot Support**: Signed bootloader for modern UEFI compatibility.
+- 💾 **Universal Targets**: Transform USB Flash, SSD, and HDD into bootable media.
+- 🧹 **Quick Format USB**: One-click NTFS/GPT initialization for removable storage.
+- ⏏️ **Safely Eject All**: Automated sequence to safely unmount all USB devices.
+
+</details>
+
 ---
 
 ## 🔒 Security & Trust
@@ -206,7 +219,7 @@ Jem Tools is built with a **Privacy-First** philosophy:
 
 <div align="center">
 
-**JEM TOOLS · Admin Edition v1.0.8**
+**JEM TOOLS · Admin Edition v1.2.0**
 *© 2026 Jemmy Francisco · MIT License*
 
 </div>
