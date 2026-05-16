@@ -58,11 +58,25 @@ Write-Host "[2/3] Building: Setup.exe (Professional Installer)" -ForegroundColor
 if (-not (Test-Path $Csc)) {
     Write-Host "  [SKIP] .NET Framework csc.exe not found." -ForegroundColor Magenta
 } else {
+    $payloadBytes = [System.IO.File]::ReadAllBytes("$ReleaseDir\Jem Tools.exe")
+    $payloadBase64 = [System.Convert]::ToBase64String($payloadBytes)
+    $uninstBytes = [System.IO.File]::ReadAllBytes("$ReleaseDir\Uninstaller.exe")
+    $uninstBase64 = [System.Convert]::ToBase64String($uninstBytes)
+
+    $setupTemplate = Get-Content "$SrcDir\Setup.cs" -Raw
+    $setupTemplate = $setupTemplate.Replace("%%PAYLOAD%%", $payloadBase64)
+    $setupTemplate = $setupTemplate.Replace("%%UNINSTALL_PAYLOAD%%", $uninstBase64)
+
+    Set-Content -Path "$SrcDir\Setup_build.cs" -Value $setupTemplate
+
     $SetupRefs = "System.dll,System.Windows.Forms.dll,System.Drawing.dll"
     $SetupOut  = "$ProjectRoot\Setup.exe"
     $SetupIcon = "$AssetsDir\jem_logo.ico"
-    $SetupArgs = @("/target:winexe", "/out:$SetupOut", "/win32icon:$SetupIcon", "/reference:$SetupRefs", "$SrcDir\Setup.cs")
+    $SetupArgs = @("/target:winexe", "/out:$SetupOut", "/win32icon:$SetupIcon", "/reference:$SetupRefs", "$SrcDir\Setup_build.cs")
     & $Csc @SetupArgs 2>&1 | Where-Object { $_ -notmatch "^Microsoft|^for C#|^Copyright|^This compiler" }
+    
+    Remove-Item "$SrcDir\Setup_build.cs" -Force -ErrorAction SilentlyContinue
+
     if ($LASTEXITCODE -eq 0) {
         $s = [math]::Round((Get-Item "$ProjectRoot\Setup.exe").Length / 1KB, 1)
         Write-Host "  [OK] Setup.exe -> root\ ($s KB)" -ForegroundColor Green
