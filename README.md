@@ -27,7 +27,7 @@ The "Admin Edition" features a **Digital Gemstone** UI experience. v1.2.0 introd
 
 | Feature | Description |
 |---|---|
-| 🗂️ **60+ Admin Modules** | Every essential Windows tool — from Registry Editor to MRT — in one place |
+| 🗂️ **63+ Admin Modules** | Every essential system tool — from Registry Editor to MRT — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
 | 🧠 **Ollama AI Core** | Automated local AI deployment via Winget and Llama3 for on-device intelligence |
 | 🎵 **SpotX Integration** | Dedicated suite for Spotify optimization, ad-blocking, and modern theming |
