@@ -98,6 +98,8 @@ namespace JEMTools.Platforms
             tools.Add(new ToolItem { SpecificName = "Install Photoshop CS6 x86", Command = "xdg-open \"https://drive.google.com/file/d/1bC498LjJy9308a8pHMJRQ1DUyyiMDcJ4/view?usp=drive_link\"", Icon = "🖌️", Category = "INSTALLERS", Description = "Download Portable CS6 (x86).", Guide = "Opens Google Drive to download the x86 portable version of Photoshop CS6.", ManualLaunch = "download ps cs6 32" });
             tools.Add(new ToolItem { SpecificName = "Install Photoshop CS3", Command = "xdg-open \"https://drive.google.com/file/d/1x6DTCVmkEKTGhw4kM1QHUTNx4UktF-gs/view?usp=drive_link\"", Icon = "🎨", Category = "INSTALLERS", Description = "Download Portable CS3.", Guide = "Opens Google Drive to download the portable version of Photoshop CS3.", ManualLaunch = "download ps cs3" });
 
+            tools.Add(new ToolItem { SpecificName = "Install CrystalDiskMark", Command = "xdg-open \"https://drive.google.com/file/d/1d0KpoNteWzGQqlBnj7QyUnHZL0v--xKM/view?usp=drive_link\"", Icon = "💿", Category = "INSTALLERS", Description = "Disk benchmark tool v9.0.2.", Guide = "Opens Google Drive to download CrystalDiskMark 9.0.2 — measures sequential and random read/write speeds.", ManualLaunch = "download crystaldiskmark" });
+
             return tools;
         }
     }
