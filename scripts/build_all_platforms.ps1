@@ -20,9 +20,31 @@ Write-Host ""
 if (-not (Test-Path $ReleaseDir)) { New-Item -Path $ReleaseDir -ItemType Directory | Out-Null }
 
 # ==========================================================
-# STEP 1: Windows EXE — Jem Tools.exe
+# STEP 1: Uninstaller — Uninstaller.exe
 # ==========================================================
-Write-Host "[1/3] Building: Jem Tools.exe (Windows Admin Suite)" -ForegroundColor Yellow
+Write-Host "[1/4] Building: Uninstaller.exe (Maintenance Suite)" -ForegroundColor Yellow
+
+if (-not (Test-Path $Csc)) {
+    Write-Host "  [SKIP] .NET Framework csc.exe not found." -ForegroundColor Magenta
+} else {
+    $UninstOut  = "$ReleaseDir\Uninstaller.exe"
+    $UninstIcon = "$AssetsDir\jem_logo.ico"
+    $UninstArgs = @("/target:winexe", "/out:$UninstOut", "/win32icon:$UninstIcon", "/reference:System.dll,System.Windows.Forms.dll,System.Drawing.dll,System.Core.dll", "$SrcDir\Uninstall.cs")
+    & $Csc @UninstArgs 2>&1 | Where-Object { $_ -notmatch "^Microsoft|^for C#|^Copyright|^This compiler" }
+    if ($LASTEXITCODE -eq 0) {
+        $s = [math]::Round((Get-Item "$ReleaseDir\Uninstaller.exe").Length / 1KB, 1)
+        Write-Host "  [OK] Uninstaller.exe -> Release\ ($s KB)" -ForegroundColor Green
+    } else {
+        Write-Host "  [FAIL] Uninstaller.exe build failed." -ForegroundColor Red
+    }
+}
+
+Write-Host ""
+
+# ==========================================================
+# STEP 2: Windows EXE — Jem Tools.exe
+# ==========================================================
+Write-Host "[2/4] Building: Jem Tools.exe (Windows Admin Suite)" -ForegroundColor Yellow
 
 if (-not (Test-Path $Csc)) {
     Write-Host "  [SKIP] .NET Framework csc.exe not found." -ForegroundColor Magenta
@@ -51,9 +73,9 @@ if (-not (Test-Path $Csc)) {
 Write-Host ""
 
 # ==========================================================
-# STEP 2: Setup.exe — Professional Installer
+# STEP 3: Setup.exe — Professional Installer
 # ==========================================================
-Write-Host "[2/3] Building: Setup.exe (Professional Installer)" -ForegroundColor Yellow
+Write-Host "[3/4] Building: Setup.exe (Professional Installer)" -ForegroundColor Yellow
 
 if (-not (Test-Path $Csc)) {
     Write-Host "  [SKIP] .NET Framework csc.exe not found." -ForegroundColor Magenta
@@ -88,9 +110,9 @@ if (-not (Test-Path $Csc)) {
 Write-Host ""
 
 # ==========================================================
-# STEP 3: Linux & macOS — Requires .NET 8 SDK
+# STEP 4: Linux & macOS — Requires .NET 8 SDK
 # ==========================================================
-Write-Host "[3/3] Building: Unix Platforms (Linux + macOS)" -ForegroundColor Yellow
+Write-Host "[4/4] Building: Unix Platforms (Linux + macOS)" -ForegroundColor Yellow
 
 $dotnet = Get-Command dotnet -ErrorAction SilentlyContinue
 
@@ -112,7 +134,7 @@ Version=1.2.2
 Type=Application
 Name=Jem Tools
 Comment=Professional Linux Administrative Suite
-Exec=sh -c '"`$(dirname "%k")/JemTools-Linux"'
+Exec=sh -c '\"`$(dirname "%k")/JemTools-Linux\"'
 Icon=utilities-terminal
 Terminal=true
 Categories=System;Settings;Utility;
@@ -169,8 +191,8 @@ Categories=System;Settings;Utility;
         # Create Terminal Launcher script
         $launcher = @"
 #!/bin/bash
-DIR=`"`$(` cd `"`$(` dirname `"`${BASH_SOURCE[0]}`" `)`" && pwd `)`"
-osascript -e 'tell application "Terminal" to do script "'"`$DIR"'/JemTools-macOS"' -e 'tell application "Terminal" to activate'
+DIR=\"`$(` cd \"`$(` dirname \"`${BASH_SOURCE[0]}\" `)\" && pwd `)\"
+osascript -e 'tell application \"Terminal\" to do script \"'\"`$DIR\"'/JemTools-macOS\"' -e 'tell application \"Terminal\" to activate'
 "@
         Set-Content "$MacOsDir\Launcher" $launcher
         
