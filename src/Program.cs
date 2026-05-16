@@ -187,7 +187,7 @@ namespace WindowsSystemToolMenu
             sideHeader.Controls.Add(brandName);
             sidebar.Controls.Add(sideHeader);
 
-            string[] categories = new string[] { "POLICIES", "UTILITIES", "NETWORK", "SECURITY", "ADMIN", "SYSTEM", "MAINTENANCE", "JEMBOOT", "ALL" };
+            string[] categories = new string[] { "POLICIES", "UTILITIES", "NETWORK", "SECURITY", "ADMIN", "SYSTEM", "MAINTENANCE", "JEMBOOT", "INSTALLERS", "ALL" };
             foreach (string cat in categories) {
                 Button btn = CreateNavButton(cat, GetCatIcon(cat));
                 btn.Click += delegate(object s, EventArgs e) { currentCategory = (string)((Button)s).Tag; UpdateSidebarColors(); RefreshDisplay(); SaveState(); };

@@ -84,9 +84,19 @@ namespace JEMTools.Platforms
             tools.Add(new ToolItem { SpecificName = "List USB Drives", Command = "diskutil list external", Icon = "🔌", Category = "JEMBOOT", Description = "Identify connected USB media.", Guide = "Filters diskutil output to show only removable/external drives.", ManualLaunch = "diskutil list external" });
             tools.Add(new ToolItem { SpecificName = "Storage Usage", Command = "df -H", Icon = "💾", Category = "JEMBOOT", Description = "Analyze mount points.", Guide = "Displays disk usage for all mounted volumes in GB/TB format.", ManualLaunch = "df -H" });
             tools.Add(new ToolItem { SpecificName = "Verify Disk", Command = "diskutil verifyDisk /dev/disk2", Icon = "📀", Category = "JEMBOOT", Description = "Check disk partition map.", Guide = "Performs a low-level verification of the partition map integrity.", ManualLaunch = "diskutil verifyDisk" });
+            // INSTALLERS
+            tools.Add(new ToolItem { SpecificName = "Install 7-Zip", Command = "brew install p7zip", Icon = "📦", Category = "INSTALLERS", Description = "Open-source file archiver.", Guide = "Installs p7zip via Homebrew.", ManualLaunch = "brew install p7zip" });
+            tools.Add(new ToolItem { SpecificName = "Install WinRAR", Command = "brew install unrar", Icon = "🗜️", Category = "INSTALLERS", Description = "Extraction utility.", Guide = "Installs unrar via Homebrew.", ManualLaunch = "brew install unrar" });
+            tools.Add(new ToolItem { SpecificName = "Install PeaZip", Command = "brew install --cask peazip", Icon = "🗃️", Category = "INSTALLERS", Description = "Free archive manager.", Guide = "Installs PeaZip via Homebrew Cask.", ManualLaunch = "brew install --cask peazip" });
+            tools.Add(new ToolItem { SpecificName = "Install VS Code", Command = "brew install --cask visual-studio-code", Icon = "💻", Category = "INSTALLERS", Description = "Modern source code editor.", Guide = "Installs Visual Studio Code.", ManualLaunch = "brew install --cask visual-studio-code" });
+            tools.Add(new ToolItem { SpecificName = "Install Cursor", Command = "brew install --cask cursor", Icon = "🤖", Category = "INSTALLERS", Description = "AI-first code editor.", Guide = "Installs Cursor, the AI-powered IDE.", ManualLaunch = "brew install --cask cursor" });
+            tools.Add(new ToolItem { SpecificName = "Install Eclipse", Command = "brew install --cask eclipse-java", Icon = "☕", Category = "INSTALLERS", Description = "Java Development IDE.", Guide = "Installs the Eclipse Java development environment.", ManualLaunch = "brew install --cask eclipse-java" });
+            tools.Add(new ToolItem { SpecificName = "Install Blender", Command = "brew install --cask blender", Icon = "🎨", Category = "INSTALLERS", Description = "3D creation suite.", Guide = "Installs Blender 3D modeling and animation software.", ManualLaunch = "brew install --cask blender" });
+            tools.Add(new ToolItem { SpecificName = "Install Acrobat", Command = "brew install --cask adobe-acrobat-reader", Icon = "📄", Category = "INSTALLERS", Description = "PDF viewer by Adobe.", Guide = "Installs Adobe Acrobat Reader.", ManualLaunch = "brew install --cask adobe-acrobat-reader" });
+            tools.Add(new ToolItem { SpecificName = "Install Photoshop CS6", Command = "open \"https://drive.google.com/file/d/108-MMr552-vNUg4ICd9_zo-ALn5AT7Oq/view?usp=drive_link\"", Icon = "🖼️", Category = "INSTALLERS", Description = "Download Portable CS6 (x64).", Guide = "Opens Google Drive to download the x64 portable version of Photoshop CS6.", ManualLaunch = "download ps cs6" });
+            tools.Add(new ToolItem { SpecificName = "Install Photoshop CS3", Command = "open \"https://drive.google.com/file/d/1bC498LjJy9308a8pHMJRQ1DUyyiMDcJ4/view?usp=drive_link\"", Icon = "🖌️", Category = "INSTALLERS", Description = "Download Portable CS3 (x86).", Guide = "Opens Google Drive to download the x86 portable version of Photoshop CS3.", ManualLaunch = "download ps cs3" });
 
             return tools;
         }
     }
 }
-
