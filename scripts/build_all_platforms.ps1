@@ -87,7 +87,25 @@ if ($dotnet) {
     # Build Linux
     Write-Host "  Building Linux edition..." -ForegroundColor Gray
     & dotnet publish "$SrcDir\Linux\JemTools.Linux.csproj" -c Release -r linux-x64 --self-contained false -o "$ReleaseDir\Linux" /p:AssemblyName="JemTools-Linux" 2>&1 | Select-Object -Last 3
-    if ($LASTEXITCODE -eq 0) { Write-Host "  [OK] Linux build -> Release\Linux\" -ForegroundColor Green }
+    if ($LASTEXITCODE -eq 0) { 
+        Write-Host "  [OK] Linux core compiled." -ForegroundColor Green 
+        
+        # Linux .desktop Generator
+        Write-Host "  Generating Linux .desktop launcher..." -ForegroundColor Gray
+        $desktop = @"
+[Desktop Entry]
+Version=1.2.2
+Type=Application
+Name=Jem Tools
+Comment=Professional Linux Administrative Suite
+Exec=sh -c '"`$(dirname "%k")/JemTools-Linux"'
+Icon=utilities-terminal
+Terminal=true
+Categories=System;Settings;Utility;
+"@
+        Set-Content "$ReleaseDir\Linux\Jem Tools.desktop" $desktop
+        Write-Host "  [OK] Linux build -> Release\Linux\" -ForegroundColor Green 
+    }
     else { Write-Host "  [FAIL] Linux build failed." -ForegroundColor Red }
 
     # Build macOS

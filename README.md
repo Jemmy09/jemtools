@@ -57,11 +57,14 @@ dotnet run --project src/macOS/JemTools.macOS.csproj
 # Run the PowerShell build script: pwsh scripts/build_all_platforms.ps1
 ```
 
-### 🐧 Linux (Bash)
+### 🐧 Linux (Bash / .desktop Launcher)
 ```bash
 git clone https://github.com/Jemmy09/jemtools.git
 cd jemtools
 dotnet run --project src/Linux/JemTools.Linux.csproj
+
+# To generate a clickable "Jem Tools.desktop" graphical launcher:
+# Run the PowerShell build script: pwsh scripts/build_all_platforms.ps1
 ```
 
 ---
