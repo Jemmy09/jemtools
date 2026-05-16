@@ -100,6 +100,8 @@ namespace JEMTools.Platforms
 
             tools.Add(new ToolItem { SpecificName = "Install CrystalDiskMark", Command = "open \"https://drive.google.com/file/d/1d0KpoNteWzGQqlBnj7QyUnHZL0v--xKM/view?usp=drive_link\"", Icon = "💿", Category = "INSTALLERS", Description = "Disk benchmark tool v9.0.2.", Guide = "Opens Google Drive to download CrystalDiskMark 9.0.2 — measures sequential and random read/write speeds.", ManualLaunch = "download crystaldiskmark" });
 
+            tools.Add(new ToolItem { SpecificName = "Install OCCT", Command = "open \"https://drive.google.com/file/d/1RiDPP8hEecxKsINrR4dgdIhkpUiz6SHn/view?usp=drive_link\"", Icon = "🔥", Category = "INSTALLERS", Description = "PC stability & stress test.", Guide = "Opens Google Drive to download OCCT — tests CPU, GPU, Memory and PSU stability under full load.", ManualLaunch = "download occt" });
+
             return tools;
         }
     }
