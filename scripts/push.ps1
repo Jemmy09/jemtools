@@ -7,7 +7,7 @@ $ScriptsDir = "$ProjectRoot\scripts"
 $SrcDir = "$ProjectRoot\src"
 $AssetsDir = "$ProjectRoot\assets"
 
-Write-Host "--- Jem Tools Update Engine v1.2.0 ---" -ForegroundColor Cyan
+Write-Host "--- Jem Tools Update Engine v1.2.2 ---" -ForegroundColor Cyan
 
 # 0. Ensure Directory Structure
 if (-not (Test-Path $ReleaseDir)) { New-Item -Path $ReleaseDir -ItemType Directory | Out-Null }
@@ -24,7 +24,8 @@ $References = "System.dll,System.Windows.Forms.dll,System.Drawing.dll,Microsoft.
 
 # 2.1 Compile Jem Tools.exe
 Write-Host "Compiling Core Suite..." -ForegroundColor Yellow
-& $csc /target:winexe /out:"$ReleaseDir\Jem Tools.exe" /win32icon:"$AssetsDir\jem_logo.ico" /reference:$References "$SrcDir\Program.cs" "$SrcDir\Shared\Models.cs" "$SrcDir\Windows\Modules.cs"
+$MainSources = @("$SrcDir\Shared\Models.cs", "$SrcDir\Windows\Modules.cs", "$SrcDir\macOS\Modules.cs", "$SrcDir\Linux\Modules.cs", "$SrcDir\Shared\TUIEngine.cs", "$SrcDir\Program.cs")
+& $csc /target:winexe /out:"$ReleaseDir\Jem Tools.exe" /win32icon:"$AssetsDir\jem_logo.ico" /reference:$References $MainSources
 if ($LASTEXITCODE -ne 0) { Write-Host "ERROR: Core Compilation failed." -ForegroundColor Red; exit }
 
 # 2.2 Compile Uninstaller.exe
@@ -75,7 +76,7 @@ Write-Host "Detected Changes:" -ForegroundColor Gray
 git status --short
 
 $msg = Read-Host "Enter commit message (Leave blank for 'Update v1.2.0')"
-if ([string]::IsNullOrWhiteSpace($msg)) { $msg = "Update v1.2.0: JemBoot Command Center Overhaul" }
+if ([string]::IsNullOrWhiteSpace($msg)) { $msg = "Update v1.2.2: Cross-Platform Parity and TUI Engine" }
 
 Write-Host "Pushing to GitHub..." -ForegroundColor Yellow
 # Clean up root files that are now in Release/

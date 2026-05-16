@@ -1,23 +1,17 @@
-// JEM TOOLS | Linux Entry Point
-using System;
+using System.Collections.Generic;
 using JEMTools.Platforms;
+using JEMTools.Shared;
 
 namespace JEMTools
 {
     class Program
     {
+        private const string Version = "1.2.2";
+
         static void Main(string[] args)
         {
-            Console.WriteLine("--- JEM TOOLS | Linux Edition v1.2.0 ---");
-            Console.WriteLine("Precision System Intelligence for Linux Professionals.\n");
-            
             var tools = LinuxModules.GetTools();
-            foreach (var tool in tools)
-            {
-                Console.WriteLine($"[{tool.Icon}] {tool.SpecificName} - {tool.Description}");
-            }
-            
-            Console.WriteLine("\n[!] Linux Support: JEM TOOLS supports GNOME, KDE, and XFCE environments.");
+            TUIEngine.Run(tools, "Linux", Version);
         }
     }
 }

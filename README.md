@@ -47,23 +47,27 @@ Run this command in an **Elevated PowerShell** window to deploy JEM TOOLS instan
 Set-ExecutionPolicy Bypass -Scope Process -Force; iwr 'https://github.com/Jemmy09/jemtools/archive/refs/heads/master.zip' -OutFile "$env:TEMP\jem.zip"; Expand-Archive "$env:TEMP\jem.zip" -Dest "$env:TEMP\jem" -Force; Start-Process "$env:TEMP\jem\jemtools-master\Setup.exe" -Verb RunAs
 ```
 
-### 🍎 macOS (Terminal)
+### 🍎 macOS (Terminal / .app Bundle)
 ```bash
 git clone https://github.com/Jemmy09/jemtools.git
 cd jemtools
-dotnet run --project src/macOS/Program.macOS.cs
+dotnet run --project src/macOS/JemTools.macOS.csproj
+
+# To generate a clickable "Jem Tools.app" bundle:
+# Run the PowerShell build script: pwsh scripts/build_all_platforms.ps1
 ```
 
 ### 🐧 Linux (Bash)
 ```bash
 git clone https://github.com/Jemmy09/jemtools.git
 cd jemtools
-dotnet run --project src/Linux/Program.Linux.cs
+dotnet run --project src/Linux/JemTools.Linux.csproj
 ```
 
 ---
 
-## 🗂️ Module Library (Windows)
+## 🗂️ Module Library (Cross-Platform Parity)
+*All platforms (Windows, macOS, and Linux) feature exactly 63 professional administrative modules organized into the following 7 identical categories.*
 
 <details>
 <summary><b>🔧 Maintenance (Deep Optimization)</b></summary>
@@ -172,16 +176,220 @@ dotnet run --project src/Linux/Program.Linux.cs
 
 </details>
 
-<details>
-<summary><b>🌍 Multi-Platform Expansion</b></summary>
+<details open>
+<summary><b>🌍 Multi-Platform Expansion (Windows, macOS, Linux)</b></summary>
 
-- 🍎 **macOS Support**: Dedicated module mapping to macOS System Information and Disk Utility.
-- 🐧 **Linux Support**: Native integration with GParted and Systemd-resolved.
-- 🔄 **Unified Architecture**: Shared C# models for consistent tool delivery across operating systems.
+- 🖥️ **Shared Intelligence**: Consistent 1:1 module parity across all operating systems.
+- 🍎 **macOS Native Integration**: Tools utilizing `diskutil`, `softwareupdate`, `system_profiler`, and native launch daemons.
+- 🐧 **Linux Native Integration**: Bash scripts leveraging `ufw`, `journalctl`, `fstrim`, `apt/dnf`, and `systemd`.
+- 🔄 **Synchronized TUI**: High-fidelity Terminal User Interface (TUI) for Unix systems powered by `.NET 8`, ensuring the same "Digital Gemstone" aesthetic.
+- 📦 **Native Execution**: Optimized command delivery using native shells (PowerShell, Zsh, Bash) for ultimate stability.
 
 </details>
 
 ---
+
+## 🗂️ Module Library (macOS)
+
+<details>
+<summary><b>🔧 Maintenance</b></summary>
+
+- ⚡ **Software Update**: Check for system software updates.
+- 🧹 **Clear User Cache**: Purge local user cache files.
+- 📂 **Clear System Cache**: Purge system-wide cache files.
+- 🔧 **Reset Permissions**: Fix home directory permissions.
+- 📊 **Purge Memory**: Force flush disk buffers/cache.
+- 🔍 **Spotlight Re-index**: Rebuild Spotlight search index.
+- 🚀 **Launch Services Reset**: Rebuild app association database.
+- 🔋 **Battery Health**: Check battery power status.
+- 🌙 **System Sleep Image**: Check hibernation file size.
+- 🔄 **System Restart**: Immediate system reboot.
+</details>
+
+<details>
+<summary><b>💻 System</b></summary>
+
+- 📋 **Activity Monitor**: Monitor processes and resources.
+- ℹ️ **System Information**: Detailed HW/SW specifications.
+- 💻 **Hardware Profiler**: CLI hardware summary.
+- ⚙️ **CPU Brand String**: Detailed processor model.
+- 📊 **Memory Capacity**: Total physical RAM in bytes.
+- 🐧 **Kernel Version**: Darwin kernel build info.
+- 🍎 **macOS Version**: Operating system build details.
+- 📦 **Loaded Extensions**: List active kernel extensions.
+- 🏁 **Boot Arguments**: View NVRAM boot parameters.
+- 🐚 **Terminal Shell**: Standard macOS terminal.
+</details>
+
+<details>
+<summary><b>⚙️ Admin</b></summary>
+
+- ⚙️ **Service List**: List managed services.
+- 💽 **Disk Utility**: Graphical disk management.
+- 📜 **Console Logs**: System and app log viewer.
+- 👥 **User Accounts**: List all system users.
+- 👤 **Group Accounts**: List all system groups.
+- 🗄️ **Directory Utility**: Advanced directory config.
+- 📡 **Screen Sharing**: Remote desktop client.
+- ⏱️ **System Uptime**: Check time since last boot.
+- 🔌 **Power Management**: View energy saver settings.
+- 📅 **Scheduled Events**: View wake/sleep schedule.
+</details>
+
+<details>
+<summary><b>🛡️ Security</b></summary>
+
+- 🛡️ **Firewall Status**: Check Application Firewall.
+- 🔒 **Gatekeeper Info**: Audit app security policy.
+- 🧱 **FileVault Status**: Check disk encryption.
+- 📂 **Open Network Files**: List files with network IDs.
+- 🔒 **Listening Ports**: Audit active listeners.
+- 🗝️ **Login Items**: List startup applications.
+- 🖋️ **Security Audit**: Audit code sign identities.
+- 🗝️ **Keychain Info**: List active keychains.
+- 📡 **Remote Login**: Check SSH/SFTP status.
+- 🔐 **Firmware Security**: Check EFI password status.
+</details>
+
+<details>
+<summary><b>📡 Network</b></summary>
+
+- 🔍 **IP Configuration**: Detailed interface diagnostics.
+- 🧼 **DNS Cache Flush**: Purge DNS resolver cache.
+- 📡 **Wi-Fi Profile**: Detailed Wi-Fi connection info.
+- 🔄 **Connectivity Test**: Check internet latency.
+- 📶 **Trace Route**: Map network hop paths.
+- 🛠️ **Network Diagnostics**: Legacy network toolkit.
+- 🗺️ **Active Routing**: Analyze routing table.
+- 👥 **ARP Table**: Analyze neighbor devices.
+- 🌐 **DNS Query (Dig)**: Advanced DNS record lookup.
+- 🔗 **Interface Setup**: List all network services.
+</details>
+
+<details>
+<summary><b>🔣 Utilities</b></summary>
+
+- 📝 **TextEdit**: Native plain text editor.
+- 📁 **Finder**: Open current directory.
+- 🧠 **Ollama AI Core**: Local AI deployment.
+- 🧮 **Calculator**: Native math utility.
+- 📅 **Calendar**: Schedule and events.
+- 📸 **Screenshot Toolkit**: Capture screen images/video.
+- 🔣 **Font Book**: Manage system fonts.
+- 🗝️ **Keychain Access**: Manage saved passwords.
+- 🎨 **ColorSync**: Display color management.
+- 📜 **Script Editor**: AppleScript and JXA tool.
+</details>
+
+<details>
+<summary><b>🔌 JemBoot</b></summary>
+
+- 🔌 **List USB Drives**: Identify connected USB media.
+- 💾 **Storage Usage**: Analyze mount points.
+- 📀 **Verify Disk**: Check disk partition map.
+
+</details>
+
+## 🗂️ Module Library (Linux)
+
+<details>
+<summary><b>🔧 Maintenance</b></summary>
+
+- ⚡ **System Update**: Full system package synchronization.
+- 🧹 **Package Cleanup**: Remove unused dependencies.
+- 💿 **SSD Trim**: Optimize SSD block allocation.
+- 📂 **Clear System Logs**: Purge old journal entries.
+- 🖼️ **Clear Temp Cache**: Purge temporary system files.
+- 🏁 **Update Grub**: Refresh bootloader configuration.
+- 🧠 **Refresh Initramfs**: Update initial RAM filesystem.
+- 🔧 **Repair Packages**: Fix broken dependency trees.
+- 🔓 **Fix Dpkg Lock**: Remove package manager locks.
+- 🔄 **System Reboot**: Perform a clean system restart.
+</details>
+
+<details>
+<summary><b>💻 System</b></summary>
+
+- 📋 **Process Monitor**: Advanced interactive monitor.
+- ℹ️ **System Info**: View architecture and kernel.
+- 💻 **Hardware Lister**: Brief hardware configuration.
+- ⚙️ **CPU Architecture**: Detailed processor specifications.
+- 📊 **Memory Stats**: Analyze RAM and swap usage.
+- 🔌 **PCI Bus Devices**: List all internal PCI devices.
+- 🖱️ **USB Bus Devices**: List all connected USB devices.
+- 🐧 **Kernel Specs**: View kernel and build details.
+- 📦 **Loaded Modules**: List active kernel modules.
+- 🐚 **Terminal Shell**: Open default system terminal.
+</details>
+
+<details>
+<summary><b>⚙️ Admin</b></summary>
+
+- ⚙️ **Service Manager**: List and manage background tasks.
+- 💽 **Partition Editor**: Graphical disk management.
+- 📜 **Real-time Logs**: Stream system log messages.
+- 📅 **Task Scheduler**: View automated cron jobs.
+- 👥 **User List**: List all registered accounts.
+- 👤 **Active Sessions**: View currently logged in users.
+- ⏱️ **System Uptime**: Check how long system has run.
+- 🏃 **Runlevel Status**: Check current system state.
+- 🏷️ **Hostname Config**: View system network name.
+- 🗄️ **DMI Table Info**: View BIOS/Firmware data.
+</details>
+
+<details>
+<summary><b>🛡️ Security</b></summary>
+
+- 🛡️ **Firewall Status**: Audit UFW configurations.
+- 🔒 **Network Ports**: Analyze listening services.
+- 🗝️ **SSH Audit**: Review SSH login attempts.
+- 🆘 **Failed Logins**: Check recent failed logins.
+- 🔗 **AppArmor Status**: Check security profiles.
+- 🧱 **SELinux Context**: Check SELinux enforcement.
+- 🔑 **Password Aging**: View account security dates.
+- 🖋️ **Sudoers Check**: Audit sudo privileges.
+- 🆘 **File Integrity**: Check file attributes.
+- 🎲 **System Entropy**: Analyze randomness pool.
+</details>
+
+<details>
+<summary><b>📡 Network</b></summary>
+
+- 🔍 **IP Config**: Analyze network interfaces.
+- 🧼 **DNS Cache Flush**: Purge local DNS resolver.
+- 📡 **Network Manager**: View device configurations.
+- 🔄 **Connectivity Test**: Check internet latency.
+- 📶 **Trace Route**: Map network hop paths.
+- 🌐 **DNS Query (Dig)**: Perform advanced DNS lookup.
+- 🔗 **Host Lookup**: Translate name to IP.
+- 📊 **Socket Stats**: View connection summaries.
+- 🗺️ **Route Table**: Analyze network routing.
+- 👥 **ARP Table**: Analyze neighbor devices.
+</details>
+
+<details>
+<summary><b>🔣 Utilities</b></summary>
+
+- 📝 **Terminal Editor**: Lightweight text editor.
+- 📁 **File Browser**: Open current directory.
+- 🧠 **Ollama AI Core**: Local AI deployment.
+- 🧮 **Calculator (bc)**: Precision math engine.
+- 📅 **System Calendar**: View terminal calendar.
+- 🔢 **Base64 Encoder**: Encode text to Base64.
+- 💎 **SHA256 Hash**: Check file integrity.
+- 🗝️ **Password Gen**: Create secure passwords.
+- 🔣 **Character Map**: View symbol catalog.
+- 🌍 **Localization**: View system locale.
+</details>
+
+<details>
+<summary><b>🔌 JemBoot</b></summary>
+
+- 🔌 **Block Layout**: Map all storage disks.
+- 💾 **Active Mounts**: View mounted filesystems.
+- 📀 **Disk Partitioning**: View partition tables.
+
+</details>
 
 ## 🔒 Security & Trust
 Jem Tools is built with a **Privacy-First** philosophy:

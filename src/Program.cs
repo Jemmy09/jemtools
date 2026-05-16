@@ -17,14 +17,14 @@ using JEMTools.Platforms;
 [assembly: AssemblyProduct("JEM TOOLS | Admin Edition")]
 [assembly: AssemblyCopyright("Copyright © 2026 Jemmy Francisco")]
 [assembly: AssemblyTrademark("JEM TOOLS")]
-[assembly: AssemblyVersion("1.2.0.0")]
-[assembly: AssemblyFileVersion("1.2.0.0")]
+[assembly: AssemblyVersion("1.2.2.0")]
+[assembly: AssemblyFileVersion("1.2.2.0")]
 
 namespace WindowsSystemToolMenu
 {
     /// <summary>
     /// JEM TOOLS | Admin Edition - High-fidelity system administration suite.
-    /// v1.2.0 Optimized for performance and professional deployment.
+    /// v1.2.2 Optimized for performance and professional deployment.
     /// </summary>
     public class Program
     {
@@ -103,7 +103,7 @@ namespace WindowsSystemToolMenu
 
         public ModernAdminForm()
         {
-            this.Text = "Jem Tools v1.2.0";
+            this.Text = "Jem Tools v1.2.2";
             this.WindowState = FormWindowState.Maximized;
             this.MinimumSize = new Size(1200, 800);
             this.BackColor = ThemeDarkBg;
@@ -346,11 +346,14 @@ namespace WindowsSystemToolMenu
 
         private void RefreshDisplay()
         {
-            dashboardView.Visible = (currentCategory != "ABOUT" && currentCategory != "POLICIES" && currentCategory != "JEMBOOT");
-            aboutView.Visible = (currentCategory == "ABOUT");
-            policiesView.Visible = (currentCategory == "POLICIES");
-            jemBootView.Visible = (currentCategory == "JEMBOOT");
+            // Mutually exclusive view switching — only one panel visible at a time
+            bool isDashboard = (currentCategory != "ABOUT" && currentCategory != "POLICIES" && currentCategory != "JEMBOOT");
+            dashboardView.Visible  = isDashboard;
+            aboutView.Visible      = (currentCategory == "ABOUT");
+            policiesView.Visible   = (currentCategory == "POLICIES");
+            jemBootView.Visible    = (currentCategory == "JEMBOOT");
 
+            // Update header title
             if (currentCategory == "ALL") {
                 titleLabel.Text = "Infrastructure Nodes";
             } else if (currentCategory == "ABOUT") {
@@ -360,17 +363,18 @@ namespace WindowsSystemToolMenu
             } else if (currentCategory == "JEMBOOT") {
                 titleLabel.Text = "JemBoot | Flash Forge";
             } else {
-                string formattedCat = currentCategory.Substring(0, 1).ToUpper() + currentCategory.Substring(1).ToLower();
-                titleLabel.Text = formattedCat + " Nodes";
+                string cap = currentCategory.Substring(0, 1).ToUpper() + currentCategory.Substring(1).ToLower();
+                titleLabel.Text = cap + " Nodes";
             }
 
-            if (dashboardView.Visible) {
+            // Only rebuild cards when the dashboard is the active view
+            if (isDashboard) {
                 cardContainer.SuspendLayout();
                 cardContainer.Controls.Clear();
                 string searchText = searchBox.Text.ToLower();
                 int visibleCount = 0;
                 foreach (ToolItem tool in tools) {
-                    if ((currentCategory == "ALL" || tool.Category == currentCategory) && 
+                    if ((currentCategory == "ALL" || tool.Category == currentCategory) &&
                         (string.IsNullOrEmpty(searchText) || tool.SpecificName.ToLower().Contains(searchText))) {
                         cardContainer.Controls.Add(CreateToolCard(tool));
                         visibleCount++;
@@ -576,7 +580,7 @@ namespace WindowsSystemToolMenu
 
             // App name & version
             content.Controls.Add(MakeInfoLabel("JEM TOOLS | Admin Edition", new Font("Segoe UI Light", 22), ThemeAccent, y, 45)); y += 45;
-            content.Controls.Add(MakeInfoLabel("Version 1.0.8 (Production)", new Font("Segoe UI", 11), Color.LightGray, y, 25)); y += 35;
+            content.Controls.Add(MakeInfoLabel("Version 1.2.2 (Production)", new Font("Segoe UI", 11), Color.LightGray, y, 25)); y += 35;
 
             // Divider 1
             content.Controls.Add(new Panel { Size = new Size(420, 1), Location = new Point(0, y), BackColor = Color.FromArgb(50, 50, 65) });
@@ -697,7 +701,7 @@ namespace WindowsSystemToolMenu
 
         private Panel CreateJemBootView()
         {
-            Panel p = new Panel { Dock = DockStyle.Fill, Visible = false, BackColor = ThemeDarkBg, Padding = new Padding(30) };
+            Panel p = new Panel { Dock = DockStyle.Top, Height = 550, Visible = false, BackColor = ThemeDarkBg, Padding = new Padding(30) };
 
             // --- HEADER ---
             Panel header = new Panel { Dock = DockStyle.Top, Height = 70 };
@@ -763,7 +767,7 @@ namespace WindowsSystemToolMenu
             terminalHeader.Controls.Add(termTitle);
 
             RichTextBox console = new RichTextBox { Dock = DockStyle.Fill, BackColor = Color.FromArgb(20, 20, 20), ForeColor = Color.FromArgb(0, 255, 150), Font = new Font("Consolas", 9), ReadOnly = true, BorderStyle = BorderStyle.None };
-            console.Text = "Initializing JemBoot v1.2.0 Professional Suite...\nKernel loaded. Infrastructure synchronized.\n\n";
+            console.Text = "Initializing JemBoot v1.2.2 Professional Suite...\nKernel loaded. Infrastructure synchronized.\n\n";
 
             Panel terminalContainer = new Panel { Dock = DockStyle.Fill, Padding = new Padding(0, 20, 0, 0) };
             terminalContainer.Controls.Add(console);
@@ -826,7 +830,7 @@ namespace WindowsSystemToolMenu
                 };
 
                 Panel content = new Panel { Dock = DockStyle.Fill, Padding = new Padding(25) };
-                Label gTitle = new Label { Text = "WELCOME TO JEMBOOT v1.2.0", Font = new Font("Segoe UI Bold", 16), ForeColor = ThemeAccent, Dock = DockStyle.Top, Height = 40 };
+                Label gTitle = new Label { Text = "WELCOME TO JEMBOOT v1.2.2", Font = new Font("Segoe UI Bold", 16), ForeColor = ThemeAccent, Dock = DockStyle.Top, Height = 40 };
                 
                 RichTextBox txt = new RichTextBox { 
                     Dock = DockStyle.Fill, 

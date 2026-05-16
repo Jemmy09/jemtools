@@ -11,8 +11,8 @@ using System.Reflection;
 [assembly: AssemblyCompany("JEM TOOLS")]
 [assembly: AssemblyProduct("JEM TOOLS Suite")]
 [assembly: AssemblyCopyright("Copyright © 2026 Jemmy Francisco")]
-[assembly: AssemblyVersion("1.2.0.0")]
-[assembly: AssemblyFileVersion("1.2.0.0")]
+[assembly: AssemblyVersion("1.2.2.0")]
+[assembly: AssemblyFileVersion("1.2.2.0")]
 
 
 namespace JEMToolsSetup
@@ -159,7 +159,7 @@ namespace JEMToolsSetup
                     if (progress <= 100) pbar.Value = progress;
                     
                     if (progress == 20) lblStatus.Text = "Preparing extraction...";
-                    if (progress == 40) lblStatus.Text = "Extracting JEMTOOLS.exe to AppData...";
+                    if (progress == 40) lblStatus.Text = "Extracting Jem Tools.exe to Program Files...";
                     if (progress == 60) lblStatus.Text = "Configuring system settings...";
                     if (progress == 80) lblStatus.Text = "Finalizing installation...";
                     
@@ -219,7 +219,7 @@ namespace JEMToolsSetup
                         key.SetValue("UninstallString", "\"" + Path.Combine(targetDir, "Uninstaller.exe") + "\"");
                         key.SetValue("DisplayIcon", exePath);
                         key.SetValue("Publisher", "Jemmy Francisco");
-                        key.SetValue("DisplayVersion", "1.2.0");
+                        key.SetValue("DisplayVersion", "1.2.2");
                         key.SetValue("InstallLocation", targetDir);
                         key.SetValue("EstimatedSize", bytes.Length / 1024);
                         key.SetValue("NoModify", 1);
@@ -270,7 +270,7 @@ namespace JEMToolsSetup
 
                 // Remove Desktop Shortcut
                 string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                string shortcutPath = Path.Combine(desktop, "JEM TOOLS.lnk");
+                string shortcutPath = Path.Combine(desktop, "Jem Tools.lnk");
                 if (File.Exists(shortcutPath)) File.Delete(shortcutPath);
 
                 // Remove Registry Keys
