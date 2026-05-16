@@ -24,7 +24,7 @@ $References = "System.dll,System.Windows.Forms.dll,System.Drawing.dll,Microsoft.
 
 # 2.1 Compile Jem Tools.exe
 Write-Host "Compiling Core Suite..." -ForegroundColor Yellow
-& $csc /target:winexe /out:"$ReleaseDir\Jem Tools.exe" /win32icon:"$AssetsDir\jem_logo.ico" /reference:$References "$SrcDir\Program.cs"
+& $csc /target:winexe /out:"$ReleaseDir\Jem Tools.exe" /win32icon:"$AssetsDir\jem_logo.ico" /reference:$References "$SrcDir\Program.cs" "$SrcDir\Shared\Models.cs" "$SrcDir\Windows\Modules.cs"
 if ($LASTEXITCODE -ne 0) { Write-Host "ERROR: Core Compilation failed." -ForegroundColor Red; exit }
 
 # 2.2 Compile Uninstaller.exe

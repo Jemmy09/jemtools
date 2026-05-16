@@ -8,8 +8,8 @@
 
   [![Status](https://img.shields.io/badge/STATUS-LIVE-00c853?style=for-the-badge)](#)
   [![Version](https://img.shields.io/badge/VERSION-1.2.0-0288d1?style=for-the-badge)](#)
-  [![OS](https://img.shields.io/badge/WINDOWS-7%20%7C%208%20%7C%2010%20%7C%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white)](#)
-  [![Tech](https://img.shields.io/badge/C%23-.NET%204.8-7b1fa2?style=for-the-badge&logo=dotnet&logoColor=white)](#)
+  [![OS](https://img.shields.io/badge/PLATFORMS-WINDOWS%20%7C%20MACOS%20%7C%20LINUX-0078d4?style=for-the-badge&logo=windows&logoColor=white)](#)
+  [![Tech](https://img.shields.io/badge/C%23-.NET%208%20%2F%204.8-7b1fa2?style=for-the-badge&logo=dotnet&logoColor=white)](#)
   [![License](https://img.shields.io/badge/License-MIT-f9a825?style=for-the-badge)](LICENSE)
 
 </div>
@@ -173,6 +173,15 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iwr 'https://github.com/Jemmy0
 - 💾 **Universal Targets**: Transform USB Flash, SSD, and HDD into bootable media.
 - 🧹 **Quick Format USB**: One-click NTFS/GPT initialization for removable storage.
 - ⏏️ **Safely Eject All**: Automated sequence to safely unmount all USB devices.
+
+</details>
+
+<details>
+<summary><b>🌍 Multi-Platform Expansion (Alpha)</b></summary>
+
+- 🍎 **macOS Support**: Dedicated module mapping to macOS System Information and Disk Utility.
+- 🐧 **Linux Support**: Native integration with GParted and Systemd-resolved.
+- 🔄 **Unified Architecture**: Shared C# models for consistent tool delivery across operating systems.
 
 </details>
 
