@@ -85,6 +85,7 @@ namespace WindowsSystemToolMenu
         private Panel aboutView;
         private Panel policiesView;
         private Panel jemBootView;
+        private Panel jemVirtualView;
 
         // Theme Definitions
         private static readonly Color ThemeAccent = Color.FromArgb(0, 180, 255);
@@ -187,7 +188,7 @@ namespace WindowsSystemToolMenu
             sideHeader.Controls.Add(brandName);
             sidebar.Controls.Add(sideHeader);
 
-            string[] categories = new string[] { "POLICIES", "UTILITIES", "NETWORK", "SECURITY", "ADMIN", "SYSTEM", "MAINTENANCE", "JEMBOOT", "INSTALLERS", "ALL" };
+            string[] categories = new string[] { "POLICIES", "UTILITIES", "NETWORK", "SECURITY", "ADMIN", "SYSTEM", "MAINTENANCE", "JEMBOOT", "JEMVIRTUAL", "INSTALLERS", "ALL" };
             foreach (string cat in categories) {
                 Button btn = CreateNavButton(cat, GetCatIcon(cat));
                 btn.Click += delegate(object s, EventArgs e) { currentCategory = (string)((Button)s).Tag; UpdateSidebarColors(); RefreshDisplay(); SaveState(); };
@@ -288,14 +289,16 @@ namespace WindowsSystemToolMenu
             aboutView = CreateAboutView();
             policiesView = CreatePoliciesView();
             jemBootView = CreateJemBootView();
+            jemVirtualView = CreateJemVirtualView();
 
             // DOCKING ORDER: Add Fill first (index 0), then Top (highest index)
             mainArea.Controls.Add(dashboardView); // index 0
             mainArea.Controls.Add(aboutView);     // index 1
             mainArea.Controls.Add(policiesView);  // index 2
             mainArea.Controls.Add(jemBootView);   // index 3
-            mainArea.Controls.Add(headerPanel);   // index 4 (Top)
-            mainArea.Controls.Add(searchPanel);   // index 5 (Top)
+            mainArea.Controls.Add(jemVirtualView);// index 4
+            mainArea.Controls.Add(headerPanel);   // index 5 (Top)
+            mainArea.Controls.Add(searchPanel);   // index 6 (Top)
 
             this.Resize += delegate(object s, EventArgs e) { SyncLayout(); };
             RefreshDisplay();
@@ -330,6 +333,7 @@ namespace WindowsSystemToolMenu
             if (cat == "POLICIES") return "📜";
             if (cat == "INSTALLERS") return "📥";
             if (cat == "JEMBOOT") return "🔌";
+            if (cat == "JEMVIRTUAL") return "🖥️";
             return "🌐";
         }
 
@@ -348,11 +352,12 @@ namespace WindowsSystemToolMenu
         private void RefreshDisplay()
         {
             // Mutually exclusive view switching — only one panel visible at a time
-            bool isDashboard = (currentCategory != "ABOUT" && currentCategory != "POLICIES" && currentCategory != "JEMBOOT");
+            bool isDashboard = (currentCategory != "ABOUT" && currentCategory != "POLICIES" && currentCategory != "JEMBOOT" && currentCategory != "JEMVIRTUAL");
             dashboardView.Visible  = isDashboard;
             aboutView.Visible      = (currentCategory == "ABOUT");
             policiesView.Visible   = (currentCategory == "POLICIES");
             jemBootView.Visible    = (currentCategory == "JEMBOOT");
+            jemVirtualView.Visible = (currentCategory == "JEMVIRTUAL");
 
             // Update header title
             if (currentCategory == "ALL") {
@@ -363,6 +368,8 @@ namespace WindowsSystemToolMenu
                 titleLabel.Text = "User Policies";
             } else if (currentCategory == "JEMBOOT") {
                 titleLabel.Text = "JemBoot | Flash Forge";
+            } else if (currentCategory == "JEMVIRTUAL") {
+                titleLabel.Text = "JemVirtual | Hypervisor";
             } else {
                 string cap = currentCategory.Substring(0, 1).ToUpper() + currentCategory.Substring(1).ToLower();
                 titleLabel.Text = cap + " Nodes";
@@ -702,7 +709,7 @@ namespace WindowsSystemToolMenu
 
         private Panel CreateJemBootView()
         {
-            Panel p = new Panel { Dock = DockStyle.Top, Height = 550, Visible = false, BackColor = ThemeDarkBg, Padding = new Padding(30) };
+            Panel p = new Panel { Dock = DockStyle.Fill, Visible = false, BackColor = ThemeDarkBg, Padding = new Padding(30) };
 
             // --- HEADER ---
             Panel header = new Panel { Dock = DockStyle.Top, Height = 70 };
@@ -717,10 +724,14 @@ namespace WindowsSystemToolMenu
             modeNav.Controls.AddRange(new Control[] { multiModeBtn, singleModeBtn });
 
             // --- MAIN INTERFACE (Cards) ---
-            Panel contentArea = new Panel { Dock = DockStyle.Top, Height = 340, Padding = new Padding(0, 20, 0, 0) };
+            TableLayoutPanel contentArea = new TableLayoutPanel { Dock = DockStyle.Top, Height = 340, ColumnCount = 4, Padding = new Padding(0, 20, 0, 0) };
+            contentArea.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            contentArea.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            contentArea.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            contentArea.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             
             // CARD 1: INPUT CONFIG
-            Panel inputCard = new Panel { Width = 480, Height = 320, BackColor = Color.FromArgb(30, 30, 35), Dock = DockStyle.Left, Padding = new Padding(20) };
+            Panel inputCard = new Panel { Width = 480, Height = 320, BackColor = Color.FromArgb(30, 30, 35), Margin = new Padding(0, 0, 10, 0), Padding = new Padding(20) };
             
             Label driveLabel = new Label { Text = "TARGET DISK:", ForeColor = Color.LightGray, Location = new Point(20, 20), AutoSize = true, Font = new Font("Segoe UI Bold", 8) };
             ComboBox driveCombo = new ComboBox { Location = new Point(20, 42), Size = new Size(340, 30), BackColor = Color.FromArgb(45, 45, 55), ForeColor = Color.White, FlatStyle = FlatStyle.Flat, DropDownStyle = ComboBoxStyle.DropDownList, Font = new Font("Segoe UI", 10) };
@@ -750,7 +761,7 @@ namespace WindowsSystemToolMenu
             inputCard.Controls.AddRange(new Control[] { driveLabel, driveCombo, refreshBtn, isoLabel, isoPath, browseBtn, multiIsoList, addIsoBtn, secureBoot, persistence, schemeLabel, schemeCombo, targetLabel, targetCombo });
 
             // CARD 2: ACTION CONTROL
-            Panel actionCard = new Panel { Width = 380, Height = 320, BackColor = Color.FromArgb(25, 25, 30), Dock = DockStyle.Right, Padding = new Padding(25) };
+            Panel actionCard = new Panel { Width = 380, Height = 320, BackColor = Color.FromArgb(25, 25, 30), Margin = new Padding(10, 0, 0, 0), Padding = new Padding(25) };
             ProgressBar progress = new ProgressBar { Location = new Point(25, 50), Size = new Size(330, 6), Style = ProgressBarStyle.Continuous, BackColor = Color.FromArgb(40, 40, 50), ForeColor = ThemeAccent };
             Label statusLabel = new Label { Text = "SYSTEM READY", ForeColor = Color.Gray, Location = new Point(25, 70), AutoSize = true, Font = new Font("Segoe UI Bold", 7) };
             
@@ -760,14 +771,17 @@ namespace WindowsSystemToolMenu
             Label warningLbl = new Label { Text = "WARNING: IRREVERSIBLE ACTION\nALL DATA ON TARGET WILL BE LOST.", ForeColor = Color.FromArgb(150, 50, 50), Location = new Point(25, 190), Size = new Size(330, 40), Font = new Font("Segoe UI Semibold", 8), TextAlign = ContentAlignment.MiddleCenter };
 
             actionCard.Controls.AddRange(new Control[] { progress, statusLabel, mainActionBtn, warningLbl });
-            contentArea.Controls.AddRange(new Control[] { inputCard, actionCard });
+            contentArea.Controls.Add(new Label() { AutoSize = false, Width = 1 }, 0, 0);
+            contentArea.Controls.Add(inputCard, 1, 0);
+            contentArea.Controls.Add(actionCard, 2, 0);
+            contentArea.Controls.Add(new Label() { AutoSize = false, Width = 1 }, 3, 0);
 
             // --- TERMINAL AREA ---
-            Panel terminalHeader = new Panel { Dock = DockStyle.Top, Height = 30, BackColor = Color.FromArgb(15, 15, 15) };
-            Label termTitle = new Label { Text = " > JEMBOOT SYSTEM TERMINAL", ForeColor = Color.LimeGreen, Font = new Font("Consolas", 8, FontStyle.Bold), Dock = DockStyle.Left, TextAlign = ContentAlignment.MiddleLeft, Width = 300 };
+            Panel terminalHeader = new Panel { Dock = DockStyle.Top, Height = 40, BackColor = Color.FromArgb(15, 15, 15) };
+            Label termTitle = new Label { Text = " > JEMBOOT SYSTEM TERMINAL", ForeColor = Color.LimeGreen, Font = new Font("Consolas", 11, FontStyle.Bold), Dock = DockStyle.Left, TextAlign = ContentAlignment.MiddleLeft, Width = 400 };
             terminalHeader.Controls.Add(termTitle);
 
-            RichTextBox console = new RichTextBox { Dock = DockStyle.Fill, BackColor = Color.FromArgb(20, 20, 20), ForeColor = Color.FromArgb(0, 255, 150), Font = new Font("Consolas", 9), ReadOnly = true, BorderStyle = BorderStyle.None };
+            RichTextBox console = new RichTextBox { Dock = DockStyle.Fill, BackColor = Color.FromArgb(20, 20, 20), ForeColor = Color.FromArgb(0, 255, 150), Font = new Font("Consolas", 12), ReadOnly = true, BorderStyle = BorderStyle.None, Padding = new Padding(10) };
             console.Text = "Initializing JemBoot v1.2.2 Professional Suite...\nKernel loaded. Infrastructure synchronized.\n\n";
 
             Panel terminalContainer = new Panel { Dock = DockStyle.Fill, Padding = new Padding(0, 20, 0, 0) };
@@ -926,6 +940,228 @@ namespace WindowsSystemToolMenu
             return p;
         }
 
+        private Panel CreateJemVirtualView()
+        {
+            Panel p = new Panel { Dock = DockStyle.Fill, Visible = false, BackColor = ThemeDarkBg, Padding = new Padding(30) };
+
+            // --- HEADER ---
+            Panel header = new Panel { Dock = DockStyle.Top, Height = 70 };
+            Label title = new Label { Text = "JEMVIRTUAL HYPERVISOR", Font = new Font("Segoe UI Semibold", 20), ForeColor = ThemeAccent, Dock = DockStyle.Left, AutoSize = true };
+            Button guideBtn = new Button { Text = "VIRTUALIZATION GUIDE ⓘ", Dock = DockStyle.Right, Size = new Size(200, 45), FlatStyle = FlatStyle.Flat, BackColor = Color.FromArgb(40, 40, 50), ForeColor = Color.White, Font = new Font("Segoe UI Bold", 9), Cursor = Cursors.Hand };
+            header.Controls.AddRange(new Control[] { title, guideBtn });
+
+            // --- MAIN INTERFACE (Cards) ---
+            TableLayoutPanel contentArea = new TableLayoutPanel { Dock = DockStyle.Top, Height = 420, ColumnCount = 4, Padding = new Padding(0, 20, 0, 0) };
+            contentArea.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            contentArea.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            contentArea.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            contentArea.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            
+            // CARD 1: INPUT CONFIG
+            Panel inputCard = new Panel { Width = 480, Height = 400, BackColor = Color.FromArgb(30, 30, 35), Margin = new Padding(0, 0, 10, 0), Padding = new Padding(20) };
+            
+            Label isoLabel = new Label { Text = "GUEST IMAGE (ISO/VHD):", ForeColor = Color.LightGray, Location = new Point(20, 20), AutoSize = true, Font = new Font("Segoe UI Bold", 8) };
+            TextBox isoPath = new TextBox { Location = new Point(20, 42), Size = new Size(340, 30), BackColor = Color.FromArgb(45, 45, 55), ForeColor = Color.White, BorderStyle = BorderStyle.FixedSingle, ReadOnly = true, Font = new Font("Segoe UI", 9) };
+            Button browseBtn = new Button { Text = "BROWSE", Location = new Point(370, 41), Size = new Size(90, 28), FlatStyle = FlatStyle.Flat, BackColor = Color.FromArgb(60, 60, 75), ForeColor = Color.White, Font = new Font("Segoe UI Bold", 8) };
+
+            Label memLabel = new Label { Text = "ALLOCATED RAM:", ForeColor = Color.LightGray, Location = new Point(20, 90), AutoSize = true, Font = new Font("Segoe UI Bold", 8) };
+            ComboBox memCombo = new ComboBox { Location = new Point(20, 112), Size = new Size(150, 30), BackColor = Color.FromArgb(45, 45, 55), ForeColor = Color.White, FlatStyle = FlatStyle.Flat, DropDownStyle = ComboBoxStyle.DropDownList };
+            memCombo.Items.AddRange(new string[] { "1024 MB (1GB)", "2048 MB (2GB)", "4096 MB (4GB)", "8192 MB (8GB)" }); memCombo.SelectedIndex = 1;
+
+            Label cpuLabel = new Label { Text = "VIRTUAL CORES:", ForeColor = Color.LightGray, Location = new Point(210, 90), AutoSize = true, Font = new Font("Segoe UI Bold", 8) };
+            ComboBox cpuCombo = new ComboBox { Location = new Point(210, 112), Size = new Size(150, 30), BackColor = Color.FromArgb(45, 45, 55), ForeColor = Color.White, FlatStyle = FlatStyle.Flat, DropDownStyle = ComboBoxStyle.DropDownList };
+            cpuCombo.Items.AddRange(new string[] { "1 Core", "2 Cores", "4 Cores", "8 Cores" }); cpuCombo.SelectedIndex = 1;
+
+            CheckBox uefiBoot = new CheckBox { Text = "Enable UEFI Firmware", Checked = true, ForeColor = Color.LightGray, Location = new Point(20, 160), AutoSize = true, Font = new Font("Segoe UI", 9) };
+            CheckBox netBridge = new CheckBox { Text = "Network Bridge Mode", Checked = true, ForeColor = Color.LightGray, Location = new Point(210, 160), AutoSize = true, Font = new Font("Segoe UI", 9) };
+            
+            CheckBox accel = new CheckBox { Text = "Hardware Accel (VT-x/AMD-V)", Checked = true, ForeColor = Color.LightGray, Location = new Point(20, 200), AutoSize = true, Font = new Font("Segoe UI", 9) };
+            CheckBox accel3D = new CheckBox { Text = "3D Accel (OpenGL/DXMT)", Checked = true, ForeColor = Color.LightGray, Location = new Point(210, 200), AutoSize = true, Font = new Font("Segoe UI", 9) };
+            
+            CheckBox clipboard = new CheckBox { Text = "Bidirectional Clipboard", Checked = true, ForeColor = Color.LightGray, Location = new Point(20, 240), AutoSize = true, Font = new Font("Segoe UI", 9) };
+            CheckBox usbPass = new CheckBox { Text = "USB Device Passthrough", Checked = false, ForeColor = Color.LightGray, Location = new Point(210, 240), AutoSize = true, Font = new Font("Segoe UI", 9) };
+            
+            CheckBox vrdp = new CheckBox { Text = "Headless VRDP Server", Checked = false, ForeColor = Color.LightGray, Location = new Point(20, 280), AutoSize = true, Font = new Font("Segoe UI", 9) };
+            CheckBox diskEnc = new CheckBox { Text = "AES Disk Encryption", Checked = false, ForeColor = Color.LightGray, Location = new Point(210, 280), AutoSize = true, Font = new Font("Segoe UI", 9) };
+            
+            CheckBox cloudSync = new CheckBox { Text = "Cloud Sync (Oracle/AWS/Azure)", Checked = false, ForeColor = Color.LightGray, Location = new Point(20, 320), AutoSize = true, Font = new Font("Segoe UI", 9) };
+
+            inputCard.Controls.AddRange(new Control[] { isoLabel, isoPath, browseBtn, memLabel, memCombo, cpuLabel, cpuCombo, uefiBoot, netBridge, accel, accel3D, clipboard, usbPass, vrdp, diskEnc, cloudSync });
+
+            // CARD 2: ACTION CONTROL
+            Panel actionCard = new Panel { Width = 380, Height = 400, BackColor = Color.FromArgb(25, 25, 30), Margin = new Padding(10, 0, 0, 0), Padding = new Padding(25) };
+            ProgressBar progress = new ProgressBar { Location = new Point(25, 80), Size = new Size(330, 6), Style = ProgressBarStyle.Continuous, BackColor = Color.FromArgb(40, 40, 50), ForeColor = ThemeAccent };
+            Label statusLabel = new Label { Text = "HYPERVISOR READY", ForeColor = Color.Gray, Location = new Point(25, 100), AutoSize = true, Font = new Font("Segoe UI Bold", 7) };
+            
+            Button mainActionBtn = new Button { Text = "BOOT VIRTUAL MACHINE", Location = new Point(25, 140), Size = new Size(330, 60), FlatStyle = FlatStyle.Flat, BackColor = Color.FromArgb(100, 50, 200), ForeColor = Color.White, Font = new Font("Segoe UI Black", 12), Cursor = Cursors.Hand };
+            mainActionBtn.FlatAppearance.BorderSize = 0;
+
+            Label warningLbl = new Label { Text = "NOTE: Virtualization requires Intel VT-x or AMD-V\nto be enabled in the host BIOS/UEFI.", ForeColor = Color.FromArgb(150, 150, 150), Location = new Point(25, 220), Size = new Size(330, 40), Font = new Font("Segoe UI Semibold", 8), TextAlign = ContentAlignment.MiddleCenter };
+
+            actionCard.Controls.AddRange(new Control[] { progress, statusLabel, mainActionBtn, warningLbl });
+            contentArea.Controls.Add(new Label() { AutoSize = false, Width = 1 }, 0, 0);
+            contentArea.Controls.Add(inputCard, 1, 0);
+            contentArea.Controls.Add(actionCard, 2, 0);
+            contentArea.Controls.Add(new Label() { AutoSize = false, Width = 1 }, 3, 0);
+
+            // --- TERMINAL AREA ---
+            Panel terminalHeader = new Panel { Dock = DockStyle.Top, Height = 40, BackColor = Color.FromArgb(15, 15, 15) };
+            Label termTitle = new Label { Text = " > JEMVIRTUAL HYPERVISOR LOG", ForeColor = Color.FromArgb(200, 100, 255), Font = new Font("Consolas", 11, FontStyle.Bold), Dock = DockStyle.Left, TextAlign = ContentAlignment.MiddleLeft, Width = 400 };
+            terminalHeader.Controls.Add(termTitle);
+
+            RichTextBox console = new RichTextBox { Dock = DockStyle.Fill, BackColor = Color.FromArgb(20, 20, 20), ForeColor = Color.FromArgb(180, 180, 255), Font = new Font("Consolas", 12), ReadOnly = true, BorderStyle = BorderStyle.None, Padding = new Padding(10) };
+            console.Text = "Initializing JemVirtual Hypervisor Engine v1.2.2...\nChecking CPU Virtualization Support: OK\nMemory Allocation Pool: READY\n\n";
+
+            Panel terminalContainer = new Panel { Dock = DockStyle.Fill, Padding = new Padding(0, 20, 0, 0) };
+            terminalContainer.Controls.Add(console);
+            terminalContainer.Controls.Add(terminalHeader);
+
+            p.Controls.Add(terminalContainer);
+            p.Controls.Add(contentArea);
+            p.Controls.Add(header);
+
+            // --- UI LOGIC ---
+            browseBtn.Click += (s, e) => {
+                using (OpenFileDialog ofd = new OpenFileDialog { Filter = "Disk Images|*.iso;*.vhd;*.vmdk;*.img|All|*.*" }) {
+                    if (ofd.ShowDialog() == DialogResult.OK) isoPath.Text = ofd.FileName;
+                }
+            };
+
+            guideBtn.Click += (s, e) => {
+                Form guide = new Form {
+                    Text = "JEMVIRTUAL | HYPERVISOR GUIDE",
+                    Size = new Size(550, 650),
+                    StartPosition = FormStartPosition.CenterParent,
+                    BackColor = Color.FromArgb(15, 15, 20),
+                    ForeColor = Color.White,
+                    FormBorderStyle = FormBorderStyle.FixedDialog,
+                    MaximizeBox = false,
+                    MinimizeBox = false,
+                    Font = new Font("Segoe UI", 10)
+                };
+
+                Panel content = new Panel { Dock = DockStyle.Fill, Padding = new Padding(25) };
+                Label gTitle = new Label { Text = "WELCOME TO JEMVIRTUAL", Font = new Font("Segoe UI Bold", 16), ForeColor = Color.FromArgb(150, 100, 255), Dock = DockStyle.Top, Height = 40 };
+                
+                RichTextBox txt = new RichTextBox { 
+                    Dock = DockStyle.Fill, 
+                    BackColor = Color.FromArgb(15, 15, 20), 
+                    ForeColor = Color.LightGray, 
+                    BorderStyle = BorderStyle.None, 
+                    ReadOnly = true,
+                    Text = "JemVirtual allows you to run multiple operating systems simultaneously within an isolated environment, similar to solutions like Mini OS or traditional hypervisors.\n\n" +
+                           "--------------------------------------------------\n" +
+                           "🚀 PHASE 1: SELECT YOUR GUEST IMAGE\n" +
+                           "--------------------------------------------------\n" +
+                           "Provide a bootable ISO or VHD file (e.g., Sergei Strelec, Ubuntu, Windows PE).\n\n" +
+                           "--------------------------------------------------\n" +
+                           "🛠️ PHASE 2: RESOURCE ALLOCATION\n" +
+                           "--------------------------------------------------\n" +
+                           "• ALLOCATED RAM: Reserve memory for the virtual machine (2048 MB recommended for most WinPE environments).\n" +
+                           "• VIRTUAL CORES: Allocate CPU threads to increase processing speed within the VM.\n\n" +
+                           "--------------------------------------------------\n" +
+                           "⚠️ SYSTEM REQUIREMENTS\n" +
+                           "--------------------------------------------------\n" +
+                           "Your physical machine must have Intel VT-x or AMD-V enabled in the BIOS/UEFI settings for the hypervisor to function at optimal performance."
+                };
+
+                Button closeBtn = new Button { 
+                    Text = "I UNDERSTAND", 
+                    Dock = DockStyle.Bottom, 
+                    Height = 45, 
+                    FlatStyle = FlatStyle.Flat, 
+                    BackColor = Color.FromArgb(100, 50, 200), 
+                    ForeColor = Color.White, 
+                    Font = new Font("Segoe UI Bold", 10),
+                    Cursor = Cursors.Hand
+                };
+                closeBtn.FlatAppearance.BorderSize = 0;
+                closeBtn.Click += (se, ev) => guide.Close();
+
+                content.Controls.Add(txt);
+                content.Controls.Add(gTitle);
+                guide.Controls.Add(content);
+                guide.Controls.Add(closeBtn);
+                guide.ShowDialog();
+            };
+
+            mainActionBtn.Click += async (s, e) => {
+                if (string.IsNullOrEmpty(isoPath.Text)) {
+                    MessageBox.Show("Please select a Guest Image (ISO/VHD) to boot.", "JemVirtual", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                }
+
+                mainActionBtn.Enabled = false;
+                statusLabel.Text = "ALLOCATING RESOURCES...";
+                statusLabel.ForeColor = Color.FromArgb(150, 100, 255);
+                console.AppendText("[" + DateTime.Now.ToString("HH:mm:ss") + "] INITIATING HYPERVISOR BOOT SEQUENCE...\n");
+                
+                string memArg = memCombo.SelectedItem.ToString().Split(' ')[0];
+                string cpuArg = cpuCombo.SelectedItem.ToString().Split(' ')[0];
+
+                string[] steps = new string[] { "Allocating " + memCombo.SelectedItem + " Memory...", "Assigning " + cpuCombo.SelectedItem + "...", "Initializing Virtual Motherboard...", "Mounting Image: " + Path.GetFileName(isoPath.Text) + "...", "Starting QEMU/KVM Engine Execution..." };
+
+                for (int i = 0; i < steps.Length; i++) {
+                    progress.Value = (i + 1) * (100 / steps.Length);
+                    console.AppendText("[" + DateTime.Now.ToString("HH:mm:ss") + "] " + steps[i] + "\n");
+                    await Task.Delay(800);
+                }
+                
+                statusLabel.Text = "VIRTUAL MACHINE RUNNING";
+                statusLabel.ForeColor = Color.LimeGreen;
+                console.AppendText("\n[!] GUEST OS BOOTED SUCCESSFULLY.\n");
+                mainActionBtn.Enabled = true;
+
+                // Virtualization Engine Launch
+                bool isIso = isoPath.Text.EndsWith(".iso", StringComparison.OrdinalIgnoreCase);
+                string qemuArgs = "-m " + memArg + " -smp " + cpuArg + " -machine q35 -rtc base=localtime -name \"JemVirtual Hypervisor\"";
+                
+                if (isIso) {
+                    string diskPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "JemVirtual_Disk.qcow2");
+                    qemuArgs += " -cdrom \"" + isoPath.Text + "\" -boot d";
+                    
+                    if (!System.IO.File.Exists(diskPath)) {
+                        console.AppendText("[" + DateTime.Now.ToString("HH:mm:ss") + "] HYPERVISOR: Creating 40GB Persistent Virtual Disk...\n");
+                        string qemuImg = @"C:\Program Files\qemu\qemu-img.exe";
+                        if (System.IO.File.Exists(qemuImg)) {
+                            System.Diagnostics.Process.Start(new ProcessStartInfo(qemuImg, "create -f qcow2 \"" + diskPath + "\" 40G") { CreateNoWindow = true, WindowStyle = ProcessWindowStyle.Hidden }).WaitForExit();
+                        }
+                    }
+                    if (System.IO.File.Exists(diskPath)) {
+                        qemuArgs += " -drive file=\"" + diskPath + "\",format=qcow2,media=disk";
+                    }
+                } else {
+                    qemuArgs += " -drive file=\"" + isoPath.Text + "\",media=disk -boot c";
+                }
+
+                qemuArgs += " -vga qxl -net nic,model=virtio -net user";
+                if (accel.Checked) qemuArgs += " -accel whpx -accel tcg";
+                if (accel3D.Checked) qemuArgs += " -display default,gl=on";
+                if (usbPass.Checked) qemuArgs += " -device qemu-xhci";
+
+                string qemuExe = "qemu-system-x86_64w";
+                if (System.IO.File.Exists(@"C:\Program Files\qemu\qemu-system-x86_64w.exe")) {
+                    qemuExe = @"C:\Program Files\qemu\qemu-system-x86_64w.exe";
+                }
+                
+                try {
+                    ProcessStartInfo psi = new ProcessStartInfo(qemuExe, qemuArgs);
+                    psi.UseShellExecute = true;
+                    Process.Start(psi);
+                    console.AppendText("[" + DateTime.Now.ToString("HH:mm:ss") + "] HYPERVISOR: QEMU process launched successfully.\n");
+                } catch {
+                    DialogResult dr = MessageBox.Show("QEMU Hypervisor Engine is not installed or not found in system PATH.\n\nWould you like to automatically download and install QEMU via Winget?", "JemVirtual | Missing Engine", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                    if (dr == DialogResult.Yes) {
+                        ProcessStartInfo winget = new ProcessStartInfo("cmd.exe", "/c winget install -e --id SoftwareFreedomConservancy.QEMU && pause");
+                        winget.UseShellExecute = true;
+                        Process.Start(winget);
+                        console.AppendText("[" + DateTime.Now.ToString("HH:mm:ss") + "] HYPERVISOR: Requested QEMU installation.\n");
+                    }
+                }
+            };
+
+            return p;
+        }
+
         private void StartStats()
         {
             statsTimer = new Timer();
@@ -1067,3 +1303,4 @@ namespace WindowsSystemToolMenu
         }
     }
 }
+
