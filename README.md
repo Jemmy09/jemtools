@@ -7,8 +7,9 @@
   *Precision System Intelligence for Windows, macOS, and Linux Professionals.*
 
   [![Status](https://img.shields.io/badge/STATUS-LIVE-00c853?style=for-the-badge)](#)
-  [![Version](https://img.shields.io/badge/VERSION-1.2.2-0288d1?style=for-the-badge)](#)
+  [![Version](https://img.shields.io/badge/VERSION-1.2.3-0288d1?style=for-the-badge)](#)
   [![Platforms](https://img.shields.io/badge/PLATFORMS-WIN%20%7C%20MAC%20%7C%20LINUX-0078d4?style=for-the-badge&logo=windows&logoColor=white)](#)
+  [![QEMU](https://img.shields.io/badge/HYPERVISOR-QEMU%20q35-ff6f00?style=for-the-badge&logo=qemu&logoColor=white)](#)
   [![Tech](https://img.shields.io/badge/C%23-.NET%208%20%2F%204.8-7b1fa2?style=for-the-badge&logo=dotnet&logoColor=white)](#)
   [![License](https://img.shields.io/badge/License-MIT-f9a825?style=for-the-badge)](LICENSE)
 
@@ -19,7 +20,7 @@
 ## 🛠️ Project Blueprint
 **Jem Tools** is a commercial-grade administrative utility designed for power users and IT professionals. It provides a centralized command center for system-level maintenance, security auditing, and real-time performance monitoring, all within a high-fidelity, privacy-first architecture.
 
-The "Admin Edition" features a **Digital Gemstone** UI experience. v1.2.2 introduces the **JemBoot Command Center**, featuring a high-fidelity, card-based interface and professional system terminal for streamlined media creation.
+The "Admin Edition" features a **Digital Gemstone** UI experience. v1.2.2 introduces the **JemVirtual Hypervisor Engine**, featuring a high-fidelity, card-based interface and professional system terminal for seamless, hardware-accelerated Virtual Machine deployment.
 
 ---
 
@@ -29,6 +30,7 @@ The "Admin Edition" features a **Digital Gemstone** UI experience. v1.2.2 introd
 |---|---|
 | 🗂️ **77 Professional Admin Modules** | Every essential system tool — from Registry Editor to MRT — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
+| 🖥️ **JemVirtual Hypervisor** | Full QEMU-powered VM engine with auto 40GB qcow2 disk, q35 SATA, hardware acceleration, USB passthrough & VRDP |
 | 🧠 **Ollama AI Core** | Automated local AI deployment via Winget and Llama3 for on-device intelligence |
 | 🎵 **SpotX Integration** | Dedicated suite for Spotify optimization, ad-blocking, and modern theming |
 | 🔍 **Instant Search** | Find any tool in milliseconds with the built-in infrastructure search |
@@ -406,8 +408,9 @@ Jem Tools is built with a **Privacy-First** philosophy:
 | 📁 **`Release/`** | Production-ready, signed binaries (Jem Tools.exe, Uninstaller.exe) |
 | 📁 **`src/`** | Core C# Source Code (Shared, Windows, macOS, Linux) |
 | 📁 **`assets/`** | Branding assets, icons, and Publisher certificates |
-| 📁 **`scripts/`** | Build, deployment, and automation logic |
+| 📁 **`scripts/`** | Build, deployment, and automation PowerShell logic |
 | 📄 **`Setup.exe`** | Professional graphical setup installer |
+| 💾 **`JemVirtual_Disk.qcow2`** | Auto-generated 40GB sparse virtual hard disk (created on first VM boot) |
 
 ---
 
@@ -417,6 +420,21 @@ Jem Tools is built with a **Privacy-First** philosophy:
 *Lead Architect & Developer*
 
 ---
+
+## ⚙️ JemVirtual — Hypervisor Requirements
+
+To use the **JemVirtual** virtualization engine, you need the following installed on your host Windows machine:
+
+| Requirement | Details |
+|---|---|
+| 🔧 **QEMU for Windows** | Install from [qemu.org](https://www.qemu.org/download/#windows) — Default path: `C:\Program Files\qemu\` |
+| ⚡ **Windows Hypervisor Platform** | Enable via *Turn Windows features on or off* for hardware-accelerated VM speed |
+| 💾 **40GB Free Disk Space** | Required for the auto-generated `JemVirtual_Disk.qcow2` virtual hard disk |
+| 🖥️ **Windows 10 / 11 ISO** | Your own legally obtained installation media |
+
+> **Note:** The virtual disk is created automatically the first time you click **BOOT VIRTUAL MACHINE**. No manual configuration needed.
+
+---
 <div align="center">
-  JEM TOOLS Build Engine | 2026
+  JEM TOOLS Build Engine | 2026 — v1.2.3 Hypervisor Edition
 </div>
