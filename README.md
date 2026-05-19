@@ -28,7 +28,7 @@ The "Admin Edition" features a **Digital Gemstone** UI experience. v1.2.3 introd
 
 | Feature | Description |
 |---|---|
-| 🗂️ **77 Professional Admin Modules** | Every essential system tool — from Registry Editor to MRT — in one place |
+| 🗂️ **78 Professional Admin Modules** | Every essential system tool — from Registry Editor to MRT — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
 | 🖥️ **JemVirtual Hypervisor** | Full QEMU-powered VM engine with auto 40GB qcow2 disk, q35 SATA, hardware acceleration, USB passthrough & VRDP |
 | 🧠 **Ollama AI Core** | Automated local AI deployment via Winget and Llama3 for on-device intelligence |
@@ -72,7 +72,7 @@ dotnet run --project src/Linux/JemTools.Linux.csproj
 ---
 
 ## 🗂️ Module Library (Cross-Platform Parity)
-*All platforms (Windows, macOS, and Linux) feature exactly 77 professional administrative modules organized into the following 8 identical categories.*
+*All platforms (Windows, macOS, and Linux) feature exactly 78 professional administrative modules organized into the following 8 identical categories.*
 
 <details>
 <summary><b>🔧 Maintenance</b></summary>
