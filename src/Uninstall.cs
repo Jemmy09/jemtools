@@ -44,7 +44,7 @@ namespace JEMToolsUninstall
 
         public UninstallForm()
         {
-            this.Text = "JEM TOOLS | Maintenance";
+            this.Text = "Uninstall";
             this.Size = new Size(450, 300);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -115,7 +115,7 @@ namespace JEMToolsUninstall
             this.Controls.Add(progressPanel);
 
             Label lblProcessing = new Label();
-            lblProcessing.Text = "DE-PROVISIONING SYSTEM";
+            lblProcessing.Text = "Uninstalling...";
             lblProcessing.Font = new Font("Segoe UI Bold", 12);
             lblProcessing.ForeColor = Color.White;
             lblProcessing.Dock = DockStyle.Top;
