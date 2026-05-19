@@ -17,14 +17,14 @@ using JEMTools.Platforms;
 [assembly: AssemblyProduct("JEM TOOLS | Admin Edition")]
 [assembly: AssemblyCopyright("Copyright © 2026 Jemmy Francisco")]
 [assembly: AssemblyTrademark("JEM TOOLS")]
-[assembly: AssemblyVersion("1.2.2.0")]
-[assembly: AssemblyFileVersion("1.2.2.0")]
+[assembly: AssemblyVersion("1.2.3.0")]
+[assembly: AssemblyFileVersion("1.2.3.0")]
 
 namespace WindowsSystemToolMenu
 {
     /// <summary>
     /// JEM TOOLS | Admin Edition - High-fidelity system administration suite.
-    /// v1.2.2 Optimized for performance and professional deployment.
+    /// v1.2.3 Optimized for performance and professional deployment.
     /// </summary>
     public class Program
     {
@@ -104,7 +104,7 @@ namespace WindowsSystemToolMenu
 
         public ModernAdminForm()
         {
-            this.Text = "Jem Tools v1.2.2";
+            this.Text = "Jem Tools v1.2.3";
             this.WindowState = FormWindowState.Maximized;
             this.MinimumSize = new Size(1200, 800);
             this.BackColor = ThemeDarkBg;
@@ -588,7 +588,7 @@ namespace WindowsSystemToolMenu
 
             // App name & version
             content.Controls.Add(MakeInfoLabel("JEM TOOLS | Admin Edition", new Font("Segoe UI Light", 22), ThemeAccent, y, 45)); y += 45;
-            content.Controls.Add(MakeInfoLabel("Version 1.2.2 (Production)", new Font("Segoe UI", 11), Color.LightGray, y, 25)); y += 35;
+            content.Controls.Add(MakeInfoLabel("Version 1.2.3 (Production)", new Font("Segoe UI", 11), Color.LightGray, y, 25)); y += 35;
 
             // Divider 1
             content.Controls.Add(new Panel { Size = new Size(420, 1), Location = new Point(0, y), BackColor = Color.FromArgb(50, 50, 65) });
@@ -782,7 +782,7 @@ namespace WindowsSystemToolMenu
             terminalHeader.Controls.Add(termTitle);
 
             RichTextBox console = new RichTextBox { Dock = DockStyle.Fill, BackColor = Color.FromArgb(20, 20, 20), ForeColor = Color.FromArgb(0, 255, 150), Font = new Font("Consolas", 12), ReadOnly = true, BorderStyle = BorderStyle.None, Padding = new Padding(10) };
-            console.Text = "Initializing JemBoot v1.2.2 Professional Suite...\nKernel loaded. Infrastructure synchronized.\n\n";
+            console.Text = "Initializing JemBoot v1.2.3 Professional Suite...\nKernel loaded. Infrastructure synchronized.\n\n";
 
             Panel terminalContainer = new Panel { Dock = DockStyle.Fill, Padding = new Padding(0, 20, 0, 0) };
             terminalContainer.Controls.Add(console);
@@ -845,7 +845,7 @@ namespace WindowsSystemToolMenu
                 };
 
                 Panel content = new Panel { Dock = DockStyle.Fill, Padding = new Padding(25) };
-                Label gTitle = new Label { Text = "WELCOME TO JEMBOOT v1.2.2", Font = new Font("Segoe UI Bold", 16), ForeColor = ThemeAccent, Dock = DockStyle.Top, Height = 40 };
+                Label gTitle = new Label { Text = "WELCOME TO JEMBOOT v1.2.3", Font = new Font("Segoe UI Bold", 16), ForeColor = ThemeAccent, Dock = DockStyle.Top, Height = 40 };
                 
                 RichTextBox txt = new RichTextBox { 
                     Dock = DockStyle.Fill, 
@@ -1010,7 +1010,7 @@ namespace WindowsSystemToolMenu
             terminalHeader.Controls.Add(termTitle);
 
             RichTextBox console = new RichTextBox { Dock = DockStyle.Fill, BackColor = Color.FromArgb(20, 20, 20), ForeColor = Color.FromArgb(180, 180, 255), Font = new Font("Consolas", 12), ReadOnly = true, BorderStyle = BorderStyle.None, Padding = new Padding(10) };
-            console.Text = "Initializing JemVirtual Hypervisor Engine v1.2.2...\nChecking CPU Virtualization Support: OK\nMemory Allocation Pool: READY\n\n";
+            console.Text = "Initializing JemVirtual Hypervisor Engine v1.2.3...\nChecking CPU Virtualization Support: OK\nMemory Allocation Pool: READY\n\n";
 
             Panel terminalContainer = new Panel { Dock = DockStyle.Fill, Padding = new Padding(0, 20, 0, 0) };
             terminalContainer.Controls.Add(console);

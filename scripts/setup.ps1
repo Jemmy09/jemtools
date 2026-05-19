@@ -12,7 +12,7 @@ Write-Host "--- $AppName Professional Setup ---" -ForegroundColor Cyan
 Clear-Host
 Write-Host "--- Jem Tools | USER AGREEMENT ---" -ForegroundColor Cyan
 Write-Host @"
-Version 1.2.2 - Professional Edition
+Version 1.2.3 - Professional Edition
 
 1. ADMINISTRATIVE RESPONSIBILITY: JEM TOOLS performs high-level system modifications.
    Execution of tools requires professional discretion.

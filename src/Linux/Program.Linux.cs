@@ -6,7 +6,7 @@ namespace JEMTools
 {
     class Program
     {
-        private const string Version = "1.2.2";
+        private const string Version = "1.2.3";
 
         static void Main(string[] args)
         {

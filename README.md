@@ -2,7 +2,7 @@
   <img src="assets/jem_logo.png" width="120" height="120" alt="JEM TOOLS Logo">
 
   # Jem Tools
-  ### v1.2.2 (Multi-Platform Edition)
+  ### v1.2.3 (Multi-Platform Edition)
 
   *Precision System Intelligence for Windows, macOS, and Linux Professionals.*
 
@@ -20,7 +20,7 @@
 ## 🛠️ Project Blueprint
 **Jem Tools** is a commercial-grade administrative utility designed for power users and IT professionals. It provides a centralized command center for system-level maintenance, security auditing, and real-time performance monitoring, all within a high-fidelity, privacy-first architecture.
 
-The "Admin Edition" features a **Digital Gemstone** UI experience. v1.2.2 introduces the **JemVirtual Hypervisor Engine**, featuring a high-fidelity, card-based interface and professional system terminal for seamless, hardware-accelerated Virtual Machine deployment.
+The "Admin Edition" features a **Digital Gemstone** UI experience. v1.2.3 introduces the **JemVirtual Hypervisor Engine**, featuring a high-fidelity, card-based interface and professional system terminal for seamless, hardware-accelerated Virtual Machine deployment.
 
 ---
 

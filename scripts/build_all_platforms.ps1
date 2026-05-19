@@ -1,4 +1,4 @@
-# JEM TOOLS | Cross-Platform Build & Sync Engine v1.2.2
+# JEM TOOLS | Cross-Platform Build & Sync Engine v1.2.3
 # Run from project root: .\scripts\build_all_platforms.ps1
 # Requirements:
 #   Windows EXE  -> .NET Framework 4.8 (built-in on Windows 10/11)
@@ -12,7 +12,7 @@ $Csc         = "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
 
 Write-Host ""
 Write-Host "=======================================================" -ForegroundColor Cyan
-Write-Host "  JEM TOOLS | Multi-Platform Build Engine v1.2.2" -ForegroundColor Cyan
+Write-Host "  JEM TOOLS | Multi-Platform Build Engine v1.2.3" -ForegroundColor Cyan
 Write-Host "=======================================================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -130,7 +130,7 @@ if ($dotnet) {
         Write-Host "  Generating Linux .desktop launcher..." -ForegroundColor Gray
         $desktop = @"
 [Desktop Entry]
-Version=1.2.2
+Version=1.2.3
 Type=Application
 Name=Jem Tools
 Comment=Professional Linux Administrative Suite
@@ -176,9 +176,9 @@ Categories=System;Settings;Utility;
     <key>CFBundleName</key>
     <string>Jem Tools</string>
     <key>CFBundleVersion</key>
-    <string>1.2.2</string>
+    <string>1.2.3</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.2.2</string>
+    <string>1.2.3</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>LSMinimumSystemVersion</key>
@@ -214,7 +214,7 @@ osascript -e 'tell application \"Terminal\" to do script \"'\"`$DIR\"'/JemTools-
 
 Write-Host ""
 Write-Host "=======================================================" -ForegroundColor Cyan
-Write-Host "  BUILD COMPLETE - JEM TOOLS v1.2.2" -ForegroundColor Green
+Write-Host "  BUILD COMPLETE - JEM TOOLS v1.2.3" -ForegroundColor Green
 Write-Host "=======================================================" -ForegroundColor Cyan
 
 # Final summary

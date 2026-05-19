@@ -11,8 +11,8 @@ using System.Reflection;
 [assembly: AssemblyCompany("JEM TOOLS")]
 [assembly: AssemblyProduct("JEM TOOLS Suite")]
 [assembly: AssemblyCopyright("Copyright © 2026 Jemmy Francisco")]
-[assembly: AssemblyVersion("1.2.2.0")]
-[assembly: AssemblyFileVersion("1.2.2.0")]
+[assembly: AssemblyVersion("1.2.3.0")]
+[assembly: AssemblyFileVersion("1.2.3.0")]
 
 namespace JEMToolsUninstall
 {

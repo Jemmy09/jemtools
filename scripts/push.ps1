@@ -7,7 +7,7 @@ $ScriptsDir = "$ProjectRoot\scripts"
 $SrcDir = "$ProjectRoot\src"
 $AssetsDir = "$ProjectRoot\assets"
 
-Write-Host "--- Jem Tools Update Engine v1.2.2 ---" -ForegroundColor Cyan
+Write-Host "--- Jem Tools Update Engine v1.2.3 ---" -ForegroundColor Cyan
 
 # 0. Ensure Directory Structure
 if (-not (Test-Path $ReleaseDir)) { New-Item -Path $ReleaseDir -ItemType Directory | Out-Null }
@@ -76,7 +76,7 @@ Write-Host "Detected Changes:" -ForegroundColor Gray
 git status --short
 
 $msg = Read-Host "Enter commit message (Leave blank for 'Update v1.2.0')"
-if ([string]::IsNullOrWhiteSpace($msg)) { $msg = "Update v1.2.2: Cross-Platform Parity and TUI Engine" }
+if ([string]::IsNullOrWhiteSpace($msg)) { $msg = "Update v1.2.3: Cross-Platform Parity and TUI Engine" }
 
 Write-Host "Pushing to GitHub..." -ForegroundColor Yellow
 # Clean up root files that are now in Release/
