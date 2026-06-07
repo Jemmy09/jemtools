@@ -28,10 +28,10 @@ The "Admin Edition" features a **Digital Gemstone** UI experience. v1.2.3 introd
 
 | Feature | Description |
 |---|---|
-| 🗂️ **78 Professional Admin Modules** | Every essential system tool — from Registry Editor to MRT — in one place |
+| 🗂️ **89 Professional Admin Modules** | Every essential system tool — from Registry Editor to MRT — in one place |
 | 📊 **Live Telemetry** | Real-time CPU & RAM monitoring with color-coded performance alerts |
 | 🖥️ **JemVirtual Hypervisor** | Full QEMU-powered VM engine with auto 40GB qcow2 disk, q35 SATA, hardware acceleration, USB passthrough & VRDP |
-| 🧠 **Ollama AI Core** | Automated local AI deployment via Winget and Llama3 for on-device intelligence |
+| 🧠 **Ollama AI Core** | Automated local AI deployment via PowerShell script or Winget |
 | 🎵 **SpotX Integration** | Dedicated suite for Spotify optimization, ad-blocking, and modern theming |
 | 🔍 **Instant Search** | Find any tool in milliseconds with the built-in infrastructure search |
 | 🛡️ **Interactive Setup** | Professional installer with EULA consent and customizable deployment |
@@ -72,7 +72,7 @@ dotnet run --project src/Linux/JemTools.Linux.csproj
 ---
 
 ## 🗂️ Module Library (Cross-Platform Parity)
-*All platforms (Windows, macOS, and Linux) feature exactly 78 professional administrative modules organized into the following 8 identical categories.*
+*All platforms feature up to 89 professional administrative modules organized into the following 8 identical categories.*
 
 <details>
 <summary><b>🔧 Maintenance</b></summary>
@@ -145,7 +145,8 @@ dotnet run --project src/Linux/JemTools.Linux.csproj
 - 📸 **Steps Recorder**: Record UI actions for debugging.
 - 🧠 **Memory Diagnostic**: Check RAM for errors.
 - 🎵 **Media Player Legacy**: Legacy multimedia hub.
-- 🧠 **Ollama AI Core**: Deploy local AI with Llama3.
+- 🧠 **Ollama AI Core (Script)**: Deploy local AI via web script.
+- 🧠 **Ollama AI Core (Winget)**: Deploy local AI via Winget.
 </details>
 
 <details>
@@ -175,15 +176,25 @@ dotnet run --project src/Linux/JemTools.Linux.csproj
 <details>
 <summary><b>📥 Installers</b></summary>
 
-- 📦 **Install 7-Zip**: Open-source file archiver.
-- 🗜️ **Install WinRAR**: Popular compression utility.
-- 🗃️ **Install PeaZip**: Free archive manager.
-- 💻 **Install VS Code**: Modern source code editor.
-- 🤖 **Install Cursor**: AI-first code editor.
-- ☕ **Install Eclipse**: Java Development IDE.
-- 🎨 **Install Blender**: 3D creation suite.
-- 📄 **Install Acrobat**: PDF viewer by Adobe.
-- 🎬 **Install DaVinci Resolve**: Free video editor (Stable).
+- 📦 **Install 7-Zip (Script)**: Install 7-Zip via PowerShell script.
+- 📦 **Install 7-Zip (Winget)**: Open-source file archiver.
+- 🗜️ **Install WinRAR (Script)**: Install WinRAR via PowerShell script.
+- 🗜️ **Install WinRAR (Winget)**: Popular compression utility.
+- 🗃️ **Install PeaZip (Script)**: Install PeaZip via PowerShell script.
+- 🗃️ **Install PeaZip (Winget)**: Free archive manager.
+- 💻 **Install VS Code (Script)**: Install VS Code via PowerShell script.
+- 💻 **Install VS Code (Winget)**: Modern source code editor.
+- 🤖 **Install Cursor (Script)**: Install Cursor via PowerShell script.
+- 🤖 **Install Cursor (Winget)**: AI-first code editor.
+- ☕ **Install Eclipse (Script)**: Install Eclipse via PowerShell script.
+- ☕ **Install Eclipse (Winget)**: Java Development IDE.
+- 🎨 **Install Blender (Script)**: Install Blender via PowerShell script.
+- 🎨 **Install Blender (Winget)**: 3D creation suite.
+- 📄 **Install Acrobat (Script)**: Install Acrobat via PowerShell script.
+- 📄 **Install Acrobat (Winget)**: PDF viewer by Adobe.
+- 🎬 **Install DaVinci Resolve (Script)**: Download DaVinci Resolve via web browser.
+- 🎬 **Install DaVinci Resolve (Winget)**: Free video editor (Stable).
+- 🧠 **Install Ollama (Setup)**: Download OllamaSetup.exe from Google Drive.
 - 🖼️ **Install Photoshop CS6 x64**: Portable CS6 (x64).
 - 🖌️ **Install Photoshop CS6 x86**: Portable CS6 (x86).
 - 🎨 **Install Photoshop CS3**: Portable CS3.
@@ -289,7 +300,25 @@ dotnet run --project src/Linux/JemTools.Linux.csproj
 - 🔌 **List USB Drives**: Identify connected USB media.
 - 💾 **Storage Usage**: Analyze mount points.
 - 📀 **Verify Disk**: Check disk partition map.
+</details>
 
+<details>
+<summary><b>📥 Installers</b></summary>
+
+- 📦 **Install 7-Zip**: Open-source file archiver.
+- 🗜️ **Install WinRAR**: Extraction utility.
+- 🗃️ **Install PeaZip**: Free archive manager.
+- 💻 **Install VS Code**: Modern source code editor.
+- 🤖 **Install Cursor**: AI-first code editor.
+- ☕ **Install Eclipse**: Java Development IDE.
+- 🎨 **Install Blender**: 3D creation suite.
+- 📄 **Install Acrobat**: PDF viewer by Adobe.
+- 🎬 **Install DaVinci Resolve**: Free video editor.
+- 🖼️ **Install Photoshop CS6 x64**: Portable CS6 (x64).
+- 🖌️ **Install Photoshop CS6 x86**: Portable CS6 (x86).
+- 🎨 **Install Photoshop CS3**: Portable CS3.
+- 💿 **Install CrystalDiskMark**: Disk benchmark tool v9.0.2.
+- 🔥 **Install OCCT**: PC stability & stress test.
 </details>
 
 ## 🗂️ Module Library (Linux)
@@ -390,7 +419,25 @@ dotnet run --project src/Linux/JemTools.Linux.csproj
 - 🔌 **Block Layout**: Map all storage disks.
 - 💾 **Active Mounts**: View mounted filesystems.
 - 📀 **Disk Partitioning**: View partition tables.
+</details>
 
+<details>
+<summary><b>📥 Installers</b></summary>
+
+- 📦 **Install 7-Zip**: Open-source file archiver.
+- 🗜️ **Install WinRAR**: Extraction utility.
+- 🗃️ **Install PeaZip**: Free archive manager.
+- 💻 **Install VS Code**: Modern source code editor.
+- 🤖 **Install Cursor**: AI-first code editor.
+- ☕ **Install Eclipse**: Java Development IDE.
+- 🎨 **Install Blender**: 3D creation suite.
+- 📄 **Install Acrobat**: PDF viewer alternatives.
+- 🎬 **Install DaVinci Resolve**: Free video editor.
+- 🖼️ **Install Photoshop CS6 x64**: Portable CS6 (x64).
+- 🖌️ **Install Photoshop CS6 x86**: Portable CS6 (x86).
+- 🎨 **Install Photoshop CS3**: Portable CS3.
+- 💿 **Install CrystalDiskMark**: Disk benchmark tool v9.0.2.
+- 🔥 **Install OCCT**: PC stability & stress test.
 </details>
 
 ## 🔒 Security & Trust
